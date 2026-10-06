@@ -1,0 +1,11 @@
+# 원작자 이전 자료 보관소
+legacy_archive/
+*.bak
+
+# 파이썬 임시 산출
+__pycache__/
+*.pyc
+
+# OS 임시 파일
+.DS_Store
+Thumbs.db

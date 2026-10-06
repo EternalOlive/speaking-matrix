@@ -1,0 +1,48 @@
+{
+  "v": 1,
+  "sessions": [
+    {
+      "id": "s_default_speaking",
+      "name": "Speaking Matrix 데일리",
+      "how": {
+        "status": [
+          "due",
+          "new"
+        ],
+        "order": "shuffle",
+        "weights": {},
+        "limit": null,
+        "bury": true,
+        "newAfter": true
+      },
+      "mode": "auto",
+      "scope": {
+        "units": [],
+        "mids": [],
+        "subj": [],
+        "tags": [],
+        "typ": []
+      },
+      "q": [],
+      "done": 0,
+      "day": "",
+      "lastScore": null,
+      "scores": [],
+      "createdAt": 1791305122000,
+      "lastAt": 0
+    }
+  ],
+  "hoedok": {},
+  "read": {},
+  "fc": {},
+  "cap": 130,
+  "capAt": 0,
+  "ret": 0.9,
+  "retAt": 0,
+  "rest": {
+    "dow": 0,
+    "days": [],
+    "skip": []
+  },
+  "restAt": 0
+}
