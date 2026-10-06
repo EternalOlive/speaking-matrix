@@ -16,6 +16,7 @@ import datetime
 import html
 import sys
 import zstandard
+import re
 
 if sys.stdout.encoding != 'utf-8':
     try:
@@ -101,6 +102,14 @@ def convert_anki_package(apkg_path):
         if len(deck_parts) >= 4:
             io_type = deck_parts[3]   # e.g. "Input" or "Output"
 
+        # Unit 번호 추출 (1.Unit 01 (Day 01-05) 형식으로 과목명 지정하여 cards.html 정렬 및 표시 완벽 지원)
+        unit_match = re.search(r'Unit\s*(\d+)', unit_name, re.IGNORECASE)
+        unit_num = int(unit_match.group(1)) if unit_match else 1
+        subj_name = f"{unit_num}.{unit_name}"
+
+        # Day별 Input/Output 하위덱 분리 (cards.html의 2줄 렌더링 지원: Day 01 — Input)
+        subdeck_name = f"{day_name} — {io_type}" if (day_name and io_type) else (day_name or unit_name)
+
         # 카드 ID
         card_id = f"sm_{cid}"
         card_id_map[cid] = card_id
@@ -117,19 +126,20 @@ def convert_anki_package(apkg_path):
             notes_lines.append(f"상황: {situation}")
         note_text = "\n".join(notes_lines)
 
-        tags = [t.strip() for t in tags_raw.split() if t.strip()]
-        if day_name and day_name not in tags:
-            tags.insert(0, day_name)
-        if io_type and io_type not in tags:
-            tags.insert(1, io_type)
-        if unit_name.split()[0] not in tags:
-            tags.append(unit_name.split()[0])
+        tags = [
+            subdeck_name,
+            f"{day_name} · {io_type}" if day_name else io_type,
+            day_name,
+            io_type,
+            f"Unit {unit_num:02d}"
+        ]
+        tags = [t for t in tags if t]
 
-        node_path = f"Speaking Matrix/{unit_name}/{day_name}/{io_type}".replace('//', '/')
+        node_path = f"Speaking Matrix/{subj_name}/{day_name}/{io_type}".replace('//', '/')
 
         converted_card = {
             "id": card_id,
-            "subj": unit_name,
+            "subj": subj_name,
             "typ": io_type,
             "front": front_text,
             "back": english,
@@ -200,6 +210,24 @@ def convert_anki_package(apkg_path):
                 },
                 "scope": {"units": [], "mids": [], "subj": [], "tags": [], "typ": []},
                 "mode": "auto",
+                "day": "",
+                "q": [],
+                "done": 0,
+                "scores": []
+            },
+            {
+                "id": "s_all_speaking",
+                "name": "Speaking Matrix 전체 풀기",
+                "how": {
+                    "status": ["all"],
+                    "order": "doc",
+                    "weights": {},
+                    "limit": None,
+                    "bury": False,
+                    "newAfter": False
+                },
+                "scope": {"units": [], "mids": [], "subj": [], "tags": [], "typ": []},
+                "mode": "manual",
                 "day": "",
                 "q": [],
                 "done": 0,

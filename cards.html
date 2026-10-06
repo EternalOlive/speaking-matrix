@@ -6689,7 +6689,7 @@ function hoedokLabel(k){ const m=TAGMETA[k];
   /* 🔴 없는 키에 무방어였다 (전층 감사 F2-6·F2-5) — 재생성으로 사라진 단위를 고른 채 화면이 다시 그려지면
      여기서 예외가 나 「새 세션 만들기」가 통째로 먹통이 됐다. 못 찾으면 키를 그대로 보여 준다(사라진 자리를 감추지 않는다). */
   if(!m||!m.subj) return k;
-  return `${m.subj.split('.')[1]} · ${m.tag}`; }
+  return `${m.subj.split('.')[1]||m.subj} · ${m.tag}`; }
 /* 회독본 열기 — 옵시디언 URI. 볼트 루트에 `회독_<과목>.md`가 평평하게 있고, 단위(대주제) 이름이
    그 안의 제목과 정확히 일치한다(60단위 전수 확인, 중복 0 · 2026-08-21).
    🔴 file에 확장자를 붙이면 제목 앵커가 통째로 무시된다 — `회독_3.영어%23제목` 형태라야 이동한다.
@@ -9558,7 +9558,7 @@ function sessDesc(sx){
     const n=(sx.scope.units||[]).length+(sx.scope.mids||[]).length;
     parts.push(n?`직접 담음 · 범위 ${n}`:'직접 담음 · 범위 없음');   // 없음을 말해야 「전체」로 안 읽힌다
   } else parts.push('매일 자동');
-  if((sx.scope.subj||[]).length)parts.push(sx.scope.subj.map(x=>x.split('.')[1]).join('·'));
+  if((sx.scope.subj||[]).length)parts.push(sx.scope.subj.map(x=>x.split('.')[1]||x).join('·'));
   if((sx.scope.typ||[]).length)parts.push(sx.scope.typ.join('·'));
   parts.push(stArr(sx.how.status).map(k=>({due:'복습',new:'신규',all:'전체',weak:'약점'}[k]||k)).join('+'));
   /* 사용자 말로(동하 09-05 비평): 「due · 셔플 · 방향 분산 · 신규 이어가기」는 내부 용어였다.
@@ -11850,7 +11850,7 @@ function syncSessEditor(){
   const wg=$('nsWts'); wg.innerHTML='';
   for(const sj of SUBJECTS){
     const c=document.createElement('div'); c.className='wt-cell';
-    c.innerHTML=`<span>${sj.split('.')[1]}</span>`;
+    c.innerHTML=`<span>${sj.split('.')[1]||sj}</span>`;
     const inp=document.createElement('input'); inp.type='number'; inp.inputMode='numeric'; inp.min=0;
     inp.value=(h.weights&&h.weights[sj])||'';
     inp.onchange=()=>{ h.weights=h.weights||{}; h.weights[sj]=+inp.value||0; };
