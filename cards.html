@@ -9804,7 +9804,7 @@ let scDF=null;
 function scDay(t){ const tz=scTZ(), s=t-scDSH()*3600e3;   // 방의 하루 — 방 시간대 새벽 4시에 넘어간다(애드온 study_day.py)
   try{ if(!scDF||scDF.tz!==tz) scDF={tz, f:new Intl.DateTimeFormat('en-CA',{timeZone:tz, year:'numeric', month:'2-digit', day:'2-digit'})}; return scDF.f.format(new Date(s)); }
   catch(e){ return new Date(s+9*3600e3).toISOString().slice(0,10); } }
-const scCid=id=>/^[0-9a-f]{1,16}$/i.test(id||'') ? (BigInt('0x'+id)||1n).toString() : null;   // 서버 card_id = 숫자 문자열(1~20자리) — 16자리 hex ID를 10진으로
+const scCid=id=>{ const s=String(id||'').replace(/^sm_/,''); if(/^\d{1,20}$/.test(s)) return s; if(/^[0-9a-f]{1,16}$/i.test(s)) return (BigInt('0x'+s)||1n).toString(); return null; };   // 서버 card_id = 숫자 문자열(1~20자리) — 16자리 hex 또는 10진 ID 지원
 function scEvents(){   // 방 기준 오늘·어제 채점 — 시간 = 같은 날 앞 채점과의 간격(5분 넘으면 0)
   const now=Date.now(), D=scDay(now), Y=scDay(now-86400e3), L=state.log, lo=now-3*86400e3, ev=[];
   for(let i=L.length-1;i>=0;i--){ const e=L[i]; if(!e) continue; const t=logTs(e); if(!isFinite(t)) continue; if(t<lo) break; const d=scDay(t); if(d===D||d===Y) ev.push({t, d, id:e[0]}); }
