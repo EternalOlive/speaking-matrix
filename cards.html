@@ -7476,9 +7476,15 @@ function refillSess(sx){ // 전체 범위 세션은 날이 바뀌면 스스로 �
    안 줄어드는데 들어가 보면 건너뛰어 빨리 끝났다. 숫자와 실제가 어긋나는 자리였다.
    ⚠ **저장 큐는 그대로 둔다** — 지우면 되돌리기가 카드를 되살릴 자리를 잃는다. 세는 것만 바꾼다.
    ⚠ 그래서 되돌리기로 되살아날 카드는 이 숫자에 안 잡힌다. 「지금 풀 것」을 세는 값이므로 그게 맞다. */
-function sessRemain(sx){ return (curSess&&curSess.id===sx.id)
-  ? newCap(sx, queue.slice(qPos).filter(c=>!settledToday(c)&&!buried(c)&&!retired(c)&&!offed(c))).length   // 끈 카드 제외(F3-8)
-  : newCap(sx, gateIn(sessCards(sx), null)).length; }   // 신규 하루 최대(10-03)도 같은 문   // 🔴 격리분(사슬·짝 키·방향) 전부 빼고 센다 — 숫자와 실제가 어긋나면 안 된다(F3-3: 사슬만 세던 것)
+function sessRemain(sx){
+  if(sx && sx.asRe){
+    return (curSess&&curSess.id===sx.id)
+      ? queue.slice(qPos).filter(c=>!buried(c)&&!retired(c)&&!offed(c)).length
+      : sessCards(sx).filter(c=>!buried(c)&&!retired(c)&&!offed(c)).length;
+  }
+  return (curSess&&curSess.id===sx.id)
+    ? newCap(sx, queue.slice(qPos).filter(c=>!settledToday(c)&&!buried(c)&&!retired(c)&&!offed(c))).length   // 끈 카드 제외(F3-8)
+    : newCap(sx, gateIn(sessCards(sx), null)).length; }   // 신규 하루 최대(10-03)도 같은 문   // 🔴 격리분(사슬·짝 키·방향) 전부 빼고 센다 — 숫자와 실제가 어긋나면 안 된다(F3-3: 사슬만 세던 것)
 /* 범위 피커의 시작 선택 = 지금 범위에서 빼 둔 것(ex)을 뺀 것. ex가 단위 안쪽(중주제·3층)만 뺐으면 그 단위를 한 층 풀어서 나머지를 체크한다. */
 function scopeEffSel(sx){
   const sc=sx.scope||{}, ex=sc.ex||{}, exU=new Set(ex.units||[]), exM=new Set(ex.mids||[]);
@@ -8426,7 +8432,10 @@ function counts(){ // 상단 바 — 남은 수는 현재 세션 큐 · 「내�
      남은 수도 `queue.length-qPos`라 **미룸·은퇴·오늘 정리분까지 셌다**(실측 19 vs 실제 18) —
      화면이 건너뛰는 카드를 세면 그 수는 영영 0이 안 된다. 세는 술어를 화면과 맞춘다.
      ⚠ 칸을 늘리지 않는다(좁은 폰에서 숫자줄이 2단이 된다) — 섞였으면 「남음」이라고 말한다. */
-  const rest=dropSettled(queue.slice(qPos));
+  const isAsRe = !!(curSess && curSess.asRe);
+  const rest = isAsRe
+    ? queue.slice(qPos).filter(c => !buried(c) && !retired(c) && !offed(c))
+    : dropSettled(queue.slice(qPos));
   let nw=0; for(const c of rest) if(isNew(c)) nw++;
   const label = nw===rest.length ? '신규' : (nw===0 ? '복습' : '남음');
   /* 🔴 **「내일」은 세 곳이 같은 수를 말한다** (09-01 감사 U3 · 2026-09-06 마감).
@@ -8441,7 +8450,16 @@ function counts(){ // 상단 바 — 남은 수는 현재 세션 큐 · 「내�
   /* 진행 막대 = **그날 이 세션** 기준(동하 09-24 「닫았다 열 때마다 진행바가 바뀜 · 그날 듀 기준으로 고정」) — 다시 열면 큐가 남은 카드로만
      다시 조립돼(playSess) 분모가 매번 줄고 막대가 0에서 다시 시작했다. 막대 = 오늘 이 세션에서 처음 채점한 수(pg) ÷ (그것 + 남은 첫 대면). 재출은 뺀다. */
   let bd=done, bt=tot;
-  if(curSess){ const n=(curSess.pg&&curSess.pg.day===todayKey())?(curSess.pg.n||0):0; bd=n; bt=n+newCap(curSess, rest.filter(c=>!c._re)).length; }   // 신규 하루 최대(10-03) — 세션 줄과 같은 문
+  if(curSess){
+    if(isAsRe){
+      bd = qPos;
+      bt = tot;
+    } else {
+      const n=(curSess.pg&&curSess.pg.day===todayKey())?(curSess.pg.n||0):0;
+      bd=n;
+      bt=n+newCap(curSess, rest.filter(c=>!c._re)).length;
+    }
+  }
   $('tbSess').textContent = curSess ? curSess.name : (curPreset ? '풀이' : '');
   /* 🔴 숫자 = 푼 수/오늘 이 세션 몫(진행 막대의 분자/분모 · 동하 09-25 「110/159 식」) — 라벨 없이(폰 폭). */
   $('tbCounts').textContent = curPreset ? `${bd.toLocaleString()}/${bt.toLocaleString()}` : '';
