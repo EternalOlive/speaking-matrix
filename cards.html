@@ -11979,15 +11979,19 @@ document.addEventListener('keydown',e=>{
      ⚠ **`e.repeat` 가드보다 먼저** 본다 — 그 가드는 채점 연타(스페이스 길게)를 막으려던 것이고,
        스크롤은 눌러 두면 계속 굴러야 한다. 여기서 처리하고 나간다. */
   if(/^(Arrow(Left|Right|Up|Down)|Page(Up|Down))$/.test(e.key) && $('ovlHd').classList.contains('show')){ hdKey(e); return; }   // 회독본 창이 떠 있으면 방향키는 전부 판 몫
-  if(e.key==='ArrowUp'||e.key==='ArrowDown'||e.key==='PageUp'||e.key==='PageDown'){
-    const t0=e.target, tg=t0&&t0.tagName;
-    if(!(tg==='INPUT'||tg==='TEXTAREA'||tg==='SELECT')){
-      const box=scrollBox();
-      if(box && box.scrollHeight>box.clientHeight+2){
-        const big=e.key.startsWith('Page');
-        const step=Math.max(80, Math.round(box.clientHeight*(big?0.9:0.42)));
-        box.scrollBy({top:(e.key==='ArrowUp'||e.key==='PageUp')?-step:step, behavior:'auto'});
-        e.preventDefault(); return;
+  if((e.key==='ArrowUp'||e.key==='ArrowDown'||e.key==='PageUp'||e.key==='PageDown')){
+    const inSolve = $('scrSolve').classList.contains('on') && !document.querySelector('.ovl.show, #ovlHd.show, #ovlImg.show');
+    // 풀이 화면에서는 방향키(↑, ↓)를 채점 키로 쓰므로, PageUp/PageDown이거나 풀이 화면이 아닐 때만 스크롤
+    if(!inSolve || e.key.startsWith('Page')){
+      const t0=e.target, tg=t0&&t0.tagName;
+      if(!(tg==='INPUT'||tg==='TEXTAREA'||tg==='SELECT')){
+        const box=scrollBox();
+        if(box && box.scrollHeight>box.clientHeight+2){
+          const big=e.key.startsWith('Page');
+          const step=Math.max(80, Math.round(box.clientHeight*(big?0.9:0.42)));
+          box.scrollBy({top:(e.key==='ArrowUp'||e.key==='PageUp')?-step:step, behavior:'auto'});
+          e.preventDefault(); return;
+        }
       }
     }
   }
@@ -12022,16 +12026,28 @@ document.addEventListener('keydown',e=>{
   }
   if(k===' '||k==='enter'){ e.preventDefault();
     if(!revealed)reveal(); else if(!itemMarks.some(Boolean))rate(3); return; }
-  if(e.key==='ArrowLeft'){
+  if(e.key==='ArrowUp'){
     e.preventDefault();
     if(!revealed) reveal();
-    else rate(1); // 왼쪽 = 다시
+    else rate(1); // 위 = 다시
     return;
   }
   if(e.key==='ArrowRight'){
     e.preventDefault();
     if(!revealed) reveal();
-    else rate(3); // 오른쪽 = 통과 / 알맞음
+    else rate(2); // 오른쪽 = 어려움
+    return;
+  }
+  if(e.key==='ArrowDown'){
+    e.preventDefault();
+    if(!revealed) reveal();
+    else rate(3); // 아래 = 알맞음
+    return;
+  }
+  if(e.key==='ArrowLeft'){
+    e.preventDefault();
+    if(!revealed) reveal();
+    else rate(4); // 왼쪽 = 쉬움
     return;
   }
   /* 🔴 Ctrl+1~4 = 사유 칩 — 채점(1~4)보다 **먼저** 본다. 레일이 닫혀 있어도 먹는다(칩은 레일 안이지만
