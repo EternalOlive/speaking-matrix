@@ -2208,7 +2208,7 @@ details.gr-fold[open]>summary .s2-chev{transform:rotate(90deg);}
     <div id="topbar">
       <div class="tb-l"><button class="tb-btn glass-c" id="btnHome" title="홈" aria-label="홈으로"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg></button><span id="saveBadge" title="미저장분 있음"></span></div>
       <div id="tbProg"><span id="tbSess"></span><span class="tb-pbar"><span id="tbBar"></span></span><span id="tbCounts"></span><span id="tbReCount" style="display:none"></span></div>
-      <div class="tb-r"><button class="tb-btn" id="btnTestConfetti" title="축포 테스트" aria-label="축포 테스트" style="font-size:12px;width:auto;padding:0 8px;font-weight:600;">축포</button><button class="tb-btn" id="btnStudy" title="스터디" aria-label="스터디"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19.5c.6-3.2 2.8-5 5.5-5s4.9 1.8 5.5 5"/><path d="M15.5 4.9a3.2 3.2 0 0 1 0 6.2M17.5 14.7c1.6.7 2.7 2.4 3 4.8"/></svg></button><button class="tb-btn" id="btnPause" title="잠시 멈춤" aria-label="잠시 멈춤"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4.5" width="4" height="15" rx="1.2"/><rect x="14" y="4.5" width="4" height="15" rx="1.2"/></svg></button><button class="tb-btn" id="btnUndo" title="되돌리기" aria-label="되돌리기" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg></button><button class="tb-btn" id="btnMore" title="피드백 · 이 카드" aria-label="피드백 · 이 카드"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5.5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="18.5" cy="12" r="1.8"/></svg></button></div>
+      <div class="tb-r"><button class="tb-btn" id="btnStudy" title="스터디" aria-label="스터디"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19.5c.6-3.2 2.8-5 5.5-5s4.9 1.8 5.5 5"/><path d="M15.5 4.9a3.2 3.2 0 0 1 0 6.2M17.5 14.7c1.6.7 2.7 2.4 3 4.8"/></svg></button><button class="tb-btn" id="btnPause" title="잠시 멈춤" aria-label="잠시 멈춤"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4.5" width="4" height="15" rx="1.2"/><rect x="14" y="4.5" width="4" height="15" rx="1.2"/></svg></button><button class="tb-btn" id="btnUndo" title="되돌리기" aria-label="되돌리기" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg></button><button class="tb-btn" id="btnMore" title="피드백 · 이 카드" aria-label="피드백 · 이 카드"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5.5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="18.5" cy="12" r="1.8"/></svg></button></div>
     </div>
 
     <!-- 풀이 -->
@@ -10352,18 +10352,19 @@ function scTriggerConfetti(){
   const rect=cardEl ? cardEl.getBoundingClientRect() : {left:0, top:0, width:cv.width, height:cv.height};
   const cx=rect.left + rect.width * 0.5;
   const cy=rect.top + rect.height * 0.5;
-  for(let i=0; i<95; i++){
+  // 너무 크지 않고 단정하게 터지도록 입자 수, 속도, 크기 축소
+  for(let i=0; i<45; i++){
     const angle = (Math.PI * 2 * Math.random());
-    const speed = Math.random() * 12 + 3;
+    const speed = Math.random() * 5.5 + 2;
     particles.push({
-      x: cx + (Math.random() - 0.5) * 30,
-      y: cy + (Math.random() - 0.5) * 30,
-      vx: Math.cos(angle) * speed * 1.15,
-      vy: Math.sin(angle) * speed - 2.5,
-      size: Math.random() * 7 + 4,
+      x: cx + (Math.random() - 0.5) * 16,
+      y: cy + (Math.random() - 0.5) * 16,
+      vx: Math.cos(angle) * speed,
+      vy: Math.sin(angle) * speed - 2.2,
+      size: Math.random() * 4 + 3,
       color: colors[Math.floor(Math.random() * colors.length)],
       rot: Math.random() * 360,
-      vrot: (Math.random() - 0.5) * 12,
+      vrot: (Math.random() - 0.5) * 10,
       opacity: 1
     });
   }
@@ -10371,13 +10372,13 @@ function scTriggerConfetti(){
   if(scConfettiTimer) cancelAnimationFrame(scConfettiTimer);
   function draw(){
     const elapsed=Date.now()-start;
-    if(elapsed>2200){ cv.style.display='none'; ctx.clearRect(0,0,cv.width,cv.height); return; }
+    if(elapsed>1700){ cv.style.display='none'; ctx.clearRect(0,0,cv.width,cv.height); return; }
     ctx.clearRect(0,0,cv.width,cv.height);
-    const alpha=Math.max(0, 1 - (elapsed/2200));
+    const alpha=Math.max(0, 1 - (elapsed/1700));
     for(const p of particles){
       p.x += p.vx; p.y += p.vy;
-      p.vy += 0.22; // 중력
-      p.vx *= 0.98;
+      p.vy += 0.18; // 중력
+      p.vx *= 0.97;
       p.rot += p.vrot;
       ctx.save();
       ctx.globalAlpha = alpha;
@@ -10407,14 +10408,6 @@ function scRenderSolveBadge(){
     // 나만 접속 중 (B안: 오늘 전체 기준)
     myCntText=`나 ${t.n||0}개`;
     leadText='혼자 공부 중';
-    // 테스트용: 혼자 있을 때도 카드를 풀어서 개수가 오르면 축포 발동
-    if((t.n||0)>0){
-      const soloKey=`solo_${t.n}`;
-      if(scLast1stSlot!==soloKey){
-        scLast1stSlot=soloKey;
-        try{ scTriggerConfetti(); }catch(e){}
-      }
-    }
   } else {
     // 2명 이상 접속 중 (A안: 최근 10분 기준)
     const nowSl=scSlot(Date.now());
@@ -10434,7 +10427,7 @@ function scRenderSolveBadge(){
           const top=arr[0];
           leadUid=top.uid;
           leadText=top.uid===me ? `1위 나 ${top.n}개` : `1위 ${top.name} ${top.n}개`;
-          // 내가 1위를 차지했을 때 축포 발동
+          // 다른 멤버가 1명 이상 접속해 있고, 내가 1위를 차지했을 때만 진짜 축포 발동
           if(top.uid===me && top.n>0){
             const slotKey=`${latestSl}_${top.n}`;
             if(scLast1stSlot!==slotKey){
@@ -10460,8 +10453,6 @@ badgeWire: {
   if(badge){
     badge.onclick=async e=>{
       e.stopPropagation();
-      // 테스트용: 배지 클릭 시 축포 발동
-      try{ scTriggerConfetti(); }catch(err){}
       if(!SC.group) return;
       if(Date.now()<scPokeOff){ toast('아직 친구 서버에 없는 기능이에요'); return; }
       const me=SC.auth&&SC.auth.user_id;
@@ -10499,13 +10490,6 @@ badgeWire: {
       }
       catch(er){ if(scPokeGone(er)){ scPokeOff=Date.now()+30*60000; toast('아직 친구 서버에 없는 기능이에요'); } else toast(scErrKo(er)); }
       finally{ scPokeFly.delete(uid); }
-    };
-  }
-  const btnConf=$('btnTestConfetti');
-  if(btnConf){
-    btnConf.onclick=e=>{
-      e.stopPropagation();
-      scTriggerConfetti();
     };
   }
 }
