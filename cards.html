@@ -10401,6 +10401,14 @@ function scRenderSolveBadge(){
     // 나만 접속 중 (B안: 오늘 전체 기준)
     myCntText=`나 ${t.n||0}개`;
     leadText='혼자 공부 중';
+    // 테스트용: 혼자 있을 때도 카드를 풀어서 개수가 오르면 축포 발동
+    if((t.n||0)>0){
+      const soloKey=`solo_${t.n}`;
+      if(scLast1stSlot!==soloKey){
+        scLast1stSlot=soloKey;
+        try{ scTriggerConfetti(); }catch(e){}
+      }
+    }
   } else {
     // 2명 이상 접속 중 (A안: 최근 10분 기준)
     const nowSl=scSlot(Date.now());
@@ -10420,7 +10428,7 @@ function scRenderSolveBadge(){
           const top=arr[0];
           leadUid=top.uid;
           leadText=top.uid===me ? `1위 나 ${top.n}개` : `1위 ${top.name} ${top.n}개`;
-          // 다른 방 멤버가 1명 이상 접속해 있고, 내가 1위를 차지했을 때 축포 발동
+          // 내가 1위를 차지했을 때 축포 발동
           if(top.uid===me && top.n>0){
             const slotKey=`${latestSl}_${top.n}`;
             if(scLast1stSlot!==slotKey){
