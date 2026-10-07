@@ -776,14 +776,14 @@ details.ss-score[open]>summary{border-bottom:1px solid var(--line);margin-bottom
 
 /* ══ 카드 상세 시트 ══ */
 .sheet.wide{max-width:520px;}
-.cs-scope{font-size:12px;font-weight:700;color:var(--faint);letter-spacing:.02em;margin-bottom:6px;}
-.cs-front{font-size:17px;font-weight:700;line-height:1.55;letter-spacing:-.2px;}
+.cs-scope{font-size:12px;font-weight:700;color:var(--faint);letter-spacing:.02em;margin-bottom:6px;-webkit-user-select:text;user-select:text;}
+.cs-front{font-size:17px;font-weight:700;line-height:1.55;letter-spacing:-.2px;-webkit-user-select:text;user-select:text;}
 .cs-back{font-size:15px;line-height:1.65;color:var(--ink2);margin-top:10px;
-  padding-top:10px;border-top:1px solid var(--line);white-space:pre-wrap;}
-.cs-items{margin-top:8px;display:flex;flex-direction:column;gap:4px;}
-.cs-items div{font-size:14px;color:var(--ink2);line-height:1.5;padding-left:14px;text-indent:-14px;}
+  padding-top:10px;border-top:1px solid var(--line);white-space:pre-wrap;-webkit-user-select:text;user-select:text;}
+.cs-items{margin-top:8px;display:flex;flex-direction:column;gap:4px;-webkit-user-select:text;user-select:text;}
+.cs-items div{font-size:14px;color:var(--ink2);line-height:1.5;padding-left:14px;text-indent:-14px;-webkit-user-select:text;user-select:text;}
 .cs-note{margin-top:10px;font-size:12.5px;line-height:1.6;color:var(--mute);
-  background:var(--sunken);border-radius:12px;padding:9px 12px;}
+  background:var(--sunken);border-radius:12px;padding:9px 12px;-webkit-user-select:text;user-select:text;}
 /* 도식 카드의 답면 안내 — 풀이 화면의 #cDiag와 같은 결로 (동하 2026-08-23) */
 .cs-diag{margin-top:10px;padding:10px 14px;border-radius:12px;background:var(--accent-dim);
   font-size:13px;line-height:1.55;color:var(--ink2);}
@@ -1408,7 +1408,7 @@ details.ym-subj>summary small{font-weight:600;color:var(--mute);font-size:12.5px
 .rbtn svg,.tb-btn svg.rb{width:22px;height:22px;stroke-width:1.9;color:var(--c-label);}
 .rbtn:active{background:var(--c-fill);}
 #rFlag svg{color:var(--c-orange);}
-#rBury svg,#rInfo svg{color:var(--c-acc);}
+#rBury svg,#rInfo svg,#rCopy svg{color:var(--c-acc);}
 #rOff,#rOffAll,#rOff svg,#rOffAll svg{color:var(--c-sec);}
 .rbtn.on{background:var(--c-acc-tint);color:var(--c-label);}
 .rbtn.on svg{color:inherit;}
@@ -2742,6 +2742,7 @@ details.gr-fold[open]>summary .s2-chev{transform:rotate(90deg);}
     <div class="rail-grp">이 카드</div>
     <button class="rbtn" id="rBury"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l2.5 2"/></svg>내일로</button>
     <button class="rbtn" id="rInfo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4.5 6h.01M4.5 12h.01M4.5 18h.01"/></svg>카드 정보</button>
+    <button class="rbtn" id="rCopy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>카드 내용 복사</button>
     <!-- @주석 「추가」(지도·사례·정의·이름) 버튼은 09-24 동하 결정으로 뺐다 — 지도·이름 사용 0 · 사례 = 칩 「사례 추가」 · 정의 = 메모.
          이미 달린 @주석은 「플래그 · @주석」 목록과 is:ann 검색에서 그대로 읽힌다(쓰기만 없앴다). -->
     <div id="railSc"></div>   <!-- 스터디(10-05 · 아이패드 가로) -->
@@ -9215,6 +9216,53 @@ $('railFab').onclick=openRailDrawer; $('btnMore').onclick=openRailDrawer; $('ohM
 $('ohPause').onclick=()=>pauseSession();
 $('ohUndo').onclick=()=>$('btnUndo').click();
 $('revealBtn').onclick=(ev)=>{ ev.stopPropagation(); reveal(); };
+function cardTextCopy(c){
+  if(!c) return '';
+  const lines = [];
+  const sc = scopeOf(c);
+  if(sc) lines.push(`[${sc}]`);
+  const m = c.front.match(/^〔([^〕]*)〕\s*(.*)$/s);
+  lines.push(`Q. ${m ? m[2] : c.front}`);
+  if(Array.isArray(c.items) && c.items.length){
+    lines.push('A.');
+    c.items.forEach((it, idx) => lines.push(` ${idx+1}) ${it}`));
+  } else if(c.back){
+    lines.push(`A. ${c.back}`);
+  }
+  if(c.note) lines.push(`보충: ${c.note}`);
+  if(c.src) lines.push(`출처: ${c.src}`);
+  return lines.join('\n');
+}
+async function copyCardToClipboard(c){
+  if(!c) return;
+  const txt = cardTextCopy(c);
+  try{
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      await navigator.clipboard.writeText(txt);
+    } else {
+      const ta = document.createElement('textarea');
+      ta.value = txt;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+    }
+    toast('카드 내용을 복사했어요');
+  }catch(e){
+    toast('복사에 실패했어요');
+  }
+}
+const rCopyEl = $('rCopy');
+if(rCopyEl) rCopyEl.onclick = () => {
+  const c = cur();
+  if(!c) return;
+  copyCardToClipboard(c);
+  $('rail').classList.remove('open');
+  $('railScrim').classList.remove('show');
+};
 $('rInfo').onclick=()=>{ const c=cur(); if(!c) return;
   openCardSheet(c, ()=>{ const k=cur(); if(k && (offed(k)||buried(k)||retired(k))) showCard(); else syncRail(); }); };
 $('railScrim').onclick=()=>{ $('rail').classList.remove('open'); $('railScrim').classList.remove('show'); };
@@ -12269,6 +12317,7 @@ function renderCardSheet(){
     <div class="cs-sec">조작</div>
     <div class="cs-acts">
       <button class="cs-act" id="csSolve">지금 이 카드 풀기</button>
+      <button class="cs-act" id="csCopy">내용 복사</button>
       <button class="cs-act ${s.flag!=null?'on':''}" id="csFlag">${s.flag!=null?'플래그 해제':'플래그'}</button>
       <button class="cs-act ${buried(c)?'on':''}" id="csBury">${buried(c)?'내일로 취소':'내일로'}</button>
       <button class="cs-act ${s.retired?'on':''}" id="csRetire">${s.retired?'다시 켜기':'끄기'}</button>
@@ -12300,6 +12349,7 @@ function renderCardSheet(){
   $('csBury').onclick=()=>{ buried(c)?unburyCard(c):buryCard(c); rr(); };
   $('csRetire').onclick=()=>{ offCard(c, !(state.cards[c.id]||{}).retired); rr(); };
   $('csSolve').onclick=()=>{ closeCardSheet(); startAdHoc([c], '카드 1장', null, true); };
+  const csCopyEl = $('csCopy'); if(csCopyEl) csCopyEl.onclick=()=>copyCardToClipboard(c);
   $('csDueSet').onclick=()=>{ const n=+$('csDueN').value;
     if(!$('csDueN').value.trim()||!isFinite(n)||n<0){ toast('며칠 뒤인지 숫자로'); return; }
     if(setDueDays(c,n)){ toast(n===0?'오늘로 옮겼어요':`${n}일 뒤로 옮겼어요`); rr(); }
