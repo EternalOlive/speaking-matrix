@@ -1291,6 +1291,7 @@ details.ym-subj>summary small{font-weight:600;color:var(--mute);font-size:12.5px
 .tb-pbar{display:block;width:180px;height:5px;border-radius:3px;background:var(--c-fill);flex:0 1 180px;min-width:60px;}
 #tbBar{display:block;height:5px;border-radius:3px;background:var(--c-acc);width:0;transition:width .2s ease;}
 #tbCounts{flex:0 0 auto;margin:0;font-size:13px;font-weight:400;color:var(--c-sec);text-align:left;letter-spacing:0;}
+#tbReCount{flex:0 0 auto;margin-left:2px;font-size:11.5px;font-weight:700;color:var(--c-again);background:var(--c-again-bg);padding:1px 6px;border-radius:6px;line-height:1.4;}
 @media (min-width:600px){ #tbCounts{margin-left:0;} }
 #saveBadge{background:var(--c-orange);}
 
@@ -2197,7 +2198,7 @@ details.gr-fold[open]>summary .s2-chev{transform:rotate(90deg);}
     <div id="banner"></div>
     <div id="topbar">
       <div class="tb-l"><button class="tb-btn glass-c" id="btnHome" title="홈" aria-label="홈으로"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg></button><span id="saveBadge" title="미저장분 있음"></span></div>
-      <div id="tbProg"><span id="tbSess"></span><span class="tb-pbar"><span id="tbBar"></span></span><span id="tbCounts"></span></div>
+      <div id="tbProg"><span id="tbSess"></span><span class="tb-pbar"><span id="tbBar"></span></span><span id="tbCounts"></span><span id="tbReCount" style="display:none"></span></div>
       <div class="tb-r"><button class="tb-btn" id="btnStudy" title="스터디" aria-label="스터디"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19.5c.6-3.2 2.8-5 5.5-5s4.9 1.8 5.5 5"/><path d="M15.5 4.9a3.2 3.2 0 0 1 0 6.2M17.5 14.7c1.6.7 2.7 2.4 3 4.8"/></svg></button><button class="tb-btn" id="btnPause" title="잠시 멈춤" aria-label="잠시 멈춤"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4.5" width="4" height="15" rx="1.2"/><rect x="14" y="4.5" width="4" height="15" rx="1.2"/></svg></button><button class="tb-btn" id="btnUndo" title="되돌리기" aria-label="되돌리기" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg></button><button class="tb-btn" id="btnMore" title="피드백 · 이 카드" aria-label="피드백 · 이 카드"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5.5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="18.5" cy="12" r="1.8"/></svg></button></div>
     </div>
 
@@ -8424,8 +8425,20 @@ function counts(){ // 상단 바 — 남은 수는 현재 세션 큐 · 「내�
   $('tbSess').textContent = curSess ? curSess.name : (curPreset ? '풀이' : '');
   /* 🔴 숫자 = 푼 수/오늘 이 세션 몫(진행 막대의 분자/분모 · 동하 09-25 「110/159 식」) — 라벨 없이(폰 폭). */
   $('tbCounts').textContent = curPreset ? `${bd.toLocaleString()}/${bt.toLocaleString()}` : '';
+  const reRem = rest.filter(c => c && c._re).length;
+  const reEl = $('tbReCount');
+  if(reEl){
+    if(curPreset && reRem > 0){
+      reEl.textContent = `다시 ${reRem}`;
+      reEl.style.display = 'inline-block';
+      reEl.title = `세션에서 다시 볼 카드 ${reRem}장 남음`;
+    } else {
+      reEl.style.display = 'none';
+      reEl.textContent = '';
+    }
+  }
   $('tbBar').style.width = bt ? Math.round(bd/bt*100)+'%' : '0%';
-  $('tbProg').title = curPreset ? `${bd}/${bt}장 · ${label} ${rest.length} · 오늘 ${todayRated()} · 내일 ~${tomorrowCount(null)}` : '';
+  $('tbProg').title = curPreset ? `${bd}/${bt}장 · ${label} ${rest.length}${reRem?` (다시 ${reRem})`:''} · 오늘 ${todayRated()} · 내일 ~${tomorrowCount(null)}` : '';
 }
 /* ═══ 표 카드 (동하 2026-08-29 · QC `table` 규약) ═══════════════════════════════
    카드 하나가 표 하나를 싣는다. 앞면 = 값 칸만 가림(탭하면 하나씩 드러남) · 뒷면 = 전량 공개.
@@ -9760,7 +9773,25 @@ function renderSessRows(){
     el.onclick=()=>{ viewSess=sx; go('scrSession'); };
     box.appendChild(el);
   });
-  if(!sessions.length) box.innerHTML='<div class="empty-note" style="padding:20px">세션이 없어요 — 오른쪽 위 ＋로 만들어요</div>';
+  const trM = todayRatings();
+  const againCards = [];
+  for(const id in trM){
+    if(trM[id] === 1){
+      const c = BYID[id];
+      if(c && !retired(c) && !offed(c)) againCards.push(c);
+    }
+  }
+  if(againCards.length){
+    const aEl = document.createElement('button'); aEl.className = 'sess2';
+    aEl.innerHTML = `<span class="s2-dot" style="background:var(--c-again)"></span>
+      <span class="s2-b"><span class="s2-n">오늘 「다시」 한 카드</span><span class="s2-s" style="color:var(--c-again)">오늘 틀렸던 카드 즉시 복습</span></span>
+      <span class="s2-r"><span class="s2-cnt"><b style="color:var(--c-again)">${againCards.length.toLocaleString()}</b><small>장</small></span><svg class="s2-chev" viewBox="0 0 9 15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m1.5 1.5 6 6-6 6"/></svg></span>`;
+    aEl.onclick = () => {
+      startAdHoc(againCards, '오늘 「다시」 카드', `오늘 틀린 카드 ${againCards.length}장 복습 시작`, true);
+    };
+    box.appendChild(aEl);
+  }
+  if(!sessions.length && !againCards.length) box.innerHTML='<div class="empty-note" style="padding:20px">세션이 없어요 — 오른쪽 위 ＋로 만들어요</div>';
 }
 /* ═══════════════ 스터디 현황 (10-01 동하 · 친구가 쓰는 안키 애드온 「스터디 현황」과 같은 방) ═══════════════
    애드온 = 오늘 공부 시간·답한 수·목표·상태를 30초마다 방(Supabase)에 올리고, 방 사람들의 같은 값을 받아 보여 준다.
