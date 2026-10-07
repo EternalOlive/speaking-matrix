@@ -8208,6 +8208,18 @@ function playSess(sx){          // 세션 화면의 [이어가기] — 남은 �
       const rc=Object.create(c); rc._re=Math.max(1,+re||1); rc._at=gradeSeq; rc._day=todayKey(); ins.push([Math.min(queue.length, +at||0), rc]); }   // 회차 상한 없음(09-22)
     ins.sort((a,b)=>b[0]-a[0]); for(const [at,rc] of ins) queue.splice(at,0,rc);   // 뒤에서부터 끼워 자리가 안 밀린다
   }
+  if(sx.asRe && queue.length){
+    queue = queue.map(c => {
+      if(c && !c._re){
+        const rc = Object.create(c);
+        rc._re = 1;
+        rc._at = gradeSeq;
+        rc._day = todayKey();
+        return rc;
+      }
+      return c;
+    });
+  }
   // 🔴 저장된 큐를 이어 풀 때도 한 번 더 건다 — 큐는 조립 뒤에도 「내용 추가」로 뒤에 붙는다
   phase = stOnly(sx.how.status,'new') ? 'new' : 'review';
   sessionDone=0; doneCredited=0; newServed=0; undoSnap=null; undoRun++; updateUndo(); sessReset();
@@ -9787,7 +9799,7 @@ function renderSessRows(){
       <span class="s2-b"><span class="s2-n">오늘 「다시」 한 카드</span><span class="s2-s" style="color:var(--c-again)">오늘 틀렸던 카드 즉시 복습</span></span>
       <span class="s2-r"><span class="s2-cnt"><b style="color:var(--c-again)">${againCards.length.toLocaleString()}</b><small>장</small></span><svg class="s2-chev" viewBox="0 0 9 15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m1.5 1.5 6 6-6 6"/></svg></span>`;
     aEl.onclick = () => {
-      startAdHoc(againCards, '오늘 「다시」 카드', `오늘 틀린 카드 ${againCards.length}장 복습 시작`, true);
+      startAdHoc(againCards, '오늘 「다시」 카드', `오늘 틀린 카드 ${againCards.length}장 복습 시작 (다시 / 통과)`, true, true);
     };
     box.appendChild(aEl);
   }
@@ -12190,7 +12202,7 @@ $('ovlCard').onclick=(e)=>{ if(e.target===$('ovlCard'))closeCardSheet(); };
 /* pick=true = **사람이 그 카드를 지목했다.** 오늘 이미 푼 카드도 거르지 않는다(playSess·showCard).
    상세에서 「바로 풀기」한 한 장이 그렇다 — 목록 세션은 조건으로 뽑은 묶음이라 안 준다.
    그쪽까지 주면 방금 푼 카드가 목록 세션에 섞여 되돌아온다. */
-function startAdHoc(cards, label, note, pick){ // 목록·상세에서 바로 풀기 = 임시 세션도 정식 세션으로 만든다
+function startAdHoc(cards, label, note, pick, asRe){ // 목록·상세에서 바로 풀기 = 임시 세션도 정식 세션으로 만든다
   if(!cards.length){ toast('풀 카드가 없어요'); return; }
   if(curSess) syncSessQueue();             // 하던 세션은 남은 큐 그대로 보존 (멀티세션)
   /* 🔴 mode는 반드시 'manual' — 임시 세션은 담은 카드만 푼다. 비우면 'auto'가 되어
@@ -12199,6 +12211,7 @@ function startAdHoc(cards, label, note, pick){ // 목록·상세에서 바로 �
   const sx=newSessObj(label||'임시 세션',
     {status:'all', order:'shuffle', weights:{}, limit:null, bury:false, newAfter:false}, {}, 'manual');
   sx.q=cards.map(c=>c.id); sx.day=todayKey(); sx.temp=true; if(pick) sx.pick=true;
+  if(asRe) sx.asRe=true;
   sessions.unshift(sx); saveSessionsFlush();
   playSess(sx);
   toast(note||`${cards.length}장 세션 — 채점은 정규로 반영돼요`);
