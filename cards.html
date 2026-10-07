@@ -1639,6 +1639,7 @@ button.sc-err{background:none;border:0;text-align:left;cursor:pointer;font:inher
 .sc-badge-dot.pulse{box-shadow:0 0 0 3px color-mix(in srgb, var(--c-green) 35%, transparent);}
 .sc-badge-lead{color:var(--c-label);font-weight:700;}
 .sc-badge-lead.poke{text-decoration:underline;text-underline-offset:2px;}
+.sc-badge-strip{width:46px;height:7px;border-radius:2px;flex:0 0 auto;}
 #railSc .rs-h{display:flex;align-items:baseline;justify-content:space-between;gap:8px;padding:4px 12px 6px;}
 #railSc .rs-room{min-width:0;font-size:13px;font-weight:600;line-height:18px;color:var(--c-sec);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 #railSc .rs-n{flex:0 0 auto;font-size:13px;line-height:18px;color:var(--c-sec);}
@@ -10275,30 +10276,47 @@ async function scRailPoke(p, uid){ const m=(SC.members||[]).find(x=>x.user_id===
 function scRenderSolveBadge(){
   const badge=$('solveStudyChip'); if(!badge) return;
   if(!SC.group){ badge.style.display='none'; badge.innerHTML=''; return; }
-  const me=SC.auth&&SC.auth.user_id, t=scToday(), myN=t.n||0;
+  const me=SC.auth&&SC.auth.user_id, t=scToday();
   const rows=(SC.members||[]).filter(m=>m.user_id!==me);
   const nStudy=rows.filter(m=>scMemberStatus(m)!=='offline').length+1;
   const L=scLeaderData(), keys=Object.keys(L.slots).map(Number);
-  let leadText='', leadUid=null;
-  if(keys.length){
-    const latestSl=Math.max(...keys);
-    const arr=L.slots[latestSl]||[];
-    if(arr.length){
-      const isTie=arr.length>1 && arr[0].n===arr[1].n;
-      if(isTie){
-        leadText=`1위 공동 ${arr[0].n}개`;
-      } else {
-        const top=arr[0];
-        leadUid=top.uid;
-        leadText=top.uid===me ? `1위 나 ${top.n}개` : `1위 ${top.name} ${top.n}개`;
+  let leadText='', leadUid=null, myCntText='', stripSvg='';
+
+  if(keys.length) stripSvg=scLeadStrip(L, 'sc-badge-strip');
+
+  if(nStudy===1){
+    // 나만 접속 중 (B안: 오늘 전체 기준)
+    myCntText=`나 ${t.n||0}개`;
+    leadText='혼자 공부 중';
+  } else {
+    // 2명 이상 접속 중 (A안: 최근 10분 기준)
+    const nowSl=scSlot(Date.now());
+    const my10m=(L.ppl.find(p=>p.uid===me)||{}).bs||[];
+    const myBucket=my10m.find(b=>b.slot===nowSl);
+    const myCount=myBucket ? (myBucket.answer_count||0) : 0;
+    myCntText=`나 ${myCount}개`;
+
+    if(keys.length){
+      const latestSl=Math.max(...keys);
+      const arr=L.slots[latestSl]||[];
+      if(arr.length){
+        const isTie=arr.length>1 && arr[0].n===arr[1].n;
+        if(isTie){
+          leadText=`1위 공동 ${arr[0].n}개`;
+        } else {
+          const top=arr[0];
+          leadUid=top.uid;
+          leadText=top.uid===me ? `1위 나 ${top.n}개` : `1위 ${top.name} ${top.n}개`;
+        }
       }
     }
   }
+
   const pokeTarget=leadUid && leadUid!==me ? leadUid : (rows.find(m=>scMemberStatus(m)!=='offline')||rows[0]||{}).user_id;
   badge.dataset.uid=pokeTarget||'';
   const dotCls='sc-badge-dot'+(nStudy>1?' pulse':'');
   const leadCls='sc-badge-lead'+(pokeTarget?' poke':'');
-  badge.innerHTML=`<span class="${dotCls}"></span><span>온라인 ${nStudy}명</span> · <span>나 ${myN}개</span>${leadText?` · <span class="${leadCls}">${esc(leadText)}</span>`:''}`;
+  badge.innerHTML=`<span class="${dotCls}"></span><span>온라인 ${nStudy}명</span> · <span>${myCntText}</span>${leadText?` · <span class="${leadCls}">${esc(leadText)}</span>`:''}${stripSvg?` · ${stripSvg}`:''}`;
   badge.title=pokeTarget ? '클릭하면 찌르기' : '스터디 참여 중';
   badge.style.display='inline-flex';
 }
