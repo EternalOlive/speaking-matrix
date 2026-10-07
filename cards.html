@@ -10454,6 +10454,8 @@ badgeWire: {
   if(badge){
     badge.onclick=async e=>{
       e.stopPropagation();
+      // 테스트용: 배지 클릭 시 축포 발동
+      try{ scTriggerConfetti(); }catch(err){}
       if(!SC.group) return;
       if(Date.now()<scPokeOff){ toast('아직 친구 서버에 없는 기능이에요'); return; }
       const me=SC.auth&&SC.auth.user_id;
