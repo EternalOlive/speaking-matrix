@@ -1640,6 +1640,7 @@ button.sc-err{background:none;border:0;text-align:left;cursor:pointer;font:inher
 .sc-badge-lead{color:var(--c-label);font-weight:700;}
 .sc-badge-lead.poke{text-decoration:underline;text-underline-offset:2px;}
 .sc-badge-strip{width:46px;height:7px;border-radius:2px;flex:0 0 auto;}
+#scConfetti{position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:99999;display:none;}
 #railSc .rs-h{display:flex;align-items:baseline;justify-content:space-between;gap:8px;padding:4px 12px 6px;}
 #railSc .rs-room{min-width:0;font-size:13px;font-weight:600;line-height:18px;color:var(--c-sec);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 #railSc .rs-n{flex:0 0 auto;font-size:13px;line-height:18px;color:var(--c-sec);}
@@ -2897,6 +2898,7 @@ details.gr-fold[open]>summary .s2-chev{transform:rotate(90deg);}
 <div class="ovl" id="ovlEnd"><div class="sheet end-sheet" id="endBody"></div></div>
 
 <div id="toast"></div>
+<canvas id="scConfetti"></canvas>
 
 <script>/* MiniSearch v7.1.2 (MIT) — npm 레지스트리 dist/umd/index.min.js 인라인 (CDN 런타임 로드 금지 원칙).
    쓰는 곳은 회독본 오버레이의 **글 점프** 한 곳뿐이다: 절 안의 줄들을 색인해 답면으로 검색한다.
@@ -10338,6 +10340,51 @@ async function scRailPoke(p, uid){ const m=(SC.members||[]).find(x=>x.user_id===
   try{ await scPoke(uid); toast(`${nm}님을 콕 찔렀어요`); }
   catch(er){ if(scPokeGone(er)){ scPokeOff=Date.now()+30*60000; toast('아직 친구 서버에 없는 기능이에요'); } else toast(scErrKo(er)); }
   finally{ scPokeFly.delete(uid); } }
+let scConfettiTimer=null, scLast1stSlot=null;
+function scTriggerConfetti(){
+  const cv=$('scConfetti'); if(!cv) return;
+  const ctx=cv.getContext('2d'); if(!ctx) return;
+  cv.width=window.innerWidth; cv.height=window.innerHeight;
+  cv.style.display='block';
+  const colors=['#30D158','#FF9F0A','#BF5AF2','#FF375F','#64D2FF','#FFD60A','#0A84FF'];
+  const particles=[];
+  for(let i=0; i<60; i++){
+    particles.push({
+      x: cv.width * (0.2 + Math.random() * 0.6),
+      y: cv.height * (0.1 + Math.random() * 0.2),
+      vx: (Math.random() - 0.5) * 8,
+      vy: Math.random() * -6 - 2,
+      size: Math.random() * 7 + 4,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      rot: Math.random() * 360,
+      vrot: (Math.random() - 0.5) * 10,
+      opacity: 1
+    });
+  }
+  const start=Date.now();
+  if(scConfettiTimer) cancelAnimationFrame(scConfettiTimer);
+  function draw(){
+    const elapsed=Date.now()-start;
+    if(elapsed>2200){ cv.style.display='none'; ctx.clearRect(0,0,cv.width,cv.height); return; }
+    ctx.clearRect(0,0,cv.width,cv.height);
+    const alpha=Math.max(0, 1 - (elapsed/2200));
+    for(const p of particles){
+      p.x += p.vx; p.y += p.vy;
+      p.vy += 0.22; // 중력
+      p.vx *= 0.98;
+      p.rot += p.vrot;
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.translate(p.x, p.y);
+      ctx.rotate((p.rot * Math.PI)/180);
+      ctx.fillStyle = p.color;
+      ctx.fillRect(-p.size/2, -p.size/2, p.size, p.size * 0.6);
+      ctx.restore();
+    }
+    scConfettiTimer=requestAnimationFrame(draw);
+  }
+  draw();
+}
 /* 풀이 화면 스터디 미니 배지(10분 1위 + 접속자 수 + 클릭 찌르기) */
 function scRenderSolveBadge(){
   const badge=$('solveStudyChip'); if(!badge) return;
@@ -10373,6 +10420,14 @@ function scRenderSolveBadge(){
           const top=arr[0];
           leadUid=top.uid;
           leadText=top.uid===me ? `1위 나 ${top.n}개` : `1위 ${top.name} ${top.n}개`;
+          // 다른 방 멤버가 1명 이상 접속해 있고, 내가 1위를 차지했을 때 축포 발동
+          if(top.uid===me && top.n>0){
+            const slotKey=`${latestSl}_${top.n}`;
+            if(scLast1stSlot!==slotKey){
+              scLast1stSlot=slotKey;
+              try{ scTriggerConfetti(); }catch(e){}
+            }
+          }
         }
       }
     }
