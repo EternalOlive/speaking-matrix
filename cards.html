@@ -10348,16 +10348,19 @@ function scTriggerConfetti(){
   cv.style.display='block';
   const colors=['#30D158','#FF9F0A','#BF5AF2','#FF375F','#64D2FF','#FFD60A','#0A84FF'];
   const particles=[];
-  for(let i=0; i<60; i++){
+  const cx=cv.width * 0.5, cy=cv.height * 0.42;
+  for(let i=0; i<85; i++){
+    const angle = (Math.PI * 2 * Math.random());
+    const speed = Math.random() * 11 + 3;
     particles.push({
-      x: cv.width * (0.2 + Math.random() * 0.6),
-      y: cv.height * (0.1 + Math.random() * 0.2),
-      vx: (Math.random() - 0.5) * 8,
-      vy: Math.random() * -6 - 2,
+      x: cx + (Math.random() - 0.5) * 40,
+      y: cy + (Math.random() - 0.5) * 30,
+      vx: Math.cos(angle) * speed * 1.1,
+      vy: Math.sin(angle) * speed - 4.5,
       size: Math.random() * 7 + 4,
       color: colors[Math.floor(Math.random() * colors.length)],
       rot: Math.random() * 360,
-      vrot: (Math.random() - 0.5) * 10,
+      vrot: (Math.random() - 0.5) * 12,
       opacity: 1
     });
   }
