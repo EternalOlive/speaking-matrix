@@ -10275,7 +10275,8 @@ async function scRailPoke(p, uid){ const m=(SC.members||[]).find(x=>x.user_id===
 function scRenderSolveBadge(){
   const badge=$('solveStudyChip'); if(!badge) return;
   if(!SC.group){ badge.style.display='none'; badge.innerHTML=''; return; }
-  const me=SC.auth&&SC.auth.user_id, rows=(SC.members||[]).filter(m=>m.user_id!==me);
+  const me=SC.auth&&SC.auth.user_id, t=scToday(), myN=t.n||0;
+  const rows=(SC.members||[]).filter(m=>m.user_id!==me);
   const nStudy=rows.filter(m=>scMemberStatus(m)!=='offline').length+1;
   const L=scLeaderData(), keys=Object.keys(L.slots).map(Number);
   let leadText='', leadUid=null;
@@ -10285,11 +10286,11 @@ function scRenderSolveBadge(){
     if(arr.length){
       const isTie=arr.length>1 && arr[0].n===arr[1].n;
       if(isTie){
-        leadText='공동 1위';
+        leadText=`1위 공동 ${arr[0].n}개`;
       } else {
         const top=arr[0];
         leadUid=top.uid;
-        leadText=top.uid===me ? '1위 나' : `1위 ${top.name}`;
+        leadText=top.uid===me ? `1위 나 ${top.n}개` : `1위 ${top.name} ${top.n}개`;
       }
     }
   }
@@ -10297,7 +10298,7 @@ function scRenderSolveBadge(){
   badge.dataset.uid=pokeTarget||'';
   const dotCls='sc-badge-dot'+(nStudy>1?' pulse':'');
   const leadCls='sc-badge-lead'+(pokeTarget?' poke':'');
-  badge.innerHTML=`<span class="${dotCls}"></span><span>${nStudy}명</span>${leadText?` · <span class="${leadCls}">${esc(leadText)}</span>`:''}`;
+  badge.innerHTML=`<span class="${dotCls}"></span><span>온라인 ${nStudy}명</span> · <span>나 ${myN}개</span>${leadText?` · <span class="${leadCls}">${esc(leadText)}</span>`:''}`;
   badge.title=pokeTarget ? '클릭하면 찌르기' : '스터디 참여 중';
   badge.style.display='inline-flex';
 }
