@@ -1632,6 +1632,13 @@ button.sc-err{background:none;border:0;text-align:left;cursor:pointer;font:inher
 #railSc .rs-p[data-uid]{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;}
 @keyframes rsPk{from{background:color-mix(in srgb, var(--pk) 24%, transparent);}to{background:transparent;}}
 #railSc .rs-p.rs-pk{animation:rsPk .8s ease-out;}
+.sc-badge{display:none;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--c-sec);padding:3px 8px;border-radius:10px;background:var(--c-fill);cursor:pointer;flex:0 0 auto;line-height:18px;-webkit-user-select:none;user-select:none;transition:background .15s, transform .08s;}
+.sc-badge:active{transform:scale(.97);}
+.sc-badge.tick{animation:rsPk .9s ease-out;}
+.sc-badge-dot{width:6px;height:6px;border-radius:3px;background:var(--c-green);flex:0 0 auto;}
+.sc-badge-dot.pulse{box-shadow:0 0 0 3px color-mix(in srgb, var(--c-green) 35%, transparent);}
+.sc-badge-lead{color:var(--c-label);font-weight:700;}
+.sc-badge-lead.poke{text-decoration:underline;text-underline-offset:2px;}
 #railSc .rs-h{display:flex;align-items:baseline;justify-content:space-between;gap:8px;padding:4px 12px 6px;}
 #railSc .rs-room{min-width:0;font-size:13px;font-weight:600;line-height:18px;color:var(--c-sec);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 #railSc .rs-n{flex:0 0 auto;font-size:13px;line-height:18px;color:var(--c-sec);}
@@ -2209,7 +2216,7 @@ details.gr-fold[open]>summary .s2-chev{transform:rotate(90deg);}
         <!-- 🔴 디자인 이식 09-24: 카드 = 위아래 반반. 답면 내용은 **앞면에서도 미리 채워 visibility:hidden**으로 깔고 가림 면으로 덮는다 →
              앞면↔답면에서 질문·선·버튼이 1px도 안 움직인다(디자인_언어 §1-1 · §7.1). 가림은 visibility라 글자가 선택·낭독되지 않는다. -->
         <div id="card">
-          <div id="cHead"><div id="cScope"></div><div id="phaseLine"></div></div>
+          <div id="cHead"><div id="cScope"></div><span id="solveStudyChip" class="sc-badge"></span><div id="phaseLine"></div></div>
           <div id="cardScroll"><div id="cSplit">
             <div id="cUpper">
               <div class="c-imgs front" id="cImgF"></div>
@@ -8707,6 +8714,7 @@ function showCard(){
   fillBack(c);                              // 답면을 미리 깔아 둔다(가려진 채) — 공개해도 선·버튼이 안 움직인다
   requestAnimationFrame(coverFit);
   syncRail(); counts();
+  try{ scRenderSolveBadge(); }catch(e){}
   $('cardScroll').scrollTop=0;
   saveResume();                  // 회독본 갔다 돌아올 자리 (앞면 상태)
 }
@@ -10112,7 +10120,7 @@ function scDetMine(){ const L=[], me=SC.auth&&SC.auth.user_id;
   L.push(`<div class="sc-line sc-hint">응답 시간 기준 · 이 기기에서 푼 것만 · 세션 이름으로 묶어요</div>`);
   return L.join(''); }
 const SC_CHEV='<svg class="sc-chev" viewBox="0 0 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 1l6 6 6-6"/></svg>';
-function scRender(){ scRenderHome(); scRenderStudy(); scRenderSet(); scRenderDock(); }
+function scRender(){ scRenderHome(); scRenderStudy(); scRenderSet(); scRenderDock(); scRenderSolveBadge(); }
 /* ═══ 공개 사이트 화면(10-06 동하 「사이트 UI가 별로 · 카드앱에 통계랑 별도로 · 피드백+처리 내역도」) ═══
    방문 = data/site-stats.json(GitHub Actions 15분 · GoatCounter API — 동하 기기의 AdGuard가 goatcounter를 막아 앱이 직접 못 부른다)
    피드백 = data/site-feedback.json(루틴 4-d 뒤 site_feedback.py · 🔴 건수·상태만 — 원문은 「시트 열기」로 동하 구글 계정에서) */
@@ -10263,6 +10271,55 @@ async function scRailPoke(p, uid){ const m=(SC.members||[]).find(x=>x.user_id===
   try{ await scPoke(uid); toast(`${nm}님을 콕 찔렀어요`); }
   catch(er){ if(scPokeGone(er)){ scPokeOff=Date.now()+30*60000; toast('아직 친구 서버에 없는 기능이에요'); } else toast(scErrKo(er)); }
   finally{ scPokeFly.delete(uid); } }
+/* 풀이 화면 스터디 미니 배지(10분 1위 + 접속자 수 + 클릭 찌르기) */
+function scRenderSolveBadge(){
+  const badge=$('solveStudyChip'); if(!badge) return;
+  if(!SC.group){ badge.style.display='none'; badge.innerHTML=''; return; }
+  const me=SC.auth&&SC.auth.user_id, rows=(SC.members||[]).filter(m=>m.user_id!==me);
+  const nStudy=rows.filter(m=>scMemberStatus(m)!=='offline').length+1;
+  const L=scLeaderData(), keys=Object.keys(L.slots).map(Number);
+  let leadText='', leadUid=null;
+  if(keys.length){
+    const latestSl=Math.max(...keys);
+    const arr=L.slots[latestSl]||[];
+    if(arr.length){
+      const isTie=arr.length>1 && arr[0].n===arr[1].n;
+      if(isTie){
+        leadText='공동 1위';
+      } else {
+        const top=arr[0];
+        leadUid=top.uid;
+        leadText=top.uid===me ? '1위 나' : `1위 ${top.name}`;
+      }
+    }
+  }
+  const pokeTarget=leadUid && leadUid!==me ? leadUid : (rows.find(m=>scMemberStatus(m)!=='offline')||rows[0]||{}).user_id;
+  badge.dataset.uid=pokeTarget||'';
+  const dotCls='sc-badge-dot'+(nStudy>1?' pulse':'');
+  const leadCls='sc-badge-lead'+(pokeTarget?' poke':'');
+  badge.innerHTML=`<span class="${dotCls}"></span><span>${nStudy}명</span>${leadText?` · <span class="${leadCls}">${esc(leadText)}</span>`:''}`;
+  badge.title=pokeTarget ? '클릭하면 찌르기' : '스터디 참여 중';
+  badge.style.display='inline-flex';
+}
+badgeWire: {
+  const badge=$('solveStudyChip');
+  if(badge){
+    badge.onclick=async e=>{
+      e.stopPropagation();
+      const uid=badge.dataset.uid;
+      if(!uid) return;
+      const m=(SC.members||[]).find(x=>x.user_id===uid), nm=(m&&m.display_name)||'친구';
+      if(Date.now()<scPokeOff){ toast('아직 친구 서버에 없는 기능이에요'); return; }
+      if((scPokeCool[uid]||0)>Date.now() || scPokeFly.has(uid)){ toast('같은 사람은 1분에 한 번 찌를 수 있어요'); return; }
+      badge.style.setProperty('--pk', scColor(uid));
+      badge.classList.remove('tick'); void badge.offsetWidth; badge.classList.add('tick');
+      scPokeFly.add(uid);
+      try{ await scPoke(uid); toast(`${nm}님을 콕 찔렀어요`); }
+      catch(er){ if(scPokeGone(er)){ scPokeOff=Date.now()+30*60000; toast('아직 친구 서버에 없는 기능이에요'); } else toast(scErrKo(er)); }
+      finally{ scPokeFly.delete(uid); }
+    };
+  }
+}
 const SC_RCHEV='<svg class="s2-chev" viewBox="0 0 9 15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m1.5 1.5 6 6-6 6"/></svg>';
 /* 사람 줄 — 홈 = 누르면 스터디 화면으로 · 스터디 화면 = 친구 줄을 누르면 그 자리에서 펼친다(덱 · 목표 · 오늘 시간대 띠) */
 function scPeople(where){
@@ -10499,7 +10556,9 @@ function scRtOn(m){ const ev=m.event, p=m.payload||{};
     if(e2==='review_tick' && uid && uid!==SC.auth.user_id){ const L=scRtLive(uid), m=(SC.members||[]).find(x=>x.user_id===uid), a=Math.max(0,Number(q.answers)||1), ms=Math.max(0,Number(q.time_ms)||0), s=Number(q.slot)||0;
       L.n=Math.max(L.n, (m&&m.answer_count)||0)+a; const v=L.bk[s]=L.bk[s]||{answer_count:0, time_ms:0};
       const mb=m&&(m.activity_buckets||[]).find(x=>x.slot===s); v.answer_count=Math.max(v.answer_count, (mb&&mb.answer_count)||0)+a; v.time_ms=Math.max(v.time_ms, (mb&&mb.time_ms)||0)+ms;
-      L.at=Date.now(); L.status=L.status||'studying'; if(scRtApply(uid)) scRtPaint(); }
+      L.at=Date.now(); L.status=L.status||'studying';
+      const bChip=$('solveStudyChip'); if(bChip){ bChip.classList.remove('tick'); void bChip.offsetWidth; bChip.classList.add('tick'); }
+      if(scRtApply(uid)) scRtPaint(); }
     else if(e2==='member_state') scRtState(uid, q);
     else if(e2==='room_ping' && uid && uid!==SC.auth.user_id){ scRt.last=''; scRtPresence(); }
     return; }
