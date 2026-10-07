@@ -10391,15 +10391,41 @@ badgeWire: {
   if(badge){
     badge.onclick=async e=>{
       e.stopPropagation();
-      const uid=badge.dataset.uid;
-      if(!uid) return;
-      const m=(SC.members||[]).find(x=>x.user_id===uid), nm=(m&&m.display_name)||'친구';
+      if(!SC.group) return;
       if(Date.now()<scPokeOff){ toast('아직 친구 서버에 없는 기능이에요'); return; }
-      if((scPokeCool[uid]||0)>Date.now() || scPokeFly.has(uid)){ toast('같은 사람은 1분에 한 번 찌를 수 있어요'); return; }
+      const me=SC.auth&&SC.auth.user_id;
+      const candidates=(SC.members||[]).filter(m=>m.user_id!==me && scMemberStatus(m)!=='offline');
+      if(!candidates.length){
+        const offList=(SC.members||[]).filter(m=>m.user_id!==me);
+        if(!offList.length){ toast('찌를 친구가 없어요'); return; }
+        candidates.push(...offList);
+      }
+      // 아직 쿨다운 안 걸린(안 찌른) 멤버 우선, 모두 쿨다운이면 쿨다운 가장 먼저 풀리는 사람
+      const now=Date.now();
+      const ready=candidates.filter(m=>(scPokeCool[m.user_id]||0)<=now && !scPokeFly.has(m.user_id));
+      let target=null;
+      if(ready.length){
+        // 1등인 사람 외에도 클릭할 때마다 순환해서 다른 사람 찌르기
+        target=ready[0];
+      } else {
+        candidates.sort((a,b)=>(scPokeCool[a.user_id]||0)-(scPokeCool[b.user_id]||0));
+        target=candidates[0];
+      }
+      const uid=target.user_id;
+      const nm=target.display_name||'친구';
+      if((scPokeCool[uid]||0)>now || scPokeFly.has(uid)){
+        const remSec=Math.max(1, Math.ceil(((scPokeCool[uid]||0)-now)/1000));
+        toast(`모두 찔렀어요 (${remSec}초 뒤 가능)`);
+        return;
+      }
       badge.style.setProperty('--pk', scColor(uid));
       badge.classList.remove('tick'); void badge.offsetWidth; badge.classList.add('tick');
       scPokeFly.add(uid);
-      try{ await scPoke(uid); toast(`${nm}님을 콕 찔렀어요`); }
+      try{
+        await scPoke(uid);
+        toast(`${nm}님을 콕 찔렀어요`);
+        scRenderSolveBadge();
+      }
       catch(er){ if(scPokeGone(er)){ scPokeOff=Date.now()+30*60000; toast('아직 친구 서버에 없는 기능이에요'); } else toast(scErrKo(er)); }
       finally{ scPokeFly.delete(uid); }
     };
