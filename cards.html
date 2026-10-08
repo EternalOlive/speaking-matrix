@@ -2445,12 +2445,24 @@ details.gr-fold[open]>summary .s2-chev{transform:rotate(90deg);}
         <div class="desc" id="padStatus" style="margin:0 2px 8px"></div>
         <div id="padMap"></div>
         <div style="display:flex;gap:8px;margin-top:10px"><button class="ym-btn ghost" id="padReset" style="flex:1">기본 배치로</button></div>
-        <div class="h-sec" style="margin-top:22px">키보드 단축키 (PC · 키보드 모드)</div>
-        <div class="kbd-note"><kbd>C</kbd>(또는 <kbd>Space</kbd>) 정답 공개 → 한 번 더 알맞음 · <kbd>Z</kbd><kbd>X</kbd><kbd>C</kbd><kbd>V</kbd> 채점(1~4도 됨) ·
-    <kbd>↑</kbd><kbd>↓</kbd> 스크롤 · <kbd>R</kbd> 되돌리기 · <kbd>S</kbd> 일시정지 · <kbd>B</kbd> 내일로 · <kbd>F</kbd> 플래그 ·
-    <kbd>Q</kbd> 끄기 · <kbd>T</kbd> 초성 힌트(항목 순서대로) · <kbd>Esc</kbd> 닫기 → 홈 · <kbd>/</kbd> 목록 검색<br>
-    <kbd>Ctrl</kbd>+<kbd>1</kbd><kbd>2</kbd><kbd>3</kbd><kbd>4</kbd> 플래그 사유(단서 과다 · 문면 분리 · 문장 어색 · 사례 추가) ·
-    한글 입력 상태에서도 먹어요(자판 자리로 읽습니다)</div>
+        <div class="h-sec" style="margin-top:22px">키보드 & 컨트롤러 단축키 안내</div>
+        <div class="kbd-note" style="line-height:1.8">
+          <p style="margin:0 0 6px;font-size:12px;color:var(--ink);font-weight:700">기본 키보드</p>
+          <kbd>Space</kbd> / <kbd>C</kbd> 정답 공개 → 한 번 더 알맞음<br>
+          <kbd>Z</kbd>(다시) · <kbd>X</kbd>(어려움) · <kbd>C</kbd>(알맞음) · <kbd>V</kbd>(쉬움) · <kbd>1</kbd>~<kbd>4</kbd>도 지원<br>
+          재출 카드: <kbd>Z</kbd>(다시) · <kbd>C</kbd>(통과)<br>
+          <p style="margin:10px 0 6px;font-size:12px;color:var(--ink);font-weight:700">8BitDo / 키보드 모드 패드</p>
+          <kbd>A</kbd> 다시 · <kbd>B</kbd> 어려움(재출: 통과) · <kbd>Y</kbd> 알맞음(재출: 통과) · <kbd>X</kbd> 쉬움<br>
+          <small style="color:var(--mute)">* 정답 공개 전에는 A·B·Y·X 아무 버튼이나 누르면 정답이 공개돼요.</small><br>
+          <p style="margin:10px 0 6px;font-size:12px;color:var(--ink);font-weight:700">방향키 (화살표)</p>
+          <kbd>↑</kbd> 다시 · <kbd>→</kbd> 어려움 · <kbd>↓</kbd> 알맞음(재출: 통과) · <kbd>←</kbd> 쉬움<br>
+          <small style="color:var(--mute)">* 정답 공개 전에는 방향키 누르면 정답이 공개돼요.</small><br>
+          <p style="margin:10px 0 6px;font-size:12px;color:var(--ink);font-weight:700">기타 기능</p>
+          <kbd>R</kbd> 되돌리기 · <kbd>Shift+B</kbd> 내일로 · <kbd>Q</kbd> 카드 끄기 · <kbd>F</kbd> 플래그 ·
+          <kbd>S</kbd> 일시정지 · <kbd>T</kbd> 초성 힌트 · <kbd>Esc</kbd> 닫기 → 홈 · <kbd>/</kbd> 목록 검색<br>
+          <kbd>Ctrl</kbd>+<kbd>1</kbd><kbd>2</kbd><kbd>3</kbd><kbd>4</kbd> 플래그 사유(단서 과다 · 문면 분리 · 문장 어색 · 사례 추가)<br>
+          <small style="color:var(--mute)">* 한글 입력 상태에서도 자판 자리로 정상 인식됩니다.</small>
+        </div>
       </div></div>
     </div>
     <div class="scr" id="scrHelp">
@@ -2701,6 +2713,7 @@ details.gr-fold[open]>summary .s2-chev{transform:rotate(90deg);}
             <table class="hp-t">
               <tr><td><b>8BitDo / 패드 (A B Y X)</b></td><td><b>A 다시 · B 어려움 · Y 알맞음 · X 쉬움</b> (답 공개 전엔 아무 버튼이나 누르면 공개)</td></tr>
               <tr><td><b>방향키 (↑ → ↓ ←)</b></td><td><b>↑ 다시 · → 어려움 · ↓ 알맞음 · ← 쉬움</b> (답 공개 전엔 정답 공개)</td></tr>
+              <tr><td><b>재출 카드</b></td><td>다시: <b>Z · A · ↑</b> / 통과: <b>C · B · Y · ↓</b></td></tr>
               <tr><td>Space · Enter · C</td><td>답 공개 → 한 번 더 누르면 <b>알맞음</b></td></tr>
               <tr><td>1 2 3 4 / Z X C V</td><td>다시 / 어려움 / 알맞음 / 쉬움</td></tr>
               <tr><td>R · Shift+B · Q</td><td>되돌리기(Revert) · 내일로(Shift+B) · <b>끄기</b>(Quit)</td></tr>
@@ -8734,8 +8747,8 @@ function showCard(){
   $('gradeBar').classList.toggle('re', reN>0);
   {
     const gl=$('gGood').querySelector('.gl'); if(gl) gl.textContent = reN>0?'통과':'알맞음';
-    const kcG=$('gGood').querySelector('.keycap'); if(kcG) kcG.textContent = reN>0?'B · C · ↓':'C';
-    const kcA=$('gAgain').querySelector('.keycap'); if(kcA) kcA.textContent = reN>0?'A · Z · ↑':'Z';
+    const kcG=$('gGood').querySelector('.keycap'); if(kcG) kcG.textContent = 'C';
+    const kcA=$('gAgain').querySelector('.keycap'); if(kcA) kcA.textContent = 'Z';
   }
   $('revealHint').textContent = (c.typ==='도식' ? '다 그렸으면 카드를 눌러요' : '카드를 누르면 정답이 보여요') + (reN>0?' · 재출':'');
   const m=c.front.match(/^〔([^〕]*)〕\s*(.*)$/s);
