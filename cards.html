@@ -2798,6 +2798,16 @@ details.gr-fold[open]>summary .s2-chev{transform:rotate(90deg);}
   <div class="btn-row"><button class="btn-ghost" id="cfNo">취소</button><button class="btn-danger" id="cfYes">끄기</button></div>
 </div></div>
 
+<!-- 내일 복습 당겨오기 -->
+<div class="ovl" id="ovlPullTmr"><div class="sheet">
+  <h2>내일 복습 당겨오기</h2>
+  <p class="desc" id="pullTmrDesc">내일 예정된 복습 카드를 오늘 큐로 가져와 미리 학습해요.</p>
+  <div class="field"><label>가져올 장수</label>
+    <div class="seg" id="pullTmrSeg"></div>
+  </div>
+  <div class="btn-row"><button class="btn-ghost" id="pullTmrCancel">취소</button><button class="btn-primary" id="pullTmrOk">가져오기</button></div>
+</div></div>
+
 <!-- 세션 조립기 -->
 <div class="ovl" id="ovlSess"><div class="sheet wide">
   <h2 id="nsTitle">새 세션</h2>
@@ -8444,6 +8454,22 @@ function tomorrowCount(sc){
     if(s&&s.fsrs&&!s.retired&&effDueKey(dayKey(new Date(s.fsrs.due)), c.id)===tk&&(!sc||inScope(c,sc))) n++; }
   return n;
 }
+function tomorrowCardsForSess(sx){
+  const tk=tomorrowKey();
+  const inQ=new Set((sx&&sx.q)||[]);
+  if(curSess&&curSess.id===(sx&&sx.id)){
+    for(const c of queue.slice(qPos)) inQ.add(c.id);
+  }
+  const sc=sx?asPreset(sx).scope:null;
+  const list=[];
+  for(const c of DATA){
+    if(inQ.has(c.id)) continue;
+    if(settledToday(c)||buried(c)||retired(c)||offed(c)) continue;
+    const s=state.cards[c.id];
+    if(s&&s.fsrs&&!s.retired&&effDueKey(dayKey(new Date(s.fsrs.due)), c.id)===tk&&(!sc||inScope(c,sc))) list.push(c);
+  }
+  return list;
+}
 /* 상단 바 「오늘 N」 = **채점 횟수**라 재출을 포함한다(동하 09-09 · 「회」의 규칙). 홈의 「N회 채점」과 같은 수다. */
 function todayRated(){ let n=0; const tk=todayKey();
   for(let i=state.log.length-1;i>=0;i--){ if(dayKey(logDate(state.log[i]))===tk)n++; else if(n)break; }
@@ -9229,6 +9255,8 @@ $('rOffAll').onclick=()=>{
   toast('형제 '+(sib.length+1)+'장을 껐어요 — 되돌리기 한 번에 전부 살아나요');
 };
 $('cfNo').onclick=()=>$('ovlConfirm').classList.remove('show');
+$('pullTmrCancel').onclick=()=>$('ovlPullTmr').classList.remove('show');
+$('ovlPullTmr').onclick=(e)=>{ if(e.target===$('ovlPullTmr')) $('ovlPullTmr').classList.remove('show'); };
 $('cTagAdd').onclick=(ev)=>{ ev.stopPropagation(); $('cTagInput').classList.add('on'); $('cTagInput').focus(); };
 $('cTagInput').onclick=(ev)=>ev.stopPropagation();
 $('cTagInput').addEventListener('change',()=>{
@@ -9889,9 +9917,11 @@ function heroSess(){   // 이어서 풀기 = 지금 세션(남았으면) → 아
 function renderHero(due){
   const box=$('hHero'); const sx=heroSess();
   if(!sx){ const ym=ymTodayN();
+    const tmrAll=tomorrowCardsForSess(null);
     box.innerHTML=`<section class="hero done"><span class="hero-ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span>
       <div class="hero-b"><span class="hero-t">오늘 할 일을 다 했어요</span><span class="hero-s">내일 ${tomorrowCount(null).toLocaleString()}장${ym?` · 문풀 ${ym}문항 남음`:''}</span></div>
-      ${ym?'<button class="hero-go tint" id="heroYm">문풀 열기</button>':''}</section>`;
+      ${tmrAll.length?'<button class="hero-go tint" id="heroPullTmr">내일 복습 당겨오기</button>':(ym?'<button class="hero-go tint" id="heroYm">문풀 열기</button>':'')}</section>`;
+    const hp=$('heroPullTmr'); if(hp) hp.onclick=()=>openPullTmr(curSess||sessions[0], true);
     const y=$('heroYm'); if(y) y.onclick=ymEnter; return; }
   const remain=sessRemain(sx), st=stArr(sx.how.status).map(k=>({due:'복습',new:'신규',all:'전체',weak:'약점'}[k]||k)).join('+');
   box.innerHTML=`<section class="hero"><div class="hero-b"><span class="hero-k">이어서 풀기</span><span class="hero-t">${esc(sx.name)}</span>
@@ -11098,6 +11128,7 @@ function renderSession(){
   const ntU=(sx.how.newAfter||stHas(sx.how.status,'new'))?(()=>{ const keep=curPreset; curPreset=asPreset(sx);
       const t=usableTopic(live?queue.slice(qPos):dropSettled(sessCards(sx))); curPreset=keep; return t; })():null;
   const nt=ntU&&ntU.nt;   // 🔴 표시와 투입이 같은 답을 본다
+  const tmrCards = tomorrowCardsForSess(sx);
   // 직접 추가 세션인데 범위가 비었다 = 「다 풀었다」가 아니라 「담은 게 없다」
   const noScope = isFixed(sx) && !((sx.scope.units||[]).length||(sx.scope.mids||[]).length);
   /* 화면 재배치(동하 09-05 비평 2): 할 일(이어서 채우기·다음 진도·범위 넓히기)을 실선 버튼으로 맨 위에 모으고,
@@ -11130,6 +11161,7 @@ function renderSession(){
       <section class="grp a-rng">
         ${(refillQ&&refillQ.length)?row('ssRefill',IC('<path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 5v6h-6"/>','var(--c-green)'),'이어서 채우기',esc(comp.replace(/^ · /,'')),`${refillQ.length.toLocaleString()}장`):''}
         ${nt?row('ssNew',IC('<circle cx="12" cy="12" r="8"/><path d="M12 8.5v7M8.5 12h7"/>','var(--c-acc)'),'다음 진도 넣기','',`${nt.mixed?`${nt.subs}과목`:esc(String(nt.label||'').split(' · ')[0])} · ${ntU.fresh.length.toLocaleString()}장`):''}
+        ${tmrCards.length?row('ssPullTmr',IC('<circle cx="12" cy="12" r="8"/><path d="M12 8v4l2.5 2"/>','var(--c-indigo)'),'내일 복습 당겨오기','',`${tmrCards.length.toLocaleString()}장`):''}
         ${row('ssAdd',IC('<path d="M4 12h16M8 8l-4 4 4 4M16 8l4 4-4 4"/>','var(--c-indigo)'),((sx.scope.units||[]).length||(sx.scope.mids||[]).length||isFixed(sx))?'범위 고르기':'범위 넓히기','',null)}
         ${row('ssEx',IC('<circle cx="12" cy="12" r="8"/><path d="M8.5 12h7"/>','var(--c-sec)'),'주제 빼 두기','',exN?`${exN}개 · ${exCards.toLocaleString()}장`:null)}
       </section>
@@ -11153,6 +11185,7 @@ function renderSession(){
   body.innerHTML=h;
   $('ssGo').onclick=()=>{ if(live){ go('scrSolve'); showCard(); } else playSess(sx); };
   const bn=$('ssNew'); if(bn)bn.onclick=()=>{ if(!live)playSess(sx); curPreset=asPreset(sx); extendWithNew(); };
+  const bp=$('ssPullTmr'); if(bp)bp.onclick=()=>openPullTmr(sx, false);
   /* 큐 비우기 — 「빼기」는 직접 추가 세션에서 **범위까지** 지운다(그래서 다시 넣으면 또 채워진다).
      오늘 큐만 물리고 싶을 때 쓸 자리가 없었다 (동하 2026-08-22). */
   const bc=$('ssClear'); if(bc)bc.onclick=()=>{
@@ -12421,6 +12454,73 @@ function askConfirm(title, desc, yesLabel, onYes){
   $('cfYes').textContent=yesLabel||'확인';
   $('ovlConfirm').classList.add('show');
   $('cfYes').onclick=()=>{ $('ovlConfirm').classList.remove('show'); onYes(); };
+}
+let pullTmrTargetSess=null, pullTmrFromHome=false;
+function openPullTmr(sx, fromHome){
+  if(!sx) sx=curSess||sessions[0];
+  if(!sx) return;
+  const avail=tomorrowCardsForSess(sx);
+  if(!avail.length){ toast('내일 예정인 복습 카드가 없어요'); return; }
+  pullTmrTargetSess=sx; pullTmrFromHome=!!fromHome;
+  $('pullTmrDesc').textContent=`${sx.name} 세션에 내일 복습 카드를 가져옵니다 (총 ${avail.length}장 가능).`;
+  const seg=$('pullTmrSeg'); seg.innerHTML='';
+  const options=[];
+  if(avail.length>10) options.push(10);
+  if(avail.length>20) options.push(20);
+  if(avail.length>30) options.push(30);
+  if(!options.includes(avail.length)) options.push('all');
+  let curVal=options[0];
+  options.forEach((opt, idx)=>{
+    const b=document.createElement('button');
+    b.textContent = opt==='all' ? `전체 (${avail.length}장)` : `${opt}장`;
+    if(idx===0) b.classList.add('on');
+    b.onclick=()=>{
+      seg.querySelectorAll('button').forEach(x=>x.classList.remove('on'));
+      b.classList.add('on');
+      curVal=opt;
+    };
+    seg.appendChild(b);
+  });
+  $('pullTmrOk').onclick=()=>{
+    $('ovlPullTmr').classList.remove('show');
+    doPullTmr(pullTmrTargetSess, curVal, pullTmrFromHome);
+  };
+  $('ovlPullTmr').classList.add('show');
+}
+function doPullTmr(sx, count, startNow){
+  if(!sx) sx=curSess||sessions[0];
+  if(!sx) return;
+  const avail=tomorrowCardsForSess(sx);
+  if(!avail.length){ toast('내일 예정인 복습 카드가 없어요'); return; }
+  const sorted = sx.how && sx.how.order==='doc'
+    ? avail.slice().sort((a,b)=>a._i - b._i)
+    : riskSort(avail);
+  const n = (count==='all' || count>=sorted.length) ? sorted.length : Math.max(1, count);
+  const picked = sorted.slice(0, n);
+  const pickedIds = picked.map(c=>c.id);
+  if(!sx.q) sx.q=[];
+  sx.day=todayKey();
+  for(const id of pickedIds){
+    if(!sx.q.includes(id)) sx.q.push(id);
+    if(sx.qDel) delete sx.qDel[id];
+  }
+  qGrow(sx);
+  saveSessionsFlush();
+  const live = curSess && curSess.id===sx.id;
+  if(live){
+    for(const c of picked){
+      if(!queue.some(q=>q.id===c.id)) queue.push(c);
+    }
+    counts();
+    syncSessQueue();
+  }
+  toast(`내일 복습 ${picked.length}장을 당겨왔어요!`);
+  if(startNow){
+    playSess(sx);
+  } else {
+    if($('scrSession').classList.contains('on')) renderSession();
+    if($('scrHome').classList.contains('on')) renderHome();
+  }
 }
 /* ═══ 카드별 기억 곡선 (09-30 · 동하 「카드별로 망각 커브 그리는 거」) ═══
    로그가 정본 — 이 카드의 채점만 applyLogEntry(replayLog와 같은 문 · 그날 첫 채점만 · 재출 제외 · base 뒤만)로 다시 돌려
