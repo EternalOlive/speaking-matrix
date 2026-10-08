@@ -1311,7 +1311,13 @@ details.ym-subj>summary small{font-weight:600;color:var(--mute);font-size:12.5px
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 #cardScroll{flex:1 1 auto;min-height:0;display:block;}   /* 🔴 block — flex면 #cSplit이 칸 높이로 줄어들어 긴 문면이 가림 면과 겹쳤다(09-24 아이폰 실측) */
 #cSplit{min-height:100%;display:flex;flex-direction:column;}
-#cUpper{flex:42 1 0;display:flex;flex-direction:column;justify-content:center;padding:12px 0;}
+#cUpper{flex:42 1 0;display:flex;flex-direction:column;justify-content:center;padding:12px 0;position:relative;}
+.c-upper-act{position:absolute;top:2px;right:0;display:flex;align-items:center;z-index:2;}
+.c-copy-btn{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;font-size:12px;font-weight:500;color:var(--c-sec);background:var(--c-fill);border:0;border-radius:999px;cursor:pointer;line-height:1.4;transition:all .15s ease;-webkit-user-select:none;user-select:none;}
+.c-copy-btn:hover{color:var(--c-label);background:var(--c-fill-hi,rgba(120,120,128,0.22));}
+.c-copy-btn svg{width:12px;height:12px;}
+.c-copy-tag{cursor:pointer;display:inline-flex;align-items:center;border:0;color:var(--c-sec);user-select:none;-webkit-user-select:none;}
+.c-copy-tag:hover{color:var(--c-label);background:var(--c-fill-hi,rgba(120,120,128,0.22));}
 #cFront{font-family:var(--font);font-size:var(--t-q);font-weight:500;line-height:1.55;letter-spacing:-.012em;color:var(--c-label);}
 #cFront.is-long{font-size:var(--t-q-long);letter-spacing:0;max-width:72ch;hyphens:auto;}
 #cLine{flex:0 0 auto;height:1px;transform:scaleY(.5);background:var(--c-sep);margin-bottom:8px;}
@@ -2221,6 +2227,7 @@ details.gr-fold[open]>summary .s2-chev{transform:rotate(90deg);}
           <div id="cHead"><div id="cScope"></div><span id="solveStudyChip" class="sc-badge"></span><div id="phaseLine"></div></div>
           <div id="cardScroll"><div id="cSplit">
             <div id="cUpper">
+              <div class="c-upper-act"><button type="button" class="c-copy-btn" id="btnCopyFront" title="카드 내용 복사" aria-label="카드 내용 복사"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span>복사</span></button></div>
               <div class="c-imgs front" id="cImgF"></div>
               <div id="cFront"></div>
               <div id="cDiag"></div>
@@ -2241,7 +2248,7 @@ details.gr-fold[open]>summary .s2-chev{transform:rotate(90deg);}
                   <!-- 가림 면 = 답과 같은 격자 칸에 겹친다 → 칸 높이 = 둘 중 큰 쪽(힌트 칩이 많아도 넘치지 않는다) · 답면에선 visibility로만 치운다(높이 그대로) -->
                   <div id="cCover"><div id="revealHint">카드를 누르면 정답이 보여요</div><div id="hintBox"></div></div>
                 </div>
-                <div id="cMeta"><span class="typ-tag" id="cTyp"></span><span class="typ-tag" id="cDir">역방향</span><span id="cHint"></span><span id="cTags"></span><button class="typ-tag" id="cTagAdd">＋태그</button><input id="cTagInput" type="text" maxlength="16" placeholder="태그"><div id="cHoedok"></div></div>
+                <div id="cMeta"><span class="typ-tag" id="cTyp"></span><span class="typ-tag" id="cDir">역방향</span><span id="cHint"></span><span id="cTags"></span><button class="typ-tag" id="cTagAdd">＋태그</button><input id="cTagInput" type="text" maxlength="16" placeholder="태그"><button type="button" class="typ-tag c-copy-tag" id="btnCopyBack" title="카드 내용 복사" aria-label="카드 내용 복사"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:12px;height:12px;vertical-align:-1px;margin-right:4px"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>복사</button><div id="cHoedok"></div></div>
               </div>
             </div>
           </div></div>
@@ -5353,7 +5360,8 @@ let planIncomplete=false;
 let dirty=false, pushing=false, ratedSincePush=0, lastPushAt=Date.now();
 let hintUsed=new Set();   // 이 카드에서 초성 힌트를 연 항목 번호 — showCard가 비운다
 let queue=[], qPos=0, revealed=false, itemMarks=[], curPreset=null, phase='review',
-    sessionDone=0, doneCredited=0, undoSnap=null, newServed=0, shownAt=0, pausedMs=0, pauseAt=0, pzTimer=null;
+    sessionDone=0, doneCredited=0, undoSnap=null, newServed=0, shownAt=0, pausedMs=0, pauseAt=0, pzTimer=null,
+    scLastConfetti100=-1;
 let sess={r:[0,0,0,0,0], ms:0, streak:0, best:0, re:0};   // 이번 세션 성적 (요약 화면용) · re = 재출 채점 수(성적에서 뺀다)
 function sessReset(){ sess={r:[0,0,0,0,0], ms:0, streak:0, best:0, re:0}; }
 /* ═══ 「다시」 당일 재출 (동하 결정 2026-09-07 · 메타 발주 · 판정대기 09-07 줄) ═══════════════
@@ -8980,6 +8988,17 @@ function rate(num){
   const hasExtra=Object.keys(extra).length>0;
   const entry=hasExtra?[c.id,ts,num,extra]:[c.id,ts,num];
   pushLog(entry); undoSnap.entry=entry;      // 되돌릴 때 이 항목만 지목해 뺀다
+  try{
+    const tdCnt=(scToday()||{}).n||0;
+    if(scLastConfetti100<0){
+      scLastConfetti100=Math.floor(tdCnt/100)*100;
+    } else if(tdCnt<scLastConfetti100){
+      scLastConfetti100=Math.floor(tdCnt/100)*100;
+    } else if(tdCnt>0 && Math.floor(tdCnt/100)*100>scLastConfetti100){
+      scLastConfetti100=Math.floor(tdCnt/100)*100;
+      try{ scTriggerConfetti(); }catch(e){}
+    }
+  }catch(e){}
   if(reN){ sess.re++; }                    // 🔴 재출은 성적·미룸 카운터에 안 들어간다 (「오늘 채점」 정의 = 첫 채점만)
   else{
     sess.r[num]++; sess.ms+=extra.ms||0;
@@ -9265,6 +9284,24 @@ if(rCopyEl) rCopyEl.onclick = () => {
   $('rail').classList.remove('open');
   $('railScrim').classList.remove('show');
 };
+const btnCopyF = $('btnCopyFront');
+if(btnCopyF){
+  ['click','pointerdown','pointerup'].forEach(ev => btnCopyF.addEventListener(ev, e => e.stopPropagation()));
+  btnCopyF.onclick = (e) => {
+    e.stopPropagation();
+    const c = cur();
+    if(c) copyCardToClipboard(c);
+  };
+}
+const btnCopyB = $('btnCopyBack');
+if(btnCopyB){
+  ['click','pointerdown','pointerup'].forEach(ev => btnCopyB.addEventListener(ev, e => e.stopPropagation()));
+  btnCopyB.onclick = (e) => {
+    e.stopPropagation();
+    const c = cur();
+    if(c) copyCardToClipboard(c);
+  };
+}
 $('rInfo').onclick=()=>{ const c=cur(); if(!c) return;
   openCardSheet(c, ()=>{ const k=cur(); if(k && (offed(k)||buried(k)||retired(k))) showCard(); else syncRail(); }); };
 $('railScrim').onclick=()=>{ $('rail').classList.remove('open'); $('railScrim').classList.remove('show'); };
@@ -10439,16 +10476,17 @@ function scRenderSolveBadge(){
           const top=arr[0];
           leadUid=top.uid;
           leadText=top.uid===me ? `1위 나 ${top.n}개` : `1위 ${top.name} ${top.n}개`;
-          // 첫 로딩 시에는 키만 기록하고 발동 건너뜀 (초기 로딩 버그 방지)
-          if(top.uid===me && top.n>0){
-            const slotKey=`${latestSl}_${top.n}`;
+          // 10분 1등 달성 시 해당 10분 슬롯에서 딱 1번만 축포 (초기 로딩 제외)
+          if(top.uid===me && top.n>0 && latestSl===nowSl){
             if(!scConfettiInited){
               scConfettiInited=true;
-              scLast1stSlot=slotKey;
-            } else if(scLast1stSlot!==slotKey){
-              scLast1stSlot=slotKey;
+              scLast1stSlot=nowSl;
+            } else if(scLast1stSlot!==nowSl){
+              scLast1stSlot=nowSl;
               try{ scTriggerConfetti(); }catch(e){}
             }
+          } else if(!scConfettiInited){
+            scConfettiInited=true;
           }
         }
       }
