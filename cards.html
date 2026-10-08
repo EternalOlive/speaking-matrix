@@ -1313,11 +1313,15 @@ details.ym-subj>summary small{font-weight:600;color:var(--mute);font-size:12.5px
 #cSplit{min-height:100%;display:flex;flex-direction:column;}
 #cUpper{flex:42 1 0;display:flex;flex-direction:column;justify-content:center;padding:12px 0;position:relative;}
 .c-upper-act{position:absolute;top:2px;right:0;display:flex;align-items:center;z-index:2;}
-.c-copy-btn{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;font-size:12px;font-weight:500;color:var(--c-sec);background:var(--c-fill);border:0;border-radius:999px;cursor:pointer;line-height:1.4;transition:all .15s ease;-webkit-user-select:none;user-select:none;}
+.c-copy-btn{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;padding:0;color:var(--c-sec);background:var(--c-fill);border:0;border-radius:50%;cursor:pointer;transition:all .15s ease;-webkit-user-select:none;user-select:none;}
 .c-copy-btn:hover{color:var(--c-label);background:var(--c-fill-hi,rgba(120,120,128,0.22));}
-.c-copy-btn svg{width:12px;height:12px;}
-.c-copy-tag{cursor:pointer;display:inline-flex;align-items:center;border:0;color:var(--c-sec);user-select:none;-webkit-user-select:none;}
+.c-copy-btn svg{width:13px;height:13px;}
+.c-copy-tag{cursor:pointer;display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;padding:0 !important;border:0;color:var(--c-sec);border-radius:50% !important;user-select:none;-webkit-user-select:none;}
 .c-copy-tag:hover{color:var(--c-label);background:var(--c-fill-hi,rgba(120,120,128,0.22));}
+.c-copy-tag svg{width:13px;height:13px;}
+.c-copy-btn.copied, .c-copy-tag.copied{color:var(--c-green, #30D158);}
+.c-copy-btn.copied .ic-copy, .c-copy-tag.copied .ic-copy{display:none;}
+.c-copy-btn.copied .ic-check, .c-copy-tag.copied .ic-check{display:inline-block !important;}
 #cFront{font-family:var(--font);font-size:var(--t-q);font-weight:500;line-height:1.55;letter-spacing:-.012em;color:var(--c-label);}
 #cFront.is-long{font-size:var(--t-q-long);letter-spacing:0;max-width:72ch;hyphens:auto;}
 #cLine{flex:0 0 auto;height:1px;transform:scaleY(.5);background:var(--c-sep);margin-bottom:8px;}
@@ -2227,7 +2231,7 @@ details.gr-fold[open]>summary .s2-chev{transform:rotate(90deg);}
           <div id="cHead"><div id="cScope"></div><span id="solveStudyChip" class="sc-badge"></span><div id="phaseLine"></div></div>
           <div id="cardScroll"><div id="cSplit">
             <div id="cUpper">
-              <div class="c-upper-act"><button type="button" class="c-copy-btn" id="btnCopyFront" title="카드 내용 복사" aria-label="카드 내용 복사"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span>복사</span></button></div>
+              <div class="c-upper-act"><button type="button" class="c-copy-btn" id="btnCopyFront" title="카드 내용 복사" aria-label="카드 내용 복사"><svg class="ic-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><svg class="ic-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:none;"><path d="M20 6 9 17l-5-5"/></svg></button></div>
               <div class="c-imgs front" id="cImgF"></div>
               <div id="cFront"></div>
               <div id="cDiag"></div>
@@ -2248,7 +2252,7 @@ details.gr-fold[open]>summary .s2-chev{transform:rotate(90deg);}
                   <!-- 가림 면 = 답과 같은 격자 칸에 겹친다 → 칸 높이 = 둘 중 큰 쪽(힌트 칩이 많아도 넘치지 않는다) · 답면에선 visibility로만 치운다(높이 그대로) -->
                   <div id="cCover"><div id="revealHint">카드를 누르면 정답이 보여요</div><div id="hintBox"></div></div>
                 </div>
-                <div id="cMeta"><span class="typ-tag" id="cTyp"></span><span class="typ-tag" id="cDir">역방향</span><span id="cHint"></span><span id="cTags"></span><button class="typ-tag" id="cTagAdd">＋태그</button><input id="cTagInput" type="text" maxlength="16" placeholder="태그"><button type="button" class="typ-tag c-copy-tag" id="btnCopyBack" title="카드 내용 복사" aria-label="카드 내용 복사"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:12px;height:12px;vertical-align:-1px;margin-right:4px"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>복사</button><div id="cHoedok"></div></div>
+                <div id="cMeta"><span class="typ-tag" id="cTyp"></span><span class="typ-tag" id="cDir">역방향</span><span id="cHint"></span><span id="cTags"></span><button class="typ-tag" id="cTagAdd">＋태그</button><input id="cTagInput" type="text" maxlength="16" placeholder="태그"><button type="button" class="typ-tag c-copy-tag" id="btnCopyBack" title="카드 내용 복사" aria-label="카드 내용 복사"><svg class="ic-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><svg class="ic-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:none;"><path d="M20 6 9 17l-5-5"/></svg></button><div id="cHoedok"></div></div>
               </div>
             </div>
           </div></div>
@@ -9254,7 +9258,7 @@ function cardTextCopy(c){
   if(c.src) lines.push(`출처: ${c.src}`);
   return lines.join('\n');
 }
-async function copyCardToClipboard(c){
+async function copyCardToClipboard(c, showToast = true){
   if(!c) return;
   const txt = cardTextCopy(c);
   try{
@@ -9271,16 +9275,21 @@ async function copyCardToClipboard(c){
       document.execCommand('copy');
       document.body.removeChild(ta);
     }
-    toast('카드 내용을 복사했어요');
+    if(showToast) toast('카드 내용을 복사했어요');
   }catch(e){
-    toast('복사에 실패했어요');
+    if(showToast) toast('복사에 실패했어요');
   }
+}
+function flashCopyBtn(btn){
+  if(!btn) return;
+  btn.classList.add('copied');
+  setTimeout(()=>btn.classList.remove('copied'), 1200);
 }
 const rCopyEl = $('rCopy');
 if(rCopyEl) rCopyEl.onclick = () => {
   const c = cur();
   if(!c) return;
-  copyCardToClipboard(c);
+  copyCardToClipboard(c, true);
   $('rail').classList.remove('open');
   $('railScrim').classList.remove('show');
 };
@@ -9290,7 +9299,7 @@ if(btnCopyF){
   btnCopyF.onclick = (e) => {
     e.stopPropagation();
     const c = cur();
-    if(c) copyCardToClipboard(c);
+    if(c){ copyCardToClipboard(c, false); flashCopyBtn(btnCopyF); }
   };
 }
 const btnCopyB = $('btnCopyBack');
@@ -9299,7 +9308,7 @@ if(btnCopyB){
   btnCopyB.onclick = (e) => {
     e.stopPropagation();
     const c = cur();
-    if(c) copyCardToClipboard(c);
+    if(c){ copyCardToClipboard(c, false); flashCopyBtn(btnCopyB); }
   };
 }
 $('rInfo').onclick=()=>{ const c=cur(); if(!c) return;
