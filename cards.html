@@ -2699,10 +2699,11 @@ details.gr-fold[open]>summary .s2-chev{transform:rotate(90deg);}
             <p>블루투스 컨트롤러(8BitDo Micro 같은 것)를 <b>키보드 모드</b>로 붙이면 버튼이 곧 키예요. 아래 표대로 버튼에 키를 배정하면 돼요.
               <b>한글 입력 상태여도 먹어요</b> — 글자가 아니라 자판 자리로 읽습니다.</p>
             <table class="hp-t">
-              <tr><td>C · Space · Enter</td><td>답 공개 → 한 번 더 누르면 <b>알맞음</b> (C = 모바일 알맞음 자리와 같다)</td></tr>
-              <tr><td>Z X C V</td><td>다시 / 어려움 / 알맞음 / 쉬움 (답을 본 뒤 · 1 2 3 4도 그대로)</td></tr>
-              <tr><td><b>↑ ↓</b></td><td><b>카드·목록 스크롤</b> — 긴 표 카드를 굴릴 때. 눌러 두면 계속 굴러요</td></tr>
-              <tr><td>R · B · Q</td><td>되돌리기(Revert) · 내일로 미루기(Bury) · <b>끄기</b>(Quit · 이 카드 그만)</td></tr>
+              <tr><td><b>8BitDo / 패드 (A B Y X)</b></td><td><b>A 다시 · B 어려움 · Y 알맞음 · X 쉬움</b> (답 공개 전엔 아무 버튼이나 누르면 공개)</td></tr>
+              <tr><td><b>방향키 (↑ → ↓ ←)</b></td><td><b>↑ 다시 · → 어려움 · ↓ 알맞음 · ← 쉬움</b> (답 공개 전엔 정답 공개)</td></tr>
+              <tr><td>Space · Enter · C</td><td>답 공개 → 한 번 더 누르면 <b>알맞음</b></td></tr>
+              <tr><td>1 2 3 4 / Z X C V</td><td>다시 / 어려움 / 알맞음 / 쉬움</td></tr>
+              <tr><td>R · Shift+B · Q</td><td>되돌리기(Revert) · 내일로(Shift+B) · <b>끄기</b>(Quit)</td></tr>
               <tr><td>F · S · T</td><td>플래그(Flag) · 일시정지(Stop) · 초성 힌트(Tip)</td></tr>
               <tr><td><b>Ctrl + 1 2 3 4</b></td><td><b>플래그 사유 칩</b> — 단서 과다 / 문면 분리 / 문장 어색 / 사례 추가.
                 레일을 안 열어도 붙고, 칩을 붙이면 플래그도 켜져요. 같은 키를 다시 누르면 해제</td></tr>
@@ -11927,16 +11928,17 @@ let kbdOn = lsGet(K_KBD)!=='0';
    구현 = 버튼 눌림 가장자리 → **같은 keydown 이벤트를 합성**해 기존 키 처리 한 곳으로 보낸다(규칙 중복 금지 · e.code 그대로 · e.repeat 없음).
    배치는 기기별(localStorage) · 「입력 배치」 화면에서 「누르기 → 버튼」으로 바꾼다. 기본 배치 = 표준 매핑 번호 기준으로 동하 K 모드 배치(구조안내 §7.7)를 옮긴 것 —
    실물 번호가 다르면 화면에서 고친다(#번호가 눌린 버튼을 알려 준다). */
-const K_PAD='cards_pad_v1';
+const K_PAD='cards_pad_v2';
 const PAD_ACTS=[   // [id, 라벨, 합성할 키] — 순서 = 화면 순서
-  ['reveal','답 보기 → 알맞음 (Space)',{code:'Space',key:' '}], ['again','다시 (Z)',{code:'Digit1',key:'1'}], ['hard','어려움 (X)',{code:'Digit2',key:'2'}],
-  ['good','알맞음 (C)',{code:'Digit3',key:'3'}], ['easy','쉬움 (V)',{code:'Digit4',key:'4'}], ['undo','되돌리기 (R)',{code:'KeyU',key:'u'}],
-  ['bury','내일로 (B)',{code:'KeyB',key:'b'}], ['off','끄기 (Q)',{code:'KeyO',key:'o'}], ['hint','첫 글자 힌트 (T)',{code:'KeyT',key:'t'}],
-  ['home','홈 (Esc)',{code:'KeyH',key:'h'}], ['pause','일시정지 (S)',{code:'KeyP',key:'p'}], ['mod','사유 칩 보조키 — 누른 채 채점 버튼 (Ctrl+1~4)',null],
+  ['again','다시 (A)',{code:'KeyA',key:'a'}], ['hard','어려움 (B)',{code:'KeyB',key:'b'}],
+  ['good','알맞음 (Y)',{code:'KeyY',key:'y'}], ['easy','쉬움 (X)',{code:'KeyX',key:'x'}],
+  ['reveal','답 보기 (Space)',{code:'Space',key:' '}], ['undo','되돌리기 (R)',{code:'KeyU',key:'u'}],
+  ['bury','내일로 (Shift+B)',{code:'KeyB',key:'b',shiftKey:true}], ['off','끄기 (Q)',{code:'KeyO',key:'o'}], ['hint','첫 글자 힌트 (T)',{code:'KeyT',key:'t'}],
+  ['home','홈 (Esc)',{code:'KeyH',key:'h'}], ['pause','일시정지 (P)',{code:'KeyP',key:'p'}], ['mod','사유 칩 보조키 — 누른 채 채점 버튼 (Ctrl+1~4)',null],
   ['up','위로 스크롤 (↑)',{code:'ArrowUp',key:'ArrowUp'}], ['down','아래로 스크롤 (↓)',{code:'ArrowDown',key:'ArrowDown'}],
   ['left','회독본 이전 절 (←)',{code:'ArrowLeft',key:'ArrowLeft'}], ['right','회독본 다음 절 (→)',{code:'ArrowRight',key:'ArrowRight'}]];
-/* 표준 매핑 버튼 번호: 0 아래 · 1 오른쪽 · 2 왼쪽 · 3 위 · 4 L · 5 R · 6 L2 · 7 R2 · 8 − · 9 + · 12↑ 13↓ 14← 15→ · 16 홈 · 17 그 밖(★ 등) */
-const PAD_DEF={reveal:1, again:3, hard:2, good:17, easy:0, undo:7, bury:16, off:4, mod:5, pause:8, home:9, up:12, down:13, left:14, right:15, hint:6};
+/* 표준 매핑 버튼 번호(8BitDo): 0 B(아래) · 1 A(오른쪽) · 2 Y(왼쪽) · 3 X(위) · 4 L · 5 R · 6 L2 · 7 R2 · 8 − · 9 + · 12↑ 13↓ 14← 15→ · 16 홈 */
+const PAD_DEF={again:1, hard:0, good:2, easy:3, undo:7, bury:16, off:4, mod:5, pause:8, home:9, up:12, down:13, left:14, right:15, hint:6, reveal:null};
 let padMap=Object.assign({}, PAD_DEF); try{ const j=JSON.parse(lsGet(K_PAD)||'null'); if(j&&typeof j==='object') padMap=Object.assign({}, PAD_DEF, j); }catch(e){}
 let padPrev=[], padSeen=false, padLearn=null, padHoldT=0, padLast=null;
 let _padEv=false;
@@ -11992,7 +11994,7 @@ applySat();
    (동하 09-10 실기: 「소프트웨어 키보드가 한글로 맞춰져 있으면 h, p 이런 키가 안 먹혀」).
    그래서 **물리 키 자리(`e.code`)**로 읽는다 — `KeyH`·`Digit1`·`Space`는 입력기·자판 배열에 안 흔들린다.
    `e.code`가 없는 기기(일부 가상 키보드)를 위해 `e.key`를 폴백으로 남긴다. */
-const RATE_KEY={z:1,x:2,c:3,v:4,'1':1,'2':2,'3':3,'4':4};   // 채점 키 → 등급 (Z X C V = 다시·어려움·알맞음·쉬움 · 숫자도 그대로)
+const RATE_KEY={z:1,x:4,c:3,v:4,'1':1,'2':2,'3':3,'4':4,a:1,b:2,y:3};   // 채점 키 → 등급 (8BitDo: A=1, B=2, Y=3, X=4 · 숫자/zxcv 지원)
 function keyOf(e){
   const c=e.code||'';
   if(/^Key[A-Z]$/.test(c)) return c.slice(3).toLowerCase();
@@ -12019,7 +12021,7 @@ document.addEventListener('keydown',e=>{
   if((!kbdOn && !_padEv) || e.metaKey || e.altKey)return;
   { const tg=e.target&&e.target.tagName; if(!(tg==='INPUT'||tg==='TEXTAREA'||tg==='SELECT')) document.documentElement.dataset.keys='on'; }   // 키 표시(09-24)
   if(!e.ctrlKey && !(e.target&&/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) && typeof ymTodayKey==='function' && (!e.repeat||/^Arrow/.test(e.key)) && ymTodayKey(e)){ e.preventDefault(); return; }
-  if(e.ctrlKey && !/^[1-4]$/.test(keyOf(e)))return;   // 🔴 Ctrl+숫자만(사유 칩) — Ctrl+Z·X·C·V는 브라우저 몫(리뷰 09-23 R10 · ca8a31f4 회귀: 복사·되돌리기가 플래그를 붙였다)
+  if(e.ctrlKey && !/^[1-4abyxzcv]$/.test(keyOf(e)))return;   // 🔴 Ctrl+숫자/키(사유 칩)
   /* 🔴 **화살표 = 지금 보이는 것의 스크롤** (동하 09-10 실기: 게임패드 D패드로 표 카드를 못 굴렸다).
      카드 본문은 문서가 아니라 `#cardScroll` 안에서 구른다 — 초점이 아무 데도 없으면 브라우저는
      문서를 굴리려 하고 문서는 넘치지 않으니 **아무 일도 안 일어난다.** 그래서 우리가 직접 굴린다.
@@ -12097,6 +12099,17 @@ document.addEventListener('keydown',e=>{
     else rate(4); // 왼쪽 = 쉬움
     return;
   }
+  /* 🔴 Shift+B = 내일로 (Bury) — B 단독은 8BitDo에서 「어려움」 채점 키 */
+  if(e.shiftKey && (k==='b'||e.key==='B')){
+    if(tooSoon()) return;
+    $('rBury').click();
+    return;
+  }
+  // 8BitDo / 키보드: A 다시, B 어려움, Y 알맞음, X 쉬움 (앞면에선 정답 공개)
+  if(k==='a'){ e.preventDefault(); if(!revealed) reveal(); else rate(1); return; }
+  if(k==='b'){ e.preventDefault(); if(!revealed) reveal(); else rate(2); return; }
+  if(k==='y'){ e.preventDefault(); if(!revealed) reveal(); else rate(3); return; }
+  if(k==='x'){ e.preventDefault(); if(!revealed) reveal(); else rate(4); return; }
   /* 🔴 Ctrl+1~4 = 사유 칩 — 채점(1~4)보다 **먼저** 본다. 레일이 닫혀 있어도 먹는다(칩은 레일 안이지만
      `toggleFlagType`은 화면과 무관하다) — 그래서 무엇이 켜졌는지 토스트로 말해 준다. */
   if(e.ctrlKey){ e.preventDefault();
@@ -12105,16 +12118,14 @@ document.addEventListener('keydown',e=>{
     toggleFlagType(c,name); syncRail();
     toast(((st(c.id).ft||[]).includes(name)?'':'해제 · ')+name);
     return; }
-  if(RATE_KEY[k]){ if(revealed)rate(RATE_KEY[k]); else if(RATE_KEY[k]===3)reveal(); return; }   // 🔴 앞면에선 C(=알맞음 자리 · 3)가 답을 연다(동하 09-25 「모바일과 통일 · 엄지 Space 불편」) — 공개 직후 350ms 가드가 두 번 누름을 막는다   // 🔴 채점 = Z X C V (동하 09-22 「1234를 zxcv로」) · 1~4도 그대로 받는다(게임패드 합성 키)
+  if(RATE_KEY[k]){ e.preventDefault(); if(!revealed) reveal(); else rate(RATE_KEY[k]); return; }   // 1~4 / zxcv 등 채점 (앞면에선 공개)
   /* 🔴 **왼손 키** (동하 09-25 「zxcv 기본 · 다른 버튼도 왼손 자리 + 직관적으로(되돌리기 → revert니까 r)」)
-     R 되돌리기(Revert) · Q 끄기(Quit · 이 카드 그만 — ZXCV에서 먼 구석) · S 일시정지(Stop) · Esc 홈(나가기) · B 내일로 · F 플래그 · T 힌트는 그대로.
-     옛 키 U·O·P·H는 별칭으로 남긴다(손에 익은 것 · 게임패드가 합성하는 코드). */
+     R 되돌리기(Revert) · Q 끄기(Quit · 이 카드 그만) · S 일시정지(Stop) · Esc 홈(나가기) · F 플래그 · T 힌트. */
   if(k==='r') k='u'; else if(k==='q') k='o'; else if(k==='s') k='p';
-  if(k==='u'||k==='b'||k==='o'){ if(tooSoon()) return; }   // 카드 바뀐 직후 연타 — tooSoon 주석
+  if(k==='u'||k==='o'){ if(tooSoon()) return; }   // 카드 바뀐 직후 연타 — tooSoon 주석
   if(k==='u'){ doUndo(); return; }
-  if(k==='b'){ $('rBury').click(); return; }
   if(k==='f'){ $('rFlag').click(); return; }
-  if(k==='o'){ $('rOff').click(); return; }   // 끄기 = 이 카드 그만 (동하 09-10 요청 · 되돌리기 있음) · X→O (09-22 · X가 채점 「어려움」이 됐다)
+  if(k==='o'){ $('rOff').click(); return; }   // 끄기 = 이 카드 그만
   if(k==='p'){ pauseSession(); return; }
   /* `C` = 초성 힌트 (동하 09-14 「초성 나타내기 단축키」). 답 보기 전, 아직 안 연 칩 중 첫 것을 연다 —
      항목이 여럿이면 누를 때마다 다음 칩. 칩이 없는 카드(범위 밖·표·도식)면 아무 일도 없다. 열면 채점이 「다시」로 잠기는 규칙은 칩과 같다. */
