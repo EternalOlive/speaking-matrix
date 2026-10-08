@@ -5378,8 +5378,7 @@ let planIncomplete=false;
 let dirty=false, pushing=false, ratedSincePush=0, lastPushAt=Date.now();
 let hintUsed=new Set();   // 이 카드에서 초성 힌트를 연 항목 번호 — showCard가 비운다
 let queue=[], qPos=0, revealed=false, itemMarks=[], curPreset=null, phase='review',
-    sessionDone=0, doneCredited=0, undoSnap=null, newServed=0, shownAt=0, pausedMs=0, pauseAt=0, pzTimer=null,
-    scLastConfetti100=-1;
+    sessionDone=0, doneCredited=0, undoSnap=null, newServed=0, shownAt=0, pausedMs=0, pauseAt=0, pzTimer=null;
 let sess={r:[0,0,0,0,0], ms:0, streak:0, best:0, re:0};   // 이번 세션 성적 (요약 화면용) · re = 재출 채점 수(성적에서 뺀다)
 function sessReset(){ sess={r:[0,0,0,0,0], ms:0, streak:0, best:0, re:0}; }
 /* ═══ 「다시」 당일 재출 (동하 결정 2026-09-07 · 메타 발주 · 판정대기 09-07 줄) ═══════════════
@@ -9010,17 +9009,7 @@ function rate(num){
   const hasExtra=Object.keys(extra).length>0;
   const entry=hasExtra?[c.id,ts,num,extra]:[c.id,ts,num];
   pushLog(entry); undoSnap.entry=entry;      // 되돌릴 때 이 항목만 지목해 뺀다
-  try{
-    const tdCnt=(scToday()||{}).n||0;
-    if(scLastConfetti100<0){
-      scLastConfetti100=Math.floor(tdCnt/100)*100;
-    } else if(tdCnt<scLastConfetti100){
-      scLastConfetti100=Math.floor(tdCnt/100)*100;
-    } else if(tdCnt>0 && Math.floor(tdCnt/100)*100>scLastConfetti100){
-      scLastConfetti100=Math.floor(tdCnt/100)*100;
-      try{ scTriggerConfetti(); }catch(e){}
-    }
-  }catch(e){}
+  try{ scCheckAndCelebrateCards(); }catch(e){}
   if(reN){ sess.re++; }                    // 🔴 재출은 성적·미룸 카운터에 안 들어간다 (「오늘 채점」 정의 = 첫 채점만)
   else{
     sess.r[num]++; sess.ms+=extra.ms||0;
@@ -10405,7 +10394,10 @@ async function scRailPoke(p, uid){ const m=(SC.members||[]).find(x=>x.user_id===
   catch(er){ if(scPokeGone(er)){ scPokeOff=Date.now()+30*60000; toast('아직 친구 서버에 없는 기능이에요'); } else toast(scErrKo(er)); }
   finally{ scPokeFly.delete(uid); } }
 let scConfettiTimer=null, scLast1stSlot=null, scConfettiInited=false;
-function scTriggerConfetti(){
+function scTriggerConfetti(msg){
+  if(msg){
+    try{ toast(msg); }catch(e){}
+  }
   const cv=$('scConfetti'); if(!cv) return;
   const ctx=cv.getContext('2d'); if(!ctx) return;
   const w=window.innerWidth, h=window.innerHeight;
@@ -10468,6 +10460,51 @@ function scTriggerConfetti(){
   }
   draw();
 }
+
+/* 오늘 푼 총 카드 수 (Study Companion study_record/tracker 합산 대응) */
+function scGetTodayCardCount(){
+  const tk = todayKey();
+  let cnt = 0;
+  if(state && Array.isArray(state.log)){
+    for(let i=state.log.length-1; i>=0; i--){
+      const e=state.log[i];
+      if(!e) continue;
+      const t=logDate(e);
+      if(dayKey(t)===tk) cnt++;
+    }
+  }
+  let scCnt=0;
+  try{
+    if(typeof scToday==='function'){
+      scCnt=(scToday()||{}).n||0;
+    }
+  }catch(e){}
+  return Math.max(cnt, scCnt);
+}
+
+/* Study Companion 레포와 동일한 100개/200개 마일스톤 축포 로직 */
+const K_CARD_MILESTONE='sc_card_milestone_v2';
+function scCheckAndCelebrateCards(){
+  const tk = todayKey();
+  const todayAnswers = scGetTodayCardCount();
+  let saved = null;
+  try{ saved = JSON.parse(lsGet(K_CARD_MILESTONE) || 'null'); }catch(e){}
+  let lastMilestone = (saved && saved.day === tk && typeof saved.milestone === 'number') ? saved.milestone : 0;
+
+  if(todayAnswers < lastMilestone){
+    lastMilestone = Math.floor(todayAnswers / 100) * 100;
+  }
+  const milestone = Math.floor(todayAnswers / 100) * 100;
+  if(milestone >= 100 && milestone > lastMilestone){
+    lastMilestone = milestone;
+    try{ lsSet(K_CARD_MILESTONE, JSON.stringify({ day: tk, milestone: lastMilestone })); }catch(e){}
+    try{
+      scTriggerConfetti(`오늘 카드 ${milestone}개 학습 달성!`);
+    }catch(e){}
+  } else if(!saved || saved.day !== tk){
+    try{ lsSet(K_CARD_MILESTONE, JSON.stringify({ day: tk, milestone: lastMilestone })); }catch(e){}
+  }
+}
 /* 풀이 화면 스터디 미니 배지(10분 1위 + 접속자 수 + 클릭 찌르기) */
 function scRenderSolveBadge(){
   const badge=$('solveStudyChip'); if(!badge) return;
@@ -10497,8 +10534,20 @@ function scRenderSolveBadge(){
       const arr=L.slots[latestSl]||[];
       if(arr.length){
         const isTie=arr.length>1 && arr[0].n===arr[1].n;
+        const myEntry=arr.find(x=>x.uid===me);
         if(isTie){
           leadText=`1위 공동 ${arr[0].n}개`;
+          if(myEntry && myEntry.n===arr[0].n && myEntry.n>0 && latestSl===nowSl){
+            if(!scConfettiInited){
+              scConfettiInited=true;
+              scLast1stSlot=nowSl;
+            } else if(scLast1stSlot!==nowSl){
+              scLast1stSlot=nowSl;
+              try{ scTriggerConfetti(`10분 구간 공동 1등 달성! (${myEntry.n}회)`); }catch(e){}
+            }
+          } else if(!scConfettiInited){
+            scConfettiInited=true;
+          }
         } else {
           const top=arr[0];
           leadUid=top.uid;
@@ -10510,7 +10559,7 @@ function scRenderSolveBadge(){
               scLast1stSlot=nowSl;
             } else if(scLast1stSlot!==nowSl){
               scLast1stSlot=nowSl;
-              try{ scTriggerConfetti(); }catch(e){}
+              try{ scTriggerConfetti(`10분 구간 1등 달성! (${top.n}회)`); }catch(e){}
             }
           } else if(!scConfettiInited){
             scConfettiInited=true;
