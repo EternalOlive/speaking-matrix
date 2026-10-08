@@ -11993,17 +11993,22 @@ let kbdOn = lsGet(K_KBD)!=='0';
    구현 = 버튼 눌림 가장자리 → **같은 keydown 이벤트를 합성**해 기존 키 처리 한 곳으로 보낸다(규칙 중복 금지 · e.code 그대로 · e.repeat 없음).
    배치는 기기별(localStorage) · 「입력 배치」 화면에서 「누르기 → 버튼」으로 바꾼다. 기본 배치 = 표준 매핑 번호 기준으로 동하 K 모드 배치(구조안내 §7.7)를 옮긴 것 —
    실물 번호가 다르면 화면에서 고친다(#번호가 눌린 버튼을 알려 준다). */
-const K_PAD='cards_pad_v2';
+const K_PAD='cards_pad_v4';
 const PAD_ACTS=[   // [id, 라벨, 합성할 키] — 순서 = 화면 순서
-  ['again','다시 (A)',{code:'KeyA',key:'a'}], ['hard','어려움 (B)',{code:'KeyB',key:'b'}],
-  ['good','알맞음 (Y)',{code:'KeyY',key:'y'}], ['easy','쉬움 (X)',{code:'KeyX',key:'x'}],
+  ['again','다시 (A)',{code:'KeyA',key:'a'}], ['hard','통과 / 어려움 (B)',{code:'KeyB',key:'b'}],
+  ['good','알맞음 (Y)',{code:'KeyY',key:'y'}], ['easy','통과 / 쉬움 (X)',{code:'KeyX',key:'x'}],
   ['reveal','답 보기 (Space)',{code:'Space',key:' '}], ['undo','되돌리기 (R)',{code:'KeyU',key:'u'}],
   ['bury','내일로 (Shift+B)',{code:'KeyB',key:'b',shiftKey:true}], ['off','끄기 (Q)',{code:'KeyO',key:'o'}], ['hint','첫 글자 힌트 (T)',{code:'KeyT',key:'t'}],
   ['home','홈 (Esc)',{code:'KeyH',key:'h'}], ['pause','일시정지 (P)',{code:'KeyP',key:'p'}], ['mod','사유 칩 보조키 — 누른 채 채점 버튼 (Ctrl+1~4)',null],
   ['up','위로 스크롤 (↑)',{code:'ArrowUp',key:'ArrowUp'}], ['down','아래로 스크롤 (↓)',{code:'ArrowDown',key:'ArrowDown'}],
   ['left','회독본 이전 절 (←)',{code:'ArrowLeft',key:'ArrowLeft'}], ['right','회독본 다음 절 (→)',{code:'ArrowRight',key:'ArrowRight'}]];
-/* 표준 매핑 버튼 번호(8BitDo): 0 B(아래) · 1 A(오른쪽) · 2 Y(왼쪽) · 3 X(위) · 4 L · 5 R · 6 L2 · 7 R2 · 8 − · 9 + · 12↑ 13↓ 14← 15→ · 16 홈 */
-const PAD_DEF={again:1, hard:0, good:2, easy:3, undo:7, bury:16, off:4, mod:5, pause:8, home:9, up:12, down:13, left:14, right:15, hint:6, reveal:null};
+/* 표준 매핑 버튼 번호:
+   PC (Windows XInput 표준): 0 A(다시) · 1 B(통과/어려움) · 2 X(통과/쉬움) · 3 Y(알맞음) · 4 L · 5 R · 6 L2 · 7 R2 · 8 Back · 9 Start · 12↑ 13↓ 14← 15→ · 16 홈
+   Apple / Switch D모드: 0 B · 1 A · 2 Y · 3 X */
+const _isWinPad = typeof navigator !== 'undefined' && (/Win/i.test(navigator.platform || '') || /Windows/i.test(navigator.userAgent || ''));
+const PAD_DEF = _isWinPad
+  ? {again:0, hard:1, easy:2, good:3, undo:7, bury:16, off:4, mod:5, pause:8, home:9, up:12, down:13, left:14, right:15, hint:6, reveal:null}
+  : {again:1, hard:0, good:2, easy:3, undo:7, bury:16, off:4, mod:5, pause:8, home:9, up:12, down:13, left:14, right:15, hint:6, reveal:null};
 let padMap=Object.assign({}, PAD_DEF); try{ const j=JSON.parse(lsGet(K_PAD)||'null'); if(j&&typeof j==='object') padMap=Object.assign({}, PAD_DEF, j); }catch(e){}
 let padPrev=[], padSeen=false, padLearn=null, padHoldT=0, padLast=null;
 let _padEv=false;
