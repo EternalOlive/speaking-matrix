@@ -5810,6 +5810,33 @@ function purgeBadUnit5Output(){
     }
     if(sessChanged) saveSessionsSoon();
   }
+  // 2026-10-10 22:00 KST 이후 모바일 버튼 반전(1↔2) 보정
+  const K_SWAP_12 = 'cards_swap_12_20261010_v1';
+  if(lsGet(K_SWAP_12) !== 'done'){
+    let swappedCount = 0;
+    for(const wk in logWeeks){
+      const list = logWeeks[wk];
+      if(Array.isArray(list)){
+        let changed = false;
+        list.forEach(e => {
+          if(logTs(e) >= 1791637200000){
+            if(e[2] === 1){ e[2] = 2; changed = true; swappedCount++; }
+            else if(e[2] === 2){ e[2] = 1; changed = true; swappedCount++; }
+          }
+        });
+        if(changed){
+          try{ lsSet(K_LOGP+wk, JSON.stringify({v:2, week:wk, log:list})); }catch(err){}
+        }
+      }
+    }
+    lsSet(K_SWAP_12, 'done');
+    if(swappedCount > 0){
+      dirtyLogs.delete('2026-W41');
+      saveDirtyLogs();
+      rebuildLog();
+      console.log('[보정] 10시 이후 채점 1↔2 맞바꿈 보정 완료 (' + swappedCount + '건)');
+    }
+  }
   if(purgedLogs > 0){
     dirtyLogs.delete('2026-W41');
     saveDirtyLogs();
