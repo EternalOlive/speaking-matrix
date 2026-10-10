@@ -1595,6 +1595,38 @@ button.sc-err{background:none;border:0;text-align:left;cursor:pointer;font:inher
 #scBox details.sc-more+details.sc-more{margin-top:2px;}
 /* 스터디 화면(10-04 · 홈 = 사람 줄만 · 설정 = 목표·공유·계정) — 절 = h-sec2 머리 + 카드 */
 #studyBody{display:flex;flex-direction:column;gap:22px;padding-bottom:24px;}
+/* 10-11 스터디 신규 기능: 타임라인 피드 · 도달 속도 레이스 · 오늘의 집중 페이스 */
+.sc-timeline-card{padding:10px 14px;}
+.sc-timeline-list{display:flex;flex-direction:column;}
+.sc-timeline-row{display:flex;align-items:center;gap:10px;font-size:14px;line-height:20px;padding:7px 0;}
+.sc-timeline-row+.sc-timeline-row{box-shadow:inset 0 0.5px 0 var(--c-sep);}
+.sc-tl-ic{font-size:16px;flex:0 0 auto;width:20px;text-align:center;}
+.sc-tl-time{font-size:12px;color:var(--c-sec);font-variant-numeric:tabular-nums;flex:0 0 auto;min-width:38px;}
+.sc-tl-txt{flex:1;min-width:0;color:var(--c-label);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.sc-feed-sub{color:var(--c-sec);font-size:12px;margin-left:4px;}
+#scRaceSeg{display:inline-flex;padding:2px;background:var(--c-fill);border-radius:10px;gap:2px;}
+#scRaceSeg button{padding:4px 10px;min-height:28px;font-size:12px;border-radius:8px;border:none;cursor:pointer;background:transparent;color:var(--c-sec);font-weight:600;}
+#scRaceSeg button.on{background:var(--c-card);color:var(--c-label);box-shadow:0 1px 3px rgba(0,0,0,.1);}
+.sc-race-card{padding:12px 14px;display:flex;flex-direction:column;gap:10px;}
+.sc-race-list{display:flex;flex-direction:column;}
+.sc-race-row{display:flex;flex-direction:column;gap:4px;padding:7px 0;}
+.sc-race-row+.sc-race-row{box-shadow:inset 0 0.5px 0 var(--c-sep);}
+.sc-race-meta{display:flex;align-items:center;justify-content:space-between;font-size:14px;line-height:20px;}
+.sc-race-nm{display:flex;align-items:center;gap:6px;font-weight:600;color:var(--c-label);}
+.sc-race-medal{font-size:15px;}
+.sc-race-val{font-size:13px;color:var(--c-sec);font-variant-numeric:tabular-nums;}
+.sc-race-val b{color:var(--c-label);font-weight:600;}
+.sc-race-track{height:6px;border-radius:3px;background:var(--c-fill);overflow:hidden;}
+.sc-race-fill{height:100%;border-radius:3px;transition:width .3s ease;}
+.sc-pace-box{background:var(--c-fill);border-radius:12px;padding:12px 14px;margin:8px 0 4px;display:flex;flex-direction:column;gap:8px;}
+.sc-pace-h{display:flex;align-items:center;justify-content:space-between;font-size:13px;font-weight:600;color:var(--c-label);}
+.sc-pace-badge{font-size:11px;font-weight:600;padding:2px 8px;border-radius:10px;background:color-mix(in srgb,var(--c-acc) 14%,transparent);color:var(--c-acc);}
+.sc-pace-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;}
+@media (max-width:480px){.sc-pace-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 12px;}}
+.sc-pace-item{display:flex;flex-direction:column;gap:2px;}
+.sc-pace-item .k{font-size:11px;color:var(--c-sec);}
+.sc-pace-item .v{font-size:13px;font-weight:600;color:var(--c-label);font-variant-numeric:tabular-nums;}
+.sc-pace-sub{font-size:12px;color:var(--c-sec);line-height:17px;box-shadow:inset 0 0.5px 0 var(--c-sep);padding-top:6px;margin-top:2px;}
 /* 공개 사이트 화면(10-06) — 스터디 화면과 같은 부품(sc-sec · h-sec2 · sc-card · set-row) + 숫자 칸 넷 · 막대 · 순위 줄 */
 #siteBody{display:flex;flex-direction:column;gap:22px;padding-bottom:24px;}
 .st-sub{font-size:13px;line-height:18px;color:var(--c-sec);margin-bottom:-10px;}   /* 위로 끌어올리면 .sub-body 윗여백 흐림(16)에 덮인다(10-06 동하) — 아래 칸 쪽으로만 붙인다 */
@@ -10349,6 +10381,7 @@ function scDetFriend(m){ const L=[];
   if(Date.now()>=scPokeOff){ const cool=(scPokeCool[m.user_id]||0)>Date.now(); L.push(`<div class="sc-pokerow"><button class="btn-ghost sc-poke" data-uid="${esc(m.user_id)}"${cool?' disabled':''}>${cool?'찔렀어요':'찌르기'}</button></div>`); }   // 찌르기(10-07 · 애드온 PR #7 머지)
   if(m.current_deck_name) L.push(`<div class="sc-line">지금 <b>${esc(m.current_deck_name)}</b></div>`);
   const tg=m.time_goal_minutes||0, cg=m.card_goal||0; if(tg||cg) L.push(`<div class="sc-line">목표 ${[tg?tg+'분':'', cg?cg.toLocaleString()+'장':''].filter(Boolean).join(' · ')}</div>`);
+  L.push(scPaceCard(m));
   L.push(`<div class="sc-h">오늘 시간대</div>`);
   if(m.activity_error && !(m.activity_buckets||[]).length) L.push(`<div class="sc-line">—</div>`);
   else if(!m.activity_known && !(m.activity_buckets||[]).length) L.push(`<div class="sc-line">아직 받은 기록이 없어요</div>`);
@@ -10357,6 +10390,264 @@ function scDetFriend(m){ const L=[];
 /* ── 사람 색 — 나 = 강조색 · 친구 = 방에 든 순서(SC.members는 joined_at 순)로 팔레트(애드온과 같은 순서) ── */
 const SC_PAL=['var(--c-green)','var(--c-orange)','var(--c-purple)','var(--c-pink)','var(--c-teal)','var(--c-brown,#A2845E)','var(--c-indigo)'];   // 디자인_언어 §2.4 「스터디 사람 색」 — 테마 변수라 다크에서 다크 값
 function scColor(uid){ const me=SC.auth&&SC.auth.user_id; if(uid===me) return 'var(--c-acc)'; const fr=(SC.members||[]).filter(m=>m.user_id!==me).map(m=>m.user_id), i=fr.indexOf(uid); return SC_PAL[(i<0?0:i)%SC_PAL.length]; }
+/* ── 10-11 스터디 신규 기능: 집중 페이스 계산 · 타임라인 피드 · 도달 속도 레이스 ── */
+function scCalcPace(m){
+  const me = SC.auth && SC.auth.user_id;
+  const isMine = m.mine || (m.user_id === me);
+  const name = isMine ? (SC.nick || '나') : (m.display_name || '친구');
+  const buckets = isMine ? scMyBuckets() : (m.activity_buckets || []);
+  const sortedB = buckets.slice().sort((a,b)=>a.slot - b.slot);
+  const totalN = isMine ? scToday().n : (m.answer_count || 0);
+  const totalSec = isMine ? scToday().sec : (m.active_seconds || 0);
+  const status = isMine ? (scStatus() === 'stopped' ? 'online' : scStatus()) : scMemberStatus(m);
+  const cardGoal = isMine ? (SC.goalCards || 0) : (m.card_goal || 0);
+
+  if(!sortedB.length && !totalN){
+    return { name, isMine, uid: m.user_id, totalN: 0, totalSec: 0, milestones: {}, events: [], startedAt: null, avgRate: '0.0', status };
+  }
+
+  const firstBucket = sortedB[0];
+  const lastBucket = sortedB[sortedB.length - 1];
+  const startedAt = firstBucket ? scSlotHM(firstBucket.slot) : null;
+  const startedSlot = firstBucket ? firstBucket.slot : 0;
+
+  const targets = [50, 100, 150, 200, 250, 300, 400, 500];
+  const reached = {};
+  let accumN = 0, accumMs = 0;
+  let goalReached = null;
+
+  for(const b of sortedB){
+    const beforeN = accumN;
+    accumN += (b.answer_count || 0);
+    accumMs += (b.time_ms || 0);
+
+    let mins = Math.round(accumMs / 60000);
+    if(mins < 1){
+      if(totalSec && totalN){
+        mins = Math.max(1, Math.round((totalSec * (accumN / totalN)) / 60));
+      } else {
+        mins = Math.max(1, (b.slot - startedSlot + 1) * 6);
+      }
+    }
+
+    for(const tgt of targets){
+      if(beforeN < tgt && accumN >= tgt && !reached[tgt]){
+        const rate = (tgt / Math.max(1, mins)).toFixed(1);
+        reached[tgt] = {
+          target: tgt,
+          slot: b.slot,
+          mins,
+          rate,
+          timeStr: scSlotHM(b.slot),
+          cards: tgt
+        };
+      }
+    }
+
+    if(cardGoal > 0 && beforeN < cardGoal && accumN >= cardGoal && !goalReached){
+      goalReached = {
+        goal: cardGoal,
+        slot: b.slot,
+        mins,
+        timeStr: scSlotHM(b.slot)
+      };
+    }
+  }
+
+  const avgRate = totalSec >= 60 ? (Math.round(totalN / (totalSec / 60) * 10) / 10).toFixed(1) : (totalN > 0 ? (totalN / Math.max(1, sortedB.length * 5)).toFixed(1) : '0.0');
+
+  const events = [];
+  if(firstBucket && startedAt){
+    events.push({
+      type: 'start',
+      slot: startedSlot,
+      timeStr: startedAt,
+      icon: '🕒',
+      text: isMine ? '<b>나</b>: 오늘 공부를 시작했어요.' : `<b>${esc(name)}</b>님이 오늘 공부를 시작했어요.`
+    });
+  }
+
+  const reachedSlots = {};
+  for(const tgt of targets){
+    if(reached[tgt]) reachedSlots[reached[tgt].slot] = reached[tgt];
+  }
+  for(const s in reachedSlots){
+    const r = reachedSlots[s];
+    events.push({
+      type: 'milestone',
+      slot: r.slot,
+      timeStr: r.timeStr,
+      icon: '⚡',
+      text: isMine
+        ? `<b>나</b>: 시작 <b>${r.mins}분</b> 만에 <b>${r.target}장</b> 돌파! <small class="sc-feed-sub">(분당 ${r.rate}장 🔥)</small>`
+        : `<b>${esc(name)}</b>님이 시작 <b>${r.mins}분</b> 만에 <b>${r.target}장</b>을 돌파했어요! <small class="sc-feed-sub">(분당 ${r.rate}장 🔥)</small>`
+    });
+  }
+
+  if(goalReached){
+    events.push({
+      type: 'goal',
+      slot: goalReached.slot,
+      timeStr: goalReached.timeStr,
+      icon: '🎯',
+      text: isMine
+        ? `<b>나</b>: 오늘 목표(<b>${goalReached.goal}장</b>) 달성! 👏`
+        : `<b>${esc(name)}</b>님이 오늘 목표(<b>${goalReached.goal}장</b>)를 달성했어요! (총 ${goalReached.mins}분 소요 👏)`
+    });
+  }
+
+  if((status === 'paused' || status === 'offline') && totalN > 0 && lastBucket){
+    events.push({
+      type: 'rest',
+      slot: lastBucket.slot,
+      timeStr: scSlotHM(lastBucket.slot),
+      icon: '☕',
+      text: isMine
+        ? `<b>나</b>: 휴식 중 (${totalN.toLocaleString()}장 완료)`
+        : `<b>${esc(name)}</b>님이 휴식에 들어갔어요 (${totalN.toLocaleString()}장 완료).`
+    });
+  }
+
+  return {
+    name,
+    isMine,
+    uid: m.user_id,
+    totalN,
+    totalSec,
+    startedAt,
+    startedSlot,
+    avgRate,
+    status,
+    milestones: reached,
+    goalReached,
+    events
+  };
+}
+function scPaceCard(m){
+  const p = scCalcPace(m);
+  if(!p.totalN && !p.startedAt) return '<div class="sc-line sc-hint" style="margin:4px 0">오늘 아직 시작한 학습이 없어요</div>';
+  const m50 = p.milestones[50], m100 = p.milestones[100], m200 = p.milestones[200];
+  const rateNum = parseFloat(p.avgRate) || 0;
+  const badge = rateNum >= 6 ? '🚀 폭풍 질주 (초고속)' : (rateNum >= 3 ? '🔥 꾸준한 열공' : '🌱 차분한 학습');
+
+  const mList = [];
+  if(m50) mList.push(`50장: <b>${m50.mins}분</b> (${m50.timeStr})`);
+  if(m100) mList.push(`100장: <b>${m100.mins}분</b> (${m100.timeStr})`);
+  if(m200) mList.push(`200장: <b>${m200.mins}분</b> (${m200.timeStr})`);
+
+  return `<div class="sc-pace-box">
+    <div class="sc-pace-h"><span>오늘의 집중 페이스</span><span class="sc-pace-badge">${badge}</span></div>
+    <div class="sc-pace-grid">
+      <div class="sc-pace-item"><span class="k">시작 시각</span><span class="v">${p.startedAt || '—'}</span></div>
+      <div class="sc-pace-item"><span class="k">오늘 학습량</span><span class="v">${p.totalN.toLocaleString()}장</span></div>
+      <div class="sc-pace-item"><span class="k">학습 시간</span><span class="v">${scFmt(p.totalSec)}</span></div>
+      <div class="sc-pace-item"><span class="k">평균 속도</span><span class="v">분당 ${p.avgRate}장</span></div>
+    </div>
+    ${mList.length ? `<div class="sc-pace-sub">${mList.join(' · ')}</div>` : ''}
+  </div>`;
+}
+function scTimelineSec(){
+  if(!SC.group) return '';
+  const me = SC.auth && SC.auth.user_id;
+  const members = [{user_id: me, mine: true}, ...(SC.members||[]).filter(x=>x.user_id!==me)];
+  const allEvents = [];
+  for(const m of members){
+    const p = scCalcPace(m);
+    allEvents.push(...p.events);
+  }
+  allEvents.sort((a,b) => b.slot - a.slot);
+  const showEvents = allEvents.slice(0, 8);
+
+  const listHtml = showEvents.length ? showEvents.map(ev => `
+    <div class="sc-timeline-row">
+      <span class="sc-tl-ic">${ev.icon}</span>
+      <span class="sc-tl-time">${ev.timeStr}</span>
+      <span class="sc-tl-txt">${ev.text}</span>
+    </div>
+  `).join('') : '<div class="sc-line sc-hint" style="padding:6px 0">오늘 첫 번째로 공부를 시작해 보세요! 🚀</div>';
+
+  return `<div class="sc-sec">
+    <div class="h-sec2"><h2>라이브 마일스톤</h2><span class="sc-g">오늘 활동 피드</span></div>
+    <div class="sc-card sc-timeline-card">
+      <div class="sc-timeline-list">${listHtml}</div>
+    </div>
+  </div>`;
+}
+let scRaceTarget = 100;
+function scSpeedRaceSec(){
+  if(!SC.group) return '';
+  const me = SC.auth && SC.auth.user_id;
+  const members = [{user_id: me, mine: true}, ...(SC.members||[]).filter(x=>x.user_id!==me)];
+  const results = [];
+  for(const m of members){
+    const p = scCalcPace(m);
+    const ms = p.milestones[scRaceTarget];
+    if(ms){
+      results.push({
+        p,
+        done: true,
+        mins: ms.mins,
+        rate: ms.rate,
+        timeStr: ms.timeStr,
+        val: ms.mins
+      });
+    } else {
+      results.push({
+        p,
+        done: false,
+        current: p.totalN,
+        target: scRaceTarget,
+        val: 999999 - p.totalN
+      });
+    }
+  }
+
+  results.sort((a,b)=>{
+    if(a.done && !b.done) return -1;
+    if(!a.done && b.done) return 1;
+    return a.val - b.val;
+  });
+
+  const medals = ['🥇', '🥈', '🥉'];
+  let doneRank = 0;
+  const rows = results.map(r => {
+    const p = r.p;
+    let rankBadge = '';
+    if(r.done){
+      doneRank++;
+      rankBadge = medals[doneRank - 1] || `${doneRank}위`;
+    } else {
+      rankBadge = '도전';
+    }
+    const color = scColor(p.uid);
+    const pct = Math.min(100, Math.round(p.totalN / scRaceTarget * 100));
+
+    return `<div class="sc-race-row">
+      <div class="sc-race-meta">
+        <span class="sc-race-nm"><span class="sc-race-medal">${rankBadge}</span>${esc(p.name)}</span>
+        <span class="sc-race-val">${r.done
+          ? `<b>${r.mins}분</b> (${r.timeStr} 달성 · 분당 ${r.rate}장)`
+          : `<b>${p.totalN}/${scRaceTarget}장</b> (${pct}% 진행)`
+        }</span>
+      </div>
+      <div class="sc-race-track"><div class="sc-race-fill" style="width:${pct}%;background:${color}"></div></div>
+    </div>`;
+  }).join('');
+
+  return `<div class="sc-sec">
+    <div class="h-sec2">
+      <h2>도달 속도 레이스</h2>
+      <div class="seg" id="scRaceSeg">
+        <button data-t="50"${scRaceTarget===50?' class="on"':''}>50장</button>
+        <button data-t="100"${scRaceTarget===100?' class="on"':''}>100장</button>
+        <button data-t="200"${scRaceTarget===200?' class="on"':''}>200장</button>
+      </div>
+    </div>
+    <div class="sc-card sc-race-card">
+      <div class="sc-race-list">${rows}</div>
+    </div>
+  </div>`;
+}
 /* ── 10분 1등(10-05 친구 요청 「15분별로 누가 많이 했는지」) — 칸마다 답한 수가 가장 많은 사람 · 공동 1등이면 아무도(회색) · 1등 횟수 = 혼자 1등인 칸 수 ── */
 let scLSel=null;
 function scLeaderData(){ const me=SC.auth&&SC.auth.user_id, fresh=SC.memDay===scDay(Date.now());
@@ -10410,6 +10701,7 @@ function scGoalWire(b){ const a=b.querySelector('#scGoalMinS'), c=b.querySelecto
   b.querySelectorAll('.sc-gx').forEach(x=>x.onclick=e=>{ e.stopPropagation(); scGoalSet(x.dataset.g, 0); });
   b.querySelectorAll('.sc-det input').forEach(x=>x.onclick=e=>e.stopPropagation()); }
 function scDetMine(){ const L=[], me=SC.auth&&SC.auth.user_id;
+  L.push(scPaceCard({user_id: me, mine: true}));
   L.push(`<div class="sc-h">오늘 시간대</div>`+scStrip(me, scMyBuckets()));
   const w=scWeek(), mx=Math.max(1,...w.days.map(d=>w.by[d].n));
   const bars=w.days.map((d,k)=>{ const v=w.by[d], h=v.n?Math.max(3,Math.round(v.n/mx*56)):0;
@@ -10883,7 +11175,9 @@ function scRenderStudy(){ const b=$('studyBody'); if(!b || !$('scrStudy').classL
       + `<div class="sc-h">차단한 사람</div>` + (scBans==null ? `<div class="sc-msg">불러오는 중…</div>` : scBans.length ? scBans.map(x=>`<div class="set-row"><span>${esc(x.name)}</span><button class="btn-ghost sc-unban" data-uid="${esc(x.user_id)}">차단 풀기</button></div>`).join('') : `<div class="sc-msg">없어요</div>`)
       + `<div class="sc-msg">내보낸 사람은 같은 계정으로 다시 못 들어와요 — 차단을 풀면 초대 코드로 다시 들어올 수 있어요</div></details>`; }
   b.innerHTML=`<div class="sc-sec"><div class="h-sec2"><h2>${esc(SC.group.name||'스터디')}</h2><span class="sc-g">${nStudy}명 접속 중</span></div><div class="sc-list">${html}</div>${SC.err?`<button class="sc-err" id="scRetryS">${esc(SC.err)} — 다시 시도</button>`:''}</div>
+    ${scTimelineSec()}
     ${scLeadSec()}
+    ${scSpeedRaceSec()}
     <div class="sc-sec"><div class="h-sec2"><h2>내 기록</h2></div><div class="sc-card">${scDetMine()}</div></div>
     <div class="sc-sec"><div class="h-sec2"><h2>방</h2></div><div class="sc-card">
       <div class="set-row"><span>초대 코드</span><span class="sc-code-r"><b class="sc-code">${esc(SC.group.invite_code||'—')}</b><button class="btn-ghost" id="scCopyCode">복사</button><button class="btn-ghost" id="scCopyMsg">안내 복사</button></span></div>
@@ -10905,6 +11199,7 @@ function scRenderStudy(){ const b=$('studyBody'); if(!b || !$('scrStudy').classL
     let best=null; for(const x of bs){ if(!best||Math.abs(x.slot-sl)<Math.abs(best.slot-sl)) best=x; }   // 손가락 폭 — 가장 가까운 칠한 칸
     scSel=best&&Math.abs(best.slot-sl)<=2 ? {uid, slot:best.slot} : null; scRenderStudy(); });
   const seg=$('scCmpSeg'); if(seg) seg.querySelectorAll('button').forEach(x=>x.onclick=()=>{ scCmp=x.dataset.m; scRenderStudy(); });
+  const rseg=b.querySelector('#scRaceSeg'); if(rseg) rseg.querySelectorAll('button').forEach(x=>x.onclick=()=>{ scRaceTarget=+x.dataset.t||100; scRenderStudy(); });
   const rt=$('scRetryS'); if(rt) rt.onclick=()=>scSync({manual:true});
   const cp=async(t,ok)=>{ try{ await navigator.clipboard.writeText(t); toast(ok); }catch(e){ prompt('복사해 가세요', t); } };   // 애드온 0.1.3 「코드·참여 안내 복사」
   $('scCopyCode').onclick=()=>cp(SC.group.invite_code||'', '초대 코드를 복사했어요');
