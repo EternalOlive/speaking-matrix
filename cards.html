@@ -10080,7 +10080,7 @@ function renderHero(due){
     box.innerHTML=`<section class="hero done"><span class="hero-ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span>
       <div class="hero-b"><span class="hero-t">오늘 할 일을 다 했어요</span><span class="hero-s">내일 ${tomorrowCount(null).toLocaleString()}장${ym?` · 문풀 ${ym}문항 남음`:''}</span></div>
       ${tmrAll.length?'<button class="hero-go tint" id="heroPullTmr">내일 복습 당겨오기</button>':(ym?'<button class="hero-go tint" id="heroYm">문풀 열기</button>':'')}</section>`;
-    const hp=$('heroPullTmr'); if(hp) hp.onclick=()=>openPullTmr(curSess||sessions[0], true);
+    const hp=$('heroPullTmr'); if(hp) hp.onclick=()=>openPullTmr(findPullTmrSess(curSess), true);
     const y=$('heroYm'); if(y) y.onclick=ymEnter; return; }
   const remain=sessRemain(sx), st=stArr(sx.how.status).map(k=>({due:'복습',new:'신규',all:'전체',weak:'약점'}[k]||k)).join('+');
   box.innerHTML=`<section class="hero"><div class="hero-b"><span class="hero-k">이어서 풀기</span><span class="hero-t">${esc(sx.name)}</span>
@@ -12615,11 +12615,25 @@ function askConfirm(title, desc, yesLabel, onYes){
   $('ovlConfirm').classList.add('show');
   $('cfYes').onclick=()=>{ $('ovlConfirm').classList.remove('show'); onYes(); };
 }
+function findPullTmrSess(sx){
+  if(sx && tomorrowCardsForSess(sx).length) return sx;
+  if(curSess && !curSess.temp && tomorrowCardsForSess(curSess).length) return curSess;
+  const autoSess = (sessions||[]).find(s => s && s.mode==='auto' && !s.temp && tomorrowCardsForSess(s).length);
+  if(autoSess) return autoSess;
+  const regSess = (sessions||[]).find(s => s && !s.temp && tomorrowCardsForSess(s).length);
+  if(regSess) return regSess;
+  const anyWithTmr = (sessions||[]).find(s => s && tomorrowCardsForSess(s).length);
+  if(anyWithTmr) return anyWithTmr;
+  if(curSess && tomorrowCardsForSess(curSess).length) return curSess;
+  const defaultAuto = (sessions||[]).find(s => s && s.mode==='auto' && !s.temp) || (sessions||[]).find(s => s && !s.temp);
+  return sx || defaultAuto || curSess || (sessions&&sessions[0]);
+}
 let pullTmrTargetSess=null, pullTmrFromHome=false;
 function openPullTmr(sx, fromHome){
-  if(!sx) sx=curSess||sessions[0];
+  sx = findPullTmrSess(sx);
   if(!sx) return;
-  const avail=tomorrowCardsForSess(sx);
+  let avail=tomorrowCardsForSess(sx);
+  if(!avail.length && fromHome) avail=tomorrowCardsForSess(null);
   if(!avail.length){ toast('내일 예정인 복습 카드가 없어요'); return; }
   pullTmrTargetSess=sx; pullTmrFromHome=!!fromHome;
   $('pullTmrDesc').textContent=`${sx.name} 세션에 내일 복습 카드를 가져옵니다 (총 ${avail.length}장 가능).`;
@@ -12648,9 +12662,10 @@ function openPullTmr(sx, fromHome){
   $('ovlPullTmr').classList.add('show');
 }
 function doPullTmr(sx, count, startNow){
-  if(!sx) sx=curSess||sessions[0];
+  sx = findPullTmrSess(sx);
   if(!sx) return;
-  const avail=tomorrowCardsForSess(sx);
+  let avail=tomorrowCardsForSess(sx);
+  if(!avail.length && startNow) avail=tomorrowCardsForSess(null);
   if(!avail.length){ toast('내일 예정인 복습 카드가 없어요'); return; }
   const sorted = sx.how && sx.how.order==='doc'
     ? avail.slice().sort((a,b)=>a._i - b._i)
