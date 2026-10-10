@@ -5735,6 +5735,88 @@ function pruneOrphans(){
     + (memos.length?` · 메모: ${memos.map(m=>`「${m}」`).join(' · ')}`:'')), 1400);
   return gone.length;
 }
+const U5_OUT_IDS = new Set([
+  'sm_1790710446873','sm_1790710446878','sm_1790710446883','sm_1790710446888','sm_1790710446893',
+  'sm_1790710446897','sm_1790710446902','sm_1790710446907','sm_1790710446911','sm_1790710446916',
+  'sm_1790710447064','sm_1790710447069','sm_1790710447073','sm_1790710447078','sm_1790710447083',
+  'sm_1790710447089','sm_1790710447096','sm_1790710447106','sm_1790710447116','sm_1790710447125',
+  'sm_1790710447321','sm_1790710447338','sm_1790710447352','sm_1790710447368','sm_1790710447380',
+  'sm_1790710447391','sm_1790710447402','sm_1790710447413','sm_1790710447424','sm_1790710447434',
+  'sm_1790710447650','sm_1790710447656','sm_1790710447663','sm_1790710447669','sm_1790710447673',
+  'sm_1790710447678','sm_1790710447683','sm_1790710447688','sm_1790710447692','sm_1790710447696',
+  'sm_1790710447801','sm_1790710447806','sm_1790710447812','sm_1790710447818','sm_1790710447823',
+  'sm_1790710447828','sm_1790710447833','sm_1790710447838','sm_1790710447844','sm_1790710447848'
+]);
+function purgeBadUnit5Output(){
+  let purgedLogs = 0;
+  for(const wk in logWeeks){
+    const list = logWeeks[wk];
+    if(Array.isArray(list)){
+      const keep = list.filter(e => !(U5_OUT_IDS.has(e[0]) && logTs(e)>=1791640000000));
+      if(keep.length !== list.length){
+        purgedLogs += list.length - keep.length;
+        logWeeks[wk] = keep;
+        try{ lsSet(K_LOGP+wk, JSON.stringify({v:2, week:wk, log:keep})); }catch(e){}
+      }
+    }
+  }
+  if(state && state.cards){
+    for(const id of U5_OUT_IDS){
+      if(state.cards[id]) delete state.cards[id];
+    }
+  }
+  try{
+    const cm = cachedFile(K_MARKS);
+    if(cm && cm.cards){
+      let ch = false;
+      for(const id of U5_OUT_IDS){
+        if(cm.cards[id]){ delete cm.cards[id]; ch = true; }
+      }
+      if(ch) lsSet(K_MARKS, JSON.stringify(cm));
+    }
+  }catch(e){}
+  const sx = Array.isArray(sessions) && sessions.find(s => s && s.id === 's_default_speaking');
+  if(sx){
+    let sessChanged = false;
+    if(sx.qDel){
+      for(const id of U5_OUT_IDS){
+        if(sx.qDel[id]){ delete sx.qDel[id]; sessChanged = true; }
+      }
+    }
+    if(sx.scores && sx.scores.length){
+      const prevLen = sx.scores.length;
+      sx.scores = sx.scores.filter(sc => !(sc && sc.n===50 && sc.at>=1791640000000));
+      if(sx.scores.length !== prevLen) sessChanged = true;
+    }
+    if(sx.lastScore && sx.lastScore.n===50 && sx.lastScore.at>=1791640000000){
+      sx.lastScore = null; sessChanged = true;
+    }
+    if(typeof sx.done === 'number' && sx.done >= 369){
+      sx.done = 319; sessChanged = true;
+    }
+    if(sx.pg && sx.pg.day === '2026-10-10' && sx.pg.n >= 340){
+      sx.pg.n = 290; sessChanged = true;
+    }
+    if(!sx.q || sx.q.length !== 50 || sx.q[0] !== 'sm_1790710446873'){
+      sx.q = [...U5_OUT_IDS]; sessChanged = true;
+    }
+    if(sx.scope && sx.scope.ex && Array.isArray(sx.scope.ex.units)){
+      if(!sx.scope.ex.units.includes('6.Unit 06 (Day 26-30)|Day 26 — Input')){
+        sx.scope.ex.units.unshift('6.Unit 06 (Day 26-30)|Day 26 — Input'); sessChanged = true;
+      }
+    }
+    if(sx.exDel && sx.exDel['6.Unit 06 (Day 26-30)|Day 26 — Input']){
+      delete sx.exDel['6.Unit 06 (Day 26-30)|Day 26 — Input']; sessChanged = true;
+    }
+    if(sessChanged) saveSessionsSoon();
+  }
+  if(purgedLogs > 0){
+    dirtyLogs.delete('2026-W41');
+    saveDirtyLogs();
+    rebuildLog();
+    console.log('[정리] 유닛 5 Output 오늘 잘못된 기록 정리 완료 (로그 ' + purgedLogs + '건 삭제)');
+  }
+}
 function splitState(){               // 메모리 state → 파일 두 벌 (마크 / 피드백)
   const marks={}, fb={};
   for(const id in state.cards){
@@ -6511,6 +6593,7 @@ async function refreshRemote(){     // 포그라운드 복귀 시 원격 상태 
       if(fb){ mergeFbInto(fb); reapFb(fb); }   // 앱을 켜 둔 채로도 루틴이 소진한다 — 그때도 걷어낸다
       if(wk) mergeLogInto(wk, thisWeek()); else rebuildLog();
       if(sess){ mergeSessInto(sess); sessLoadOK=true; }   // 늦게라도 제대로 받으면 그때부터 올려도 된다
+      purgeBadUnit5Output();
       replayLog();                    // 다른 기기가 올린 로그를 내 스냅샷에 반영
       restReset();                    // due가 움직였다 — 실효 due 캐시·백로그 계획을 버린다
                                       // (다른 기기가 밀린 것을 소화하면 계획이 낡는다 — 감사 지적 2026-09-01)
@@ -7229,6 +7312,7 @@ async function loadAll(){         // 스케줄·피드백·세션·이번 주 �
     logCacheSweep();                 // 남은 지난 주 사본을 IDB로 (보통 무일 — loadWeeks가 읽는 김에 옮긴다)
     // 🔴 부분 이력으로 조용히 재계산하지 않는다 (F1-6) — 자동 충전 보류는 refillSess가 건다
     if(logIncomplete) showBanner('지난 기록을 다 못 받았어요 — 새로고침하세요 (오늘 몫이 실제와 다를 수 있어요)', false, 'log');
+    purgeBadUnit5Output();
     const t0=performance.now();
     const n=replayLog();
     console.log('로그 재계산', n, '건 ·', Math.round(performance.now()-t0), 'ms');
