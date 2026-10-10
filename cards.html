@@ -1302,12 +1302,14 @@ details.ym-subj>summary small{font-weight:600;color:var(--mute);font-size:12.5px
 #card{flex:1 1 auto;width:100%;max-width:none;max-height:none;min-height:0;margin:0 auto;
   background:var(--c-card);border-radius:var(--r-card);box-shadow:var(--sh-big);padding:24px 32px 16px;}
 #card.tblwide{max-width:none;}
-#cHead{display:flex;align-items:center;justify-content:space-between;gap:6px;flex:0 0 auto;font-size:13px;line-height:18px;min-width:0;overflow:hidden;width:100%;}
+#cHead{display:flex;flex-direction:column;gap:5px;flex:0 0 auto;font-size:13px;line-height:18px;min-width:0;width:100%;margin-bottom:2px;}
+.c-head-top{display:flex;align-items:center;justify-content:space-between;gap:8px;min-width:0;width:100%;}
+.c-head-sub{display:flex;align-items:center;gap:6px;min-width:0;width:100%;flex-wrap:wrap;}
 #cScope{display:flex;align-items:center;gap:6px;margin:0;font-size:13px;font-weight:500;color:var(--c-sec);letter-spacing:0;min-width:0;overflow:hidden;white-space:nowrap;flex:1 1 auto;}
 #cScope .sc-p{overflow:hidden;text-overflow:ellipsis;}
 #cScope .sc-chev{width:6px;height:10px;flex:0 0 auto;color:var(--c-ter);}
 #cScope .sc-first{flex:0 0 auto;font-size:15px;font-weight:600;line-height:18px;}   /* 과목명만 살짝 크게(동하 09-24) — 줄 높이 18 그대로라 카드 위치 무변 */
-#phaseLine{flex:0 1 auto;min-width:0;padding:0;min-height:0;font-size:13px;font-weight:400;color:var(--c-sec);text-align:right;
+#phaseLine{flex:0 0 auto;min-width:0;padding:0;min-height:0;font-size:13px;font-weight:400;color:var(--c-sec);text-align:right;
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 #cardScroll{flex:1 1 auto;min-height:0;display:block;}   /* 🔴 block — flex면 #cSplit이 칸 높이로 줄어들어 긴 문면이 가림 면과 겹쳤다(09-24 아이폰 실측) */
 #cSplit{min-height:100%;display:flex;flex-direction:column;}
@@ -1322,7 +1324,7 @@ details.ym-subj>summary small{font-weight:600;color:var(--mute);font-size:12.5px
 .c-copy-btn.copied, .c-copy-tag.copied{color:var(--c-green, #30D158);}
 .c-copy-btn.copied .ic-copy, .c-copy-tag.copied .ic-copy{display:none;}
 .c-copy-btn.copied .ic-check, .c-copy-tag.copied .ic-check{display:inline-block !important;}
-.whine-chip{background:var(--c-fill);color:var(--c-sec);border-radius:10px;padding:2px 8px;font-size:11px;font-weight:600;display:inline-flex;align-items:center;gap:3px;cursor:pointer;border:none;flex:0 0 auto;white-space:nowrap;user-select:none;-webkit-user-select:none;transition:transform .1s, background .15s;}
+.whine-chip{background:var(--c-fill);color:var(--c-sec);border-radius:10px;padding:2px 8px;font-size:11px;font-weight:600;display:inline-flex;align-items:center;gap:3px;cursor:pointer;border:none;flex:0 0 auto;white-space:nowrap;user-select:none;-webkit-user-select:none;transition:transform .1s, background .15s;margin-left:auto;}
 .whine-chip:active{transform:scale(0.92);background:var(--c-fill-hi,rgba(120,120,128,0.22));}
 #cFront{font-family:var(--font);font-size:var(--t-q);font-weight:500;line-height:1.55;letter-spacing:-.012em;color:var(--c-label);}
 #cFront.is-long{font-size:var(--t-q-long);letter-spacing:0;max-width:72ch;hyphens:auto;}
@@ -1644,19 +1646,17 @@ button.sc-err{background:none;border:0;text-align:left;cursor:pointer;font:inher
 #railSc .rs-p[data-uid]{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;}
 @keyframes rsPk{from{background:color-mix(in srgb, var(--pk) 24%, transparent);}to{background:transparent;}}
 #railSc .rs-p.rs-pk{animation:rsPk .8s ease-out;}
-.sc-badge{display:none;align-items:center;gap:5px;font-size:12px;font-weight:600;color:var(--c-sec);padding:3px 8px;border-radius:10px;background:var(--c-fill);cursor:pointer;flex:0 1 auto;min-width:0;max-width:210px;line-height:18px;-webkit-user-select:none;user-select:none;transition:background .15s, transform .08s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.sc-badge{display:none;align-items:center;gap:5px;font-size:12px;font-weight:600;color:var(--c-sec);padding:3px 8px;border-radius:10px;background:var(--c-fill);cursor:pointer;flex:0 1 auto;min-width:0;max-width:100%;line-height:18px;-webkit-user-select:none;user-select:none;transition:background .15s, transform .08s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .sc-badge:active{transform:scale(.97);}
 .sc-badge.tick{animation:rsPk .9s ease-out;}
 .sc-badge-dot{width:6px;height:6px;border-radius:3px;background:var(--c-green);flex:0 0 auto;}
 .sc-badge-dot.pulse{box-shadow:0 0 0 3px color-mix(in srgb, var(--c-green) 35%, transparent);}
-.sc-badge-lead{color:var(--c-label);font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:85px;display:inline-block;vertical-align:bottom;}
+.sc-badge-lead{color:var(--c-label);font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:140px;display:inline-block;vertical-align:bottom;}
 .sc-badge-lead.poke{text-decoration:underline;text-underline-offset:2px;}
 .sc-badge-strip{width:46px;height:7px;border-radius:2px;flex:0 0 auto;}
 @media (max-width: 500px){
   #cHead{gap:4px;}
-  .sc-badge{max-width:130px;font-size:11px;padding:2px 6px;gap:3px;}
-  .sc-m-hide{display:none !important;}
-  .sc-badge-strip{display:none !important;}
+  .sc-badge{font-size:11px;padding:2px 6px;gap:3px;}
   .whine-chip{padding:2px 6px;font-size:10px;}
 }
 #scConfetti{position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:99999;display:none;}
@@ -2237,7 +2237,7 @@ details.gr-fold[open]>summary .s2-chev{transform:rotate(90deg);}
         <!-- 🔴 디자인 이식 09-24: 카드 = 위아래 반반. 답면 내용은 **앞면에서도 미리 채워 visibility:hidden**으로 깔고 가림 면으로 덮는다 →
              앞면↔답면에서 질문·선·버튼이 1px도 안 움직인다(디자인_언어 §1-1 · §7.1). 가림은 visibility라 글자가 선택·낭독되지 않는다. -->
         <div id="card">
-          <div id="cHead"><div id="cScope"></div><button type="button" class="whine-chip" id="btnWhine" title="아 진짜 하기 싫다! (투덜이 로그)">🫠 하기 싫어</button><span id="solveStudyChip" class="sc-badge"></span><div id="phaseLine"></div></div>
+          <div id="cHead"><div class="c-head-top"><div id="cScope"></div><div id="phaseLine"></div></div><div class="c-head-sub" id="cHeadSub"><span id="solveStudyChip" class="sc-badge"></span><button type="button" class="whine-chip" id="btnWhine" title="아 진짜 하기 싫다! (투덜이 로그)">🫠 하기 싫어</button></div></div>
           <div id="cardScroll"><div id="cSplit">
             <div id="cUpper">
               <div class="c-upper-act"><button type="button" class="c-copy-btn" id="btnCopyFront" title="카드 내용 복사" aria-label="카드 내용 복사"><svg class="ic-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><svg class="ic-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:none;"><path d="M20 6 9 17l-5-5"/></svg></button></div>
@@ -10735,7 +10735,7 @@ function scRenderSolveBadge(){
   const dotCls='sc-badge-dot'+(nStudy>1?' pulse':'');
   const leadCls='sc-badge-lead'+(pokeTarget?' poke':'');
   const leadSpan = leadText ? ` · <span class="${leadCls}">${esc(leadText)}</span>` : '';
-  badge.innerHTML=`<span class="${dotCls}"></span><span>온라인 ${nStudy}명</span><span class="sc-m-hide"> · ${myCntText}</span>${leadSpan}${stripSvg?`<span class="sc-m-hide"> · ${stripSvg}</span>`:''}`;
+  badge.innerHTML=`<span class="${dotCls}"></span><span>온라인 ${nStudy}명</span><span> · ${myCntText}</span>${leadSpan}${stripSvg?` · ${stripSvg}`:''}`;
   badge.title=pokeTarget ? '클릭하면 찌르기 (패드 R버튼)' : '스터디 참여 중';
   badge.style.display='inline-flex';
 }
