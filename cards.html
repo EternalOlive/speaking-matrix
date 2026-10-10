@@ -1322,6 +1322,8 @@ details.ym-subj>summary small{font-weight:600;color:var(--mute);font-size:12.5px
 .c-copy-btn.copied, .c-copy-tag.copied{color:var(--c-green, #30D158);}
 .c-copy-btn.copied .ic-copy, .c-copy-tag.copied .ic-copy{display:none;}
 .c-copy-btn.copied .ic-check, .c-copy-tag.copied .ic-check{display:inline-block !important;}
+.whine-chip{background:var(--c-fill);color:var(--c-sec);border-radius:10px;padding:2px 8px;font-size:11px;font-weight:600;display:inline-flex;align-items:center;gap:3px;cursor:pointer;border:none;flex:0 0 auto;white-space:nowrap;user-select:none;-webkit-user-select:none;transition:transform .1s, background .15s;}
+.whine-chip:active{transform:scale(0.92);background:var(--c-fill-hi,rgba(120,120,128,0.22));}
 #cFront{font-family:var(--font);font-size:var(--t-q);font-weight:500;line-height:1.55;letter-spacing:-.012em;color:var(--c-label);}
 #cFront.is-long{font-size:var(--t-q-long);letter-spacing:0;max-width:72ch;hyphens:auto;}
 #cLine{flex:0 0 auto;height:1px;transform:scaleY(.5);background:var(--c-sep);margin-bottom:8px;}
@@ -2228,7 +2230,7 @@ details.gr-fold[open]>summary .s2-chev{transform:rotate(90deg);}
         <!-- 🔴 디자인 이식 09-24: 카드 = 위아래 반반. 답면 내용은 **앞면에서도 미리 채워 visibility:hidden**으로 깔고 가림 면으로 덮는다 →
              앞면↔답면에서 질문·선·버튼이 1px도 안 움직인다(디자인_언어 §1-1 · §7.1). 가림은 visibility라 글자가 선택·낭독되지 않는다. -->
         <div id="card">
-          <div id="cHead"><div id="cScope"></div><span id="solveStudyChip" class="sc-badge"></span><div id="phaseLine"></div></div>
+          <div id="cHead"><div id="cScope"></div><button type="button" class="whine-chip" id="btnWhine" title="아 진짜 하기 싫다! (투덜이 로그)">🫠 하기 싫어</button><span id="solveStudyChip" class="sc-badge"></span><div id="phaseLine"></div></div>
           <div id="cardScroll"><div id="cSplit">
             <div id="cUpper">
               <div class="c-upper-act"><button type="button" class="c-copy-btn" id="btnCopyFront" title="카드 내용 복사" aria-label="카드 내용 복사"><svg class="ic-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><svg class="ic-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:none;"><path d="M20 6 9 17l-5-5"/></svg></button></div>
@@ -2458,7 +2460,7 @@ details.gr-fold[open]>summary .s2-chev{transform:rotate(90deg);}
           <kbd>↑</kbd> 다시 · <kbd>→</kbd> 어려움 · <kbd>↓</kbd> 알맞음(재출: 통과) · <kbd>←</kbd> 쉬움<br>
           <small style="color:var(--mute)">* 정답 공개 전에는 방향키 누르면 정답이 공개돼요.</small><br>
           <p style="margin:10px 0 6px;font-size:12px;color:var(--ink);font-weight:700">기타 기능</p>
-          <kbd>R</kbd> 되돌리기 · <kbd>Shift+B</kbd> 내일로 · <kbd>Q</kbd> 카드 끄기 · <kbd>F</kbd> 플래그 ·
+          <kbd>R</kbd> 되돌리기 · <kbd>Shift+B</kbd> 내일로 · <kbd>W</kbd> 하기 싫어 · <kbd>Q</kbd> 카드 끄기 · <kbd>F</kbd> 플래그 ·
           <kbd>S</kbd> 일시정지 · <kbd>T</kbd> 초성 힌트 · <kbd>Esc</kbd> 닫기 → 홈 · <kbd>/</kbd> 목록 검색<br>
           <kbd>Ctrl</kbd>+<kbd>1</kbd><kbd>2</kbd><kbd>3</kbd><kbd>4</kbd> 플래그 사유(단서 과다 · 문면 분리 · 문장 어색 · 사례 추가)<br>
           <small style="color:var(--mute)">* 한글 입력 상태에서도 자판 자리로 정상 인식됩니다.</small>
@@ -2766,6 +2768,7 @@ details.gr-fold[open]>summary .s2-chev{transform:rotate(90deg);}
     <div id="flagMemoRow"><input id="flagMemo" type="text" placeholder="메모 (선택)" maxlength="120"></div>
     <div class="rail-sep"></div>
     <div class="rail-grp">이 카드</div>
+    <button class="rbtn" id="rWhine"><span style="font-size:17px;margin-right:4px">🫠</span>하기 싫어</button>
     <button class="rbtn" id="rBury"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l2.5 2"/></svg>내일로</button>
     <button class="rbtn" id="rInfo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4.5 6h.01M4.5 12h.01M4.5 18h.01"/></svg>카드 정보</button>
     <button class="rbtn" id="rCopy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>카드 내용 복사</button>
@@ -8339,10 +8342,12 @@ function showSessEnd(sx){
   const hit=Math.round((sc.n-sc.r[1])/sc.n*100), per=Math.round(sc.ms/sc.n/1000);
   const next=sessions.find(s=>s && s.id!==sx.id && sessRemain(s)>0);
   const C=2*Math.PI*22, off=C*(1-hit/100);
+  const wCount=typeof todayWhineCount==='function'?todayWhineCount():0;
   $('endBody').innerHTML=`<div class="end-top"><svg class="end-ring" viewBox="0 0 52 52" aria-hidden="true"><circle cx="26" cy="26" r="22" fill="none" stroke="var(--c-fill)" stroke-width="7"/>
       <circle cx="26" cy="26" r="22" fill="none" stroke="var(--c-green)" stroke-width="7" stroke-linecap="round" stroke-dasharray="${C.toFixed(1)}" stroke-dashoffset="${off.toFixed(1)}" transform="rotate(-90 26 26)"/></svg>
     <div class="end-h"><span class="end-k">세션 끝</span><span class="end-t">${esc(sx.name)}</span></div></div>
     <div class="end-stats"><div><b>${hit}%</b><small>정답률</small></div><div><b>${sc.n.toLocaleString()}</b><small>채점</small></div><div><b>${esc(fmtMin(sc.ms))}</b><small>응답 시간</small></div><div><b>${per}초</b><small>장당 응답</small></div></div>
+    ${wCount?`<div style="margin:8px 0 12px;padding:9px 14px;border-radius:12px;background:var(--c-fill);font-size:13px;color:var(--c-sec);text-align:center">🫠 오늘 '하기 싫어'를 <b>${wCount}번</b> 외치면서도 완주했어요! 👏</div>`:''}
     ${next?`<button class="end-next" id="endNext"><span>다음: ${esc(next.name)}</span><small>${sessRemain(next).toLocaleString()}장 · ${esc(fmtEst(sessRemain(next)))}</small></button>`:''}
     <div class="btn-row"><button class="btn-ghost" id="endSess">세션 화면</button><button class="btn-primary" id="endHome">오늘로</button></div>`;
   $('ovlEnd').classList.add('show');
@@ -9221,6 +9226,42 @@ $('rFlag').onclick=()=>{
 };
 $('flagMemo').addEventListener('change',()=>{ if(commitMemo()) syncRail(); });
 function dropFromQueue(id){ for(let i=queue.length-1;i>qPos;i--){ if(queue[i].id===id)queue.splice(i,1); } }
+const WHINE_MSGS=[
+  "아 진짜 하기 싫다!! (근데 손은 계속 푸는 중… 👏)",
+  "그래도 해야지 어쩌겠어… 🥲",
+  "하기 싫은 마음 완전 인정! 꾹 참고 한 장 더 🔥",
+  "투덜대면서도 해내는 사람이 결국 이김 👑",
+  "뇌: 하기 싫어 / 손: (다음 버튼 딸깍) 🤖",
+  "하기 싫다 외치면서도 푸는 당신이 진정한 위너 🏆",
+  "오늘만 버티자… 조금만 더 힘내요 💪",
+  "아오 하기 싫어어어!! 🫠 (정상입니다)",
+  "인생은 실전이고 복습은 계속된다… ☕",
+  "하기 싫어도 카드 본 사람이 합격한다 🎯"
+];
+function todayWhineCount(){
+  const tk=todayKey();
+  let n=0;
+  const list=state.whineLog||[];
+  for(let i=list.length-1;i>=0;i--){
+    if(dayKey(new Date(list[i].t))===tk) n++;
+  }
+  return n;
+}
+function doWhine(){
+  const c=cur();
+  state.whineLog=state.whineLog||[];
+  const now=Date.now();
+  const rated=todayRated();
+  state.whineLog.push({ t:now, id:c?c.id:'', n:rated, subj:c?c.subj:'' });
+  if(state.whineLog.length>500) state.whineLog.shift();
+  cacheState(); setDirty(true);
+  const count=todayWhineCount();
+  const baseMsg=WHINE_MSGS[Math.floor(Math.random()*WHINE_MSGS.length)];
+  toast(`${baseMsg} · 오늘 ${count}번째`);
+  if(navigator.vibrate) try{ navigator.vibrate(40); }catch(e){}
+}
+const bw=$('btnWhine'); if(bw) bw.onclick=(e)=>{ e.stopPropagation(); doWhine(); };
+const rw=$('rWhine'); if(rw) rw.onclick=(e)=>{ e.stopPropagation(); doWhine(); };
 $('rBury').onclick=()=>{
   if(tooSoon()) return;                       // 카드 바뀐 직후 더블탭
   const c=cur(); if(!c)return;
@@ -12032,6 +12073,7 @@ const PAD_ACTS=[   // [id, 라벨, 합성할 키] — 순서 = 화면 순서
   ['good','알맞음 (Y)',{code:'KeyY',key:'y'}], ['easy','통과 / 쉬움 (X)',{code:'KeyX',key:'x'}],
   ['reveal','답 보기 (Space)',{code:'Space',key:' '}], ['undo','되돌리기 (R)',{code:'KeyU',key:'u'}],
   ['bury','내일로 (Shift+B)',{code:'KeyB',key:'b',shiftKey:true}], ['off','끄기 (Q)',{code:'KeyO',key:'o'}], ['hint','첫 글자 힌트 (T)',{code:'KeyT',key:'t'}],
+  ['whine','하기 싫어 (W)',{code:'KeyW',key:'w'}],
   ['home','홈 (Esc)',{code:'KeyH',key:'h'}], ['pause','일시정지 (P)',{code:'KeyP',key:'p'}], ['mod','사유 칩 보조키 — 누른 채 채점 버튼 (Ctrl+1~4)',null],
   ['up','위로 스크롤 (↑)',{code:'ArrowUp',key:'ArrowUp'}], ['down','아래로 스크롤 (↓)',{code:'ArrowDown',key:'ArrowDown'}],
   ['left','회독본 이전 절 (←)',{code:'ArrowLeft',key:'ArrowLeft'}], ['right','회독본 다음 절 (→)',{code:'ArrowRight',key:'ArrowRight'}]];
@@ -12040,8 +12082,8 @@ const PAD_ACTS=[   // [id, 라벨, 합성할 키] — 순서 = 화면 순서
    Apple / Switch D모드: 0 B · 1 A · 2 Y · 3 X */
 const _isWinPad = typeof navigator !== 'undefined' && (/Win/i.test(navigator.platform || '') || /Windows/i.test(navigator.userAgent || ''));
 const PAD_DEF = _isWinPad
-  ? {again:0, hard:1, easy:2, good:3, undo:7, bury:16, off:4, mod:5, pause:8, home:9, up:12, down:13, left:14, right:15, hint:6, reveal:null}
-  : {again:1, hard:0, good:2, easy:3, undo:7, bury:16, off:4, mod:5, pause:8, home:9, up:12, down:13, left:14, right:15, hint:6, reveal:null};
+  ? {again:0, hard:1, easy:2, good:3, undo:7, bury:16, off:4, mod:5, pause:8, home:9, up:12, down:13, left:14, right:15, hint:6, whine:null, reveal:null}
+  : {again:1, hard:0, good:2, easy:3, undo:7, bury:16, off:4, mod:5, pause:8, home:9, up:12, down:13, left:14, right:15, hint:6, whine:null, reveal:null};
 let padMap=Object.assign({}, PAD_DEF); try{ const j=JSON.parse(lsGet(K_PAD)||'null'); if(j&&typeof j==='object') padMap=Object.assign({}, PAD_DEF, j); }catch(e){}
 let padPrev=[], padSeen=false, padLearn=null, padHoldT=0, padLast=null;
 let _padEv=false;
@@ -12231,6 +12273,7 @@ document.addEventListener('keydown',e=>{
   if(k==='f'){ $('rFlag').click(); return; }
   if(k==='o'){ $('rOff').click(); return; }   // 끄기 = 이 카드 그만
   if(k==='p'){ pauseSession(); return; }
+  if(k==='w'){ doWhine(); return; }
   /* `C` = 초성 힌트 (동하 09-14 「초성 나타내기 단축키」). 답 보기 전, 아직 안 연 칩 중 첫 것을 연다 —
      항목이 여럿이면 누를 때마다 다음 칩. 칩이 없는 카드(범위 밖·표·도식)면 아무 일도 없다. 열면 채점이 「다시」로 잠기는 규칙은 칩과 같다. */
   if(k==='t'){ if(revealed) return; const b=[...document.querySelectorAll('#hintBox.on .hint-chip:not(.on)')][0]; if(b) b.click(); return; }   // 초성 힌트 C→T (09-22 · C가 채점 「알맞음」이 됐다)
