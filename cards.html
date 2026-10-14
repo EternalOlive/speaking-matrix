@@ -6252,7 +6252,7 @@ function mergeLogInto(remote, wk){    // 로그: (카드|시각) 합집합
 }
 function mergeSessInto(remote){
   const merged=mergeSessions((remote&&remote.sessions)||[], sessFile().sessions, state.log);
-  sessions=merged.filter(x=>!x.del); sessTomb=merged.filter(x=>x.del);
+  sessions=merged.filter(x=>!x.del&&x.name!=='시작 가이드'&&x.id!=='s_tutorial'&&x.id!=='s1791980482284592'); sessTomb=merged.filter(x=>x.del);
   normalizeSessions();
   state.hoedok={...((remote&&remote.hoedok)||{}), ...(state.hoedok||{})};
   state.read={...((remote&&remote.read)||{}), ...(state.read||{})};      // 읽음 표시도 같은 규칙(로컬 승·null 툼스톤)
@@ -6994,7 +6994,10 @@ function saveResume(){
 function clearResume(){ try{ lsSet(K_RESUME,''); }catch(e){} }
 function tryResume(){
   let r=null; try{ r=JSON.parse(lsGet(K_RESUME)||'null'); }catch(e){}
-  if(!r||r.day!==todayKey()) return false;
+  if(!r||r.day!==todayKey()||r.sid==='s1791980482284592'||String(r.cid).startsWith('guide_')) {
+    if(r&&(r.sid==='s1791980482284592'||String(r.cid).startsWith('guide_'))) clearResume();
+    return false;
+  }
   const sx=sessions.find(s=>s.id===r.sid), c=BYID[r.cid];
   if(!sx||!c||settledToday(c)||buried(c)) return false;
   playSess(sx);                                  // 저장 큐가 그 카드부터라 보통 첫 장이 그 카드다
@@ -7389,7 +7392,12 @@ function newSessObj(name, how, scope, mode){
     q:[], done:0, day:'', lastScore:null, scores:[], createdAt:Date.now(), lastAt:0};
 }
 function normalizeSessions(){
+  sessions=sessions.filter(x=>x&&!x.del&&x.name!=='시작 가이드'&&x.id!=='s_tutorial'&&x.id!=='s1791980482284592'&&!((x.scope&&x.scope.subj)||[]).includes('시작 가이드'));
+  if(!sessTomb.some(x=>x.id==='s1791980482284592')) sessTomb.push({id:'s1791980482284592', del:1791986500000});
+  if(curSess&&(curSess.id==='s1791980482284592'||curSess.name==='시작 가이드')){ curSess=null; queue=[]; qPos=0; }
+  if(viewSess&&(viewSess.id==='s1791980482284592'||viewSess.name==='시작 가이드')){ viewSess=null; }
   for(const x of sessions){
+    if(x.q&&Array.isArray(x.q)) x.q=x.q.filter(id=>!String(id).startsWith('guide_'));
     x.scope=Object.assign({units:[],mids:[],subj:[],tags:[],typ:[]},x.scope||{}); x.q=x.q||[];
     x.scope.ex=Object.assign({units:[],mids:[]}, x.scope.ex||{});
     if(!x.mode) x.mode=(x.scope.units&&x.scope.units.length)?'manual':'auto';
@@ -7423,7 +7431,7 @@ function loadSessions(){
   if(v){ try{ const j=JSON.parse(v); sessions=Array.isArray(j)?j:((j&&j.sessions)||[]); }
          catch(e){ sessions=[]; } }
   if(!Array.isArray(sessions)) sessions=[];
-  sessions=sessions.filter(x=>x&&!x.del);      // 캐시에는 삭제 툼스톤도 같이 들어 있다
+  sessions=sessions.filter(x=>x&&!x.del&&x.name!=='시작 가이드'&&x.id!=='s_tutorial'&&x.id!=='s1791980482284592');      // 캐시에는 삭제 툼스톤도 같이 들어 있다 — 시작 가이드 잔여물 영구 배제
   if(!sessions.length){                       // 예전 프리셋이 있으면 승계, 없으면 일일 복습 하나
     const old=lsGet(K_PRESETS);
     let migrated=[];
