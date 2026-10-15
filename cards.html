@@ -1963,8 +1963,14 @@ input,select{border-radius:10px;}
 /* ═══════════════ 학습 누적 & 회독 통계 ═══════════════ */
 .traj-kpi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:10px 0 14px;}
 @media (min-width:640px){ .traj-kpi-grid{grid-template-columns:repeat(4,1fr);} }
-.traj-kpi-item{background:var(--c-fill);border-radius:12px;padding:10px 12px;display:flex;flex-direction:column;gap:3px;min-width:0;}
+.traj-kpi-item{position:relative;background:var(--c-fill);border-radius:12px;padding:10px 12px;display:flex;flex-direction:column;gap:3px;min-width:0;transition:all .18s ease;}
+.traj-kpi-item.has-hover{cursor:default;}
+.traj-kpi-item.has-hover:hover{background:var(--c-card);box-shadow:0 3px 12px rgba(0,0,0,0.07);}
+.traj-kpi-head{display:flex;align-items:center;justify-content:space-between;gap:6px;}
 .traj-kpi-item small{font-size:11.5px;color:var(--c-sec);font-weight:600;}
+.traj-kpi-tip{display:inline-flex;align-items:center;font-size:10.5px;font-weight:600;color:var(--c-acc);background:var(--c-acc-tint);padding:1px 6px;border-radius:999px;opacity:0;transform:translateY(2px);transition:all .18s ease;pointer-events:none;white-space:nowrap;}
+.traj-kpi-tip b{font-size:10.5px;line-height:inherit;}
+.traj-kpi-item.has-hover:hover .traj-kpi-tip{opacity:1;transform:translateY(0);}
 .traj-kpi-item b{font-size:20px;line-height:24px;font-weight:700;color:var(--c-label);font-variant-numeric:tabular-nums;}
 .traj-kpi-item b small{font-size:13px;font-weight:600;color:var(--c-sec);margin-left:2px;}
 .traj-kpi-item .sub{font-size:11px;color:var(--c-ter);line-height:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
@@ -1973,6 +1979,19 @@ input,select{border-radius:10px;}
 .traj-tab:hover{color:var(--c-label);}
 .traj-tab.on{background:var(--c-card);color:var(--c-label);box-shadow:0 1px 4px rgba(0,0,0,0.08);}
 .traj-chart-container{position:relative;width:100%;margin-top:6px;}
+
+.cum-chart-wrap{position:relative;width:100%;user-select:none;-webkit-user-select:none;}
+.cum-top-badge{position:absolute;top:2px;right:4px;display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--c-acc);font-variant-numeric:tabular-nums;cursor:default;padding:2px 8px;border-radius:6px;background:var(--c-fill);transition:all .15s ease;z-index:5;}
+.cum-top-badge:hover{background:var(--c-acc-tint);}
+.cum-top-daily{font-size:11px;font-weight:600;color:var(--c-sec);opacity:0.85;margin-left:4px;}
+.cum-top-daily b{color:var(--c-acc);}
+
+.cum-hover-tip{position:absolute;pointer-events:none;z-index:25;background:var(--c-card);border:1px solid var(--c-sep);border-radius:10px;padding:7px 10px;box-shadow:0 4px 18px rgba(0,0,0,0.12);font-size:11.5px;color:var(--c-label);white-space:nowrap;transform:translate(-50%,-100%);margin-top:-6px;transition:opacity .1s ease;}
+.cum-hover-tip .cht-date{font-size:10.5px;font-weight:600;color:var(--c-sec);margin-bottom:3px;}
+.cum-hover-tip .cht-row{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:11.5px;}
+.cum-hover-tip .cht-row b{font-weight:700;color:var(--c-label);font-variant-numeric:tabular-nums;}
+.cum-hover-tip .cht-daily b{color:var(--c-acc);}
+.cum-hover-tip .cht-sub{font-size:10px;color:var(--c-sec);font-weight:500;}
 
 
 /* ═══════════════ 디자인 이식 E(2) — 세션 화면 (캔버스 「세션」 판) ═══════════════ */
@@ -14154,6 +14173,7 @@ function repsHistogramChart(repsDist, maxVal){
 /* 2. 누적 풀이 추이 (누적 훈련량 곡선) */
 function cumReviewsChart(cumArr){
   if(!cumArr.length) return '';
+  window._cumArrData = cumArr;
   const W=680, H=165, PADB=22, PADT=20;
   const n=cumArr.length;
   const maxCum = cumArr[n-1].cum || 1;
@@ -14170,15 +14190,88 @@ function cumReviewsChart(cumArr){
   g += `<polyline points="${line}" fill="none" stroke="var(--c-acc)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>`;
   g += `<line x1="0" y1="${y(maxCum).toFixed(1)}" x2="${W}" y2="${y(maxCum).toFixed(1)}" stroke="var(--c-sep)" stroke-width="1" stroke-dasharray="3 3"/>`;
 
+  g += `<line id="cumHoverLine" x1="0" y1="${PADT}" x2="0" y2="${H-PADB}" stroke="var(--c-acc)" stroke-width="1.5" stroke-dasharray="3 3" opacity="0" pointer-events="none"/>`;
+  g += `<circle id="cumHoverDot" cx="0" cy="0" r="4.5" fill="var(--c-acc)" stroke="var(--c-card)" stroke-width="2" opacity="0" pointer-events="none"/>`;
+
   const d0 = cumArr[0].d.slice(5).replace('-','/');
   const dMid = cumArr[Math.floor(n/2)].d.slice(5).replace('-','/');
   const dEnd = cumArr[n-1].d.slice(5).replace('-','/');
   
   const lab = (leftPct, t, tr) => `<span style="position:absolute;bottom:3px;left:${leftPct}%;transform:translateX(${tr});font-size:11px;font-weight:600;color:var(--c-sec);white-space:nowrap">${t}</span>`;
-  const topLab = `<span style="position:absolute;top:2px;right:4px;font-size:12px;font-weight:700;color:var(--c-acc);font-variant-numeric:tabular-nums">누적 ${maxCum.toLocaleString()}회</span>`;
 
-  return `<div style="position:relative">${topLab}<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" style="width:100%;height:${H}px;display:block">${g}</svg>${lab(0, d0, '0')}${lab(50, dMid, '-50%')}${lab(100, dEnd + ' (오늘)', '-100%')}</div>`;
+  const todayEntry = cumArr[cumArr.length - 1];
+  const todayCards = todayEntry ? (todayEntry.dailyCards || 0) : 0;
+  const todayReps = todayEntry ? (todayEntry.dailyReps || 0) : 0;
+  const topLab = `<div class="cum-top-badge" id="cumTopBadge" title="오늘 일일 학습량: ${todayCards.toLocaleString()}장 (${todayReps.toLocaleString()}회)">
+    <span class="cum-top-val">누적 ${maxCum.toLocaleString()}회</span>
+    <span class="cum-top-daily">오늘 일일 <b>+${todayCards.toLocaleString()}장</b></span>
+  </div>`;
+
+  return `<div class="cum-chart-wrap" id="cumChartWrap" onmousemove="onCumChartMove(event)" onmouseleave="onCumChartLeave()" ontouchmove="onCumChartMove(event)" ontouchend="onCumChartLeave()">
+    ${topLab}
+    <div id="cumHoverTip" class="cum-hover-tip" style="display:none;"></div>
+    <svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" style="width:100%;height:${H}px;display:block;cursor:crosshair;">${g}</svg>
+    ${lab(0, d0, '0')}${lab(50, dMid, '-50%')}${lab(100, dEnd + ' (오늘)', '-100%')}
+  </div>`;
 }
+
+function onCumChartMove(e){
+  const wrap = document.getElementById('cumChartWrap');
+  if(!wrap || !window._cumArrData || !window._cumArrData.length) return;
+  const rect = wrap.getBoundingClientRect();
+  const clientX = (e.touches && e.touches.length) ? e.touches[0].clientX : e.clientX;
+  const pct = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+  const data = window._cumArrData;
+  const n = data.length;
+  const idx = Math.min(n - 1, Math.max(0, Math.round(pct * (n - 1))));
+  const item = data[idx];
+  if(!item) return;
+
+  const W = 680, H = 165, PADB = 22, PADT = 20;
+  const maxCum = data[n - 1].cum || 1;
+  const posX = (idx / (n - 1 || 1)) * W;
+  const posY = H - PADB - (item.cum / maxCum) * (H - PADB - PADT);
+
+  const line = document.getElementById('cumHoverLine');
+  const dot = document.getElementById('cumHoverDot');
+  const tip = document.getElementById('cumHoverTip');
+  if(line){
+    line.setAttribute('x1', posX.toFixed(1));
+    line.setAttribute('x2', posX.toFixed(1));
+    line.style.opacity = '1';
+  }
+  if(dot){
+    dot.setAttribute('cx', posX.toFixed(1));
+    dot.setAttribute('cy', posY.toFixed(1));
+    dot.style.opacity = '1';
+  }
+  if(tip){
+    const dObj = new Date(item.d + 'T12:00:00');
+    const dayName = '일월화수목금토'[dObj.getDay()];
+    const dStr = `${Number(item.d.slice(5,7))}월 ${Number(item.d.slice(8))}일 (${dayName})`;
+    tip.innerHTML = `
+      <div class="cht-date">${dStr}</div>
+      <div class="cht-row"><span>누적 학습량</span><b>${item.cum.toLocaleString()}회</b></div>
+      <div class="cht-row cht-daily"><span>일일 학습량</span><b>${item.dailyCards.toLocaleString()}장</b> <span class="cht-sub">(${item.dailyReps.toLocaleString()}회)</span></div>
+    `;
+    const leftPx = (posX / W) * rect.width;
+    const topPx = (posY / H) * rect.height;
+    tip.style.left = `${Math.max(65, Math.min(rect.width - 65, leftPx))}px`;
+    tip.style.top = `${Math.max(10, topPx - 10)}px`;
+    tip.style.display = 'block';
+  }
+}
+
+function onCumChartLeave(){
+  const line = document.getElementById('cumHoverLine');
+  const dot = document.getElementById('cumHoverDot');
+  const tip = document.getElementById('cumHoverTip');
+  if(line) line.style.opacity = '0';
+  if(dot) dot.style.opacity = '0';
+  if(tip) tip.style.display = 'none';
+}
+window.onCumChartMove = onCumChartMove;
+window.onCumChartLeave = onCumChartLeave;
 
 /* 3. 안키식 카드 상태 누적 면적 */
 function ankiCardCountsChart(hist){
@@ -14238,24 +14331,37 @@ function renderTrajCardInner(){
     else repsDist[n]++;
   }
 
+  const tk = todayKey();
+  const by = dailyStats();
+  const today = by[tk] || emptyDay();
+
   const daysSorted = Object.keys(byDay).sort();
   let cum = 0;
   const cumArr = [];
   for(const d of daysSorted){
     cum += byDay[d];
-    cumArr.push({d, cum});
+    const st = by[d];
+    const dailyCards = st ? st.cards : (byDay[d] || 0);
+    const dailyReps = byDay[d] || 0;
+    cumArr.push({d, cum, dailyCards, dailyReps});
   }
 
   const M = maturitySplit();
 
   let h = `<div class="traj-kpi-grid">
-    <div class="traj-kpi-item">
-      <small>학습한 카드</small>
+    <div class="traj-kpi-item has-hover" title="오늘 일일 학습량: ${today.cards.toLocaleString()}장 (신규 ${today.nw} · 복습 ${Math.max(0,today.cards-today.nw)})">
+      <div class="traj-kpi-head">
+        <small>학습한 카드</small>
+        <span class="traj-kpi-tip">오늘 일일 <b>+${today.cards.toLocaleString()}장</b></span>
+      </div>
       <b>${studiedCount.toLocaleString()}<small>/${totalCards}장</small></b>
       <span class="sub">진도율 ${Math.round(studiedCount/totalCards*100)}% · 미학습 ${unseenCount}장</span>
     </div>
-    <div class="traj-kpi-item">
-      <small>총 복습량 (채점)</small>
+    <div class="traj-kpi-item has-hover" title="오늘 일일 채점량: ${today.n.toLocaleString()}회 (학습 ${today.cards}장)">
+      <div class="traj-kpi-head">
+        <small>총 복습량 (채점)</small>
+        <span class="traj-kpi-tip">오늘 일일 <b>+${today.n.toLocaleString()}회</b></span>
+      </div>
       <b>${totalReps.toLocaleString()}<small>회</small></b>
       <span class="sub">순수 반복 훈련량</span>
     </div>
