@@ -58,7 +58,15 @@ Speaking Matrix 900제 문장의 뉘앙스, 원어민 어감 차이, 실전 활�
 
 <div id="day-11"></div>
 ### Day 11
-*등록된 뉘앙스 노트가 없습니다.*
+- **I usually have cold drinks, but I hardly drink hot beverages.** <!-- id: sm_1790710445357 -->
+  - **`hardly`**: 거의 ~하지 않다 (정도·발생이 극히 적음)
+  - **`rarely`**: 거의 ~하지 않다, 드물게 (빈도가 낮음)
+  - **차이:** `hardly`는 정도가 거의 없음, `rarely`는 빈도가 낮음에 초점.
+
+- **I like to drink an iced Americano on hot days.** <!-- id: sm_1790710445275 -->
+  - **`like to + 동사원형`**: ~하는 것을 좋아하다 (습관·선호하는 행동)
+  - **`like + 동명사(-ing)`**: ~하는 것을 좋아하다 (활동 자체를 즐김)
+  - **차이:** 의미가 겹치는 경우가 많으며, 이 문장에서는 둘 다 자연스럽다.
 
 <div id="day-12"></div>
 ### Day 12
@@ -81,6 +89,11 @@ Speaking Matrix 900제 문장의 뉘앙스, 원어민 어감 차이, 실전 활�
 - **I usually get to work ten minutes early.** <!-- id: sm_1790710445643 -->
   - get to work: 직장에 도착하다 / 일을 시작하다
 
+- **I see my personal trainer twice a week.** <!-- id: sm_1790710445780 -->
+  - **`see someone`**: 정기적으로 만나다, 진료·지도 등을 받다
+  - **`meet someone`**: 만나다, 약속하거나 처음 대면하다
+  - **차이:** 정기적인 트레이닝·진료·수업 관계에는 `see`가 자연스럽고, 만나는 행위나 약속 자체를 강조할 때는 `meet`를 사용할 수 있다.
+
 <div id="day-15"></div>
 ### Day 15
 *등록된 뉘앙스 노트가 없습니다.*
@@ -101,7 +114,10 @@ Speaking Matrix 900제 문장의 뉘앙스, 원어민 어감 차이, 실전 활�
 
 <div id="day-19"></div>
 ### Day 19
-*등록된 뉘앙스 노트가 없습니다.*
+- **`Thanks for understanding.`**: 이해해 주셔서 감사합니다. (이해해 주는 행위)
+- **`Thanks for your understanding.`**: 이해해 주셔서 감사합니다. (상대방의 이해와 배려)
+
+**차이:** 두 표현은 의미가 거의 같으며, `your understanding`은 상대방의 이해를 명사로 표현한다.
 
 <div id="day-20"></div>
 ### Day 20
@@ -141,7 +157,10 @@ Speaking Matrix 900제 문장의 뉘앙스, 원어민 어감 차이, 실전 활�
 
 <div id="day-27"></div>
 ### Day 27
-*등록된 뉘앙스 노트가 없습니다.*
+- **I stopped checking my phone in bed.** <!-- id: sm_1790710448026 -->
+  - **`in bed`**: 침대에 누워 있거나 침대에서 쉬는 상태
+  - **`on the bed`**: 침대 표면 위에 있는 위치를 강조
+  - **차이:** 취침·휴식 상태나 침대에서 하는 습관을 말할 때는 `in bed`, 물건이나 사람의 물리적 위치를 강조할 때는 `on the bed`를 주로 사용한다.
 
 <div id="day-28"></div>
 ### Day 28
