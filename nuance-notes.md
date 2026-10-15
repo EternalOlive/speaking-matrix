@@ -36,7 +36,10 @@ Speaking Matrix 900제 문장의 뉘앙스, 원어민 어감 차이, 실전 활�
 
 <div id="day-05"></div>
 ### Day 05
-*등록된 뉘앙스 노트가 없습니다.*
+- **Today was all about resting.** <!-- id: sm_1790710444418 -->
+  - **`resting`**: 쉬는 것, 휴식을 취하는 것 (활동 중단·회복)
+  - **`relaxing`**: 긴장을 풀고 편안하게 있는 것 (여유·심리적 안정)
+  - **차이:** `resting`은 휴식과 회복, `relaxing`은 긴장을 풀고 편안해지는 데 초점.
 
 ## Unit 02 (Day 06-10)
 
