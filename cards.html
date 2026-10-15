@@ -7279,6 +7279,21 @@ async function loadAll(){         // 스케줄·피드백·세션·이번 주 �
     const t0=performance.now();
     const n=replayLog();
     console.log('로그 재계산', n, '건 ·', Math.round(performance.now()-t0), 'ms');
+    /* 🔴 과거 주차 로그 누락 사고로 인해 큐에 신규로 오인되어 들어간 카드 자동 정정 */
+    for(const sx of sessions){
+      if(sx.id==='s_default_speaking' && sx.q && sx.q.length > 200){
+        const beforeN = sx.q.length;
+        sx.q = sx.q.filter(id => {
+          const c = BYID[id];
+          return c && (isNew(c) || isDue(c));
+        });
+        if(sx.q.length < beforeN){
+          sx.lastAt = Date.now();
+          saveSessions();
+          console.info('[세션 복구] 비-due 카드 ' + (beforeN - sx.q.length) + '장 정정, 잔여: ' + sx.q.length + '장');
+        }
+      }
+    }
   }
   cleanupTempSessions();
   /* 🔴 세션 목록을 **못 받은 것**과 **없는 것**은 다르다 (동하 2026-08-24 「누복 세션이 두 개가 됐어」)
