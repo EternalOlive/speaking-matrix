@@ -1392,6 +1392,43 @@ details.ym-subj>summary small{font-weight:600;color:var(--mute);font-size:12.5px
 .note-btn-clear:hover{color:var(--c-red, #ff3b30);}
 .note-editor-hint{font-size:11px;color:var(--c-ter);}
 .empty-hint{color:var(--c-sec);font-size:13.5px;margin:4px 0 10px;}
+/* 뉘앙스 노트 (카드 화면) */
+#cNuance{margin-top:10px;display:none;}
+#cNuance.on{display:block;}
+.cn-box{background:var(--c-fill);border:1px solid var(--c-sep);border-radius:12px;padding:10px 14px;box-sizing:border-box;}
+.cn-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--c-sep);}
+.cn-title{display:flex;align-items:center;gap:6px;}
+.cn-badge{font-size:11px;font-weight:600;color:var(--c-acc);background:var(--c-acc-tint);padding:2px 7px;border-radius:6px;letter-spacing:0.02em;}
+.cn-day{font-size:12px;font-weight:600;color:var(--c-label);}
+.cn-actions{display:flex;align-items:center;gap:5px;}
+.cn-act-btn{border:0;background:var(--c-card);color:var(--c-sec);font-size:11.5px;font-weight:500;padding:2px 8px;border-radius:6px;cursor:pointer;transition:all .12s ease;font-family:var(--font);border:1px solid var(--c-sep);}
+.cn-act-btn:hover{color:var(--c-label);border-color:var(--c-sec);}
+.cn-act-btn.primary{color:var(--c-acc);border-color:var(--c-acc-tint);background:var(--c-acc-tint);}
+.cn-act-btn.primary:hover{background:var(--c-acc);color:#fff;}
+.cn-body{font-size:13.5px;line-height:1.55;color:var(--c-label);}
+.cn-ul{margin:4px 0 6px;padding-left:18px;}
+.cn-li{font-size:13.5px;line-height:1.55;color:var(--c-label);margin:3px 0;}
+.cn-li.sub{font-size:13px;color:var(--c-sec);line-height:1.5;margin-left:10px;list-style-type:circle;}
+.cn-li strong{color:var(--c-label);font-weight:600;}
+.cn-p{font-size:13.5px;line-height:1.55;color:var(--c-label);margin:4px 0;}
+.cn-bq{margin:6px 0;padding:4px 10px;border-left:3px solid var(--c-acc);background:var(--c-card);font-size:13px;color:var(--c-sec);border-radius:0 6px 6px 0;}
+.cn-empty-row{display:flex;align-items:center;justify-content:space-between;padding:7px 12px;background:var(--c-fill);border:1px dashed var(--c-sep);border-radius:10px;box-sizing:border-box;}
+.cn-empty-label{font-size:12px;color:var(--c-sec);font-weight:500;}
+.cn-add-btn{border:0;background:var(--c-card);border:1px solid var(--c-sep);color:var(--c-acc);font-size:12px;font-weight:600;padding:3px 10px;border-radius:6px;cursor:pointer;transition:all .12s ease;font-family:var(--font);}
+.cn-add-btn:hover{background:var(--c-acc);color:#fff;border-color:var(--c-acc);}
+.cn-add-btn:active{opacity:.85;}
+.cn-editor{display:flex;flex-direction:column;gap:8px;}
+.cn-ta{width:100%;min-height:96px;max-height:240px;border:1px solid var(--c-sep);border-radius:8px;background:var(--c-card);color:var(--c-label);font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:13px;line-height:1.5;padding:8px 10px;box-sizing:border-box;resize:vertical;outline:none;}
+.cn-ta:focus{border-color:var(--c-acc);box-shadow:0 0 0 2px var(--c-acc-tint);}
+.cn-footer{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+.cn-btns{display:flex;align-items:center;gap:6px;}
+.cn-btn-save{height:28px;padding:0 12px;background:var(--c-acc);color:#fff;border:0;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;}
+.cn-btn-save:active{opacity:.85;}
+.cn-btn-cancel{height:28px;padding:0 10px;background:var(--c-card);border:1px solid var(--c-sep);color:var(--c-sec);border-radius:6px;font-size:12px;font-weight:500;cursor:pointer;}
+.cn-btn-cancel:hover{color:var(--c-label);}
+.cn-btn-full{background:transparent;border:0;color:var(--c-sec);font-size:11.5px;cursor:pointer;padding:4px;}
+.cn-btn-full:hover{color:var(--c-acc);text-decoration:underline;}
+.cn-hint{font-size:11px;color:var(--c-ter);}
 .c-line-wrap{position:relative;flex:0 0 auto;display:flex;align-items:center;justify-content:center;margin-bottom:8px;}
 #cLine{width:100%;height:1px;transform:scaleY(.5);background:var(--c-sep);}
 .cline-dots{position:absolute;display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:0 8px;background:var(--c-card);cursor:pointer;user-select:none;-webkit-user-select:none;transition:opacity .4s ease-out;}
@@ -2374,6 +2411,7 @@ details.gr-fold[open]>summary .s2-chev{transform:rotate(90deg);}
                     <div class="c-imgs back" id="cImgB"></div>
                     <div id="cItems"></div>
                     <div id="cNote"></div>
+                    <div id="cNuance" class="c-nuance"></div>
                     <div id="cSrc"></div>
                   </div>
                   <!-- 가림 면 = 답과 같은 격자 칸에 겹친다 → 칸 높이 = 둘 중 큰 쪽(힌트 칩이 많아도 넘치지 않는다) · 답면에선 visibility로만 치운다(높이 그대로) -->
@@ -8948,6 +8986,7 @@ function showHoedokLink(c){
   el.innerHTML = `<button type="button" class="typ-tag c-note-link" onclick="event.stopPropagation(); openNuanceNotes(${d});"><span>노트</span><svg class="s2-chev" viewBox="0 0 9 15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m1.5 1.5 6 6-6 6"/></svg></button>`;
 }
 function showCard(){
+  cardNuanceEditingDay = null;
   $('card').classList.remove('rev');
   /* 🔴 오늘 정리된 카드는 어떤 경로로 큐에 남아 있든 화면에 안 띄운다 — 규칙의 마지막 관문.
      큐 조립 때(playSess·buildQueue)만 거르면 샌다: 세션 순서·설정을 바꾸면 저장 큐가
@@ -9072,7 +9111,7 @@ function fillBack(c){   // 앞면에서 답면을 미리 깐다 — 보이는 �
     : isDiag ? '그림 답 — 회독본과 대조해 스스로 채점'
     : TERM_TYPES.has(c.typ)||((c.back||'').length<=14&&!String(c.back||'').includes('·'))
     ? '용어 답 — 표기까지 정확히' : '서술 답 — 요지 재현이면 정답';
-  showHoedokLink(c); renderCardTags(c);
+  showHoedokLink(c); renderCardTags(c); renderCardNuance(c);
 }
 function scopeHtml(c){   // 경로 = 과목 › 갈래 › 주제 (과목 번호 접두는 뗀다 · 아이폰은 과목 › 마지막 갈래 둘만 — CSS)
   const parts=String(scopeOf(c)||'').split(/\s+·\s+/).filter(Boolean);
@@ -9113,6 +9152,7 @@ function reveal(){
   renderTable(c,true);
   showDiag(c,true);
   showHoedokLink(c);
+  renderCardNuance(c);
   $('cHint').textContent = isTbl ? '표 답 — 위 표를 채워 보고 대조해요'
     : c.typ==='도식' ? '그림 답 — 회독본과 대조해 스스로 채점'
     : TERM_TYPES.has(c.typ)||((c.back||'').length<=14&&!c.back.includes('·'))
@@ -9711,7 +9751,7 @@ let lastSwipeAt=0;
 /* PC에서 카드 문면이 선택 가능해졌다(F3, 2026-08-24). CSS와 **같은 조건**으로 켜고 끈다 —
    여기가 어긋나면 터치 기기에서 없는 선택을 있다고 치고 탭·스와이프를 막아 버린다. */
 const SEL_OK = !!(window.matchMedia && window.matchMedia('(hover:hover) and (pointer:fine)').matches);
-const SEL_ZONE='#cScope,#cFront,#cBack,#cItems,#cNote,#cSrc';
+const SEL_ZONE='#cScope,#cFront,#cBack,#cItems,#cNote,#cSrc,#cNuance';
 function selecting(){   // 지금 글자가 실제로 잡혀 있나 = 방금 동작이 「선택」이었나
   if(!SEL_OK)return false;
   const s=window.getSelection&&window.getSelection();
@@ -15181,6 +15221,8 @@ async function saveNuanceDay(dNum){
 
   nuanceActiveEditDay = null;
   renderNuanceBody(dNum);
+  const curCard = (typeof cur === 'function') ? cur() : null;
+  if(curCard && cardDay(curCard) === dNum) renderCardNuance(curCard);
 
   const dStr = String(dNum).padStart(2, '0');
   if(cfg && cfg.token){
@@ -15231,6 +15273,213 @@ window.openNuanceDayEditor = openNuanceDayEditor;
 window.cancelNuanceDay = cancelNuanceDay;
 window.clearNuanceDay = clearNuanceDay;
 window.saveNuanceDay = saveNuanceDay;
+
+/* ═══════════════ 카드 화면 뉘앙스 노트 ═══════════════ */
+let cardNuanceEditingDay = null;
+
+function renderCardNuanceHtml(rawContent) {
+  if (!rawContent || !rawContent.trim()) return '';
+  const lines = rawContent.split('\n');
+  let html = [];
+  let inList = false;
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    const trimmed = line.trim();
+    if (!trimmed) {
+      if (inList) { html.push('</ul>'); inList = false; }
+      continue;
+    }
+    if (/^\s*[-*]\s+/.test(line)) {
+      if (!inList) { html.push('<ul class="cn-ul">'); inList = true; }
+      const indent = line.search(/\S/);
+      const content = line.replace(/^\s*[-*]\s+/, '');
+      const cls = indent >= 2 ? 'cn-li sub' : 'cn-li';
+      html.push('<li class="' + cls + '">' + parseInlineMd(content) + '</li>');
+      continue;
+    }
+    if (inList) { html.push('</ul>'); inList = false; }
+    if (line.startsWith('> ')) {
+      html.push('<blockquote class="cn-bq">' + parseInlineMd(line.slice(2)) + '</blockquote>');
+    } else {
+      html.push('<p class="cn-p">' + parseInlineMd(line) + '</p>');
+    }
+  }
+  if (inList) html.push('</ul>');
+  return html.join('');
+}
+
+function renderCardNuance(c){
+  const el = $('cNuance');
+  if(!el) return;
+  if(!c){
+    el.style.display = 'none';
+    el.classList.remove('on');
+    return;
+  }
+  const d = cardDay(c);
+  if(!d){
+    el.style.display = 'none';
+    el.classList.remove('on');
+    return;
+  }
+  el.style.display = 'block';
+  el.classList.add('on');
+
+  if(cardNuanceEditingDay === d){
+    return;
+  }
+
+  const dStr = String(d).padStart(2, '0');
+
+  if(!nuanceNotesCache){
+    el.innerHTML = `<div class="cn-empty-row"><span class="cn-empty-label">Day ${dStr} 뉘앙스 노트 불러오는 중...</span></div>`;
+    fetchNuanceNotes().then(md => {
+      const curC = (typeof cur === 'function') ? cur() : null;
+      if(curC && cardDay(curC) === d && cardNuanceEditingDay !== d){
+        renderCardNuance(curC);
+      }
+    });
+    return;
+  }
+
+  const content = getDayContentFromMd(nuanceNotesCache, d);
+  if(content){
+    el.innerHTML = `
+      <div class="cn-box">
+        <div class="cn-header">
+          <div class="cn-title">
+            <span class="cn-badge">뉘앙스</span>
+            <span class="cn-day">Day ${dStr}</span>
+          </div>
+          <div class="cn-actions">
+            <button type="button" class="cn-act-btn primary" onclick="event.stopPropagation(); openCardNuanceEditor(${d}, true);">+ 추가</button>
+            <button type="button" class="cn-act-btn" onclick="event.stopPropagation(); openCardNuanceEditor(${d}, false);">수정</button>
+            <button type="button" class="cn-act-btn" onclick="event.stopPropagation(); openNuanceNotes(${d});">전체 보기</button>
+          </div>
+        </div>
+        <div class="cn-body">${renderCardNuanceHtml(content)}</div>
+      </div>
+    `;
+  } else {
+    el.innerHTML = `
+      <div class="cn-empty-row">
+        <span class="cn-empty-label">Day ${dStr} 뉘앙스 노트</span>
+        <button type="button" class="cn-add-btn" onclick="event.stopPropagation(); openCardNuanceEditor(${d}, true);">+ 뉘앙스 노트 추가</button>
+      </div>
+    `;
+  }
+}
+
+function openCardNuanceEditor(d, isAppend){
+  const c = (typeof cur === 'function') ? cur() : null;
+  if(!c || !d) return;
+  cardNuanceEditingDay = d;
+  renderCardNuanceEditor(c, d, isAppend);
+}
+
+function cancelCardNuance(d){
+  cardNuanceEditingDay = null;
+  const c = (typeof cur === 'function') ? cur() : null;
+  if(c) renderCardNuance(c);
+}
+
+function renderCardNuanceEditor(c, d, isAppend){
+  const el = $('cNuance');
+  if(!el) return;
+  const dStr = String(d).padStart(2, '0');
+  let currentContent = nuanceNotesCache ? getDayContentFromMd(nuanceNotesCache, d) : '';
+  let prefill = currentContent;
+
+  const targetSentence = (c.back || '').trim();
+  const sentenceHead = `- **${targetSentence}**`;
+  if(isAppend){
+    if(!prefill){
+      prefill = sentenceHead + '\n  - ';
+    } else if(targetSentence && !prefill.includes(targetSentence)){
+      prefill = prefill.trim() + '\n\n' + sentenceHead + '\n  - ';
+    }
+  }
+
+  el.innerHTML = `
+    <div class="cn-box is-editing">
+      <div class="cn-header">
+        <div class="cn-title">
+          <span class="cn-badge">뉘앙스 편집</span>
+          <span class="cn-day">Day ${dStr}</span>
+        </div>
+        <div class="cn-actions">
+          <span class="cn-hint">Ctrl+Enter로 저장</span>
+        </div>
+      </div>
+      <div class="cn-editor">
+        <textarea id="cnEditTa" class="cn-ta" placeholder="${esc(sentenceHead)}&#10;  - 뉘앙스 설명">${esc(prefill)}</textarea>
+        <div class="cn-footer">
+          <div class="cn-btns">
+            <button type="button" class="cn-btn-save" onclick="event.stopPropagation(); saveCardNuance(${d});">저장</button>
+            <button type="button" class="cn-btn-cancel" onclick="event.stopPropagation(); cancelCardNuance(${d});">취소</button>
+          </div>
+          <button type="button" class="cn-btn-full" onclick="event.stopPropagation(); openNuanceNotes(${d}, true);">전체 창에서 편집</button>
+        </div>
+      </div>
+    </div>
+  `;
+
+  setTimeout(()=>{
+    const ta = $('cnEditTa');
+    if(ta){
+      ta.focus();
+      ta.selectionStart = ta.selectionEnd = ta.value.length;
+      ta.onkeydown = (e) => {
+        e.stopPropagation();
+        if((e.ctrlKey || e.metaKey) && e.key === 'Enter'){
+          e.preventDefault();
+          saveCardNuance(d);
+        } else if(e.key === 'Escape'){
+          e.preventDefault();
+          cancelCardNuance(d);
+        }
+      };
+    }
+  }, 40);
+}
+
+async function saveCardNuance(d){
+  const ta = $('cnEditTa');
+  const val = ta ? ta.value.trim() : '';
+  const currentMd = await fetchNuanceNotes();
+  if(!currentMd) return;
+  const updatedMd = setDayContentInMd(currentMd, d, val);
+  nuanceNotesCache = updatedMd;
+  lsSet('cards_nuance_notes_v1', updatedMd);
+  lsSet('cards_nuance_notes_at', Date.now());
+  lsSet('cards_nuance_notes_dirty', '1');
+
+  cardNuanceEditingDay = null;
+  const c = (typeof cur === 'function') ? cur() : null;
+  if(c) renderCardNuance(c);
+
+  const dStr = String(d).padStart(2, '0');
+  if(cfg && cfg.token){
+    toast(`Day ${dStr} 노트를 저장하는 중...`);
+    ghPutNuanceNotes(updatedMd).then(ok => {
+      if(ok) toast(`Day ${dStr} 노트를 저장하고 GitHub에 반영했어요`);
+      else toast(`Day ${dStr} 노트를 기기에 저장했어요 (GitHub 동기화 실패)`);
+    });
+  } else {
+    toast(`Day ${dStr} 노트를 기기에 저장했어요`);
+  }
+}
+
+window.openCardNuanceEditor = openCardNuanceEditor;
+window.cancelCardNuance = cancelCardNuance;
+window.saveCardNuance = saveCardNuance;
+window.renderCardNuance = renderCardNuance;
+
+fetchNuanceNotes().then(() => {
+  const c = (typeof cur === 'function') ? cur() : null;
+  if(c) renderCardNuance(c);
+});
 /* 🔴 **브라우저·마우스 뒤로가기로도 앱 안에서 뒤로 간다** (동하 09-01 실기:
    「PC에서 뒤로가기로 세션 → 홈 화면 전환이 안 되고(마우스 뒤로가기 버튼)」).
    앱은 화면 전환에 history를 안 써서, 마우스 4번 버튼은 **앱을 벗어나는 쪽**으로만 갔다.
