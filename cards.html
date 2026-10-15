@@ -1999,6 +1999,16 @@ input,select{border-radius:10px;}
 .cum-hover-tip .cht-dot-line{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--c-acc);margin-right:4px;}
 .cum-hover-tip .cht-dot-bar{display:inline-block;width:3.5px;height:7.5px;border-radius:1px;background:var(--c-acc);opacity:0.75;margin-right:5px;}
 
+/* 일반 모드 60초 정지 시 동기부여 플로팅 배너 */
+.idle-motive-banner{position:fixed;left:50%;bottom:calc(8px + var(--grade-h) + 14px + env(safe-area-inset-bottom));transform:translateX(-50%) translateY(16px);opacity:0;pointer-events:none;z-index:80;display:none;align-items:center;gap:8px;padding:8px 16px;border-radius:999px;background:var(--c-card);border:1px solid var(--c-sep);box-shadow:0 8px 24px rgba(0,0,0,0.12),0 2px 6px rgba(0,0,0,0.06);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);font-family:var(--font);font-size:13.5px;font-weight:600;color:var(--c-label);cursor:pointer;transition:opacity .25s ease,transform .25s cubic-bezier(0.16,1,0.3,1);white-space:nowrap;user-select:none;-webkit-user-select:none;}
+.idle-motive-banner.show{transform:translateX(-50%) translateY(0);opacity:1;pointer-events:auto;}
+.idle-motive-banner:active{transform:translateX(-50%) translateY(0) scale(0.98);}
+@media (min-width:1120px) and (orientation:landscape){body:has(#main.railed) .idle-motive-banner{left:calc((100% - var(--insp-w) - var(--sp-m)) / 2);}}
+@media (max-width:500px){.idle-motive-banner{bottom:calc(8px + var(--grade-h) + 10px + 48px + 14px + env(safe-area-inset-bottom));max-width:calc(100vw - 32px);font-size:13px;padding:7px 14px;}}
+.idle-motive-banner .imb-dot{width:7px;height:7px;border-radius:50%;background:var(--c-acc);flex:0 0 auto;}
+.idle-motive-banner .imb-text b{color:var(--c-acc);font-weight:700;}
+.idle-motive-banner .imb-sub{font-size:11px;font-weight:500;color:var(--c-sec);margin-left:4px;}
+
 
 /* ═══════════════ 디자인 이식 E(2) — 세션 화면 (캔버스 「세션」 판) ═══════════════ */
 .ss-sub{font-size:15px;color:var(--c-sec);line-height:20px;margin:-8px 0 16px;}
@@ -2449,7 +2459,7 @@ details.gr-fold[open]>summary .s2-chev{transform:rotate(90deg);}
         <!-- 🔴 디자인 이식 09-24: 카드 = 위아래 반반. 답면 내용은 **앞면에서도 미리 채워 visibility:hidden**으로 깔고 가림 면으로 덮는다 →
              앞면↔답면에서 질문·선·버튼이 1px도 안 움직인다(디자인_언어 §1-1 · §7.1). 가림은 visibility라 글자가 선택·낭독되지 않는다. -->
         <div id="card">
-          <div id="cHead"><div class="c-head-top"><div id="cScope"></div><div id="phaseLine"></div></div><div class="c-head-sub" id="cHeadSub"><span id="lastActionChip" class="last-action-chip" style="display:none;" title="직전 채점 (탭하면 되돌리기)"></span><span id="solveStudyChip" class="sc-badge"></span><div id="sprintControls" class="sprint-controls" onclick="event.stopPropagation()"><button type="button" class="sprint-chip" id="btnSprint" onclick="toggleSprintMenu(event)"><span>스프린트</span></button><div id="sprintMenu" class="sprint-menu" style="display:none;" onclick="event.stopPropagation()"><button type="button" class="sprint-opt" onclick="startSprint(180, event)">3분 스프린트</button><button type="button" class="sprint-opt" onclick="startSprint(300, event)">5분 스프린트</button></div></div><div class="c-upper-act"><button type="button" class="c-copy-btn c-gpt-btn" id="btnGptFront" title="ChatGPT 앱 열기" aria-label="ChatGPT 앱 열기"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1683a.071.071 0 0 1 .038.052v5.5826a4.5045 4.5045 0 0 1-4.4945 4.4947zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4998 4.4998 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1683a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.8956zm16.0993 3.8558L12.5973 8.3829l2.02-1.1636a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.402-.6862zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L8.909 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4998 4.4998 0 0 1 6.6802 4.6604v.0001zm-4.4664 4.3713L10.1504 9.7348 12.0142 8.66l5.834 3.3685-1.8638 1.0709zm-2.006 1.1541L12 15.3401l-5.834-3.3685 1.8638-1.0709 3.834 2.2132v2.1378z"/></svg></button><button type="button" class="c-copy-btn" id="btnCopyFront" title="카드 내용 복사" aria-label="카드 내용 복사"><svg class="ic-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><svg class="ic-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:none;"><path d="M20 6 9 17l-5-5"/></svg></button></div></div></div>
+          <div id="cHead"><div class="c-head-top"><div id="cScope"></div><div id="phaseLine"></div></div><div class="c-head-sub" id="cHeadSub"><span id="lastActionChip" class="last-action-chip" style="display:none;" title="직전 채점 (탭하면 되돌리기)"></span><span id="solveStudyChip" class="sc-badge"></span><div id="sprintControls" class="sprint-controls" onclick="event.stopPropagation()"><button type="button" class="sprint-chip" id="btnSprint" onclick="toggleSprintMenu(event)"><span>스프린트</span></button><div id="sprintMenu" class="sprint-menu" style="display:none;" onclick="event.stopPropagation()"><button type="button" class="sprint-opt" onclick="startSprint(60, event)">1분 스프린트</button><button type="button" class="sprint-opt" onclick="startSprint(180, event)">3분 스프린트</button></div></div><div class="c-upper-act"><button type="button" class="c-copy-btn c-gpt-btn" id="btnGptFront" title="ChatGPT 앱 열기" aria-label="ChatGPT 앱 열기"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1683a.071.071 0 0 1 .038.052v5.5826a4.5045 4.5045 0 0 1-4.4945 4.4947zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4998 4.4998 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1683a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.8956zm16.0993 3.8558L12.5973 8.3829l2.02-1.1636a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.402-.6862zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L8.909 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4998 4.4998 0 0 1 6.6802 4.6604v.0001zm-4.4664 4.3713L10.1504 9.7348 12.0142 8.66l5.834 3.3685-1.8638 1.0709zm-2.006 1.1541L12 15.3401l-5.834-3.3685 1.8638-1.0709 3.834 2.2132v2.1378z"/></svg></button><button type="button" class="c-copy-btn" id="btnCopyFront" title="카드 내용 복사" aria-label="카드 내용 복사"><svg class="ic-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><svg class="ic-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:none;"><path d="M20 6 9 17l-5-5"/></svg></button></div></div></div>
           <div id="sprintGaugeWrap" class="sprint-gauge-wrap" style="display:none;"><div id="sprintGauge" class="sprint-gauge"></div></div>
           <div id="cardScroll"><div id="cSplit">
             <div id="cUpper">
@@ -2483,6 +2493,11 @@ details.gr-fold[open]>summary .s2-chev{transform:rotate(90deg);}
             </div>
           </div></div>
         </div>
+      </div>
+      <div id="idleMotiveBanner" class="idle-motive-banner" style="display:none;" onclick="dismissIdleMotiveBanner(event)">
+        <span class="imb-dot"></span>
+        <span class="imb-text" id="imbText"></span>
+        <span class="imb-sub">탭하여 닫기</span>
       </div>
       <div id="ohBar"><button class="tb-btn" id="ohPause" aria-label="잠시 멈춤"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4.5" width="4" height="15" rx="1.2"/><rect x="14" y="4.5" width="4" height="15" rx="1.2"/></svg></button><div id="ohWhy"></div><button class="tb-btn" id="ohUndo" aria-label="되돌리기" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg></button><button class="tb-btn" id="ohMore" aria-label="피드백 · 이 카드"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5.5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="18.5" cy="12" r="1.8"/></svg></button></div>
       <div id="gradeBar">
@@ -9078,6 +9093,7 @@ function showHoedokLink(c){
 }
 function showCard(){
   if(typeof cancelSprintCardTimer === 'function') cancelSprintCardTimer();
+  if(typeof cancelIdleMotivationalTimer === 'function') cancelIdleMotivationalTimer();
   cardNuanceEditingDay = null;
   $('card').classList.remove('rev');
   /* 🔴 오늘 정리된 카드는 어떤 경로로 큐에 남아 있든 화면에 안 띄운다 — 규칙의 마지막 관문.
@@ -9135,7 +9151,11 @@ function showCard(){
   renderLineDots();
   $('cardScroll').scrollTop=0;
   saveResume();                  // 회독본 갔다 돌아올 자리 (앞면 상태)
-  if(typeof startSprintCardTimer === 'function' && typeof sprintActive !== 'undefined' && sprintActive) startSprintCardTimer(c);
+  if(typeof startSprintCardTimer === 'function' && typeof sprintActive !== 'undefined' && sprintActive){
+    startSprintCardTimer(c);
+  } else if(typeof startIdleMotivationalTimer === 'function'){
+    startIdleMotivationalTimer();
+  }
 }
 /* 🔴 **공개 직후의 채점은 버린다** (동하 09-11 「키보드 실수로 연타하는 거 막는 장치 있어?」).
    있던 장치 둘 — `e.repeat`(눌러 두기)와 「답을 봐야 채점」(숫자 연타)은 **스페이스 두 번 빠르게**를 못 막았다:
@@ -9218,6 +9238,7 @@ function scopeHtml(c){   // 경로 = 과목 › 갈래 › 주제 (과목 번호
 }
 function reveal(){
   if(typeof stopSprintCardTimer === 'function') stopSprintCardTimer();
+  if(typeof resetIdleMotivationalTimer === 'function') resetIdleMotivationalTimer();
   const c=cur(); if(!c||revealed)return;
   revealed=true; revealAt=Date.now();
   /* 힌트 칩은 가림 면 안이라 답면에선 가림 면과 함께 visibility로 숨는다 — 여기서 치우면(display) 칸 높이가 바뀌어 선이 움직였다(09-24 실측 5px) */
@@ -9416,6 +9437,7 @@ function intervalsPreview(c){ // 채점 버튼 위 다음 간격 미리보기
 }
 function rate(num){
   if(typeof cancelSprintCardTimer === 'function') cancelSprintCardTimer();
+  if(typeof cancelIdleMotivationalTimer === 'function') cancelIdleMotivationalTimer();
   const c=cur(); if(!c||!revealed)return;
   if(Date.now()-revealAt < RATE_MIN_MS) return;   // 공개 직후 연타 — 위 주석
   const ts=Math.round(Date.now()/1000), now=new Date(ts*1000);
@@ -10096,6 +10118,7 @@ function go(id){
   document.getElementById('main').classList.toggle('solving', id==='scrSolve');   // 풀이 화면 밖에서는 윗줄(⌂) 숨김 — 하위 화면은 ‹ 하나(UI 리뷰 🟠 · 홈의 ⌂는 아무 일도 안 했다)
   if(id!=='scrSolve'){
     if(typeof cancelSprintCardTimer === 'function') cancelSprintCardTimer();
+    if(typeof cancelIdleMotivationalTimer === 'function') cancelIdleMotivationalTimer();
     resumeSession(); syncSessQueue();
     if(pendingRefresh){ pendingRefresh=false; setTimeout(refreshRemote,0); } }
   /* 🔴 **홈으로 나가면 복귀 지점을 버린다** (전층 감사 F4-8 · 2026-09-06).
@@ -12904,6 +12927,7 @@ function scrollBox(){
   return scr ? (scr.querySelector('.home-wrap, .sub-body') || scr) : null;
 }
 document.addEventListener('keydown',e=>{
+  if(typeof resetIdleMotivationalTimer === 'function' && typeof $ === 'function' && $('scrSolve') && $('scrSolve').classList.contains('on')) resetIdleMotivationalTimer();
   /* 🔴 조합키는 원래 **통째로** 무시한다 — 브라우저 단축키(Cmd+R·Cmd+F…)를 가로채지 않으려고.
      딱 하나 연다: **Ctrl+1~4 = 플래그 사유 칩 넷** (동하 09-09 · 게임패드 R을 Ctrl로 두고 쥔다).
      채점 1~4와 손가락 자리가 같고 Ctrl만 얹는 꼴이라 외울 것이 없다. 그 밖의 조합은 여전히 버린다. */
@@ -16122,8 +16146,8 @@ function toggleSprintMenu(e){
     menu.innerHTML = `<button type="button" class="sprint-opt" onclick="stopSprint(true, event)">스프린트 조기 종료</button>`;
   } else {
     menu.innerHTML = `
+      <button type="button" class="sprint-opt" onclick="startSprint(60, event)">1분 스프린트</button>
       <button type="button" class="sprint-opt" onclick="startSprint(180, event)">3분 스프린트</button>
-      <button type="button" class="sprint-opt" onclick="startSprint(300, event)">5분 스프린트</button>
     `;
   }
   menu.style.display = menu.style.display === 'none' ? 'flex' : 'none';
@@ -16135,6 +16159,7 @@ function startSprint(durationSec, e){
   if(menu) menu.style.display = 'none';
   closeSprintSummary();
   if(sprintRestInterval){ clearInterval(sprintRestInterval); sprintRestInterval = null; }
+  if(typeof cancelIdleMotivationalTimer === 'function') cancelIdleMotivationalTimer();
 
   // 이미 정답이 열려있었다면 앞면으로 복귀시켜 깨끗하게 시작
   if(typeof revealed !== 'undefined' && revealed && typeof unreveal === 'function'){
@@ -16198,6 +16223,8 @@ function stopSprint(showSummary = false, e){
   if(menu) menu.style.display = 'none';
   if(showSummary){
     finishSprint();
+  } else if(typeof startIdleMotivationalTimer === 'function'){
+    startIdleMotivationalTimer();
   }
 }
 
@@ -16223,7 +16250,7 @@ function openSprintSummary(){
   const elapsedSec = Math.max(1, (Date.now() - (sprintStats.startTime || Date.now())) / 1000);
   const cards = sprintStats.cards || 0;
   const cpm = ((cards / elapsedSec) * 60).toFixed(1);
-  const minText = Math.max(1, Math.round((sprintStats.targetSec || 180) / 60));
+  const minText = Math.max(1, Math.round((sprintStats.targetSec || 60) / 60));
 
   const titleEl = document.getElementById('sprintSummaryTitle');
   if(titleEl) titleEl.textContent = `${minText}분 몰입 완료`;
@@ -16255,10 +16282,11 @@ function closeSprintSummary(){
     clearInterval(sprintRestInterval);
     sprintRestInterval = null;
   }
+  if(typeof startIdleMotivationalTimer === 'function') startIdleMotivationalTimer();
 }
 
 function restartSprint(){
-  const dur = (sprintStats && sprintStats.targetSec) ? sprintStats.targetSec : 180;
+  const dur = (sprintStats && sprintStats.targetSec) ? sprintStats.targetSec : 60;
   closeSprintSummary();
   startSprint(dur);
 }
@@ -16296,6 +16324,101 @@ document.addEventListener('click', (e) => {
   }
 });
 
+/* ═══════════════ 일반 학습 모드 60초 정지 시 동기부여 배너 ═══════════════ */
+let idleMotiveTimer = null;
+let idleMotiveShown = false;
+
+function cancelIdleMotivationalTimer(){
+  if(idleMotiveTimer){
+    clearTimeout(idleMotiveTimer);
+    idleMotiveTimer = null;
+  }
+  hideIdleMotivationalBanner();
+}
+
+function resetIdleMotivationalTimer(){
+  if(idleMotiveTimer){
+    clearTimeout(idleMotiveTimer);
+    idleMotiveTimer = null;
+  }
+  if(idleMotiveShown){
+    hideIdleMotivationalBanner();
+  }
+  startIdleMotivationalTimer();
+}
+
+function startIdleMotivationalTimer(){
+  if(typeof sprintActive !== 'undefined' && sprintActive) return;
+  const scr = document.getElementById('scrSolve');
+  if(!scr || !scr.classList.contains('on')) return;
+  const c = (typeof cur === 'function') ? cur() : null;
+  if(!c) return;
+
+  if(idleMotiveTimer) clearTimeout(idleMotiveTimer);
+  idleMotiveTimer = setTimeout(() => {
+    showIdleMotivationalBanner();
+  }, 60000);
+}
+
+function showIdleMotivationalBanner(){
+  if(typeof sprintActive !== 'undefined' && sprintActive) return;
+  const scr = document.getElementById('scrSolve');
+  if(!scr || !scr.classList.contains('on')) return;
+  const c = (typeof cur === 'function') ? cur() : null;
+  if(!c) return;
+
+  const count = (typeof sess !== 'undefined' && sess && sess.r)
+    ? (sess.r[1] + sess.r[2] + sess.r[3] + sess.r[4] + (sess.re || 0))
+    : 0;
+  const nextGoal = (Math.floor(count / 10) + 1) * 10;
+  const diff = nextGoal - count;
+
+  const banner = document.getElementById('idleMotiveBanner');
+  const textEl = document.getElementById('imbText');
+  if(!banner || !textEl) return;
+
+  if(count === 0){
+    textEl.innerHTML = `<b>10개</b>만 풀고 이번 세션 가볍게 완료해볼까요?`;
+  } else {
+    textEl.innerHTML = `<b>${diff}개</b>만 더 풀면 이번에 <b>${nextGoal}개</b> 달성!`;
+  }
+
+  banner.style.display = 'flex';
+  requestAnimationFrame(() => {
+    banner.classList.add('show');
+  });
+  idleMotiveShown = true;
+}
+
+function hideIdleMotivationalBanner(){
+  const banner = document.getElementById('idleMotiveBanner');
+  if(!banner) return;
+  banner.classList.remove('show');
+  setTimeout(() => {
+    if(!banner.classList.contains('show')){
+      banner.style.display = 'none';
+    }
+  }, 260);
+  idleMotiveShown = false;
+}
+
+function dismissIdleMotiveBanner(e){
+  if(e){
+    e.stopPropagation();
+    e.preventDefault();
+  }
+  hideIdleMotivationalBanner();
+  startIdleMotivationalTimer();
+}
+
+document.addEventListener('pointerdown', (e) => {
+  const scr = document.getElementById('scrSolve');
+  if(!scr || !scr.classList.contains('on')) return;
+  const banner = document.getElementById('idleMotiveBanner');
+  if(banner && banner.contains(e.target)) return;
+  if(typeof resetIdleMotivationalTimer === 'function') resetIdleMotivationalTimer();
+}, { passive: true });
+
 window.toggleSprintMenu = toggleSprintMenu;
 window.startSprint = startSprint;
 window.stopSprint = stopSprint;
@@ -16306,6 +16429,12 @@ window.cancelSprintCardTimer = cancelSprintCardTimer;
 window.stopSprintCardTimer = stopSprintCardTimer;
 window.startSprintCardTimer = startSprintCardTimer;
 window.recordSprintRating = recordSprintRating;
+window.cancelIdleMotivationalTimer = cancelIdleMotivationalTimer;
+window.resetIdleMotivationalTimer = resetIdleMotivationalTimer;
+window.startIdleMotivationalTimer = startIdleMotivationalTimer;
+window.showIdleMotivationalBanner = showIdleMotivationalBanner;
+window.hideIdleMotivationalBanner = hideIdleMotivationalBanner;
+window.dismissIdleMotiveBanner = dismissIdleMotiveBanner;
 /* 🔴 **브라우저·마우스 뒤로가기로도 앱 안에서 뒤로 간다** (동하 09-01 실기:
    「PC에서 뒤로가기로 세션 → 홈 화면 전환이 안 되고(마우스 뒤로가기 버튼)」).
    앱은 화면 전환에 history를 안 써서, 마우스 4번 버튼은 **앱을 벗어나는 쪽**으로만 갔다.
