@@ -1372,6 +1372,26 @@ details.ym-subj>summary small{font-weight:600;color:var(--mute);font-size:12.5px
 .note-code{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:12.5px;background:var(--c-fill);padding:2px 6px;border-radius:5px;color:var(--c-orange);}
 .note-bq{margin:8px 0;padding:6px 12px;border-left:3px solid var(--c-acc);background:var(--c-fill);font-size:13.5px;color:var(--c-sec);border-radius:0 8px 8px 0;}
 .note-target-flash{background:var(--c-acc-tint)!important;transition:background 1.5s ease;}
+.note-day-block{margin-bottom:20px;}
+.note-day-head{display:flex;align-items:center;justify-content:space-between;margin:20px 0 6px;padding-bottom:4px;border-bottom:1px solid var(--c-sep);}
+.note-day-head .note-h3{margin:0;padding:2px 4px;font-size:15px;font-weight:600;color:var(--c-acc);}
+.note-day-btn{border:0;background:var(--c-fill);color:var(--c-sec);font-size:11.5px;font-weight:500;padding:2px 8px;border-radius:6px;cursor:pointer;transition:all .12s ease;font-family:var(--font);}
+.note-day-btn:hover{background:var(--c-fill-hi, rgba(120,120,128,0.22));color:var(--c-label);}
+.note-inline-add-btn{border:0;background:var(--c-acc-tint);color:var(--c-acc);font-size:11.5px;font-weight:500;padding:2px 8px;border-radius:6px;cursor:pointer;margin-left:6px;transition:all .12s ease;font-family:var(--font);}
+.note-inline-add-btn:hover{background:var(--c-acc);color:#fff;}
+.note-editor-card{margin:8px 0 14px;background:var(--c-card);border:1px solid var(--c-sep);border-radius:10px;padding:10px;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
+.note-editor-ta{width:100%;min-height:110px;border:1px solid var(--c-sep);border-radius:6px;background:var(--c-fill);color:var(--c-label);font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:13px;line-height:1.5;padding:8px 10px;box-sizing:border-box;resize:vertical;outline:none;}
+.note-editor-ta:focus{border-color:var(--c-acc);box-shadow:0 0 0 2px var(--c-acc-tint);}
+.note-editor-footer{display:flex;align-items:center;justify-content:space-between;margin-top:8px;flex-wrap:wrap;gap:8px;}
+.note-editor-btns{display:flex;align-items:center;gap:6px;}
+.note-btn-save{height:28px;padding:0 12px;background:var(--c-acc);color:#fff;border:0;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;}
+.note-btn-save:active{opacity:.85;}
+.note-btn-cancel{height:28px;padding:0 10px;background:var(--c-fill);color:var(--c-sec);border:0;border-radius:6px;font-size:12px;font-weight:500;cursor:pointer;}
+.note-btn-cancel:hover{color:var(--c-label);}
+.note-btn-clear{height:28px;padding:0 8px;background:transparent;color:var(--c-ter);border:0;font-size:11.5px;cursor:pointer;}
+.note-btn-clear:hover{color:var(--c-red, #ff3b30);}
+.note-editor-hint{font-size:11px;color:var(--c-ter);}
+.empty-hint{color:var(--c-sec);font-size:13.5px;margin:4px 0 10px;}
 .c-line-wrap{position:relative;flex:0 0 auto;display:flex;align-items:center;justify-content:center;margin-bottom:8px;}
 #cLine{width:100%;height:1px;transform:scaleY(.5);background:var(--c-sep);}
 .cline-dots{position:absolute;display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:0 8px;background:var(--c-card);cursor:pointer;user-select:none;-webkit-user-select:none;transition:opacity .4s ease-out;}
@@ -14853,15 +14873,29 @@ function hdSaveSpot(){ if(!HD_BROWSE) return; try{ const w=$('hdFrame').contentW
   const f=hdFileOf(w.location.pathname); if(f && f!=='index.html'){ const m=hdSpots(); m[f]=v; lsSet(K_HD_SPOTS, JSON.stringify(m)); } }catch(e){} }   // 과목마다 따로(09-29 · 과목을 바꿔도 각자 보던 자리로)
 function hdLastSpot(){ try{ const j=JSON.parse(lsGet(K_HD_LAST)||'null'); return (j&&j.p&&/\/hoedok\//.test(j.p))?j:null; }catch(e){ return null; } }
 let nuanceNotesCache = null;
+let nuanceActiveEditDay = null;
 
 async function fetchNuanceNotes(){
   if(nuanceNotesCache) return nuanceNotesCache;
+  const local = lsGet('cards_nuance_notes_v1');
+  const dirty = lsGet('cards_nuance_notes_dirty') === '1';
   try {
     const r = await fetch('nuance-notes.md?t=' + Date.now());
     if(!r.ok) throw 0;
-    nuanceNotesCache = await r.text();
+    const remote = await r.text();
+    if(dirty && local) {
+      nuanceNotesCache = local;
+    } else {
+      nuanceNotesCache = remote;
+      lsSet('cards_nuance_notes_v1', remote);
+      lsSet('cards_nuance_notes_dirty', '0');
+    }
     return nuanceNotesCache;
   } catch(e) {
+    if(local) {
+      nuanceNotesCache = local;
+      return nuanceNotesCache;
+    }
     console.error('Failed to load nuance-notes.md', e);
     return null;
   }
@@ -14875,19 +14909,54 @@ function parseInlineMd(s) {
     .replace(/\*([^*]+)\*/g, '<em>$1</em>');
 }
 
-function renderNuanceMarkdown(md) {
+function getDayContentFromMd(md, dayNum){
+  if(!md) return '';
+  const dStr = String(dayNum).padStart(2, '0');
+  const pattern = new RegExp('(?:<div id="day-' + dStr + '"></div>\\s*\\n)?###\\s+Day\\s+' + dStr + '\\s*\\n([\\s\\S]*?)(?=(?:<div id="day-\\d+"></div>\\s*\\n)?###\\s+Day|##\\s+Unit|\\Z)', 'i');
+  const m = md.match(pattern);
+  if(!m) return '';
+  let c = m[1].trim();
+  if(c === '*등록된 뉘앙스 노트가 없습니다.*') return '';
+  return c;
+}
+
+function setDayContentInMd(md, dayNum, newContent){
+  const dStr = String(dayNum).padStart(2, '0');
+  const headerPattern = new RegExp('((?:<div id="day-' + dStr + '"></div>\\s*\\n)?###\\s+Day\\s+' + dStr + '\\s*\\n)', 'i');
+  const headerMatch = md.match(headerPattern);
+  if(!headerMatch) return md;
+
+  const headerEnd = headerMatch.index + headerMatch[0].length;
+  const rest = md.slice(headerEnd);
+  const nextHeaderMatch = rest.match(/(?:<div id="day-\d+"><\/div>\s*\n)?###\s+Day|##\s+Unit|\Z/i);
+  const sectionEnd = headerEnd + (nextHeaderMatch ? nextHeaderMatch.index : rest.length);
+
+  const clean = (newContent || '').trim();
+  const sectionBody = clean ? clean : '*등록된 뉘앙스 노트가 없습니다.*';
+
+  return md.slice(0, headerEnd) + sectionBody + '\n\n' + md.slice(sectionEnd).replace(/^\n+/, '');
+}
+
+function renderNuanceMarkdown(md, activeEditDay) {
   if (!md) return '<div class="empty-note" style="padding:40px 0;">노트를 불러올 수 없습니다.</div>';
   const lines = md.split('\n');
   let html = [];
   let inList = false;
+  let currentDay = null;
 
-  for (let line of lines) {
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
     const trimmed = line.trim();
     if (!trimmed) {
       if (inList) { html.push('</ul>'); inList = false; }
       continue;
     }
-    if (trimmed.startsWith('<div') && trimmed.endsWith('</div>')) {
+    if (trimmed.startsWith('<div id="day-') && trimmed.endsWith('</div>')) {
+      if (inList) { html.push('</ul>'); inList = false; }
+      if (currentDay !== null) {
+        html.push('</div></div>');
+        currentDay = null;
+      }
       html.push(trimmed);
       continue;
     }
@@ -14898,12 +14967,48 @@ function renderNuanceMarkdown(md) {
     }
     if (line.startsWith('## ')) {
       if (inList) { html.push('</ul>'); inList = false; }
+      if (currentDay !== null) {
+        html.push('</div></div>');
+        currentDay = null;
+      }
       html.push('<h2 class="note-h2">' + parseInlineMd(line.slice(3)) + '</h2>');
       continue;
     }
-    if (line.startsWith('### ')) {
+    const dayMatch = line.match(/^###\s+Day\s+(\d+)/i);
+    if (dayMatch) {
       if (inList) { html.push('</ul>'); inList = false; }
-      html.push('<h3 class="note-h3">' + parseInlineMd(line.slice(4)) + '</h3>');
+      if (currentDay !== null) {
+        html.push('</div></div>');
+      }
+      const dNum = parseInt(dayMatch[1], 10);
+      const dStr = String(dNum).padStart(2, '0');
+      currentDay = dNum;
+      const isEditing = (activeEditDay === dNum);
+
+      html.push('<div class="note-day-block' + (isEditing ? ' is-editing' : '') + '" id="block-day-' + dStr + '">');
+      html.push('  <div class="note-day-head" id="head-day-' + dStr + '">');
+      html.push('    <h3 class="note-h3">Day ' + dStr + '</h3>');
+      html.push('    <button type="button" class="note-day-btn" onclick="openNuanceDayEditor(' + dNum + ')">' + (isEditing ? '닫기' : '편집') + '</button>');
+      html.push('  </div>');
+
+      if (isEditing) {
+        const rawContent = getDayContentFromMd(md, dNum);
+        html.push('  <div class="note-editor-card">');
+        html.push('    <textarea id="noteEditTa-' + dNum + '" class="note-editor-ta" placeholder="- **문장**&#10;  - 뉘앙스 설명">' + esc(rawContent) + '</textarea>');
+        html.push('    <div class="note-editor-footer">');
+        html.push('      <div class="note-editor-btns">');
+        html.push('        <button type="button" class="note-btn-save" onclick="saveNuanceDay(' + dNum + ')">저장</button>');
+        html.push('        <button type="button" class="note-btn-cancel" onclick="cancelNuanceDay(' + dNum + ')">취소</button>');
+        if (rawContent) {
+          html.push('        <button type="button" class="note-btn-clear" onclick="clearNuanceDay(' + dNum + ')">비우기</button>');
+        }
+        html.push('      </div>');
+        html.push('      <span class="note-editor-hint">Ctrl+Enter로 저장</span>');
+        html.push('    </div>');
+        html.push('  </div>');
+      }
+
+      html.push('  <div class="note-day-body" id="body-day-' + dStr + '"' + (isEditing ? ' style="display:none;"' : '') + '>');
       continue;
     }
     if (/^\s*[-*]\s+/.test(line)) {
@@ -14918,14 +15023,55 @@ function renderNuanceMarkdown(md) {
     if (line.startsWith('> ')) {
       html.push('<blockquote class="note-bq">' + parseInlineMd(line.slice(2)) + '</blockquote>');
     } else {
-      html.push('<p class="note-p">' + parseInlineMd(line) + '</p>');
+      if (trimmed === '*등록된 뉘앙스 노트가 없습니다.*') {
+        html.push('<p class="note-p empty-hint"><em>등록된 뉘앙스 노트가 없습니다.</em> <button type="button" class="note-inline-add-btn" onclick="openNuanceDayEditor(' + currentDay + ')">+ 노트 작성</button></p>');
+      } else {
+        html.push('<p class="note-p">' + parseInlineMd(line) + '</p>');
+      }
     }
   }
   if (inList) html.push('</ul>');
+  if (currentDay !== null) html.push('</div></div>');
   return html.join('\n');
 }
 
-async function openNuanceNotes(dayNum){
+async function ghPutNuanceNotes(mdText){
+  if(!cfg || !cfg.token) return false;
+  const path = 'nuance-notes.md';
+  const br = (typeof refFor === 'function' ? refFor(path) : '') || '';
+  try {
+    if(!sha[path]){
+      await ghGet(path);
+    }
+    const msg = `docs: update nuance notes ${new Date().toISOString()}`;
+    const opts = (curSha) => ({
+      method: 'PUT',
+      headers: { ...ghHeaders(), 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        message: msg,
+        content: utf8ToB64(mdText),
+        ...(br ? { branch: br } : {}),
+        ...(curSha ? { sha: curSha } : {})
+      })
+    });
+
+    let r = await fetch(ghUrl(path), opts(sha[path]));
+    if(r.status === 409 || r.status === 422){
+      await ghGet(path);
+      r = await fetch(ghUrl(path), opts(sha[path]));
+    }
+    if(!r.ok) return false;
+    const j = await r.json();
+    if(j && j.content) sha[path] = j.content.sha;
+    lsSet('cards_nuance_notes_dirty', '0');
+    return true;
+  } catch(e) {
+    console.error('Failed to push nuance-notes.md to GitHub:', e);
+    return false;
+  }
+}
+
+async function openNuanceNotes(dayNum, autoEdit){
   const ovl = $('ovlHd');
   if(!ovl) return;
   ovl.classList.add('show');
@@ -14952,14 +15098,99 @@ async function openNuanceNotes(dayNum){
   }
 
   const md = await fetchNuanceNotes();
+  if(autoEdit && dayNum) {
+    nuanceActiveEditDay = dayNum;
+  }
   if(body){
-    body.innerHTML = renderNuanceMarkdown(md);
+    body.innerHTML = renderNuanceMarkdown(md, nuanceActiveEditDay);
+    bindNuanceEditorKeydown(nuanceActiveEditDay);
   }
 
   if(dayNum){
     setTimeout(()=>jumpToNuanceDay(dayNum), 50);
   } else {
     if(body) body.scrollTop = 0;
+  }
+}
+
+function bindNuanceEditorKeydown(dNum){
+  if(!dNum) return;
+  const ta = document.getElementById('noteEditTa-' + dNum);
+  if(ta){
+    ta.onkeydown = (e) => {
+      if((e.ctrlKey || e.metaKey) && e.key === 'Enter'){
+        e.preventDefault();
+        saveNuanceDay(dNum);
+      } else if(e.key === 'Escape'){
+        e.preventDefault();
+        cancelNuanceDay(dNum);
+      }
+    };
+  }
+}
+
+function renderNuanceBody(targetDay){
+  const body = $('hdNoteBody');
+  if(!body || !nuanceNotesCache) return;
+  body.innerHTML = renderNuanceMarkdown(nuanceNotesCache, nuanceActiveEditDay);
+  bindNuanceEditorKeydown(nuanceActiveEditDay);
+  if(targetDay){
+    jumpToNuanceDay(targetDay);
+  }
+}
+
+function openNuanceDayEditor(dNum){
+  if(nuanceActiveEditDay === dNum){
+    nuanceActiveEditDay = null;
+  } else {
+    nuanceActiveEditDay = dNum;
+  }
+  renderNuanceBody(dNum);
+  if(nuanceActiveEditDay === dNum){
+    setTimeout(()=>{
+      const ta = document.getElementById('noteEditTa-' + dNum);
+      if(ta){
+        ta.focus();
+        ta.selectionStart = ta.selectionEnd = ta.value.length;
+      }
+    }, 40);
+  }
+}
+
+function cancelNuanceDay(dNum){
+  nuanceActiveEditDay = null;
+  renderNuanceBody(dNum);
+}
+
+function clearNuanceDay(dNum){
+  const ta = document.getElementById('noteEditTa-' + dNum);
+  if(ta) ta.value = '';
+  saveNuanceDay(dNum);
+}
+
+async function saveNuanceDay(dNum){
+  const ta = document.getElementById('noteEditTa-' + dNum);
+  const val = ta ? ta.value.trim() : '';
+  const currentMd = await fetchNuanceNotes();
+  if(!currentMd) return;
+  const updatedMd = setDayContentInMd(currentMd, dNum, val);
+  nuanceNotesCache = updatedMd;
+  lsSet('cards_nuance_notes_v1', updatedMd);
+  lsSet('cards_nuance_notes_at', Date.now());
+  lsSet('cards_nuance_notes_dirty', '1');
+
+  nuanceActiveEditDay = null;
+  renderNuanceBody(dNum);
+
+  const dStr = String(dNum).padStart(2, '0');
+  if(cfg && cfg.token){
+    toast(`Day ${dStr} 노트를 저장하는 중...`);
+    ghPutNuanceNotes(updatedMd).then(ok => {
+      if(ok) toast(`Day ${dStr} 노트를 저장하고 GitHub에 반영했어요`);
+      else toast(`Day ${dStr} 노트를 기기에 저장했어요 (GitHub 동기화 실패)`);
+    });
+  } else {
+    toast(`Day ${dStr} 노트를 기기에 저장했어요`);
   }
 }
 
@@ -14972,17 +15203,18 @@ function jumpToNuanceDay(d){
   if(sel) sel.value = String(d);
   if(target && body){
     target.scrollIntoView({behavior: 'smooth', block: 'start'});
-    const nextHeading = target.nextElementSibling;
-    if(nextHeading){
-      nextHeading.classList.remove('note-target-flash');
-      void nextHeading.offsetWidth;
-      nextHeading.classList.add('note-target-flash');
-      setTimeout(()=>nextHeading.classList.remove('note-target-flash'), 1800);
+    const nextBlock = document.getElementById('block-day-' + dStr) || target.nextElementSibling;
+    if(nextBlock){
+      nextBlock.classList.remove('note-target-flash');
+      void nextBlock.offsetWidth;
+      nextBlock.classList.add('note-target-flash');
+      setTimeout(()=>nextBlock.classList.remove('note-target-flash'), 1800);
     }
   }
 }
 
 function closeNuanceNotes(){
+  nuanceActiveEditDay = null;
   const ovl = $('ovlHd');
   if(ovl) ovl.classList.remove('show');
   hdDock(false);
@@ -14995,6 +15227,10 @@ function closeHoedok(){ closeNuanceNotes(); }
 window.openNuanceNotes = openNuanceNotes;
 window.jumpToNuanceDay = jumpToNuanceDay;
 window.closeNuanceNotes = closeNuanceNotes;
+window.openNuanceDayEditor = openNuanceDayEditor;
+window.cancelNuanceDay = cancelNuanceDay;
+window.clearNuanceDay = clearNuanceDay;
+window.saveNuanceDay = saveNuanceDay;
 /* 🔴 **브라우저·마우스 뒤로가기로도 앱 안에서 뒤로 간다** (동하 09-01 실기:
    「PC에서 뒤로가기로 세션 → 홈 화면 전환이 안 되고(마우스 뒤로가기 버튼)」).
    앱은 화면 전환에 history를 안 써서, 마우스 4번 버튼은 **앱을 벗어나는 쪽**으로만 갔다.
