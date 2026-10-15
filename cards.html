@@ -1405,12 +1405,12 @@ details.ym-subj>summary small{font-weight:600;color:var(--mute);font-size:12.5px
 .cn-act-btn:hover{color:var(--c-label);border-color:var(--c-sec);}
 .cn-act-btn.primary{color:var(--c-acc);border-color:var(--c-acc-tint);background:var(--c-acc-tint);}
 .cn-act-btn.primary:hover{background:var(--c-acc);color:#fff;}
-.cn-body{font-size:13.5px;line-height:1.55;color:var(--c-label);}
+.cn-body{font-size:13.5px;line-height:1.6;color:var(--c-label);word-break:break-word;white-space:normal;}
 .cn-ul{margin:4px 0 6px;padding-left:18px;}
-.cn-li{font-size:13.5px;line-height:1.55;color:var(--c-label);margin:3px 0;}
-.cn-li.sub{font-size:13px;color:var(--c-sec);line-height:1.5;margin-left:10px;list-style-type:circle;}
+.cn-li{font-size:13.5px;line-height:1.6;color:var(--c-label);margin:4px 0;}
+.cn-li.sub{font-size:13px;color:var(--c-sec);line-height:1.55;margin-left:12px;list-style-type:circle;}
 .cn-li strong{color:var(--c-label);font-weight:600;}
-.cn-p{font-size:13.5px;line-height:1.55;color:var(--c-label);margin:4px 0;}
+.cn-p{font-size:13.5px;line-height:1.6;color:var(--c-label);margin:5px 0;}
 .cn-bq{margin:6px 0;padding:4px 10px;border-left:3px solid var(--c-acc);background:var(--c-card);font-size:13px;color:var(--c-sec);border-radius:0 6px 6px 0;}
 .cn-empty-row{display:flex;align-items:center;justify-content:space-between;padding:7px 12px;background:var(--c-fill);border:1px dashed var(--c-sep);border-radius:10px;box-sizing:border-box;gap:8px;flex-wrap:wrap;}
 .cn-empty-label{font-size:12px;color:var(--c-sec);font-weight:500;}
@@ -1419,7 +1419,7 @@ details.ym-subj>summary small{font-weight:600;color:var(--mute);font-size:12.5px
 .cn-add-btn:hover{background:var(--c-acc);color:#fff;border-color:var(--c-acc);}
 .cn-add-btn:active{opacity:.85;}
 .cn-editor{display:flex;flex-direction:column;gap:8px;}
-.cn-ta{width:100%;min-height:96px;max-height:240px;border:1px solid var(--c-sep);border-radius:8px;background:var(--c-card);color:var(--c-label);font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:13px;line-height:1.5;padding:8px 10px;box-sizing:border-box;resize:vertical;outline:none;}
+.cn-ta{width:100%;min-height:120px;max-height:380px;border:1px solid var(--c-sep);border-radius:8px;background:var(--c-card);color:var(--c-label);font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:13px;line-height:1.6;padding:10px 12px;box-sizing:border-box;resize:vertical;outline:none;white-space:pre-wrap;}
 .cn-ta:focus{border-color:var(--c-acc);box-shadow:0 0 0 2px var(--c-acc-tint);}
 .cn-footer{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;}
 .cn-btns{display:flex;align-items:center;gap:6px;}
@@ -15136,7 +15136,7 @@ function norm(s) {
 function getDayContentFromMd(md, dayNum){
   if(!md) return '';
   const dStr = String(dayNum).padStart(2, '0');
-  const pattern = new RegExp('(?:<div id="day-' + dStr + '"></div>\\s*\\n)?###\\s+Day\\s+' + dStr + '\\s*\\n([\\s\\S]*?)(?=(?:<div id="day-\\d+"></div>\\s*\\n)?###\\s+Day|##\\s+Unit|\\Z)', 'i');
+  const pattern = new RegExp('(?:<div id="day-' + dStr + '"></div>\\s*\\n)?###\\s+Day\\s+' + dStr + '\\s*\\n([\\s\\S]*?)(?=(?:<div id="day-\\d+"></div>\\s*\\n)?###\\s+Day|##\\s+Unit|$)', 'i');
   const m = md.match(pattern);
   if(!m) return '';
   let c = m[1].trim();
@@ -15152,7 +15152,7 @@ function setDayContentInMd(md, dayNum, newContent){
 
   const headerEnd = headerMatch.index + headerMatch[0].length;
   const rest = md.slice(headerEnd);
-  const nextHeaderMatch = rest.match(/(?:<div id="day-\d+"><\/div>\s*\n)?###\s+Day|##\s+Unit|\Z/i);
+  const nextHeaderMatch = rest.match(/(?:<div id="day-\d+"><\/div>\s*\n)?###\s+Day|##\s+Unit|$/i);
   const sectionEnd = headerEnd + (nextHeaderMatch ? nextHeaderMatch.index : rest.length);
 
   const clean = (newContent || '').trim();
@@ -15473,11 +15473,22 @@ function parseDayEntries(dayMd) {
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
     const trimmed = line.trim();
-    const isHeader = /^[-*]\s+\*\*([^*]+)\*\*/.test(trimmed) ||
-                     /^#{3,5}\s+(.+)/.test(trimmed) ||
-                     /<(?:div|span|a)\s+id="([^"]+)"/i.test(trimmed);
+    if (!trimmed) {
+      if (curEntry && curEntry.body && !curEntry.body.endsWith('\n\n')) {
+        curEntry.body += '\n';
+        curEntry.raw += '\n';
+      }
+      continue;
+    }
+    const indent = line.search(/\S/);
+    const hasIndent = indent >= 2 || line.startsWith('\t');
+    const isHeader = !hasIndent && (
+      /^[-*]\s+\*\*([^*]+)\*\*/.test(trimmed) ||
+      /^#{3,5}\s+(.+)/.test(trimmed) ||
+      /<(?:div|span|a)\s+id="([^"]+)"/i.test(trimmed)
+    );
 
-    if (isHeader && !line.startsWith('   ') && !line.startsWith('\t')) {
+    if (isHeader) {
       if (curEntry) {
         curEntry.raw = curEntry.raw.trim();
         curEntry.body = curEntry.body.trim();
@@ -15502,8 +15513,8 @@ function parseDayEntries(dayMd) {
       };
     } else {
       if (curEntry) {
-        const unindented = line.replace(/^(?:  |\t)/, '');
-        curEntry.body += (curEntry.body ? '\n' : '') + unindented;
+        const unindented = line.replace(/^(?: {2}|\t)/, '');
+        curEntry.body += (curEntry.body && !curEntry.body.endsWith('\n') ? '\n' : '') + unindented;
         curEntry.raw += '\n' + line;
       } else if (trimmed) {
         curEntry = {
@@ -15548,49 +15559,85 @@ function findCardEntry(entries, c) {
     if (byContain) return byContain;
   }
 
+  if (entries.length === 1 && (!entries[0].cardId || entries[0].cardId === c.id)) {
+    return entries[0];
+  }
+
   return null;
 }
 
 function formatCardEntry(c, bodyText) {
   const cleanBody = (bodyText || '').trim();
   if (!cleanBody) return '';
-  if (/^[-*]\s+\*\*/.test(cleanBody) || /^#{2,5}\s+/.test(cleanBody)) {
-    return cleanBody;
-  }
+
   const idComment = c && c.id ? ` <!-- id: ${c.id} -->` : '';
   const header = `- **${(c && c.back) ? c.back : '노트'}**${idComment}`;
+
+  // 만약 첫 줄이 이미 해당 카드의 헤더 형식(- **문장** ...)으로 작성되어 있다면 그대로 보존
   const lines = cleanBody.split('\n');
-  const formattedLines = lines.map(l => {
-    if (!l.trim()) return '';
-    if (/^[-*]\s+/.test(l.trim())) return '  ' + l.trim();
-    return '  - ' + l.trim();
-  });
+  if (c && c.back && lines[0] && norm(lines[0]).includes(norm(c.back)) && /^[-*]\s+\*\*/.test(lines[0])) {
+    return cleanBody;
+  }
+
+  const formattedLines = [];
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    const trimmed = line.trim();
+    if (!trimmed) continue;
+
+    if (/^\s*[-*]\s+/.test(line)) {
+      const leadingSpaces = line.search(/\S/);
+      const extraIndent = leadingSpaces > 2 ? ' '.repeat(leadingSpaces - 2) : '';
+      formattedLines.push('  ' + extraIndent + trimmed);
+    } else if (trimmed.startsWith('>')) {
+      formattedLines.push('  ' + trimmed);
+    } else {
+      formattedLines.push('  - ' + trimmed);
+    }
+  }
+
   return header + '\n' + formattedLines.join('\n');
 }
 
 function setCardEntryInDay(dayMd, c, newBody) {
   const entries = parseDayEntries(dayMd);
-  const existing = findCardEntry(entries, c);
   const cleanBody = (newBody || '').trim();
 
+  // 기존 해당 카드 항목 모두 찾기(이전 버그로 인한 분할 항목 정리)
+  const matchingIndices = [];
+  entries.forEach((e, idx) => {
+    if (e.cardId && c.id && e.cardId === c.id) {
+      matchingIndices.push(idx);
+    } else if (c.back && norm(e.title) && norm(e.title) === norm(c.back)) {
+      matchingIndices.push(idx);
+    }
+  });
+
+  if (!matchingIndices.length) {
+    const existing = findCardEntry(entries, c);
+    if (existing) matchingIndices.push(entries.indexOf(existing));
+  }
+
   if (!cleanBody) {
-    if (existing) {
-      const idx = entries.indexOf(existing);
-      entries.splice(idx, 1);
+    for (let i = matchingIndices.length - 1; i >= 0; i--) {
+      entries.splice(matchingIndices[i], 1);
     }
   } else {
     const formatted = formatCardEntry(c, cleanBody);
-    if (existing) {
-      existing.raw = formatted;
-      existing.body = cleanBody;
+    const newEntryObj = {
+      raw: formatted,
+      body: cleanBody,
+      header: `- **${c.back}** <!-- id: ${c.id} -->`,
+      title: c.back,
+      cardId: c.id
+    };
+    if (matchingIndices.length > 0) {
+      entries[matchingIndices[0]] = newEntryObj;
+      for (let i = matchingIndices.length - 1; i > 0; i--) {
+        entries.splice(matchingIndices[i], 1);
+      }
     } else {
-      entries.push({
-        raw: formatted,
-        body: cleanBody,
-        header: `- **${c.back}**`,
-        title: c.back,
-        cardId: c.id
-      });
+      entries.push(newEntryObj);
     }
   }
 
@@ -15670,6 +15717,9 @@ function renderCardNuance(c){
   const backSafe = esc(c.back || '');
 
   if(cardEntry){
+    const displayContent = (cardEntry.body && cardEntry.body.trim()) ? cardEntry.body : (
+      cardEntry.raw && /^[-*]\s+\*\*/.test(cardEntry.raw) ? cardEntry.raw.split('\n').slice(1).join('\n') : (cardEntry.body || cardEntry.raw)
+    );
     el.innerHTML = `
       <div class="cn-box">
         <div class="cn-header">
@@ -15682,7 +15732,7 @@ function renderCardNuance(c){
             <button type="button" class="cn-act-btn" onclick="event.stopPropagation(); openNuanceNotes(${d}, false, '${c.id}', '${backSafe}');">Day 전체 보기</button>
           </div>
         </div>
-        <div class="cn-body">${renderCardNuanceHtml(cardEntry.body || cardEntry.raw)}</div>
+        <div class="cn-body">${renderCardNuanceHtml(displayContent)}</div>
       </div>
     `;
   } else {
@@ -15718,8 +15768,20 @@ function renderCardNuanceEditor(c, d){
   const dayMd = nuanceNotesCache ? getDayContentFromMd(nuanceNotesCache, d) : '';
   const entries = parseDayEntries(dayMd);
   const cardEntry = findCardEntry(entries, c);
-  let prefill = cardEntry ? (cardEntry.body || cardEntry.raw) : '';
-  if(!prefill) prefill = '- ';
+
+  let prefill = '';
+  if (cardEntry) {
+    if (cardEntry.body && cardEntry.body.trim()) {
+      prefill = cardEntry.body.trim();
+    } else if (cardEntry.raw) {
+      const rawLines = cardEntry.raw.split('\n');
+      if (rawLines.length > 1 && /^[-*]\s+\*\*/.test(rawLines[0])) {
+        prefill = rawLines.slice(1).map(l => l.replace(/^(?: {2}|\t)/, '')).join('\n').trim();
+      } else {
+        prefill = cardEntry.raw.trim();
+      }
+    }
+  }
 
   const targetSentence = (c.back || '').trim();
   const backSafe = esc(targetSentence);
@@ -15736,7 +15798,7 @@ function renderCardNuanceEditor(c, d){
         </div>
       </div>
       <div class="cn-editor">
-        <textarea id="cnEditTa" class="cn-ta" placeholder="- 이 문장의 뉘앙스나 어감 차이를 작성하세요">${esc(prefill)}</textarea>
+        <textarea id="cnEditTa" class="cn-ta" placeholder="- 이 문장의 뉘앙스나 어감 차이를 여러 줄로 자유롭게 작성하세요&#10;- Enter로 줄바꿈 시 글머리 기호(-)가 이어집니다">${esc(prefill)}</textarea>
         <div class="cn-footer">
           <div class="cn-btns">
             <button type="button" class="cn-btn-save" onclick="event.stopPropagation(); saveCardNuance(${d});">저장</button>
@@ -15754,14 +15816,49 @@ function renderCardNuanceEditor(c, d){
     if(ta){
       ta.focus();
       ta.selectionStart = ta.selectionEnd = ta.value.length;
+
+      const autoGrow = () => {
+        ta.style.height = 'auto';
+        ta.style.height = Math.min(380, Math.max(120, ta.scrollHeight)) + 'px';
+      };
+      autoGrow();
+      ta.oninput = autoGrow;
+
       ta.onkeydown = (e) => {
         e.stopPropagation();
         if((e.ctrlKey || e.metaKey) && e.key === 'Enter'){
           e.preventDefault();
           saveCardNuance(d);
-        } else if(e.key === 'Escape'){
+          return;
+        }
+        if(e.key === 'Escape'){
           e.preventDefault();
           cancelCardNuance(d);
+          return;
+        }
+        if(e.key === 'Enter' && !e.shiftKey && !e.isComposing){
+          const start = ta.selectionStart;
+          const end = ta.selectionEnd;
+          const val = ta.value;
+          const lineStart = val.lastIndexOf('\n', start - 1) + 1;
+          const currentLine = val.substring(lineStart, start);
+          const matchBullet = currentLine.match(/^(\s*[-*]\s+)/);
+          if(matchBullet){
+            const bullet = matchBullet[1];
+            if(currentLine.trim() === '-' || currentLine.trim() === '*'){
+              e.preventDefault();
+              ta.value = val.substring(0, lineStart) + val.substring(start);
+              ta.selectionStart = ta.selectionEnd = lineStart;
+              autoGrow();
+              return;
+            }
+            e.preventDefault();
+            const insert = '\n' + bullet;
+            ta.value = val.substring(0, start) + insert + val.substring(end);
+            ta.selectionStart = ta.selectionEnd = start + insert.length;
+            autoGrow();
+            return;
+          }
         }
       };
     }
