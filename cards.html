@@ -1830,6 +1830,20 @@ input,select{border-radius:10px;}
 .cap-line{position:absolute;left:0;right:0;height:0;border-top:1px dashed var(--c-sec);opacity:.8;pointer-events:none;}
 .cap-line span{position:absolute;right:0;top:3px;font-size:11px;color:var(--c-sec);background:var(--c-card);padding:0 2px;line-height:14px;}
 
+/* ═══════════════ 학습 누적 & 회독 통계 ═══════════════ */
+.traj-kpi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:10px 0 14px;}
+@media (min-width:640px){ .traj-kpi-grid{grid-template-columns:repeat(4,1fr);} }
+.traj-kpi-item{background:var(--c-fill);border-radius:12px;padding:10px 12px;display:flex;flex-direction:column;gap:3px;min-width:0;}
+.traj-kpi-item small{font-size:11.5px;color:var(--c-sec);font-weight:600;}
+.traj-kpi-item b{font-size:20px;line-height:24px;font-weight:700;color:var(--c-label);font-variant-numeric:tabular-nums;}
+.traj-kpi-item b small{font-size:13px;font-weight:600;color:var(--c-sec);margin-left:2px;}
+.traj-kpi-item .sub{font-size:11px;color:var(--c-ter);line-height:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.traj-tabs{display:flex;gap:6px;background:var(--c-fill);padding:4px;border-radius:12px;margin:12px 0 10px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.traj-tab{flex:1;min-width:max-content;border:0;background:transparent;padding:7px 12px;border-radius:9px;font-size:12.5px;font-weight:600;color:var(--c-sec);cursor:pointer;transition:all .15s ease;white-space:nowrap;text-align:center;}
+.traj-tab:hover{color:var(--c-label);}
+.traj-tab.on{background:var(--c-card);color:var(--c-label);box-shadow:0 1px 4px rgba(0,0,0,0.08);}
+.traj-chart-container{position:relative;width:100%;margin-top:6px;}
+
 
 /* ═══════════════ 디자인 이식 E(2) — 세션 화면 (캔버스 「세션」 판) ═══════════════ */
 .ss-sub{font-size:15px;color:var(--c-sec);line-height:20px;margin:-8px 0 16px;}
@@ -13833,52 +13847,191 @@ function simTrajectory(inp, newPerDay, seeds){
     unseen:Math.round(runs.reduce((a,r)=>a+r.days[i].unseen,0)/runs.length) }));
   return { days, K:Math.round(runs.reduce((a,r)=>a+r.K,0)/runs.length), doneKey:runs[0].doneKey };
 }
-/* ═══ 궤적 그림 — 누적 면적 3층(굳음/무름/안 나옴) · 실측 실선 + 예측 옅게 + 시험일 선 ═══ */
-function trajChart(hist, pred, zero){
-  const W=680, H=170, PADB=16;
-  const all=[...hist, ...pred];
-  if(!all.length) return '';
-  const tot=Math.max(1, ...all.map(d=>d.hard+d.soft+d.unseen));
-  const x=i=>i/(all.length-1||1)*W;
+/* ═══════════════ 학습 누적 & 회독 통계 ═══════════════ */
+let trajTab = 'reps'; // 'reps' | 'cum' | 'anki'
+window.setTrajTab = function(t){
+  trajTab = t;
+  const box = $('trajBoxInner');
+  if(box){
+    box.innerHTML = renderTrajCardInner();
+  } else if($('scrStats') && $('scrStats').classList.contains('on')){
+    renderStats();
+  }
+};
+
+/* 1. 회독수 분포 히스토그램 (카드당 몇 번 봤나?) */
+function repsHistogramChart(repsDist, maxVal){
+  const W=680, H=165, PADB=24, PADT=22;
+  const keys=[1,2,3,4,5,6,7,8,9,10,11];
+  const n=keys.length, slot=W/n;
+  let bars='', labels='';
+  keys.forEach((k, i)=>{
+    const cnt = repsDist[k]||0;
+    const barH = maxVal ? (cnt/maxVal)*(H - PADB - PADT) : 0;
+    const x = i * slot + slot*0.14;
+    const bw = slot * 0.72;
+    const y = H - PADB - barH;
+    
+    // 회독수에 따른 단계별 컬러
+    const col = k<=2 ? 'var(--c-orange)' : k<=5 ? 'var(--c-acc)' : k<=10 ? 'var(--c-purple, #af52de)' : 'var(--c-green)';
+    const op = k===11 ? '0.95' : '0.85';
+    
+    bars += `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${bw.toFixed(1)}" height="${Math.max(2,barH).toFixed(1)}" rx="4" fill="${col}" opacity="${op}"><title>${k===11?'11회 이상':k+'회독'}: ${cnt.toLocaleString()}장</title></rect>`;
+    if(cnt > 0){
+      bars += `<text x="${(x+bw/2).toFixed(1)}" y="${(y-5).toFixed(1)}" text-anchor="middle" font-size="11" font-weight="700" fill="var(--c-label)">${cnt}</text>`;
+    }
+    const lbl = k===11 ? '11+회' : (k+'회');
+    labels += `<span style="position:absolute;bottom:3px;left:${((x+bw/2)/W*100).toFixed(2)}%;transform:translateX(-50%);font-size:11px;font-weight:600;color:var(--c-sec);white-space:nowrap">${lbl}</span>`;
+  });
+  return `<div style="position:relative"><svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" style="width:100%;height:${H}px;display:block">${bars}</svg>${labels}</div>`;
+}
+
+/* 2. 누적 풀이 추이 (누적 훈련량 곡선) */
+function cumReviewsChart(cumArr){
+  if(!cumArr.length) return '';
+  const W=680, H=165, PADB=22, PADT=20;
+  const n=cumArr.length;
+  const maxCum = cumArr[n-1].cum || 1;
+  const x = i => (i/(n-1||1))*W;
+  const y = v => H - PADB - (v/maxCum)*(H - PADB - PADT);
+
+  const pts = cumArr.map((d,i)=>x(i).toFixed(1)+','+y(d.cum).toFixed(1));
+  const poly = [`0,${H-PADB}`, ...pts, `${W},${H-PADB}`].join(' ');
+  const line = pts.join(' ');
+
+  const gradId = 'cumGrad_' + Math.floor(Math.random()*1000);
+  let g = `<defs><linearGradient id="${gradId}" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="var(--c-acc)" stop-opacity="0.38"/><stop offset="100%" stop-color="var(--c-acc)" stop-opacity="0.04"/></linearGradient></defs>`;
+  g += `<polygon points="${poly}" fill="url(#${gradId})"/>`;
+  g += `<polyline points="${line}" fill="none" stroke="var(--c-acc)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>`;
+  g += `<line x1="0" y1="${y(maxCum).toFixed(1)}" x2="${W}" y2="${y(maxCum).toFixed(1)}" stroke="var(--c-sep)" stroke-width="1" stroke-dasharray="3 3"/>`;
+
+  const d0 = cumArr[0].d.slice(5).replace('-','/');
+  const dMid = cumArr[Math.floor(n/2)].d.slice(5).replace('-','/');
+  const dEnd = cumArr[n-1].d.slice(5).replace('-','/');
+  
+  const lab = (leftPct, t, tr) => `<span style="position:absolute;bottom:3px;left:${leftPct}%;transform:translateX(${tr});font-size:11px;font-weight:600;color:var(--c-sec);white-space:nowrap">${t}</span>`;
+  const topLab = `<span style="position:absolute;top:2px;right:4px;font-size:12px;font-weight:700;color:var(--c-acc);font-variant-numeric:tabular-nums">누적 ${maxCum.toLocaleString()}회</span>`;
+
+  return `<div style="position:relative">${topLab}<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" style="width:100%;height:${H}px;display:block">${g}</svg>${lab(0, d0, '0')}${lab(50, dMid, '-50%')}${lab(100, dEnd + ' (오늘)', '-100%')}</div>`;
+}
+
+/* 3. 안키식 카드 상태 누적 면적 */
+function ankiCardCountsChart(hist){
+  if(!hist.length) return '';
+  const W=680, H=165, PADB=22;
+  const tot=Math.max(1, ...hist.map(d=>d.hard+d.soft+d.unseen));
+  const x=i=>i/(hist.length-1||1)*W;
   const y=v=>H-PADB-(v/tot)*(H-PADB);
-  const band=(from,to,pick,upto)=>{                     // 누적 면적 한 층
+  const band=(pick,upto)=>{
     const top=[], bot=[];
-    for(let i=from;i<to;i++){ const d=all[i];
+    for(let i=0;i<hist.length;i++){ const d=hist[i];
       top.push(x(i).toFixed(1)+','+y(upto(d)).toFixed(1));
       bot.unshift(x(i).toFixed(1)+','+y(upto(d)-pick(d)).toFixed(1)); }
     return top.concat(bot).join(' ');
   };
-  const nH=hist.length, L=all.length;
-  /* 🔴 층은 **불투명도로** 가른다 — `--*-dim` 토큰은 알파가 .13이라 셋을 겹치면 한 덩어리로 보인다(첫 판이 그랬다). */
-  const layers=[[d=>d.unseen, d=>d.hard+d.soft+d.unseen, 'var(--mute)',   .13],
-                [d=>d.soft,   d=>d.hard+d.soft,          'var(--hard)',   .30],
-                [d=>d.hard,   d=>d.hard,                 'var(--accent)', .45]];
+  const layers=[
+    [d=>d.unseen, d=>d.hard+d.soft+d.unseen, 'var(--c-fill)', .7],
+    [d=>d.soft,   d=>d.hard+d.soft,          'var(--c-orange)', .4],
+    [d=>d.hard,   d=>d.hard,                 'var(--c-green)', .65]
+  ];
   let g='';
-  for(const L2 of layers){
-    g+='<polygon points="'+band(0,nH,L2[0],L2[1])+'" fill="'+L2[2]+'" opacity="'+L2[3]+'"/>';
-    if(pred.length) g+='<polygon points="'+band(nH-1,L,L2[0],L2[1])+'" fill="'+L2[2]+'" opacity="'+(L2[3]*0.55).toFixed(2)+'"/>';
+  for(const L of layers){
+    g+='<polygon points="'+band(L[0],L[1])+'" fill="'+L[2]+'" opacity="'+L[3]+'"/>';
   }
-  // 무름 위 경계선 — 층이 읽히게
-  const softTop=(from,to)=>all.slice(from,to).map((d,i)=>x(from+i).toFixed(1)+','+y(d.hard+d.soft).toFixed(1)).join(' ');
-  g+='<polyline points="'+softTop(0,nH)+'" fill="none" stroke="var(--hard)" stroke-width="1.2" opacity=".7"/>';
-  if(pred.length) g+='<polyline points="'+softTop(nH-1,L)+'" fill="none" stroke="var(--hard)" stroke-width="1.2" opacity=".5" stroke-dasharray="4 4"/>';
-  const line=(from,to)=>all.slice(from,to).map((d,i)=>x(from+i).toFixed(1)+','+y(d.hard).toFixed(1)).join(' ');
-  g+='<polyline points="'+line(0,nH)+'" fill="none" stroke="var(--accent)" stroke-width="2"/>';
-  if(pred.length) g+='<polyline points="'+line(nH-1,L)+'" fill="none" stroke="var(--accent)" stroke-width="2" stroke-dasharray="5 4"/>';
-  if(zero&&zero.length){                                // 「오늘부터 신규 0」 아래쪽 경계
-    const z=[all[nH-1]].concat(zero);
-    g+='<polyline points="'+z.map((d,i)=>x(nH-1+i).toFixed(1)+','+y(d.hard).toFixed(1)).join(' ')
-      +'" fill="none" stroke="var(--mute)" stroke-width="1.5" stroke-dasharray="2 4"/>';
-  }
-  g+='<line x1="'+x(nH-1).toFixed(1)+'" y1="0" x2="'+x(nH-1).toFixed(1)+'" y2="'+(H-PADB)+'" stroke="var(--line)" stroke-width="1"/>';
-  g+='<line x1="'+W+'" y1="0" x2="'+W+'" y2="'+(H-PADB)+'" stroke="var(--again)" stroke-width="1.5"/>';
-  /* 축 글자는 SVG 밖(HTML) — 늘이기로 글자가 눌렸다(아이폰 0.49배 · UI 리뷰 🟠 · 위 「글자는 SVG 안에 두지 마라」 원칙) */
-  const lab=(i,t,anc)=>{ const pc=(Math.min(W-2,Math.max(2,x(i)))/W*100).toFixed(2); const tr=anc==='start'?'0':anc==='end'?'-100%':'-50%';
-    return '<span style="position:absolute;bottom:2px;left:'+pc+'%;transform:translateX('+tr+');font-size:10.5px;color:var(--mute);white-space:nowrap">'+t+'</span>'; };
-  const k0=all[0].k.slice(5).replace('-','/');
+  const hardLine = hist.map((d,i)=>x(i).toFixed(1)+','+y(d.hard).toFixed(1)).join(' ');
+  g+='<polyline points="'+hardLine+'" fill="none" stroke="var(--c-green)" stroke-width="2"/>';
+
+  const d0=hist[0].k.slice(5).replace('-','/');
+  const dMid=hist[Math.floor(hist.length/2)].k.slice(5).replace('-','/');
+  const dEnd=hist[hist.length-1].k.slice(5).replace('-','/');
+  const lab=(leftPct, t, tr)=>'<span style="position:absolute;bottom:3px;left:'+leftPct+'%;transform:translateX('+tr+');font-size:11px;font-weight:600;color:var(--c-sec);white-space:nowrap">'+t+'</span>';
+
   return '<div style="position:relative"><svg viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="none" style="width:100%;height:'+H+'px;display:block">'+g+'</svg>'
-    +lab(0, k0, 'start')+lab(nH-1,'오늘','middle')+lab(L-1,'시험','end')+'</div>';
+    +lab(0, d0, '0')+lab(50, dMid, '-50%')+lab(100, dEnd + ' (오늘)', '-100%')+'</div>';
 }
+
+function renderTrajCardInner(){
+  const repsMap = {};
+  const byDay = {};
+  for(const e of state.log){
+    repsMap[e[0]] = (repsMap[e[0]]||0) + 1;
+    const d = dayKey(logDate(e));
+    byDay[d] = (byDay[d]||0) + 1;
+  }
+  const studiedCount = Object.keys(repsMap).length;
+  const totalCards = DATA.length;
+  const unseenCount = Math.max(0, totalCards - studiedCount);
+  const totalReps = state.log.length;
+  const avgReps = studiedCount ? (totalReps / studiedCount) : 0;
+
+  let maxReps = 0;
+  const repsDist = {1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0, 8:0, 9:0, 10:0, 11:0};
+  for(const cid in repsMap){
+    const n = repsMap[cid];
+    if(n > maxReps) maxReps = n;
+    if(n >= 11) repsDist[11]++;
+    else repsDist[n]++;
+  }
+
+  const daysSorted = Object.keys(byDay).sort();
+  let cum = 0;
+  const cumArr = [];
+  for(const d of daysSorted){
+    cum += byDay[d];
+    cumArr.push({d, cum});
+  }
+
+  const M = maturitySplit();
+
+  let h = `<div class="traj-kpi-grid">
+    <div class="traj-kpi-item">
+      <small>학습한 카드</small>
+      <b>${studiedCount.toLocaleString()}<small>/${totalCards}장</small></b>
+      <span class="sub">진도율 ${Math.round(studiedCount/totalCards*100)}% · 미학습 ${unseenCount}장</span>
+    </div>
+    <div class="traj-kpi-item">
+      <small>총 복습량 (채점)</small>
+      <b>${totalReps.toLocaleString()}<small>회</small></b>
+      <span class="sub">순수 반복 훈련량</span>
+    </div>
+    <div class="traj-kpi-item">
+      <small>평균 회독수</small>
+      <b>${avgReps.toFixed(1)}<small>회독</small></b>
+      <span class="sub">최다 ${maxReps}회 복습</span>
+    </div>
+    <div class="traj-kpi-item">
+      <small>굳은 카드 (21일+)</small>
+      <b>${M.mature.toLocaleString()}<small>장</small></b>
+      <span class="sub">전체의 ${Math.round(M.mature/totalCards*100)}% 마스터</span>
+    </div>
+  </div>`;
+
+  h += `<div class="traj-tabs">
+    <button class="traj-tab ${trajTab==='reps'?'on':''}" onclick="setTrajTab('reps')">📊 카드당 회독 분포</button>
+    <button class="traj-tab ${trajTab==='cum'?'on':''}" onclick="setTrajTab('cum')">📈 누적 풀이 추이</button>
+    <button class="traj-tab ${trajTab==='anki'?'on':''}" onclick="setTrajTab('anki')">🗂️ 카드 상태 (안키)</button>
+  </div>`;
+
+  h += `<div class="traj-chart-container">`;
+  if(trajTab === 'reps'){
+    const maxVal = Math.max(1, ...Object.values(repsDist));
+    h += repsHistogramChart(repsDist, maxVal);
+    const multiReps = studiedCount - repsDist[1];
+    const multiPct = studiedCount ? Math.round(multiReps/studiedCount*100) : 0;
+    h += `<div class="cap" style="margin-top:8px">학습 카드 중 <b>${multiReps.toLocaleString()}장(${multiPct}%)</b>이 2회독 이상 복습 완료 · 4회독(${repsDist[4]}장), 11회 이상(${repsDist[11]}장)에 집중</div>`;
+  } else if(trajTab === 'cum'){
+    h += cumReviewsChart(cumArr);
+    const daysN = cumArr.length || 1;
+    h += `<div class="cap" style="margin-top:8px">첫 채점부터 오늘까지 <b>총 ${totalReps.toLocaleString()}회</b>의 실전 말하기 훈련 누적 (풀이한 날 하루 평균 ${Math.round(totalReps/daysN)}회)</div>`;
+  } else {
+    const hist = maturityHistory();
+    h += ankiCardCountsChart(hist);
+    h += `<div class="cap" style="margin-top:8px">굳음(21일 이상, 녹색) <b>${M.mature}장</b> · 복습중(주황) <b>${M.soft}장</b> · 새 카드(회색) <b>${unseenCount}장</b></div>`;
+  }
+  h += `</div>`;
+  return h;
+}
+
 /* 궤적은 무겁다(시뮬 ≈1.4초) — 통계를 열 때마다 다시 돌리지 않는다.
    🔴 렌더 경로에 전수 계산을 넣으면 화면이 죽는다(09-06 F2-1 회귀에서 배운 것). */
 let TRAJ=null, TRAJ_KEY='', TRAJ_BUSY=false;
@@ -14066,47 +14219,24 @@ function renderStats(){
     if(isDue(c)&&!buried(c)) e.due++;
   }
   const alive=DATA.length-ret;
+  const cap=dailyThroughput();
+  const histM=maturityHistory();
+  const T={hist:histM};
   let h='';
 
-  /* ═══ A. 시험까지의 궤적 ═══ */
-  const T=trajectory(), M=maturitySplit(), dd=dDay();
-  const cap=T?T.inp.cap:dailyThroughput();
-  if(!T){
-    h+='<div class="card-box"><h3>시험까지의 궤적</h3>'
-      +'<div class="cap">D-'+dd+' · 굳음 <b>'+M.mature.toLocaleString()+'</b> / '+alive.toLocaleString()+'</div>'
-      +'<div class="empty-note" style="padding:24px 0">시험까지 그려 보는 중…</div></div>';
-  } else {
-    const end=T.pred.length?T.pred[T.pred.length-1]:{hard:M.mature};
-    const pctEnd=alive?Math.round(end.hard/alive*100):0;
-    h+='<div class="card-box"><h3>시험까지의 궤적</h3>'
-      +'<div class="cap">D-'+dd+' · 굳음 <b>'+M.mature.toLocaleString()+'</b> / '+alive.toLocaleString()
-      +' · <b>이 속도면</b> 시험날 굳음 약 <b>'+end.hard.toLocaleString()+'장('+pctEnd+'%)</b>'
-      +' · 시험날 떠올릴 수 있는 것 약 <b>'+T.K.toLocaleString()+'장</b></div>'
-      +trajChart(T.hist, T.pred, T.zero)
-      +'<div class="cap" style="margin-top:6px">굳음(21일 이상) · 무름 · 안 나옴 순으로 쌓았어요 · '
-      +'점선 = 예측 · 옅은 점선 = 오늘부터 신규를 안 넣으면('+((T.zeroEnd&&T.zeroEnd.hard)||0).toLocaleString()+'장)</div>'
-      +'<div class="cap" style="margin-top:4px;color:var(--mute)">최근 7일 기준 — 신규 '+T.inp.newPerDay+'/일 · 처리 '+T.inp.cap+'/일'
-      +' · 유지율 '+Math.round(T.inp.pFirst*100)+'/'+Math.round(T.inp.pRev*100)+'%'
-      +(T.doneKey?' · 신규 소진 '+T.doneKey.slice(5).replace('-','/'):'')+'</div>';
-    recordForecast(T);
-    const FC=forecastCheck();
-    if(FC) h+='<div class="cap" style="margin-top:4px;color:var(--mute)">지난주 예측 오차 '
-      +(FC.err>=0?'+':'')+FC.err+'% (예측 '+FC.pred.toLocaleString()+' · 실제 '+FC.actual.toLocaleString()+')'
-      +(FC.basisChanged?' · ⚠ 기준 바뀜(파라미터·강도 변경)':'')+'</div>';
-    h+='</div>';
-  }
+  /* ═══ A. 누적 학습량 & 회독 궤적 ═══ */
+  h+='<div class="card-box"><h3>누적 학습량 & 회독 궤적</h3>'
+    +'<div class="cap">Speaking Matrix 900제 실전 문장 체화 진도와 다회독 반복 훈련량</div>'
+    +'<div id="trajBoxInner">'+renderTrajCardInner()+'</div>'
+    +'</div>';
 
   /* ═══ B. 오늘 ═══ */
-  h+='<div class="card-box"><h3>오늘</h3>';
-  if(!T){
-    h+='<div class="cap">'+today.cards+'장 — 신규 '+today.nw+' · 복습 '+Math.max(0,today.cards-today.nw)+' · '+fmtMin(today.ms)+'</div>';
-  } else {
-    const G=todayGains(T.hist);
-    h+='<div class="cap">새로 굳은 <b>'+(G.newHard>=0?'+':'')+G.newHard+'</b> · 누수 탈출 <b>'+G.escaped+'</b>'
-      +' · '+today.cards+'장 — 신규 '+today.nw+' · 복습 '+Math.max(0,today.cards-today.nw)+' · '+fmtMin(today.ms)+'</div>';
-  }
-  h+=heatmapHtml(by, T);
-  h+='</div>';
+  const G=todayGains(histM);
+  h+='<div class="card-box"><h3>오늘</h3>'
+    +'<div class="cap">새로 굳은 <b>'+(G.newHard>=0?'+':'')+G.newHard+'</b> · 누수 탈출 <b>'+G.escaped+'</b>'
+    +' · '+today.cards+'장 — 신규 '+today.nw+' · 복습 '+Math.max(0,today.cards-today.nw)+' · '+fmtMin(today.ms)+'</div>'
+    +heatmapHtml(by, T)
+    +'</div>';
 
   /* ═══ C. 신호 ═══ */
   /* 🔴 신호는 ✕로 **7일 숨긴다**(동하 09-23 「총창이랑 나머지 하나도 계속 뜸」 — 알고 있는 신호가 며칠째 같은 자리에 붙어 있었다). 기기별 · 7일 뒤 조건이 그대로면 다시 뜬다. */
