@@ -21,6 +21,17 @@ Speaking Matrix 900제 문장의 뉘앙스, 원어민 어감 차이, 실전 활�
   - **`a lot`**: 많이, 자주 (문맥에 따라 정도 또는 빈도 강조)
   - **차이:** `stressed out` 자체로 강한 스트레스 상태를 표현할 수 있다. `a lot`을 추가하면 스트레스의 정도나 빈도를 별도로 강조할 수 있다.
 
+- **Now I'm getting ready for the day.** <!-- id: sm_1790710444142 -->
+  - **`for the day`**: 하루를 위한, 오늘 하루를 보내기 위한
+  - **`for my day`**: 내 하루를 위한 (개인적인 일과·활동을 강조할 때 가능하지만, 단독으로는 덜 관용적)
+  - **차이:** `get ready for the day`는 하루를 시작할 준비를 한다는 자연스러운 관용 표현이다. `get ready for my day`도 가능하지만, 일반적으로는 `the day`를 더 자주 사용한다.
+
+- **I think I'm extra tired today.** <!-- id: sm_1790710444109 -->
+  - **`I'm extra tired.`**: 유난히 피곤하다. (상태)
+  - **`I feel extra tired.`**: 유난히 피곤하게 느껴진다. (주관적 감각)
+  - **`I think I'm extra tired.`**: 유난히 피곤한 것 같다. (판단·추측)
+  - **차이:** `I'm`은 상태를, `I feel`은 주관적인 느낌을, `I think`는 판단이나 추측을 강조한다.
+
 <div id="day-04"></div>
 ### Day 04
 *등록된 뉘앙스 노트가 없습니다.*
