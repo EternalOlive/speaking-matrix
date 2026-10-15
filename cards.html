@@ -1288,13 +1288,20 @@ details.ym-subj>summary small{font-weight:600;color:var(--mute);font-size:12.5px
 .glass-c{border-radius:22px;}
 #tbProg{height:44px;border-radius:22px;display:flex;align-items:center;gap:14px;padding:0 20px;min-width:0;max-width:100%;}
 #tbSess{font-size:15px;font-weight:600;white-space:nowrap;color:var(--c-label);overflow:hidden;text-overflow:ellipsis;}
-.tb-pbar{position:relative;display:block;width:180px;height:6px;border-radius:3px;background:var(--c-fill);flex:0 1 180px;min-width:60px;overflow:visible;}
+.tb-pbar{position:relative;display:flex;align-items:center;width:180px;height:6px;border-radius:3px;background:var(--c-fill);flex:0 1 180px;min-width:60px;overflow:visible;}
 #tbBar{display:block;height:6px;border-radius:3px;background:var(--c-acc);width:0;transition:width .25s ease;}
+.tb-chunks{position:absolute;inset:0;display:none;width:100%;height:100%;align-items:center;gap:3px;}
+.tb-chunk{position:relative;height:6px;border-radius:3px;background:var(--c-fill);overflow:hidden;transition:flex .35s cubic-bezier(0.16,1,0.3,1);min-width:8px;}
+.tb-chunk.active{box-shadow:0 0 0 1px var(--c-acc-tint);}
+.tb-chunk-fill{display:block;height:100%;border-radius:3px;background:var(--c-acc);transition:width .2s ease;}
+.tb-chk-pt{flex:0 0 auto;width:6px;height:6px;border-radius:50%;background:var(--c-card);border:1px solid var(--c-sep);box-shadow:0 0 2px rgba(0,0,0,0.15);transition:all .25s ease;z-index:2;}
+.tb-chk-pt.reached{background:var(--c-acc);border-color:#fff;box-shadow:0 0 5px var(--c-acc);}
+.tb-chk-pt.just-reached{animation:tickPop .5s ease;}
 .tb-ticks{position:absolute;inset:0;pointer-events:none;}
 .tb-tick{position:absolute;top:50%;transform:translate(-50%,-50%);width:6px;height:6px;border-radius:50%;background:var(--c-card);border:1px solid var(--c-sep);box-shadow:0 0 2px rgba(0,0,0,0.15);transition:all .25s ease;z-index:2;}
 .tb-tick.reached{background:var(--c-acc);border-color:#fff;box-shadow:0 0 5px var(--c-acc);}
 .tb-tick.just-reached{animation:tickPop .5s ease;}
-@keyframes tickPop{0%{transform:translate(-50%,-50%) scale(1);}50%{transform:translate(-50%,-50%) scale(1.6);box-shadow:0 0 10px var(--c-acc);}100%{transform:translate(-50%,-50%) scale(1);}}
+@keyframes tickPop{0%{transform:scale(1);}50%{transform:scale(1.6);box-shadow:0 0 10px var(--c-acc);}100%{transform:scale(1);}}
 #tbCounts{flex:0 0 auto;margin:0;font-size:13px;font-weight:400;color:var(--c-sec);text-align:left;letter-spacing:0;}
 #tbReCount{flex:0 0 auto;margin-left:2px;font-size:11.5px;font-weight:700;color:var(--c-again);background:var(--c-again-bg);padding:1px 6px;border-radius:6px;line-height:1.4;}
 @media (min-width:600px){ #tbCounts{margin-left:0;} }
@@ -1479,6 +1486,13 @@ details.ym-subj>summary small{font-weight:600;color:var(--mute);font-size:12.5px
 .chk-prog-label b{font-size:14px;color:var(--c-label);font-variant-numeric:tabular-nums;font-weight:700;}
 .chk-bar-wrap{width:100%;height:6px;border-radius:3px;background:var(--c-sep);overflow:hidden;}
 .chk-bar-fill{height:100%;border-radius:3px;background:var(--c-acc);transition:width .3s ease;}
+.chk-chunks{display:flex;align-items:center;gap:4px;width:100%;height:8px;}
+.chk-chunk{position:relative;height:8px;border-radius:4px;background:var(--c-sep);overflow:hidden;transition:flex .3s ease;min-width:12px;}
+.chk-chunk.done{background:var(--c-acc);}
+.chk-chunk.next{box-shadow:0 0 0 1.5px var(--c-acc);background:var(--c-acc-tint);}
+.chk-chunk-fill{display:block;height:100%;border-radius:4px;background:var(--c-acc);transition:width .3s ease;}
+.chk-dot{flex:0 0 auto;width:8px;height:8px;border-radius:50%;background:var(--c-card);border:1.5px solid var(--c-sep);box-shadow:0 0 2px rgba(0,0,0,0.15);}
+.chk-dot.reached{background:var(--c-acc);border-color:#fff;box-shadow:0 0 6px var(--c-acc);}
 .c-line-wrap{position:relative;flex:0 0 auto;display:flex;align-items:center;justify-content:center;margin-bottom:8px;}
 #cLine{width:100%;height:1px;transform:scaleY(.5);background:var(--c-sep);}
 .cline-dots{position:absolute;display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:0 8px;background:var(--c-card);cursor:pointer;user-select:none;-webkit-user-select:none;transition:opacity .4s ease-out;}
@@ -2014,15 +2028,16 @@ input,select{border-radius:10px;}
 .cum-hover-tip .cht-dot-line{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--c-acc);margin-right:4px;}
 .cum-hover-tip .cht-dot-bar{display:inline-block;width:3.5px;height:7.5px;border-radius:1px;background:var(--c-acc);opacity:0.75;margin-right:5px;}
 
-/* 일반 모드 60초 정지 시 동기부여 플로팅 배너 */
-.idle-motive-banner{position:fixed;left:50%;bottom:calc(8px + var(--grade-h) + 14px + env(safe-area-inset-bottom));transform:translateX(-50%) translateY(16px);opacity:0;pointer-events:none;z-index:80;display:none;align-items:center;gap:8px;padding:8px 16px;border-radius:999px;background:var(--c-card);border:1px solid var(--c-sep);box-shadow:0 8px 24px rgba(0,0,0,0.12),0 2px 6px rgba(0,0,0,0.06);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);font-family:var(--font);font-size:13.5px;font-weight:600;color:var(--c-label);cursor:pointer;transition:opacity .25s ease,transform .25s cubic-bezier(0.16,1,0.3,1);white-space:nowrap;user-select:none;-webkit-user-select:none;}
-.idle-motive-banner.show{transform:translateX(-50%) translateY(0);opacity:1;pointer-events:auto;}
-.idle-motive-banner:active{transform:translateX(-50%) translateY(0) scale(0.98);}
-@media (min-width:1120px) and (orientation:landscape){body:has(#main.railed) .idle-motive-banner{left:calc((100% - var(--insp-w) - var(--sp-m)) / 2);}}
-@media (max-width:500px){.idle-motive-banner{bottom:calc(8px + var(--grade-h) + 10px + 48px + 14px + env(safe-area-inset-bottom));max-width:calc(100vw - 32px);font-size:13px;padding:7px 14px;}}
-.idle-motive-banner .imb-dot{width:7px;height:7px;border-radius:50%;background:var(--c-acc);flex:0 0 auto;}
-.idle-motive-banner .imb-text b{color:var(--c-acc);font-weight:700;}
-.idle-motive-banner .imb-sub{font-size:11px;font-weight:500;color:var(--c-sec);margin-left:4px;}
+/* 일반 모드 60초 정지 시 동기부여 중앙 모달 */
+.idle-motive-banner{position:fixed;inset:0;z-index:950;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.38);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:20px;box-sizing:border-box;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .25s ease;user-select:none;-webkit-user-select:none;}
+.idle-motive-banner.show{opacity:1;pointer-events:auto;}
+.idle-motive-banner .imb-card{background:var(--c-card);border:1px solid var(--c-sep);border-radius:24px;padding:32px 28px;max-width:360px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.3),0 4px 16px rgba(0,0,0,0.1);display:flex;flex-direction:column;align-items:center;text-align:center;gap:12px;box-sizing:border-box;transform:scale(0.92);transition:transform .25s cubic-bezier(0.16,1,0.3,1);}
+.idle-motive-banner.show .imb-card{transform:scale(1);}
+.idle-motive-banner:active .imb-card{transform:scale(0.98);}
+.idle-motive-banner .imb-badge{font-size:13px;font-weight:700;color:var(--c-acc);background:var(--c-acc-tint);padding:5px 14px;border-radius:999px;letter-spacing:-0.01em;}
+.idle-motive-banner .imb-text{font-size:21px;font-weight:700;color:var(--c-label);line-height:1.45;letter-spacing:-0.02em;margin:6px 0;}
+.idle-motive-banner .imb-text b{color:var(--c-acc);font-size:28px;font-weight:800;}
+.idle-motive-banner .imb-sub{font-size:13px;font-weight:500;color:var(--c-sec);opacity:0.85;}
 
 
 /* ═══════════════ 디자인 이식 E(2) — 세션 화면 (캔버스 「세션」 판) ═══════════════ */
@@ -2463,7 +2478,7 @@ details.gr-fold[open]>summary .s2-chev{transform:rotate(90deg);}
     <div id="banner"></div>
     <div id="topbar">
       <div class="tb-l"><button class="tb-btn glass-c" id="btnHome" title="홈" aria-label="홈으로"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg></button><span id="saveBadge" title="미저장분 있음"></span></div>
-      <div id="tbProg"><span id="tbSess"></span><span class="tb-pbar"><span id="tbBar"></span><span id="tbTicks" class="tb-ticks"></span></span><span id="tbCounts"></span><span id="tbReCount" style="display:none"></span></div>
+      <div id="tbProg"><span id="tbSess"></span><span class="tb-pbar"><span id="tbBar"></span><span id="tbChunks" class="tb-chunks"></span><span id="tbTicks" class="tb-ticks"></span></span><span id="tbCounts"></span><span id="tbReCount" style="display:none"></span></div>
       <div class="tb-r"><button class="tb-btn" id="btnStudy" title="스터디" aria-label="스터디"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19.5c.6-3.2 2.8-5 5.5-5s4.9 1.8 5.5 5"/><path d="M15.5 4.9a3.2 3.2 0 0 1 0 6.2M17.5 14.7c1.6.7 2.7 2.4 3 4.8"/></svg></button><button class="tb-btn" id="btnPause" title="잠시 멈춤" aria-label="잠시 멈춤"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4.5" width="4" height="15" rx="1.2"/><rect x="14" y="4.5" width="4" height="15" rx="1.2"/></svg></button><button class="tb-btn" id="btnUndo" title="되돌리기" aria-label="되돌리기" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg></button><button class="tb-btn" id="btnMore" title="피드백 · 이 카드" aria-label="피드백 · 이 카드"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5.5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="18.5" cy="12" r="1.8"/></svg></button></div>
     </div>
 
@@ -2510,9 +2525,11 @@ details.gr-fold[open]>summary .s2-chev{transform:rotate(90deg);}
         </div>
       </div>
       <div id="idleMotiveBanner" class="idle-motive-banner" style="display:none;" onclick="dismissIdleMotiveBanner(event)">
-        <span class="imb-dot"></span>
-        <span class="imb-text" id="imbText"></span>
-        <span class="imb-sub">탭하여 닫기</span>
+        <div class="imb-card">
+          <div class="imb-badge">동기부여</div>
+          <div class="imb-text" id="imbText"></div>
+          <div class="imb-sub">화면을 터치하면 바로 닫혀요</div>
+        </div>
       </div>
       <div id="ohBar"><button class="tb-btn" id="ohPause" aria-label="잠시 멈춤"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4.5" width="4" height="15" rx="1.2"/><rect x="14" y="4.5" width="4" height="15" rx="1.2"/></svg></button><div id="ohWhy"></div><button class="tb-btn" id="ohUndo" aria-label="되돌리기" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg></button><button class="tb-btn" id="ohMore" aria-label="피드백 · 이 카드"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5.5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="18.5" cy="12" r="1.8"/></svg></button></div>
       <div id="gradeBar">
@@ -2709,7 +2726,8 @@ details.gr-fold[open]>summary .s2-chev{transform:rotate(90deg);}
             <span id="chkProgLabel">세션 진행도</span>
             <b id="chkProgVal">20 / 60</b>
           </div>
-          <div class="chk-bar-wrap">
+          <div class="chk-chunks" id="chkChunks"></div>
+          <div class="chk-bar-wrap" id="chkBarWrap" style="display:none;">
             <div class="chk-bar-fill" id="chkBarFill" style="width: 33%;"></div>
           </div>
         </div>
@@ -8859,22 +8877,19 @@ function counts(){ // 상단 바 — 남은 수는 현재 세션 큐 · 「내�
       reEl.textContent = '';
     }
   }
-  $('tbBar').style.width = bt ? Math.round(bd/bt*100)+'%' : '0%';
+  const barEl = $('tbBar');
+  const chunksEl = $('tbChunks');
   const ticksEl = $('tbTicks');
-  if(ticksEl){
-    if(!curPreset || bt < 20){
-      ticksEl.innerHTML = '';
-    } else {
-      const tickCount = Math.floor((bt - 1) / 20);
-      let html = '';
-      for(let m = 1; m <= tickCount; m++){
-        const val = m * 20;
-        const pct = (val / bt * 100).toFixed(2);
-        const isReached = bd >= val;
-        const isJust = bd === val;
-        html += `<span class="tb-tick${isReached ? ' reached' : ''}${isJust ? ' just-reached' : ''}" style="left:${pct}%;" data-val="${val}" title="${val}장 완료 마일스톤"></span>`;
-      }
-      ticksEl.innerHTML = html;
+  if(!curPreset || bt < 20){
+    if(barEl){ barEl.style.display = 'block'; barEl.style.width = bt ? Math.round(bd/bt*100)+'%' : '0%'; }
+    if(chunksEl){ chunksEl.style.display = 'none'; chunksEl.innerHTML = ''; }
+    if(ticksEl){ ticksEl.style.display = 'none'; ticksEl.innerHTML = ''; }
+  } else {
+    if(barEl){ barEl.style.display = 'none'; }
+    if(ticksEl){ ticksEl.style.display = 'none'; ticksEl.innerHTML = ''; }
+    if(chunksEl){
+      chunksEl.style.display = 'flex';
+      if(typeof renderProgressChunks === 'function') renderProgressChunks(chunksEl, bd, bt);
     }
   }
   if(typeof checkMilestoneProgress === 'function'){
@@ -13046,6 +13061,14 @@ document.addEventListener('keydown',e=>{
     }
     return;
   }
+  const motOvl = $('idleMotiveBanner');
+  if(motOvl && motOvl.style.display !== 'none'){
+    if(e.key === ' ' || e.key === 'Enter' || e.key === 'Escape'){
+      e.preventDefault();
+      dismissIdleMotiveBanner();
+    }
+    return;
+  }
   const sprOvl = $('ovlSprint');
   if(sprOvl && sprOvl.style.display !== 'none'){
     if(e.key === ' ' || e.key === 'Enter' || e.key === 'Escape'){
@@ -16466,9 +16489,9 @@ function showIdleMotivationalBanner(){
   if(!banner || !textEl) return;
 
   if(count === 0){
-    textEl.innerHTML = `<b>10개</b>만 풀고 이번 세션 가볍게 완료해볼까요?`;
+    textEl.innerHTML = `<b>10개</b>만 풀고<br>이번 세션 가볍게 완료해볼까요?`;
   } else {
-    textEl.innerHTML = `<b>${diff}개</b>만 더 풀면 이번에 <b>${nextGoal}개</b> 달성!`;
+    textEl.innerHTML = `<b>${diff}개</b>만 더 풀면<br>이번에 <b>${nextGoal}개</b> 달성!`;
   }
 
   banner.style.display = 'flex';
@@ -16567,6 +16590,27 @@ function openMilestoneCheckpoint(bd, bt){
     const pct = Math.min(100, Math.round(bd / Math.max(1, bt) * 100));
     barFillEl.style.width = `${pct}%`;
   }
+  const chunksBox = $('chkChunks');
+  if(chunksBox){
+    const chunkSize = 20;
+    const numChunks = Math.ceil(bt / chunkSize);
+    const nextIdx = Math.min(numChunks - 1, Math.floor(bd / chunkSize));
+    let chkHtml = '';
+    for(let i = 0; i < numChunks; i++){
+      const cStart = i * chunkSize;
+      const cEnd = Math.min(bt, (i + 1) * chunkSize);
+      const isDone = (bd >= cEnd);
+      const isNext = (i === nextIdx && bd < bt);
+      const flexW = isNext ? '2.4' : '1';
+      chkHtml += `<div class="chk-chunk${isDone ? ' done' : ''}${isNext ? ' next' : ''}" style="flex:${flexW};" title="${cStart + 1}~${cEnd}장 ${isDone ? '(완료)' : isNext ? '(다음 차례)' : '(대기)'}"></div>`;
+      if(i < numChunks - 1){
+        const cpVal = (i + 1) * chunkSize;
+        const reached = bd >= cpVal;
+        chkHtml += `<span class="chk-dot${reached ? ' reached' : ''}"></span>`;
+      }
+    }
+    chunksBox.innerHTML = chkHtml;
+  }
   if(restBox) restBox.style.display = 'none';
   if(btnRest) btnRest.style.display = 'block';
 
@@ -16583,6 +16627,57 @@ function openMilestoneCheckpoint(bd, bt){
   if(typeof scTriggerConfetti === 'function'){
     scTriggerConfetti(`${bd}장 마일스톤 달성!`, true);
   }
+}
+
+function renderProgressChunks(chunksEl, bd, bt){
+  if(!chunksEl) return;
+  const chunkSize = 20;
+  const numChunks = Math.ceil(bt / chunkSize);
+  const activeIdx = Math.min(numChunks - 1, Math.floor(bd / chunkSize));
+
+  const existingChunks = chunksEl.querySelectorAll('.tb-chunk');
+  if(existingChunks.length !== numChunks){
+    let html = '';
+    for(let i = 0; i < numChunks; i++){
+      html += `<div class="tb-chunk" data-idx="${i}"><div class="tb-chunk-fill"></div></div>`;
+      if(i < numChunks - 1){
+        const cpVal = (i + 1) * chunkSize;
+        html += `<span class="tb-chk-pt" data-cp="${cpVal}"></span>`;
+      }
+    }
+    chunksEl.innerHTML = html;
+  }
+
+  const chunkEls = chunksEl.querySelectorAll('.tb-chunk');
+  const ptEls = chunksEl.querySelectorAll('.tb-chk-pt');
+
+  chunkEls.forEach((el, i) => {
+    const cStart = i * chunkSize;
+    const cEnd = Math.min(bt, (i + 1) * chunkSize);
+    const cCount = cEnd - cStart;
+    const isActive = (i === activeIdx && bd < bt);
+    const isDone = (bd >= cEnd);
+    let cPct = 0;
+    if(isDone) cPct = 100;
+    else if(isActive) cPct = Math.round((Math.max(0, bd - cStart) / cCount) * 100);
+
+    el.style.flex = isActive ? '2.4' : '1';
+    el.classList.toggle('active', isActive);
+    el.classList.toggle('done', isDone);
+    el.title = `${cStart + 1}~${cEnd}장 ${isDone ? '(완료)' : isActive ? `(진행 중: ${Math.max(0, bd - cStart)}/${cCount}장)` : '(대기)'}`;
+
+    const fillEl = el.querySelector('.tb-chunk-fill');
+    if(fillEl) fillEl.style.width = `${cPct}%`;
+  });
+
+  ptEls.forEach(pt => {
+    const cpVal = +pt.dataset.cp;
+    const isReached = bd >= cpVal;
+    const isJust = bd === cpVal;
+    pt.classList.toggle('reached', isReached);
+    pt.classList.toggle('just-reached', isJust);
+    pt.title = `${cpVal}장 체크포인트${isReached ? ' (달성)' : ''}`;
+  });
 }
 
 function closeMilestoneCheckpoint(){
@@ -16639,6 +16734,7 @@ function finishSessEarlyFromCheckpoint(){
 
 window.initMilestoneCheckpoint = initMilestoneCheckpoint;
 window.checkMilestoneProgress = checkMilestoneProgress;
+window.renderProgressChunks = renderProgressChunks;
 window.openMilestoneCheckpoint = openMilestoneCheckpoint;
 window.closeMilestoneCheckpoint = closeMilestoneCheckpoint;
 window.startCheckpointRest = startCheckpointRest;
