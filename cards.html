@@ -1353,6 +1353,22 @@ details.ym-subj>summary small{font-weight:600;color:var(--mute);font-size:12.5px
 .c-uh-save-btn:active{opacity:.85;}
 .c-uh-cancel-btn{height:34px;padding:0 10px;background:var(--c-fill);color:var(--c-sec);border:0;border-radius:8px;font-size:12.5px;font-weight:600;cursor:pointer;flex:0 0 auto;}
 .c-uh-cancel-btn:hover{color:var(--c-label);}
+.c-note-link{display:inline-flex;align-items:center;gap:3px;background:var(--c-fill);color:var(--c-label);border:0;border-radius:14px;padding:3px 10px;font-size:12.5px;font-weight:600;cursor:pointer;transition:all .12s ease;}
+.c-note-link:hover{background:var(--c-fill-hi, rgba(120,120,128,0.22));}
+.c-note-link .s2-chev{width:7px;height:12px;color:var(--c-sec);margin-left:1px;}
+.hd-day-select{height:32px;padding:0 8px;background:var(--c-fill);border:0;border-radius:10px;font-size:13px;font-weight:600;color:var(--c-label);font-family:var(--font);outline:none;cursor:pointer;}
+.hd-day-select:focus{box-shadow:0 0 0 2px var(--c-acc);}
+.hd-note-body{flex:1 1 auto;overflow-y:auto;padding:16px 20px 60px;max-width:800px;width:100%;margin:0 auto;box-sizing:border-box;-webkit-overflow-scrolling:touch;}
+.note-h1{font-size:24px;font-weight:700;line-height:30px;letter-spacing:-.02em;color:var(--c-label);margin:16px 0 8px;}
+.note-h2{font-size:19px;font-weight:700;line-height:26px;color:var(--c-label);margin:28px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--c-sep);}
+.note-h3{font-size:16px;font-weight:600;line-height:22px;color:var(--c-acc);margin:18px 0 6px;padding:4px 6px;border-radius:6px;transition:background .8s ease;}
+.note-p{font-size:14.5px;line-height:22px;color:var(--c-label);margin:6px 0;}
+.note-ul{margin:6px 0 14px;padding-left:18px;}
+.note-li{font-size:14px;line-height:22px;color:var(--c-label);margin:3px 0;}
+.note-li.sub{font-size:13.5px;color:var(--c-sec);line-height:20px;margin-left:12px;list-style-type:circle;}
+.note-code{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:12.5px;background:var(--c-fill);padding:2px 6px;border-radius:5px;color:var(--c-orange);}
+.note-bq{margin:8px 0;padding:6px 12px;border-left:3px solid var(--c-acc);background:var(--c-fill);font-size:13.5px;color:var(--c-sec);border-radius:0 8px 8px 0;}
+.note-target-flash{background:var(--c-acc-tint)!important;transition:background 1.5s ease;}
 .c-line-wrap{position:relative;flex:0 0 auto;display:flex;align-items:center;justify-content:center;margin-bottom:8px;}
 #cLine{width:100%;height:1px;transform:scaleY(.5);background:var(--c-sep);}
 .cline-dots{position:absolute;display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:0 8px;background:var(--c-card);cursor:pointer;user-select:none;-webkit-user-select:none;transition:opacity .4s ease-out;}
@@ -2394,7 +2410,7 @@ details.gr-fold[open]>summary .s2-chev{transform:rotate(90deg);}
       <nav id="tabBar">
         <button class="tab on" id="tabToday"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg><span>오늘</span></button>
         <button class="tab" id="tabYm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 3 3 5-6"/></svg><span>문풀</span></button>
-        <button class="tab" id="tabHd"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 6.5C10 5 7 4.5 3.5 5v13c3.5-.5 6.5 0 8.5 1.5 2-1.5 5-2 8.5-1.5V5C17 4.5 14 5 12 6.5z"/><path d="M12 6.5v13"/></svg><span>회독본</span></button>
+        <button class="tab" id="tabHd"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 6.5C10 5 7 4.5 3.5 5v13c3.5-.5 6.5 0 8.5 1.5 2-1.5 5-2 8.5-1.5V5C17 4.5 14 5 12 6.5z"/><path d="M12 6.5v13"/></svg><span>노트</span></button>
         <button class="tab" data-go="scrList"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4.5 6h.01M4.5 12h.01M4.5 18h.01"/></svg><span>라이브러리</span></button>
       </nav>
     </div>
@@ -2488,26 +2504,16 @@ details.gr-fold[open]>summary .s2-chev{transform:rotate(90deg);}
     <!-- 그림 확대 (그림 카드 · 탭하면 열리고 탭하면 닫힌다) -->
     <div id="ovlImg"></div>
 
-    <!-- 회독본 오버레이 — 앱 안에서 연다 (전체화면 유지 · 미저장분 방지) -->
+    <!-- 뉘앙스 노트 오버레이 — 마크다운 기반 해설 노트 -->
     <div id="ovlHd">
       <div class="hd-edge"></div>
       <div class="hd-bar">
-        <button class="tb-btn" id="hdSideBtn" title="사이드바" aria-label="사이드바"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="15" rx="3"/><path d="M9 4.5v15"/></svg></button>
-        <button class="tb-btn" id="hdClose"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
-        <button class="hd-subj" id="hdSubj" title="과목 바꾸기"><span class="hd-ttl" id="hdTtl">회독본</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+        <button class="tb-btn" id="hdClose" title="닫기" aria-label="닫기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+        <span class="hd-ttl" id="hdTtl">Speaking Matrix 뉘앙스 노트</span>
         <span class="hd-sp"></span>
-        <button class="tb-btn" id="hdQBtn" title="질문 목록" style="display:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg></button>
-        <button class="tb-btn" id="hdTocBtn" title="목차" aria-label="목차"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4.5 6h.01M4.5 12h.01M4.5 18h.01"/></svg></button>
+        <select id="hdDaySelect" class="hd-day-select" title="Day 선택 이동" onchange="jumpToNuanceDay(this.value)"></select>
       </div>
-      <div id="hdSideScrim"></div><div id="hdPopScrim"></div><div id="hdPop" role="menu"></div>
-      <div id="hdQ">
-        <button class="qnav" id="hdQPrev">‹</button>
-        <div id="hdQTxt"></div>
-        <span id="hdQIdx"></span>
-        <button class="qnav" id="hdQNext">›</button>
-      </div>
-      <ol id="hdQList"></ol>
-      <!-- 회독본 iframe은 열 때만 만들고 닫으면 지운다(09-16) — 빈 iframe이 남아 있으면 홈 화면 앱에서 하드웨어 키 초점을 물고 있을 수 있다 -->
+      <div id="hdNoteBody" class="hd-note-body"></div>
     </div>
 
     <!-- 읽을거리 -->
@@ -8906,12 +8912,17 @@ function renderLineDots(){
    🔴 뒷면 전용이다: 답을 보기 전에 원문으로 가면 인출 연습이 깨진다. 그래서 #cDiag(앞면 아래)가
    아니라 #cBackWrap 안의 #cHoedok에 그린다 — 공개 전에는 부모가 통째로 숨겨져 있어 새어 나올 길이 없다.
    도식 카드에서는 비워 둔다: #cDiag가 이미 안내 문구와 함께 같은 링크를 달고 있어 두 번 나온다. */
+function cardDay(c){
+  if(!c) return null;
+  const m = (c.tags || []).join(' ').match(/Day\s*(\d+)/i) || (c.src || '').match(/Day\s*(\d+)/i);
+  return m ? parseInt(m[1], 10) : null;
+}
 function showHoedokLink(c){
   const el=$('cHoedok');
-  const uri = (c && c.typ!=='도식') ? cardHoedokURI(c) : null;   // null = 회독본이 없는 과목 (⚠ 13.총창은 09-02에 생겼다 — 지금은 283장 전부 링크)
-  el.classList.toggle('on', !!uri);
-  el.innerHTML = uri ? `<a href="${uri.replace(/&/g,'&amp;')}">회독본 ↗</a>` : '';
-  const a=el.querySelector('a'); if(a)a.onclick=(e)=>e.stopPropagation();   // 탭이 카드 되접기로 먹지 않게
+  if(!el) return;
+  const d = cardDay(c);
+  el.classList.add('on');
+  el.innerHTML = `<button type="button" class="typ-tag c-note-link" onclick="event.stopPropagation(); openNuanceNotes(${d});"><span>노트</span><svg class="s2-chev" viewBox="0 0 9 15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m1.5 1.5 6 6-6 6"/></svg></button>`;
 }
 function showCard(){
   $('card').classList.remove('rev');
@@ -9131,11 +9142,11 @@ function renderUserHint(c){
 
   if(hint){
     el.innerHTML=`<div class="c-uh-box" onclick="event.stopPropagation();">`
-      +`<span class="c-uh-badge">💡 힌트</span>`
+      +`<span class="c-uh-badge">힌트</span>`
       +`<span class="c-uh-text" title="클릭하여 수정" onclick="openUserHintInput()">${esc(hint)}</span>`
       +`<div class="c-uh-actions">`
-      +`<button type="button" class="c-uh-btn-edit" title="힌트 수정" aria-label="힌트 수정" onclick="openUserHintInput()">✎</button>`
-      +`<button type="button" class="c-uh-btn-del" title="힌트 삭제" aria-label="힌트 삭제" onclick="deleteUserHint()">✕</button>`
+      +`<button type="button" class="c-uh-btn-edit" title="힌트 수정" aria-label="힌트 수정" onclick="openUserHintInput()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></button>`
+      +`<button type="button" class="c-uh-btn-del" title="힌트 삭제" aria-label="힌트 삭제" onclick="deleteUserHint()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;"><path d="M18 6 6 18M6 6l12 12"/></svg></button>`
       +`</div></div>`;
   } else {
     el.innerHTML=`<button type="button" class="c-uh-add" onclick="event.stopPropagation(); openUserHintInput();">`
@@ -9558,7 +9569,7 @@ function cardTextCopy(c){
   const m = c.front.match(/^〔([^〕]*)〕\s*(.*)$/s);
   lines.push(`Q. ${m ? m[2] : c.front}`);
   const uh = userHint(c.id);
-  if(uh) lines.push(`💡 힌트: ${uh}`);
+  if(uh) lines.push(`힌트: ${uh}`);
   if(Array.isArray(c.items) && c.items.length){
     lines.push('A.');
     c.items.forEach((it, idx) => lines.push(` ${idx+1}) ${it}`));
@@ -13257,7 +13268,7 @@ function renderCardSheet(){
     <div class="cs-scope">${esc(scopeOf(c))}</div>
     ${csImgs(c,'f')}
     <div class="cs-front">${esc(m?m[2]:c.front)}</div>
-    ${userHint(c.id)?`<div class="cs-hint" style="font-size:13px;font-weight:600;color:var(--c-orange);margin:4px 0 2px">💡 힌트: ${esc(userHint(c.id))}</div>`:''}
+    ${userHint(c.id)?`<div class="cs-hint" style="font-size:13px;font-weight:600;color:var(--c-orange);margin:4px 0 2px">힌트: ${esc(userHint(c.id))}</div>`:''}
     ${hasItems?`<div class="cs-items">${c.items.map(i=>`<div>· ${esc(i)}</div>`).join('')}</div>`
               :`<div class="cs-back">${esc(c.back)}</div>`}
     ${csImgs(c,'b')}
@@ -14121,9 +14132,9 @@ function renderTrajCardInner(){
   </div>`;
 
   h += `<div class="traj-tabs">
-    <button class="traj-tab ${trajTab==='reps'?'on':''}" onclick="setTrajTab('reps')">📊 카드당 회독 분포</button>
-    <button class="traj-tab ${trajTab==='cum'?'on':''}" onclick="setTrajTab('cum')">📈 누적 풀이 추이</button>
-    <button class="traj-tab ${trajTab==='anki'?'on':''}" onclick="setTrajTab('anki')">🗂️ 카드 상태 (안키)</button>
+    <button class="traj-tab ${trajTab==='reps'?'on':''}" onclick="setTrajTab('reps')">카드당 회독 분포</button>
+    <button class="traj-tab ${trajTab==='cum'?'on':''}" onclick="setTrajTab('cum')">누적 풀이 추이</button>
+    <button class="traj-tab ${trajTab==='anki'?'on':''}" onclick="setTrajTab('anki')">카드 상태 (안키)</button>
   </div>`;
 
   h += `<div class="traj-chart-container">`;
@@ -14838,28 +14849,149 @@ function hdSaveSpot(){ if(!HD_BROWSE) return; try{ const w=$('hdFrame').contentW
   const v={p:p, y:Math.round(w.scrollY), at:Date.now()}; lsSet(K_HD_LAST, JSON.stringify(v));
   const f=hdFileOf(w.location.pathname); if(f && f!=='index.html'){ const m=hdSpots(); m[f]=v; lsSet(K_HD_SPOTS, JSON.stringify(m)); } }catch(e){} }   // 과목마다 따로(09-29 · 과목을 바꿔도 각자 보던 자리로)
 function hdLastSpot(){ try{ const j=JSON.parse(lsGet(K_HD_LAST)||'null'); return (j&&j.p&&/\/hoedok\//.test(j.p))?j:null; }catch(e){ return null; } }
-function hdBrowse(){                            // 홈 알약 — 마지막 자리가 있으면 거기로, 없으면 과목 목록
-  const last=hdLastSpot();
-  HD_RESUME = last ? {p:last.p, y:last.y||0} : null;
-  openHoedok(last ? last.p : PAN_DIR+'index.html', '회독본'); HD_BROWSE=true;
+let nuanceNotesCache = null;
+
+async function fetchNuanceNotes(){
+  if(nuanceNotesCache) return nuanceNotesCache;
+  try {
+    const r = await fetch('nuance-notes.md?t=' + Date.now());
+    if(!r.ok) throw 0;
+    nuanceNotesCache = await r.text();
+    return nuanceNotesCache;
+  } catch(e) {
+    console.error('Failed to load nuance-notes.md', e);
+    return null;
+  }
 }
-function openHoedok(uri, title, qs, readKey, readN, ans){
-  HD_BROWSE=false;
-  $('hdTtl').textContent=title||'회독본';
-  HD_QS=Array.isArray(qs)?qs.slice():[]; HD_QI=0;
-  HD_QA=Array.isArray(ans)?ans.slice():[]; _hdIdx=null;   // 답면 = 글 점프의 표적 (질문과 같은 순서)
-  HD_KEY=readKey||''; HD_N=readN||0;
-  $('hdQ').classList.remove('mini');
-  $('hdQList').classList.toggle('on', HD_QS.length>=HD_PREVIEW_MIN);
-  renderHdQ();
-  hdNewFrame(uri);
-  $('ovlHd').classList.add('show');
-  hdDock(true);                        // 앱 화면으로 붙인다(사이드바·탭 막대가 남는다 · 09-29)
-  /* 🔴 기기·마우스 뒤로가기가 앱을 벗어나지 않게 **공용 가드 칸**을 물고 있는다.
-     ⚠ 오버레이 전용 칸은 두지 않는다 — 칸이 두 종류면 닫기 버튼·제스처·화면 전환이 뒤엉켜
-     「뒤로 눌렀는데 화면이 그대로」가 났다(실측). 칸은 하나, 우선순위만 나눈다. */
+
+function parseInlineMd(s) {
+  return String(s || '')
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/`([^`]+)`/g, '<code class="note-code">$1</code>')
+    .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*([^*]+)\*/g, '<em>$1</em>');
+}
+
+function renderNuanceMarkdown(md) {
+  if (!md) return '<div class="empty-note" style="padding:40px 0;">노트를 불러올 수 없습니다.</div>';
+  const lines = md.split('\n');
+  let html = [];
+  let inList = false;
+
+  for (let line of lines) {
+    const trimmed = line.trim();
+    if (!trimmed) {
+      if (inList) { html.push('</ul>'); inList = false; }
+      continue;
+    }
+    if (trimmed.startsWith('<div') && trimmed.endsWith('</div>')) {
+      html.push(trimmed);
+      continue;
+    }
+    if (line.startsWith('# ')) {
+      if (inList) { html.push('</ul>'); inList = false; }
+      html.push('<h1 class="note-h1">' + parseInlineMd(line.slice(2)) + '</h1>');
+      continue;
+    }
+    if (line.startsWith('## ')) {
+      if (inList) { html.push('</ul>'); inList = false; }
+      html.push('<h2 class="note-h2">' + parseInlineMd(line.slice(3)) + '</h2>');
+      continue;
+    }
+    if (line.startsWith('### ')) {
+      if (inList) { html.push('</ul>'); inList = false; }
+      html.push('<h3 class="note-h3">' + parseInlineMd(line.slice(4)) + '</h3>');
+      continue;
+    }
+    if (/^\s*[-*]\s+/.test(line)) {
+      if (!inList) { html.push('<ul class="note-ul">'); inList = true; }
+      const indent = line.search(/\S/);
+      const content = line.replace(/^\s*[-*]\s+/, '');
+      const cls = indent >= 2 ? 'note-li sub' : 'note-li';
+      html.push('<li class="' + cls + '">' + parseInlineMd(content) + '</li>');
+      continue;
+    }
+    if (inList) { html.push('</ul>'); inList = false; }
+    if (line.startsWith('> ')) {
+      html.push('<blockquote class="note-bq">' + parseInlineMd(line.slice(2)) + '</blockquote>');
+    } else {
+      html.push('<p class="note-p">' + parseInlineMd(line) + '</p>');
+    }
+  }
+  if (inList) html.push('</ul>');
+  return html.join('\n');
+}
+
+async function openNuanceNotes(dayNum){
+  const ovl = $('ovlHd');
+  if(!ovl) return;
+  ovl.classList.add('show');
+  hdDock(true);
   navGuard();
+
+  const body = $('hdNoteBody');
+  if(body && !body.innerHTML.trim()){
+    body.innerHTML = '<div class="empty-note" style="padding:40px 0;">노트를 불러오는 중...</div>';
+  }
+
+  const sel = $('hdDaySelect');
+  if(sel && !sel.options.length){
+    let optHtml = '<option value="">Day 선택 이동</option>';
+    for(let u=1; u<=18; u++){
+      const ds = (u-1)*5 + 1, de = u*5;
+      optHtml += `<optgroup label="Unit ${String(u).padStart(2,'0')} (Day ${String(ds).padStart(2,'0')}-${String(de).padStart(2,'0')})">`;
+      for(let d=ds; d<=de; d++){
+        optHtml += `<option value="${d}">Day ${String(d).padStart(2,'0')}</option>`;
+      }
+      optHtml += '</optgroup>';
+    }
+    sel.innerHTML = optHtml;
+  }
+
+  const md = await fetchNuanceNotes();
+  if(body){
+    body.innerHTML = renderNuanceMarkdown(md);
+  }
+
+  if(dayNum){
+    setTimeout(()=>jumpToNuanceDay(dayNum), 50);
+  } else {
+    if(body) body.scrollTop = 0;
+  }
 }
+
+function jumpToNuanceDay(d){
+  if(!d) return;
+  const dStr = String(d).padStart(2, '0');
+  const target = document.getElementById('day-' + dStr);
+  const body = $('hdNoteBody');
+  const sel = $('hdDaySelect');
+  if(sel) sel.value = String(d);
+  if(target && body){
+    target.scrollIntoView({behavior: 'smooth', block: 'start'});
+    const nextHeading = target.nextElementSibling;
+    if(nextHeading){
+      nextHeading.classList.remove('note-target-flash');
+      void nextHeading.offsetWidth;
+      nextHeading.classList.add('note-target-flash');
+      setTimeout(()=>nextHeading.classList.remove('note-target-flash'), 1800);
+    }
+  }
+}
+
+function closeNuanceNotes(){
+  const ovl = $('ovlHd');
+  if(ovl) ovl.classList.remove('show');
+  hdDock(false);
+}
+
+function hdBrowse(){ openNuanceNotes(); }
+function openHoedok(uri, title, qs, readKey, readN, ans){ openNuanceNotes(); }
+function closeHoedok(){ closeNuanceNotes(); }
+
+window.openNuanceNotes = openNuanceNotes;
+window.jumpToNuanceDay = jumpToNuanceDay;
+window.closeNuanceNotes = closeNuanceNotes;
 /* 🔴 **브라우저·마우스 뒤로가기로도 앱 안에서 뒤로 간다** (동하 09-01 실기:
    「PC에서 뒤로가기로 세션 → 홈 화면 전환이 안 되고(마우스 뒤로가기 버튼)」).
    앱은 화면 전환에 history를 안 써서, 마우스 4번 버튼은 **앱을 벗어나는 쪽**으로만 갔다.
