@@ -2696,7 +2696,7 @@ details.gr-fold[open]>summary .s2-chev{transform:rotate(90deg);}
           <kbd>↑</kbd> 다시 · <kbd>→</kbd> 어려움 · <kbd>↓</kbd> 알맞음(재출: 통과) · <kbd>←</kbd> 쉬움<br>
           <small style="color:var(--mute)">* 정답 공개 전에는 방향키 누르면 정답이 공개돼요.</small><br>
           <p style="margin:10px 0 6px;font-size:12px;color:var(--ink);font-weight:700">기타 기능</p>
-          <kbd>R</kbd> 되돌리기 · <kbd>Shift+B</kbd> 내일로 · <kbd>Q</kbd> 카드 끄기 · <kbd>F</kbd> 플래그 ·
+          <kbd>`</kbd> 친구 찌르기 · <kbd>R</kbd> 되돌리기 · <kbd>Shift+B</kbd> 내일로 · <kbd>Q</kbd> 카드 끄기 · <kbd>F</kbd> 플래그 ·
           <kbd>S</kbd> 일시정지 · <kbd>T</kbd> 초성 힌트 · <kbd>Esc</kbd> 닫기 → 홈 · <kbd>/</kbd> 목록 검색<br>
           <kbd>Ctrl</kbd>+<kbd>1</kbd><kbd>2</kbd><kbd>3</kbd><kbd>4</kbd> 플래그 사유(단서 과다 · 문면 분리 · 문장 어색 · 사례 추가)<br>
           <small style="color:var(--mute)">* 한글 입력 상태에서도 자판 자리로 정상 인식됩니다.</small>
@@ -2958,7 +2958,7 @@ details.gr-fold[open]>summary .s2-chev{transform:rotate(90deg);}
               <tr><td>F · S · T</td><td>플래그(Flag) · 일시정지(Stop) · 초성 힌트(Tip)</td></tr>
               <tr><td><b>Ctrl + 1 2 3 4</b></td><td><b>플래그 사유 칩</b> — 단서 과다 / 문면 분리 / 문장 어색 / 사례 추가.
                 레일을 안 열어도 붙고, 칩을 붙이면 플래그도 켜져요. 같은 키를 다시 누르면 해제</td></tr>
-              <tr><td>Esc · /</td><td>닫기(열린 것이 없으면 홈) · 목록 검색 — 옛 키 U·O·P·H도 그대로 먹어요</td></tr>
+              <tr><td>` · Esc · /</td><td>친구 찌르기(`) · 닫기(열린 것이 없으면 홈) · 목록 검색 — 옛 키 U·O·P·H도 그대로 먹어요</td></tr>
             </table>
             <p>⚠ Ctrl+1~4 말고 다른 조합키(Cmd·Alt 등)는 브라우저 몫이라 앱이 안 받아요. 컨트롤러엔 <b>낱개 키</b>로 배정하세요.</p>
             <p><b>되돌리기</b>가 정확히 무엇을 되돌리는지는 위 <b>「되돌리기」</b> 절에 있어요.</p>
@@ -11373,7 +11373,7 @@ function scRenderSolveBadge(){
   const leadCls='sc-badge-lead'+(pokeTarget?' poke':'');
   const leadSpan = leadText ? ` · <span class="${leadCls}">${esc(leadText)}</span>` : '';
   badge.innerHTML=`<span class="${dotCls}"></span><span>온라인 ${nStudy}명</span><span> · ${myCntText}</span>${leadSpan}${stripSvg?` · ${stripSvg}`:''}`;
-  badge.title=pokeTarget ? '클릭하면 찌르기 (패드 R · 하트 ♥)' : '스터디 참여 중';
+  badge.title=pokeTarget ? '클릭하면 찌르기 (` 키 · 패드 R · 하트)' : '스터디 참여 중';
   badge.style.display='inline-flex';
 }
 let scPokeIdx = 0;
@@ -12804,7 +12804,7 @@ try{ if(lsGet('cards_pad_v4')) lsSet('cards_pad_v4',''); }catch(e){}
 const PAD_ACTS=[   // [id, 라벨, 합성할 키] — 순서 = 화면 순서
   ['again','다시 (A)',{code:'KeyA',key:'a'}], ['hard','통과 / 어려움 (B)',{code:'KeyB',key:'b'}],
   ['good','알맞음 (Y)',{code:'KeyY',key:'y'}], ['easy','통과 / 쉬움 (X)',{code:'KeyX',key:'x'}],
-  ['poke','친구 찌르기 (R · 하트 ♥)',{code:'KeyJ',key:'j'}],
+  ['poke','친구 찌르기 (` · R · 하트)',{code:'Backquote',key:'`'}],
   ['reveal','답 보기 (Space)',{code:'Space',key:' '}], ['undo','되돌리기 (R2)',{code:'KeyU',key:'u'}],
   ['bury','내일로 (Shift+B)',{code:'KeyB',key:'b',shiftKey:true}], ['off','끄기 (Q)',{code:'KeyO',key:'o'}], ['hint','첫 글자 힌트 (T)',{code:'KeyT',key:'t'}],
   ['home','홈 (Esc)',{code:'KeyH',key:'h'}], ['pause','일시정지 (P)',{code:'KeyP',key:'p'}], ['mod','사유 칩 보조키 — 누른 채 채점 버튼 (Ctrl+1~4)',null],
@@ -12885,6 +12885,7 @@ function keyOf(e){
   if(c==='Enter'||c==='NumpadEnter') return 'enter';
   if(c==='Escape') return 'escape';
   if(c==='Slash') return '/';
+  if(c==='Backquote') return '`';
   return (e.key||'').toLowerCase();
 }
 /* 지금 화면에서 실제로 구르는 상자 하나 — 열린 시트가 있으면 그것이 먼저다(시트가 화면을 덮으므로). */
@@ -12947,7 +12948,7 @@ document.addEventListener('keydown',e=>{
   }
   if(typing||ovl)return;
   let k=keyOf(e);                    // let — 아래 왼손 키가 옛 키로 바꿔 쓴다(09-25)
-  if(k==='j'){ e.preventDefault(); triggerStudyPoke(); return; }
+  if(k==='j' || k==='`' || k==='~' || e.code==='Backquote'){ e.preventDefault(); triggerStudyPoke(); return; }
   if(k==='/'){ e.preventDefault(); go('scrList'); $('qSearch').focus(); return; }
   if(k==='h'){ e.preventDefault(); push(); go('scrHome'); return; }
   if(!$('scrSolve').classList.contains('on'))return;
