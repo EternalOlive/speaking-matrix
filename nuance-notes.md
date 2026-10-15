@@ -38,7 +38,13 @@ Speaking Matrix 900제 문장의 뉘앙스, 원어민 어감 차이, 실전 활�
 
 <div id="day-08"></div>
 ### Day 08
-*등록된 뉘앙스 노트가 없습니다.*
+- **We are enthusiastic about our work.** <!-- id: sm_1790710444872 -->
+  - **`enthusiastic about`**: ~에 의욕적이고 열성적인
+  - **`passionate about`**: ~에 깊은 애정과 열정을 가진
+  - **차이:** `enthusiastic`은 의욕과 적극성, `passionate`는 강한 애정과 열정에 초점.
+
+- **`passionate about`**: ~에 깊은 애정과 열정을 가진
+**차이:** `enthusiastic`은 의욕과 적극성, `passionate`는 강한 애정과 열정에 초점.
 
 <div id="day-09"></div>
 ### Day 09
@@ -56,10 +62,15 @@ Speaking Matrix 900제 문장의 뉘앙스, 원어민 어감 차이, 실전 활�
 
 <div id="day-12"></div>
 ### Day 12
-- **Do you prefer staying at home or going out?** <!-- id: sm_1790710445433 -->
-  - `going out` → 외출하다 (외출·여가 활동 전반)
-  - `heading out` → 나가다, 출발하다 (어딘가로 떠나는 동작 강조)
-  - 핵심: 평소 여가 취향을 물을 때는 `going out`이 더 자연스러워.
+- **`going out`** → 외출하다 (외출·여가 활동 전반) **`heading out`** → 나가다, 출발하다 (어딘가로 떠나는 동작 강조) **핵심:** 평소 여가 취향을 물을 때는 `going out`이 더 자연스러워.
+
+- **`heading out`** → 나가다, 출발하다 (어딘가로 떠나는 동작 강조)
+
+**핵심:** 평소 여가 취향을 물을 때는 `going out`이 더 자연스러워.
+
+- **`heading out`** → 나가다, 출발하다 (어딘가로 떠나는 동작 강조)
+
+- **핵심:** 평소 여가 취향을 물을 때는 `going out`이 더 자연스러워.
 
 <div id="day-13"></div>
 ### Day 13
@@ -67,7 +78,8 @@ Speaking Matrix 900제 문장의 뉘앙스, 원어민 어감 차이, 실전 활�
 
 <div id="day-14"></div>
 ### Day 14
-*등록된 뉘앙스 노트가 없습니다.*
+- **I usually get to work ten minutes early.** <!-- id: sm_1790710445643 -->
+  - get to work: 직장에 도착하다 / 일을 시작하다
 
 <div id="day-15"></div>
 ### Day 15
@@ -107,10 +119,8 @@ Speaking Matrix 900제 문장의 뉘앙스, 원어민 어감 차이, 실전 활�
 
 <div id="day-23"></div>
 ### Day 23
-- **I usually drink tea, but today I went with coffee to focus.**
+- **I went with the simpler option.** <!-- id: sm_1790710447200 -->
   - `went with`: 단순히 `chose`보다 여러 선택지 중 '이걸로 결정했다/택했다'는 자연스러운 구어체 뉘앙스입니다. 식당이나 카페에서 주문할 때도 자주 쓰입니다.
-  - `to focus`: `in order to focus`의 일상적 축약 형태로, 목적을 간결하게 표현합니다.
-  - `usually` vs `normally`: `usually`는 일상적인 빈도/습관에 초점이 있고, `normally`는 일반적인 규칙/상태에 초점이 있습니다.
 
 <div id="day-24"></div>
 ### Day 24
@@ -124,7 +134,10 @@ Speaking Matrix 900제 문장의 뉘앙스, 원어민 어감 차이, 실전 활�
 
 <div id="day-26"></div>
 ### Day 26
-*등록된 뉘앙스 노트가 없습니다.*
+- **I want to be more organized.** <!-- id: sm_1790710447914 -->
+  - **`organized`**: 정리된, 체계적인 (효율적인 관리와 정돈)
+  - **`structured`**: 구조화된, 체계가 잡힌 (명확한 계획·규칙·구조)
+  - **차이:** `organized`는 정리와 관리, `structured`는 계획과 구조에 초점.
 
 <div id="day-27"></div>
 ### Day 27
