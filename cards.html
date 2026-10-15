@@ -1288,20 +1288,11 @@ details.ym-subj>summary small{font-weight:600;color:var(--mute);font-size:12.5px
 .glass-c{border-radius:22px;}
 #tbProg{height:44px;border-radius:22px;display:flex;align-items:center;gap:14px;padding:0 20px;min-width:0;max-width:100%;}
 #tbSess{font-size:15px;font-weight:600;white-space:nowrap;color:var(--c-label);overflow:hidden;text-overflow:ellipsis;}
-.tb-pbar{position:relative;display:flex;align-items:center;width:180px;height:6px;border-radius:3px;background:var(--c-fill);flex:0 1 180px;min-width:60px;overflow:visible;}
+.tb-pbar{position:relative;display:flex;align-items:center;width:180px;height:6px;border-radius:3px;background:var(--c-fill);flex:0 1 180px;min-width:60px;overflow:hidden;}
 #tbBar{display:block;height:6px;border-radius:3px;background:var(--c-acc);width:0;transition:width .25s ease;}
-.tb-chunks{position:absolute;inset:0;display:none;width:100%;height:100%;align-items:center;gap:3px;}
-.tb-chunk{position:relative;height:6px;border-radius:3px;background:var(--c-fill);overflow:hidden;transition:flex .35s cubic-bezier(0.16,1,0.3,1);min-width:8px;}
-.tb-chunk.active{box-shadow:0 0 0 1px var(--c-acc-tint);}
-.tb-chunk-fill{display:block;height:100%;border-radius:3px;background:var(--c-acc);transition:width .2s ease;}
-.tb-chk-pt{flex:0 0 auto;width:6px;height:6px;border-radius:50%;background:var(--c-card);border:1px solid var(--c-sep);box-shadow:0 0 2px rgba(0,0,0,0.15);transition:all .25s ease;z-index:2;}
-.tb-chk-pt.reached{background:var(--c-acc);border-color:#fff;box-shadow:0 0 5px var(--c-acc);}
-.tb-chk-pt.just-reached{animation:tickPop .5s ease;}
-.tb-ticks{position:absolute;inset:0;pointer-events:none;}
-.tb-tick{position:absolute;top:50%;transform:translate(-50%,-50%);width:6px;height:6px;border-radius:50%;background:var(--c-card);border:1px solid var(--c-sep);box-shadow:0 0 2px rgba(0,0,0,0.15);transition:all .25s ease;z-index:2;}
-.tb-tick.reached{background:var(--c-acc);border-color:#fff;box-shadow:0 0 5px var(--c-acc);}
-.tb-tick.just-reached{animation:tickPop .5s ease;}
-@keyframes tickPop{0%{transform:scale(1);}50%{transform:scale(1.6);box-shadow:0 0 10px var(--c-acc);}100%{transform:scale(1);}}
+.tb-ticks{position:absolute;inset:0;pointer-events:none;overflow:hidden;border-radius:3px;}
+.tb-notch{position:absolute;top:0;bottom:0;width:1.5px;background:var(--c-card);opacity:0.85;transform:translateX(-50%);pointer-events:none;transition:all .2s ease;}
+.tb-notch.reached{background:rgba(255,255,255,0.75);box-shadow:0 0 2px rgba(255,255,255,0.4);}
 #tbCounts{flex:0 0 auto;margin:0;font-size:13px;font-weight:400;color:var(--c-sec);text-align:left;letter-spacing:0;}
 #tbReCount{flex:0 0 auto;margin-left:2px;font-size:11.5px;font-weight:700;color:var(--c-again);background:var(--c-again-bg);padding:1px 6px;border-radius:6px;line-height:1.4;}
 @media (min-width:600px){ #tbCounts{margin-left:0;} }
@@ -1484,15 +1475,11 @@ details.ym-subj>summary small{font-weight:600;color:var(--mute);font-size:12.5px
 .chk-progress-box{width:100%;background:var(--c-fill);border-radius:14px;padding:12px 16px;margin-bottom:18px;box-sizing:border-box;display:flex;flex-direction:column;gap:8px;}
 .chk-prog-label{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;color:var(--c-sec);font-weight:500;}
 .chk-prog-label b{font-size:14px;color:var(--c-label);font-variant-numeric:tabular-nums;font-weight:700;}
-.chk-bar-wrap{width:100%;height:6px;border-radius:3px;background:var(--c-sep);overflow:hidden;}
-.chk-bar-fill{height:100%;border-radius:3px;background:var(--c-acc);transition:width .3s ease;}
-.chk-chunks{display:flex;align-items:center;gap:4px;width:100%;height:8px;}
-.chk-chunk{position:relative;height:8px;border-radius:4px;background:var(--c-sep);overflow:hidden;transition:flex .3s ease;min-width:12px;}
-.chk-chunk.done{background:var(--c-acc);}
-.chk-chunk.next{box-shadow:0 0 0 1.5px var(--c-acc);background:var(--c-acc-tint);}
-.chk-chunk-fill{display:block;height:100%;border-radius:4px;background:var(--c-acc);transition:width .3s ease;}
-.chk-dot{flex:0 0 auto;width:8px;height:8px;border-radius:50%;background:var(--c-card);border:1.5px solid var(--c-sep);box-shadow:0 0 2px rgba(0,0,0,0.15);}
-.chk-dot.reached{background:var(--c-acc);border-color:#fff;box-shadow:0 0 6px var(--c-acc);}
+.chk-bar-wrap{position:relative;width:100%;height:8px;border-radius:4px;background:var(--c-sep);overflow:hidden;}
+.chk-bar-fill{height:100%;border-radius:4px;background:var(--c-acc);transition:width .3s ease;}
+.chk-notches{position:absolute;inset:0;pointer-events:none;overflow:hidden;border-radius:4px;}
+.chk-notch{position:absolute;top:0;bottom:0;width:1.5px;background:var(--c-card);opacity:0.85;transform:translateX(-50%);pointer-events:none;}
+.chk-notch.reached{background:rgba(255,255,255,0.75);}
 .c-line-wrap{position:relative;flex:0 0 auto;display:flex;align-items:center;justify-content:center;margin-bottom:8px;}
 #cLine{width:100%;height:1px;transform:scaleY(.5);background:var(--c-sep);}
 .cline-dots{position:absolute;display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:0 8px;background:var(--c-card);cursor:pointer;user-select:none;-webkit-user-select:none;transition:opacity .4s ease-out;}
@@ -2478,7 +2465,7 @@ details.gr-fold[open]>summary .s2-chev{transform:rotate(90deg);}
     <div id="banner"></div>
     <div id="topbar">
       <div class="tb-l"><button class="tb-btn glass-c" id="btnHome" title="홈" aria-label="홈으로"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg></button><span id="saveBadge" title="미저장분 있음"></span></div>
-      <div id="tbProg"><span id="tbSess"></span><span class="tb-pbar"><span id="tbBar"></span><span id="tbChunks" class="tb-chunks"></span><span id="tbTicks" class="tb-ticks"></span></span><span id="tbCounts"></span><span id="tbReCount" style="display:none"></span></div>
+      <div id="tbProg"><span id="tbSess"></span><span class="tb-pbar"><span id="tbBar"></span><span id="tbTicks" class="tb-ticks"></span></span><span id="tbCounts"></span><span id="tbReCount" style="display:none"></span></div>
       <div class="tb-r"><button class="tb-btn" id="btnStudy" title="스터디" aria-label="스터디"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19.5c.6-3.2 2.8-5 5.5-5s4.9 1.8 5.5 5"/><path d="M15.5 4.9a3.2 3.2 0 0 1 0 6.2M17.5 14.7c1.6.7 2.7 2.4 3 4.8"/></svg></button><button class="tb-btn" id="btnPause" title="잠시 멈춤" aria-label="잠시 멈춤"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4.5" width="4" height="15" rx="1.2"/><rect x="14" y="4.5" width="4" height="15" rx="1.2"/></svg></button><button class="tb-btn" id="btnUndo" title="되돌리기" aria-label="되돌리기" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg></button><button class="tb-btn" id="btnMore" title="피드백 · 이 카드" aria-label="피드백 · 이 카드"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5.5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="18.5" cy="12" r="1.8"/></svg></button></div>
     </div>
 
@@ -2726,9 +2713,9 @@ details.gr-fold[open]>summary .s2-chev{transform:rotate(90deg);}
             <span id="chkProgLabel">세션 진행도</span>
             <b id="chkProgVal">20 / 60</b>
           </div>
-          <div class="chk-chunks" id="chkChunks"></div>
-          <div class="chk-bar-wrap" id="chkBarWrap" style="display:none;">
+          <div class="chk-bar-wrap" id="chkBarWrap">
             <div class="chk-bar-fill" id="chkBarFill" style="width: 33%;"></div>
+            <div class="chk-notches" id="chkNotches"></div>
           </div>
         </div>
         <div id="chkRestBox" class="sprint-rest-box" style="display:none;">
@@ -8878,18 +8865,26 @@ function counts(){ // 상단 바 — 남은 수는 현재 세션 큐 · 「내�
     }
   }
   const barEl = $('tbBar');
-  const chunksEl = $('tbChunks');
   const ticksEl = $('tbTicks');
-  if(!curPreset || bt < 20){
-    if(barEl){ barEl.style.display = 'block'; barEl.style.width = bt ? Math.round(bd/bt*100)+'%' : '0%'; }
-    if(chunksEl){ chunksEl.style.display = 'none'; chunksEl.innerHTML = ''; }
-    if(ticksEl){ ticksEl.style.display = 'none'; ticksEl.innerHTML = ''; }
-  } else {
-    if(barEl){ barEl.style.display = 'none'; }
-    if(ticksEl){ ticksEl.style.display = 'none'; ticksEl.innerHTML = ''; }
-    if(chunksEl){
-      chunksEl.style.display = 'flex';
-      if(typeof renderProgressChunks === 'function') renderProgressChunks(chunksEl, bd, bt);
+  if(barEl){
+    barEl.style.display = 'block';
+    barEl.style.width = bt ? Math.round(bd / bt * 100) + '%' : '0%';
+  }
+  if(ticksEl){
+    if(!curPreset || bt < 20){
+      ticksEl.innerHTML = '';
+      ticksEl.style.display = 'none';
+    } else {
+      ticksEl.style.display = 'block';
+      const tickCount = Math.floor((bt - 1) / 20);
+      let html = '';
+      for(let m = 1; m <= tickCount; m++){
+        const val = m * 20;
+        const pct = (val / bt * 100).toFixed(2);
+        const isReached = bd >= val;
+        html += `<span class="tb-notch${isReached ? ' reached' : ''}" style="left:${pct}%;" data-val="${val}" title="${val}장 체크포인트"></span>`;
+      }
+      ticksEl.innerHTML = html;
     }
   }
   if(typeof checkMilestoneProgress === 'function'){
@@ -16590,26 +16585,18 @@ function openMilestoneCheckpoint(bd, bt){
     const pct = Math.min(100, Math.round(bd / Math.max(1, bt) * 100));
     barFillEl.style.width = `${pct}%`;
   }
-  const chunksBox = $('chkChunks');
-  if(chunksBox){
+  const notchesBox = $('chkNotches');
+  if(notchesBox){
     const chunkSize = 20;
-    const numChunks = Math.ceil(bt / chunkSize);
-    const nextIdx = Math.min(numChunks - 1, Math.floor(bd / chunkSize));
-    let chkHtml = '';
-    for(let i = 0; i < numChunks; i++){
-      const cStart = i * chunkSize;
-      const cEnd = Math.min(bt, (i + 1) * chunkSize);
-      const isDone = (bd >= cEnd);
-      const isNext = (i === nextIdx && bd < bt);
-      const flexW = isNext ? '2.4' : '1';
-      chkHtml += `<div class="chk-chunk${isDone ? ' done' : ''}${isNext ? ' next' : ''}" style="flex:${flexW};" title="${cStart + 1}~${cEnd}장 ${isDone ? '(완료)' : isNext ? '(다음 차례)' : '(대기)'}"></div>`;
-      if(i < numChunks - 1){
-        const cpVal = (i + 1) * chunkSize;
-        const reached = bd >= cpVal;
-        chkHtml += `<span class="chk-dot${reached ? ' reached' : ''}"></span>`;
-      }
+    const tickCount = Math.floor((bt - 1) / chunkSize);
+    let notchHtml = '';
+    for(let m = 1; m <= tickCount; m++){
+      const val = m * chunkSize;
+      const pct = (val / bt * 100).toFixed(2);
+      const isReached = bd >= val;
+      notchHtml += `<span class="chk-notch${isReached ? ' reached' : ''}" style="left:${pct}%;"></span>`;
     }
-    chunksBox.innerHTML = chkHtml;
+    notchesBox.innerHTML = notchHtml;
   }
   if(restBox) restBox.style.display = 'none';
   if(btnRest) btnRest.style.display = 'block';
@@ -16629,56 +16616,7 @@ function openMilestoneCheckpoint(bd, bt){
   }
 }
 
-function renderProgressChunks(chunksEl, bd, bt){
-  if(!chunksEl) return;
-  const chunkSize = 20;
-  const numChunks = Math.ceil(bt / chunkSize);
-  const activeIdx = Math.min(numChunks - 1, Math.floor(bd / chunkSize));
-
-  const existingChunks = chunksEl.querySelectorAll('.tb-chunk');
-  if(existingChunks.length !== numChunks){
-    let html = '';
-    for(let i = 0; i < numChunks; i++){
-      html += `<div class="tb-chunk" data-idx="${i}"><div class="tb-chunk-fill"></div></div>`;
-      if(i < numChunks - 1){
-        const cpVal = (i + 1) * chunkSize;
-        html += `<span class="tb-chk-pt" data-cp="${cpVal}"></span>`;
-      }
-    }
-    chunksEl.innerHTML = html;
-  }
-
-  const chunkEls = chunksEl.querySelectorAll('.tb-chunk');
-  const ptEls = chunksEl.querySelectorAll('.tb-chk-pt');
-
-  chunkEls.forEach((el, i) => {
-    const cStart = i * chunkSize;
-    const cEnd = Math.min(bt, (i + 1) * chunkSize);
-    const cCount = cEnd - cStart;
-    const isActive = (i === activeIdx && bd < bt);
-    const isDone = (bd >= cEnd);
-    let cPct = 0;
-    if(isDone) cPct = 100;
-    else if(isActive) cPct = Math.round((Math.max(0, bd - cStart) / cCount) * 100);
-
-    el.style.flex = isActive ? '2.4' : '1';
-    el.classList.toggle('active', isActive);
-    el.classList.toggle('done', isDone);
-    el.title = `${cStart + 1}~${cEnd}장 ${isDone ? '(완료)' : isActive ? `(진행 중: ${Math.max(0, bd - cStart)}/${cCount}장)` : '(대기)'}`;
-
-    const fillEl = el.querySelector('.tb-chunk-fill');
-    if(fillEl) fillEl.style.width = `${cPct}%`;
-  });
-
-  ptEls.forEach(pt => {
-    const cpVal = +pt.dataset.cp;
-    const isReached = bd >= cpVal;
-    const isJust = bd === cpVal;
-    pt.classList.toggle('reached', isReached);
-    pt.classList.toggle('just-reached', isJust);
-    pt.title = `${cpVal}장 체크포인트${isReached ? ' (달성)' : ''}`;
-  });
-}
+function renderProgressChunks(){}
 
 function closeMilestoneCheckpoint(){
   const ovl = $('ovlCheckpoint');
