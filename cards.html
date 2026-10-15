@@ -1412,8 +1412,9 @@ details.ym-subj>summary small{font-weight:600;color:var(--mute);font-size:12.5px
 .cn-li strong{color:var(--c-label);font-weight:600;}
 .cn-p{font-size:13.5px;line-height:1.55;color:var(--c-label);margin:4px 0;}
 .cn-bq{margin:6px 0;padding:4px 10px;border-left:3px solid var(--c-acc);background:var(--c-card);font-size:13px;color:var(--c-sec);border-radius:0 6px 6px 0;}
-.cn-empty-row{display:flex;align-items:center;justify-content:space-between;padding:7px 12px;background:var(--c-fill);border:1px dashed var(--c-sep);border-radius:10px;box-sizing:border-box;}
+.cn-empty-row{display:flex;align-items:center;justify-content:space-between;padding:7px 12px;background:var(--c-fill);border:1px dashed var(--c-sep);border-radius:10px;box-sizing:border-box;gap:8px;flex-wrap:wrap;}
 .cn-empty-label{font-size:12px;color:var(--c-sec);font-weight:500;}
+.cn-empty-actions{display:flex;align-items:center;gap:6px;}
 .cn-add-btn{border:0;background:var(--c-card);border:1px solid var(--c-sep);color:var(--c-acc);font-size:12px;font-weight:600;padding:3px 10px;border-radius:6px;cursor:pointer;transition:all .12s ease;font-family:var(--font);}
 .cn-add-btn:hover{background:var(--c-acc);color:#fff;border-color:var(--c-acc);}
 .cn-add-btn:active{opacity:.85;}
@@ -1426,6 +1427,8 @@ details.ym-subj>summary small{font-weight:600;color:var(--mute);font-size:12.5px
 .cn-btn-save:active{opacity:.85;}
 .cn-btn-cancel{height:28px;padding:0 10px;background:var(--c-card);border:1px solid var(--c-sep);color:var(--c-sec);border-radius:6px;font-size:12px;font-weight:500;cursor:pointer;}
 .cn-btn-cancel:hover{color:var(--c-label);}
+.cn-btn-del{height:28px;padding:0 8px;background:transparent;color:var(--c-ter);border:0;font-size:11.5px;cursor:pointer;}
+.cn-btn-del:hover{color:var(--c-red, #ff3b30);}
 .cn-btn-full{background:transparent;border:0;color:var(--c-sec);font-size:11.5px;cursor:pointer;padding:4px;}
 .cn-btn-full:hover{color:var(--c-acc);text-decoration:underline;}
 .cn-hint{font-size:11px;color:var(--c-ter);}
@@ -8983,7 +8986,8 @@ function showHoedokLink(c){
   if(!el) return;
   const d = cardDay(c);
   el.classList.add('on');
-  el.innerHTML = `<button type="button" class="typ-tag c-note-link" onclick="event.stopPropagation(); openNuanceNotes(${d});"><span>노트</span><svg class="s2-chev" viewBox="0 0 9 15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m1.5 1.5 6 6-6 6"/></svg></button>`;
+  const bEsc = esc(c.back || '');
+  el.innerHTML = `<button type="button" class="typ-tag c-note-link" onclick="event.stopPropagation(); openNuanceNotes(${d}, false, '${c.id}', '${bEsc}');"><span>노트</span><svg class="s2-chev" viewBox="0 0 9 15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m1.5 1.5 6 6-6 6"/></svg></button>`;
 }
 function showCard(){
   cardNuanceEditingDay = null;
@@ -14949,6 +14953,10 @@ function parseInlineMd(s) {
     .replace(/\*([^*]+)\*/g, '<em>$1</em>');
 }
 
+function norm(s) {
+  return String(s || '').toLowerCase().replace(/[^a-z0-9가-힣]/g, '');
+}
+
 function getDayContentFromMd(md, dayNum){
   if(!md) return '';
   const dStr = String(dayNum).padStart(2, '0');
@@ -15056,7 +15064,10 @@ function renderNuanceMarkdown(md, activeEditDay) {
       const indent = line.search(/\S/);
       const content = line.replace(/^\s*[-*]\s+/, '');
       const cls = indent >= 2 ? 'note-li sub' : 'note-li';
-      html.push('<li class="' + cls + '">' + parseInlineMd(content) + '</li>');
+      const mId = line.match(/<!--\s*id:\s*([a-zA-Z0-9_-]+)\s*-->/);
+      const mTitle = line.match(/^\s*[-*]\s+\*\*([^*]+)\*\*/);
+      const anchorAttr = mId ? ' id="note-card-' + mId[1] + '"' : (mTitle ? ' id="note-card-' + norm(mTitle[1]) + '"' : '');
+      html.push('<li class="' + cls + '"' + anchorAttr + '>' + parseInlineMd(content) + '</li>');
       continue;
     }
     if (inList) { html.push('</ul>'); inList = false; }
@@ -15111,7 +15122,7 @@ async function ghPutNuanceNotes(mdText){
   }
 }
 
-async function openNuanceNotes(dayNum, autoEdit){
+async function openNuanceNotes(dayNum, autoEdit, targetCardId, targetTitle){
   const ovl = $('ovlHd');
   if(!ovl) return;
   ovl.classList.add('show');
@@ -15147,7 +15158,7 @@ async function openNuanceNotes(dayNum, autoEdit){
   }
 
   if(dayNum){
-    setTimeout(()=>jumpToNuanceDay(dayNum), 50);
+    setTimeout(()=>jumpToNuanceDay(dayNum, targetCardId, targetTitle), 60);
   } else {
     if(body) body.scrollTop = 0;
   }
@@ -15236,22 +15247,22 @@ async function saveNuanceDay(dNum){
   }
 }
 
-function jumpToNuanceDay(d){
+function jumpToNuanceDay(d, targetCardId, targetTitle){
   if(!d) return;
   const dStr = String(d).padStart(2, '0');
-  const target = document.getElementById('day-' + dStr);
+  let target = null;
+  if(targetCardId) target = document.getElementById('note-card-' + targetCardId);
+  if(!target && targetTitle) target = document.getElementById('note-card-' + norm(targetTitle));
+  if(!target) target = document.getElementById('day-' + dStr);
   const body = $('hdNoteBody');
   const sel = $('hdDaySelect');
   if(sel) sel.value = String(d);
   if(target && body){
-    target.scrollIntoView({behavior: 'smooth', block: 'start'});
-    const nextBlock = document.getElementById('block-day-' + dStr) || target.nextElementSibling;
-    if(nextBlock){
-      nextBlock.classList.remove('note-target-flash');
-      void nextBlock.offsetWidth;
-      nextBlock.classList.add('note-target-flash');
-      setTimeout(()=>nextBlock.classList.remove('note-target-flash'), 1800);
-    }
+    target.scrollIntoView({behavior: 'smooth', block: 'center'});
+    target.classList.remove('note-target-flash');
+    void target.offsetWidth;
+    target.classList.add('note-target-flash');
+    setTimeout(()=>target.classList.remove('note-target-flash'), 1800);
   }
 }
 
@@ -15274,8 +15285,142 @@ window.cancelNuanceDay = cancelNuanceDay;
 window.clearNuanceDay = clearNuanceDay;
 window.saveNuanceDay = saveNuanceDay;
 
-/* ═══════════════ 카드 화면 뉘앙스 노트 ═══════════════ */
+/* ═══════════════ 카드 화면 뉘앙스 노트 (카드 단위 표시 및 편집) ═══════════════ */
 let cardNuanceEditingDay = null;
+
+function parseDayEntries(dayMd) {
+  if (!dayMd || dayMd.trim() === '*등록된 뉘앙스 노트가 없습니다.*') return [];
+  const lines = dayMd.split('\n');
+  const entries = [];
+  let curEntry = null;
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    const trimmed = line.trim();
+    const isHeader = /^[-*]\s+\*\*([^*]+)\*\*/.test(trimmed) ||
+                     /^#{3,5}\s+(.+)/.test(trimmed) ||
+                     /<(?:div|span|a)\s+id="([^"]+)"/i.test(trimmed);
+
+    if (isHeader && !line.startsWith('   ') && !line.startsWith('\t')) {
+      if (curEntry) {
+        curEntry.raw = curEntry.raw.trim();
+        curEntry.body = curEntry.body.trim();
+        entries.push(curEntry);
+      }
+      let title = '';
+      const mBold = trimmed.match(/^[-*]\s+\*\*([^*]+)\*\*/);
+      const mH = trimmed.match(/^#{3,5}\s+(.+)/);
+      if (mBold) title = mBold[1].trim();
+      else if (mH) title = mH[1].trim();
+
+      const mId = line.match(/<!--\s*id:\s*([a-zA-Z0-9_-]+)\s*-->/) ||
+                  line.match(/id="([a-zA-Z0-9_-]+)"/);
+      const cardId = mId ? mId[1] : null;
+
+      curEntry = {
+        header: line,
+        title: title,
+        body: '',
+        raw: line,
+        cardId: cardId
+      };
+    } else {
+      if (curEntry) {
+        const unindented = line.replace(/^(?:  |\t)/, '');
+        curEntry.body += (curEntry.body ? '\n' : '') + unindented;
+        curEntry.raw += '\n' + line;
+      } else if (trimmed) {
+        curEntry = {
+          header: '',
+          title: '',
+          body: line,
+          raw: line,
+          cardId: null
+        };
+      }
+    }
+  }
+  if (curEntry) {
+    curEntry.raw = curEntry.raw.trim();
+    curEntry.body = curEntry.body.trim();
+    entries.push(curEntry);
+  }
+  return entries;
+}
+
+function findCardEntry(entries, c) {
+  if (!entries || !entries.length || !c) return null;
+  const cBackNorm = norm(c.back);
+  const cId = c.id;
+
+  if (cId) {
+    const byId = entries.find(e => e.cardId === cId || (e.raw && e.raw.includes(cId)));
+    if (byId) return byId;
+  }
+
+  if (cBackNorm) {
+    const byTitle = entries.find(e => {
+      const tNorm = norm(e.title);
+      return tNorm && (tNorm === cBackNorm || cBackNorm.includes(tNorm) || tNorm.includes(cBackNorm));
+    });
+    if (byTitle) return byTitle;
+  }
+
+  if (c.back && c.back.trim().length >= 4) {
+    const cleanBack = c.back.trim().toLowerCase();
+    const byContain = entries.find(e => e.raw && e.raw.toLowerCase().includes(cleanBack));
+    if (byContain) return byContain;
+  }
+
+  return null;
+}
+
+function formatCardEntry(c, bodyText) {
+  const cleanBody = (bodyText || '').trim();
+  if (!cleanBody) return '';
+  if (/^[-*]\s+\*\*/.test(cleanBody) || /^#{2,5}\s+/.test(cleanBody)) {
+    return cleanBody;
+  }
+  const idComment = c && c.id ? ` <!-- id: ${c.id} -->` : '';
+  const header = `- **${(c && c.back) ? c.back : '노트'}**${idComment}`;
+  const lines = cleanBody.split('\n');
+  const formattedLines = lines.map(l => {
+    if (!l.trim()) return '';
+    if (/^[-*]\s+/.test(l.trim())) return '  ' + l.trim();
+    return '  - ' + l.trim();
+  });
+  return header + '\n' + formattedLines.join('\n');
+}
+
+function setCardEntryInDay(dayMd, c, newBody) {
+  const entries = parseDayEntries(dayMd);
+  const existing = findCardEntry(entries, c);
+  const cleanBody = (newBody || '').trim();
+
+  if (!cleanBody) {
+    if (existing) {
+      const idx = entries.indexOf(existing);
+      entries.splice(idx, 1);
+    }
+  } else {
+    const formatted = formatCardEntry(c, cleanBody);
+    if (existing) {
+      existing.raw = formatted;
+      existing.body = cleanBody;
+    } else {
+      entries.push({
+        raw: formatted,
+        body: cleanBody,
+        header: `- **${c.back}**`,
+        title: c.back,
+        cardId: c.id
+      });
+    }
+  }
+
+  if (!entries.length) return '*등록된 뉘앙스 노트가 없습니다.*';
+  return entries.map(e => e.raw.trim()).join('\n\n');
+}
 
 function renderCardNuanceHtml(rawContent) {
   if (!rawContent || !rawContent.trim()) return '';
@@ -15343,39 +15488,45 @@ function renderCardNuance(c){
     return;
   }
 
-  const content = getDayContentFromMd(nuanceNotesCache, d);
-  if(content){
+  const dayMd = getDayContentFromMd(nuanceNotesCache, d);
+  const entries = parseDayEntries(dayMd);
+  const cardEntry = findCardEntry(entries, c);
+  const backSafe = esc(c.back || '');
+
+  if(cardEntry){
     el.innerHTML = `
       <div class="cn-box">
         <div class="cn-header">
           <div class="cn-title">
-            <span class="cn-badge">뉘앙스</span>
+            <span class="cn-badge">이 문장 뉘앙스</span>
             <span class="cn-day">Day ${dStr}</span>
           </div>
           <div class="cn-actions">
-            <button type="button" class="cn-act-btn primary" onclick="event.stopPropagation(); openCardNuanceEditor(${d}, true);">+ 추가</button>
-            <button type="button" class="cn-act-btn" onclick="event.stopPropagation(); openCardNuanceEditor(${d}, false);">수정</button>
-            <button type="button" class="cn-act-btn" onclick="event.stopPropagation(); openNuanceNotes(${d});">전체 보기</button>
+            <button type="button" class="cn-act-btn" onclick="event.stopPropagation(); openCardNuanceEditor(${d});">수정</button>
+            <button type="button" class="cn-act-btn" onclick="event.stopPropagation(); openNuanceNotes(${d}, false, '${c.id}', '${backSafe}');">Day 전체 보기</button>
           </div>
         </div>
-        <div class="cn-body">${renderCardNuanceHtml(content)}</div>
+        <div class="cn-body">${renderCardNuanceHtml(cardEntry.body || cardEntry.raw)}</div>
       </div>
     `;
   } else {
     el.innerHTML = `
       <div class="cn-empty-row">
-        <span class="cn-empty-label">Day ${dStr} 뉘앙스 노트</span>
-        <button type="button" class="cn-add-btn" onclick="event.stopPropagation(); openCardNuanceEditor(${d}, true);">+ 뉘앙스 노트 추가</button>
+        <span class="cn-empty-label">이 문장 뉘앙스 노트 없음</span>
+        <div class="cn-empty-actions">
+          <button type="button" class="cn-add-btn" onclick="event.stopPropagation(); openCardNuanceEditor(${d});">+ 뉘앙스 추가</button>
+          ${entries.length > 0 ? `<button type="button" class="cn-act-btn" onclick="event.stopPropagation(); openNuanceNotes(${d}, false, '${c.id}', '${backSafe}');">Day 전체 (${entries.length})</button>` : ''}
+        </div>
       </div>
     `;
   }
 }
 
-function openCardNuanceEditor(d, isAppend){
+function openCardNuanceEditor(d){
   const c = (typeof cur === 'function') ? cur() : null;
   if(!c || !d) return;
   cardNuanceEditingDay = d;
-  renderCardNuanceEditor(c, d, isAppend);
+  renderCardNuanceEditor(c, d);
 }
 
 function cancelCardNuance(d){
@@ -15384,42 +15535,39 @@ function cancelCardNuance(d){
   if(c) renderCardNuance(c);
 }
 
-function renderCardNuanceEditor(c, d, isAppend){
+function renderCardNuanceEditor(c, d){
   const el = $('cNuance');
   if(!el) return;
   const dStr = String(d).padStart(2, '0');
-  let currentContent = nuanceNotesCache ? getDayContentFromMd(nuanceNotesCache, d) : '';
-  let prefill = currentContent;
+  const dayMd = nuanceNotesCache ? getDayContentFromMd(nuanceNotesCache, d) : '';
+  const entries = parseDayEntries(dayMd);
+  const cardEntry = findCardEntry(entries, c);
+  let prefill = cardEntry ? (cardEntry.body || cardEntry.raw) : '';
+  if(!prefill) prefill = '- ';
 
   const targetSentence = (c.back || '').trim();
-  const sentenceHead = `- **${targetSentence}**`;
-  if(isAppend){
-    if(!prefill){
-      prefill = sentenceHead + '\n  - ';
-    } else if(targetSentence && !prefill.includes(targetSentence)){
-      prefill = prefill.trim() + '\n\n' + sentenceHead + '\n  - ';
-    }
-  }
+  const backSafe = esc(targetSentence);
 
   el.innerHTML = `
     <div class="cn-box is-editing">
       <div class="cn-header">
         <div class="cn-title">
-          <span class="cn-badge">뉘앙스 편집</span>
-          <span class="cn-day">Day ${dStr}</span>
+          <span class="cn-badge">이 문장 뉘앙스 작성</span>
+          <span class="cn-day">${backSafe}</span>
         </div>
         <div class="cn-actions">
           <span class="cn-hint">Ctrl+Enter로 저장</span>
         </div>
       </div>
       <div class="cn-editor">
-        <textarea id="cnEditTa" class="cn-ta" placeholder="${esc(sentenceHead)}&#10;  - 뉘앙스 설명">${esc(prefill)}</textarea>
+        <textarea id="cnEditTa" class="cn-ta" placeholder="- 이 문장의 뉘앙스나 어감 차이를 작성하세요">${esc(prefill)}</textarea>
         <div class="cn-footer">
           <div class="cn-btns">
             <button type="button" class="cn-btn-save" onclick="event.stopPropagation(); saveCardNuance(${d});">저장</button>
             <button type="button" class="cn-btn-cancel" onclick="event.stopPropagation(); cancelCardNuance(${d});">취소</button>
+            ${cardEntry ? `<button type="button" class="cn-btn-del" onclick="event.stopPropagation(); deleteCardNuance(${d});">삭제</button>` : ''}
           </div>
-          <button type="button" class="cn-btn-full" onclick="event.stopPropagation(); openNuanceNotes(${d}, true);">전체 창에서 편집</button>
+          <button type="button" class="cn-btn-full" onclick="event.stopPropagation(); openNuanceNotes(${d}, true, '${c.id}', '${backSafe}');">전체 창에서 편집</button>
         </div>
       </div>
     </div>
@@ -15445,35 +15593,48 @@ function renderCardNuanceEditor(c, d, isAppend){
 }
 
 async function saveCardNuance(d){
+  const c = (typeof cur === 'function') ? cur() : null;
+  if(!c) return;
   const ta = $('cnEditTa');
   const val = ta ? ta.value.trim() : '';
   const currentMd = await fetchNuanceNotes();
   if(!currentMd) return;
-  const updatedMd = setDayContentInMd(currentMd, d, val);
-  nuanceNotesCache = updatedMd;
-  lsSet('cards_nuance_notes_v1', updatedMd);
+
+  const currentDayMd = getDayContentFromMd(currentMd, d);
+  const updatedDayMd = setCardEntryInDay(currentDayMd, c, val);
+  const updatedMasterMd = setDayContentInMd(currentMd, d, updatedDayMd);
+
+  nuanceNotesCache = updatedMasterMd;
+  lsSet('cards_nuance_notes_v1', updatedMasterMd);
   lsSet('cards_nuance_notes_at', Date.now());
   lsSet('cards_nuance_notes_dirty', '1');
 
   cardNuanceEditingDay = null;
-  const c = (typeof cur === 'function') ? cur() : null;
-  if(c) renderCardNuance(c);
+  renderCardNuance(c);
 
   const dStr = String(d).padStart(2, '0');
+  const actionMsg = val ? '저장' : '삭제';
   if(cfg && cfg.token){
-    toast(`Day ${dStr} 노트를 저장하는 중...`);
-    ghPutNuanceNotes(updatedMd).then(ok => {
-      if(ok) toast(`Day ${dStr} 노트를 저장하고 GitHub에 반영했어요`);
-      else toast(`Day ${dStr} 노트를 기기에 저장했어요 (GitHub 동기화 실패)`);
+    toast(`Day ${dStr} 문장 노트를 ${actionMsg}하는 중...`);
+    ghPutNuanceNotes(updatedMasterMd).then(ok => {
+      if(ok) toast(`Day ${dStr} 문장 노트를 ${actionMsg}하고 GitHub에 반영했어요`);
+      else toast(`Day ${dStr} 문장 노트를 기기에 ${actionMsg}했어요 (GitHub 동기화 실패)`);
     });
   } else {
-    toast(`Day ${dStr} 노트를 기기에 저장했어요`);
+    toast(`Day ${dStr} 문장 노트를 기기에 ${actionMsg}했어요`);
   }
+}
+
+function deleteCardNuance(d){
+  const ta = $('cnEditTa');
+  if(ta) ta.value = '';
+  saveCardNuance(d);
 }
 
 window.openCardNuanceEditor = openCardNuanceEditor;
 window.cancelCardNuance = cancelCardNuance;
 window.saveCardNuance = saveCardNuance;
+window.deleteCardNuance = deleteCardNuance;
 window.renderCardNuance = renderCardNuance;
 
 fetchNuanceNotes().then(() => {
