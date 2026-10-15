@@ -9469,6 +9469,7 @@ function flashCopyBtn(btn){
   btn.classList.add('copied');
   setTimeout(()=>btn.classList.remove('copied'), 1200);
 }
+let gptTab = null;
 function openChatGpt(c){
   if(!c) c = cur();
   if(!c) return;
@@ -9484,7 +9485,18 @@ function openChatGpt(c){
     }, 1200);
     window.location.href = 'chatgpt://';
   } else {
-    window.open('https://chatgpt.com/', '_blank');
+    try {
+      if(gptTab && !gptTab.closed){
+        gptTab.focus();
+      } else {
+        gptTab = window.open('https://chatgpt.com/', 'chatgpt_tab');
+      }
+    } catch(e) {
+      gptTab = window.open('https://chatgpt.com/', 'chatgpt_tab');
+    }
+    if(gptTab){
+      try { gptTab.focus(); } catch(e){}
+    }
   }
 }
 const rCopyEl = $('rCopy');
