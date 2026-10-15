@@ -1288,8 +1288,13 @@ details.ym-subj>summary small{font-weight:600;color:var(--mute);font-size:12.5px
 .glass-c{border-radius:22px;}
 #tbProg{height:44px;border-radius:22px;display:flex;align-items:center;gap:14px;padding:0 20px;min-width:0;max-width:100%;}
 #tbSess{font-size:15px;font-weight:600;white-space:nowrap;color:var(--c-label);overflow:hidden;text-overflow:ellipsis;}
-.tb-pbar{display:block;width:180px;height:5px;border-radius:3px;background:var(--c-fill);flex:0 1 180px;min-width:60px;}
-#tbBar{display:block;height:5px;border-radius:3px;background:var(--c-acc);width:0;transition:width .2s ease;}
+.tb-pbar{position:relative;display:block;width:180px;height:6px;border-radius:3px;background:var(--c-fill);flex:0 1 180px;min-width:60px;overflow:visible;}
+#tbBar{display:block;height:6px;border-radius:3px;background:var(--c-acc);width:0;transition:width .25s ease;}
+.tb-ticks{position:absolute;inset:0;pointer-events:none;}
+.tb-tick{position:absolute;top:50%;transform:translate(-50%,-50%);width:6px;height:6px;border-radius:50%;background:var(--c-card);border:1px solid var(--c-sep);box-shadow:0 0 2px rgba(0,0,0,0.15);transition:all .25s ease;z-index:2;}
+.tb-tick.reached{background:var(--c-acc);border-color:#fff;box-shadow:0 0 5px var(--c-acc);}
+.tb-tick.just-reached{animation:tickPop .5s ease;}
+@keyframes tickPop{0%{transform:translate(-50%,-50%) scale(1);}50%{transform:translate(-50%,-50%) scale(1.6);box-shadow:0 0 10px var(--c-acc);}100%{transform:translate(-50%,-50%) scale(1);}}
 #tbCounts{flex:0 0 auto;margin:0;font-size:13px;font-weight:400;color:var(--c-sec);text-align:left;letter-spacing:0;}
 #tbReCount{flex:0 0 auto;margin-left:2px;font-size:11.5px;font-weight:700;color:var(--c-again);background:var(--c-again-bg);padding:1px 6px;border-radius:6px;line-height:1.4;}
 @media (min-width:600px){ #tbCounts{margin-left:0;} }
@@ -1464,6 +1469,16 @@ details.ym-subj>summary small{font-weight:600;color:var(--mute);font-size:12.5px
 .sprint-btn-sec{height:36px;border-radius:10px;background:var(--c-fill);color:var(--c-label);border:1px solid var(--c-sep);font-size:13px;font-weight:500;cursor:pointer;width:100%;}
 .sprint-btn-ghost{height:32px;background:transparent;border:0;color:var(--c-sec);font-size:12px;cursor:pointer;width:100%;}
 .sprint-btn-ghost:hover{color:var(--c-label);}
+/* 20개 묶음 체크포인트 모달 */
+.ovl-checkpoint .chk-card{max-width:390px;padding:26px 22px;}
+.chk-badge{font-size:12px;font-weight:700;color:var(--c-acc);background:var(--c-acc-tint);padding:4px 12px;border-radius:999px;margin-bottom:12px;letter-spacing:-0.01em;}
+.chk-sub-desc{font-size:14px;color:var(--c-sec);line-height:1.5;margin:0 0 16px;text-align:center;}
+.chk-sub-desc b{color:var(--c-label);font-weight:700;}
+.chk-progress-box{width:100%;background:var(--c-fill);border-radius:14px;padding:12px 16px;margin-bottom:18px;box-sizing:border-box;display:flex;flex-direction:column;gap:8px;}
+.chk-prog-label{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;color:var(--c-sec);font-weight:500;}
+.chk-prog-label b{font-size:14px;color:var(--c-label);font-variant-numeric:tabular-nums;font-weight:700;}
+.chk-bar-wrap{width:100%;height:6px;border-radius:3px;background:var(--c-sep);overflow:hidden;}
+.chk-bar-fill{height:100%;border-radius:3px;background:var(--c-acc);transition:width .3s ease;}
 .c-line-wrap{position:relative;flex:0 0 auto;display:flex;align-items:center;justify-content:center;margin-bottom:8px;}
 #cLine{width:100%;height:1px;transform:scaleY(.5);background:var(--c-sep);}
 .cline-dots{position:absolute;display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:0 8px;background:var(--c-card);cursor:pointer;user-select:none;-webkit-user-select:none;transition:opacity .4s ease-out;}
@@ -1598,7 +1613,7 @@ details.ym-subj>summary small{font-weight:600;color:var(--mute);font-size:12.5px
     flex-wrap:wrap;justify-content:center;align-content:center;}
   #tbSess,#tbCounts{font-size:15px;font-weight:600;color:var(--c-label);}
   #tbSess::after{content:" ·";}
-  .tb-pbar{flex:0 0 100%;width:auto;max-width:240px;height:5px;order:2;}
+  .tb-pbar{flex:0 0 100%;width:auto;max-width:240px;height:6px;order:2;}
   #scrSolve{padding:10px var(--sp-m) 8px;}
   #card{border-radius:26px;padding:18px 18px 12px;}
   #cScope .sc-p:not(.sc-first):not(.sc-last),#cScope .sc-p:not(.sc-first):not(.sc-last)+.sc-chev{display:none;}
@@ -2448,7 +2463,7 @@ details.gr-fold[open]>summary .s2-chev{transform:rotate(90deg);}
     <div id="banner"></div>
     <div id="topbar">
       <div class="tb-l"><button class="tb-btn glass-c" id="btnHome" title="홈" aria-label="홈으로"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg></button><span id="saveBadge" title="미저장분 있음"></span></div>
-      <div id="tbProg"><span id="tbSess"></span><span class="tb-pbar"><span id="tbBar"></span></span><span id="tbCounts"></span><span id="tbReCount" style="display:none"></span></div>
+      <div id="tbProg"><span id="tbSess"></span><span class="tb-pbar"><span id="tbBar"></span><span id="tbTicks" class="tb-ticks"></span></span><span id="tbCounts"></span><span id="tbReCount" style="display:none"></span></div>
       <div class="tb-r"><button class="tb-btn" id="btnStudy" title="스터디" aria-label="스터디"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19.5c.6-3.2 2.8-5 5.5-5s4.9 1.8 5.5 5"/><path d="M15.5 4.9a3.2 3.2 0 0 1 0 6.2M17.5 14.7c1.6.7 2.7 2.4 3 4.8"/></svg></button><button class="tb-btn" id="btnPause" title="잠시 멈춤" aria-label="잠시 멈춤"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4.5" width="4" height="15" rx="1.2"/><rect x="14" y="4.5" width="4" height="15" rx="1.2"/></svg></button><button class="tb-btn" id="btnUndo" title="되돌리기" aria-label="되돌리기" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg></button><button class="tb-btn" id="btnMore" title="피드백 · 이 카드" aria-label="피드백 · 이 카드"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5.5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="18.5" cy="12" r="1.8"/></svg></button></div>
     </div>
 
@@ -2678,6 +2693,34 @@ details.gr-fold[open]>summary .s2-chev{transform:rotate(90deg);}
           <button type="button" class="sprint-btn-primary" id="btnSprintAgain" onclick="restartSprint()">다음 스프린트 시작</button>
           <button type="button" class="sprint-btn-sec" id="btnSprintRest" onclick="startSprintRest(60)">1분 휴식</button>
           <button type="button" class="sprint-btn-ghost" onclick="closeSprintSummary()">일반 풀기 계속</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 20개 묶음 마일스톤 체크포인트 모달 -->
+    <div id="ovlCheckpoint" class="ovl-sprint ovl-checkpoint" style="display:none;">
+      <div class="sprint-scrim" onclick="closeMilestoneCheckpoint()"></div>
+      <div class="sprint-card chk-card">
+        <div class="sprint-card-badge chk-badge" id="chkBadge">20장 완료 마일스톤</div>
+        <h2 id="chkTitle" class="sprint-title">20개 묶음 완주!</h2>
+        <p id="chkSub" class="chk-sub-desc">잠시 숨 고르고 갈까요? 지금까지 <b>20장</b>을 완주했어요.</p>
+        <div class="chk-progress-box">
+          <div class="chk-prog-label">
+            <span id="chkProgLabel">세션 진행도</span>
+            <b id="chkProgVal">20 / 60</b>
+          </div>
+          <div class="chk-bar-wrap">
+            <div class="chk-bar-fill" id="chkBarFill" style="width: 33%;"></div>
+          </div>
+        </div>
+        <div id="chkRestBox" class="sprint-rest-box" style="display:none;">
+          <div class="sprint-rest-title">숨 고르는 중...</div>
+          <div class="sprint-rest-time" id="chkRestTime">60s</div>
+        </div>
+        <div class="sprint-actions">
+          <button type="button" class="sprint-btn-primary" id="btnChkContinue" onclick="closeMilestoneCheckpoint()">이어서 계속하기 <span class="keycap" style="opacity:0.75;font-size:11px;margin-left:4px;">Space</span></button>
+          <button type="button" class="sprint-btn-sec" id="btnChkRest" onclick="startCheckpointRest(60)">1분 숨 고르기</button>
+          <button type="button" class="sprint-btn-ghost" onclick="finishSessEarlyFromCheckpoint()">여기서 세션 완료하고 홈으로</button>
         </div>
       </div>
     </div>
@@ -8559,6 +8602,7 @@ function playSess(sx){          // 세션 화면의 [이어가기] — 남은 �
   // 🔴 저장된 큐를 이어 풀 때도 한 번 더 건다 — 큐는 조립 뒤에도 「내용 추가」로 뒤에 붙는다
   phase = stOnly(sx.how.status,'new') ? 'new' : 'review';
   sessionDone=0; doneCredited=0; newServed=0; undoSnap=null; undoRun++; updateUndo(); sessReset();
+  if(typeof initMilestoneCheckpoint === 'function') initMilestoneCheckpoint();
   lastAction = null;
   go('scrSolve');
   /* 🔴 큐가 비었는데 세션에 카드는 있었다 = 전부 오늘 이미 푼 것이다. 말없이 돌려보내면
@@ -8816,6 +8860,26 @@ function counts(){ // 상단 바 — 남은 수는 현재 세션 큐 · 「내�
     }
   }
   $('tbBar').style.width = bt ? Math.round(bd/bt*100)+'%' : '0%';
+  const ticksEl = $('tbTicks');
+  if(ticksEl){
+    if(!curPreset || bt < 20){
+      ticksEl.innerHTML = '';
+    } else {
+      const tickCount = Math.floor((bt - 1) / 20);
+      let html = '';
+      for(let m = 1; m <= tickCount; m++){
+        const val = m * 20;
+        const pct = (val / bt * 100).toFixed(2);
+        const isReached = bd >= val;
+        const isJust = bd === val;
+        html += `<span class="tb-tick${isReached ? ' reached' : ''}${isJust ? ' just-reached' : ''}" style="left:${pct}%;" data-val="${val}" title="${val}장 완료 마일스톤"></span>`;
+      }
+      ticksEl.innerHTML = html;
+    }
+  }
+  if(typeof checkMilestoneProgress === 'function'){
+    checkMilestoneProgress(bd, bt, rest.length);
+  }
   $('tbProg').title = curPreset ? `${bd}/${bt}장 · ${label} ${rest.length}${reRem?` (다시 ${reRem})`:''} · 오늘 ${todayRated()} · 내일 ~${tomorrowCount(null)}` : '';
 }
 /* ═══ 표 카드 (동하 2026-08-29 · QC `table` 규약) ═══════════════════════════════
@@ -11207,7 +11271,7 @@ async function scRailPoke(p, uid){ const m=(SC.members||[]).find(x=>x.user_id===
   catch(er){ if(scPokeGone(er)){ scPokeOff=Date.now()+30*60000; toast('아직 친구 서버에 없는 기능이에요'); } else toast(scErrKo(er)); }
   finally{ scPokeFly.delete(uid); } }
 let scConfettiTimer=null, scActiveTrackedSlot=null, scActiveSlotLeader=null, scFinishedCelebratedSlots=new Set();
-function scTriggerConfetti(msg){
+function scTriggerConfetti(msg, big = false){
   if(msg){
     try{ toast(msg); }catch(e){}
   }
@@ -11217,41 +11281,49 @@ function scTriggerConfetti(msg){
   cv.width=w; cv.height=h;
   cv.style.width=w+'px'; cv.style.height=h+'px';
   cv.style.display='block';
-  const colors=['#30D158','#FF9F0A','#BF5AF2','#FF375F','#64D2FF','#FFD60A','#0A84FF','#FF453A'];
+  const colors=big
+    ? ['#30D158','#FF9F0A','#BF5AF2','#FF375F','#64D2FF','#FFD60A','#0A84FF','#FF453A','#FF2D55','#5856D6','#FFCC00']
+    : ['#30D158','#FF9F0A','#BF5AF2','#FF375F','#64D2FF','#FFD60A','#0A84FF','#FF453A'];
   const particles=[];
-  // 토스/캐논 스타일: 좌하단·우하단에서 화면 중앙 위쪽 대각선으로 분사
-  const origins = [
+  // 토스/캐논 스타일: big일 땐 좌·중·우 3곳에서 대포 발사
+  const origins = big ? [
+    { x: w * 0.12, y: h * 0.90, angleMin: -82, angleMax: -28 },
+    { x: w * 0.50, y: h * 0.92, angleMin: -115, angleMax: -65 },
+    { x: w * 0.88, y: h * 0.90, angleMin: -152, angleMax: -98 }
+  ] : [
     { x: w * 0.15, y: h * 0.85, angleMin: -75, angleMax: -35 },
     { x: w * 0.85, y: h * 0.85, angleMin: -145, angleMax: -105 }
   ];
+  const countPerOrig = big ? 55 : 32;
   origins.forEach(orig=>{
-    for(let i=0; i<32; i++){
+    for(let i=0; i<countPerOrig; i++){
       const deg = orig.angleMin + Math.random() * (orig.angleMax - orig.angleMin);
       const rad = (deg * Math.PI) / 180;
-      const speed = Math.random() * 8 + 8;
+      const speed = big ? (Math.random() * 11 + 9) : (Math.random() * 8 + 8);
       particles.push({
         x: orig.x,
         y: orig.y,
         vx: Math.cos(rad) * speed,
         vy: Math.sin(rad) * speed,
-        w: Math.random() * 5 + 4,
-        h: Math.random() * 8 + 6,
+        w: big ? (Math.random() * 6 + 5) : (Math.random() * 5 + 4),
+        h: big ? (Math.random() * 10 + 7) : (Math.random() * 8 + 6),
         color: colors[Math.floor(Math.random() * colors.length)],
         rot: Math.random() * 360,
-        vrot: (Math.random() - 0.5) * 8,
+        vrot: (Math.random() - 0.5) * (big ? 12 : 8),
         flip: Math.random() * 360,
-        vflip: Math.random() * 10 + 5,
+        vflip: Math.random() * (big ? 14 : 10) + 5,
         opacity: 1
       });
     }
   });
+  const duration = big ? 3200 : 2400;
   const start=Date.now();
   if(scConfettiTimer) cancelAnimationFrame(scConfettiTimer);
   function draw(){
     const elapsed=Date.now()-start;
-    if(elapsed>2400){ cv.style.display='none'; ctx.clearRect(0,0,cv.width,cv.height); return; }
+    if(elapsed>duration){ cv.style.display='none'; ctx.clearRect(0,0,cv.width,cv.height); return; }
     ctx.clearRect(0,0,cv.width,cv.height);
-    const alpha=Math.max(0, 1 - (elapsed/2400));
+    const alpha=Math.max(0, 1 - (elapsed/duration));
     for(const p of particles){
       p.x += p.vx; p.y += p.vy;
       p.vy += 0.26; // 중력 가속도
@@ -12966,6 +13038,22 @@ document.addEventListener('keydown',e=>{
   const typing = tag==='INPUT'||tag==='TEXTAREA'||tag==='SELECT';
   /* 🔴 회독본 창(#ovlHd)·그림 확대(#ovlImg)는 `.ovl`이 아니라 여기서 빠졌다 — 그 위에서 키·게임패드가 **뒤 카드를 채점**했다(리뷰 09-23 R8 · Space 두 번 = 안 본 카드 「알맞음」). */
   const ovl=document.querySelector('.ovl.show') || document.querySelector('#ovlHd.show, #ovlImg.show');
+  const chkOvl = $('ovlCheckpoint');
+  if(chkOvl && chkOvl.style.display !== 'none'){
+    if(e.key === ' ' || e.key === 'Enter' || e.key === 'Escape'){
+      e.preventDefault();
+      closeMilestoneCheckpoint();
+    }
+    return;
+  }
+  const sprOvl = $('ovlSprint');
+  if(sprOvl && sprOvl.style.display !== 'none'){
+    if(e.key === ' ' || e.key === 'Enter' || e.key === 'Escape'){
+      e.preventDefault();
+      closeSprintSummary();
+    }
+    return;
+  }
   if(pauseAt){                        // 정지 중엔 Space·Enter·Esc·P로 재개
     if([' ','enter','escape','p','s'].includes(keyOf(e))){ e.preventDefault(); resumeSession(); }
     return;
@@ -16435,6 +16523,126 @@ window.startIdleMotivationalTimer = startIdleMotivationalTimer;
 window.showIdleMotivationalBanner = showIdleMotivationalBanner;
 window.hideIdleMotivationalBanner = hideIdleMotivationalBanner;
 window.dismissIdleMotiveBanner = dismissIdleMotiveBanner;
+
+/* ═══ 20개 묶음 마일스톤 체크포인트 & 휴식 ═══ */
+let lastMilestoneCheckpoint = 0;
+let checkpointRestInterval = null;
+let checkpointRestRemaining = 60;
+
+function initMilestoneCheckpoint(){
+  const n = (curSess && curSess.pg && curSess.pg.day === todayKey()) ? (curSess.pg.n || 0) : 0;
+  lastMilestoneCheckpoint = Math.floor(n / 20) * 20;
+}
+
+function checkMilestoneProgress(bd, bt, rem){
+  if(bd < lastMilestoneCheckpoint){
+    lastMilestoneCheckpoint = Math.floor(bd / 20) * 20;
+    return;
+  }
+  if(typeof sprintActive !== 'undefined' && sprintActive) return;
+  if(rem <= 0) return;
+  if(bd >= 20 && bd % 20 === 0 && bd > lastMilestoneCheckpoint){
+    lastMilestoneCheckpoint = bd;
+    openMilestoneCheckpoint(bd, bt);
+  }
+}
+
+function openMilestoneCheckpoint(bd, bt){
+  const ovl = $('ovlCheckpoint');
+  if(!ovl) return;
+
+  const badgeEl = $('chkBadge');
+  const titleEl = $('chkTitle');
+  const subEl = $('chkSub');
+  const progValEl = $('chkProgVal');
+  const barFillEl = $('chkBarFill');
+  const restBox = $('chkRestBox');
+  const btnRest = $('btnChkRest');
+
+  if(badgeEl) badgeEl.textContent = `${bd}장 완료 마일스톤`;
+  if(titleEl) titleEl.textContent = `${bd}개 묶음 완주!`;
+  if(subEl) subEl.innerHTML = `잠시 숨 고르고 갈까요? 지금까지 <b>${bd}장</b>을 완주했어요.`;
+  if(progValEl) progValEl.textContent = `${bd} / ${bt}`;
+  if(barFillEl){
+    const pct = Math.min(100, Math.round(bd / Math.max(1, bt) * 100));
+    barFillEl.style.width = `${pct}%`;
+  }
+  if(restBox) restBox.style.display = 'none';
+  if(btnRest) btnRest.style.display = 'block';
+
+  if(checkpointRestInterval){
+    clearInterval(checkpointRestInterval);
+    checkpointRestInterval = null;
+  }
+
+  ovl.style.display = 'flex';
+  requestAnimationFrame(()=>{
+    ovl.classList.add('show');
+  });
+
+  if(typeof scTriggerConfetti === 'function'){
+    scTriggerConfetti(`${bd}장 마일스톤 달성!`, true);
+  }
+}
+
+function closeMilestoneCheckpoint(){
+  const ovl = $('ovlCheckpoint');
+  if(ovl){
+    ovl.classList.remove('show');
+    ovl.style.display = 'none';
+  }
+  if(checkpointRestInterval){
+    clearInterval(checkpointRestInterval);
+    checkpointRestInterval = null;
+  }
+  const restBox = $('chkRestBox');
+  if(restBox) restBox.style.display = 'none';
+  const btnRest = $('btnChkRest');
+  if(btnRest) btnRest.style.display = 'block';
+
+  if(typeof resetIdleMotivationalTimer === 'function') resetIdleMotivationalTimer();
+}
+
+function startCheckpointRest(sec){
+  checkpointRestRemaining = sec || 60;
+  const box = $('chkRestBox');
+  const timeEl = $('chkRestTime');
+  const btn = $('btnChkRest');
+  if(box) box.style.display = 'block';
+  if(timeEl) timeEl.textContent = `${checkpointRestRemaining}s`;
+  if(btn) btn.style.display = 'none';
+
+  if(checkpointRestInterval){
+    clearInterval(checkpointRestInterval);
+  }
+  checkpointRestInterval = setInterval(()=>{
+    checkpointRestRemaining--;
+    if(timeEl) timeEl.textContent = `${checkpointRestRemaining}s`;
+    if(checkpointRestRemaining <= 0){
+      if(checkpointRestInterval){
+        clearInterval(checkpointRestInterval);
+        checkpointRestInterval = null;
+      }
+      closeMilestoneCheckpoint();
+    }
+  }, 1000);
+}
+
+function finishSessEarlyFromCheckpoint(){
+  closeMilestoneCheckpoint();
+  if(typeof finishSess === 'function'){
+    finishSess();
+  }
+  if(typeof go === 'function') go('scrHome');
+  try{ toast('세션을 마무리하고 홈으로 이동했어요'); }catch(e){}
+}
+
+window.initMilestoneCheckpoint = initMilestoneCheckpoint;
+window.checkMilestoneProgress = checkMilestoneProgress;
+window.openMilestoneCheckpoint = openMilestoneCheckpoint;
+window.closeMilestoneCheckpoint = closeMilestoneCheckpoint;
+window.startCheckpointRest = startCheckpointRest;
+window.finishSessEarlyFromCheckpoint = finishSessEarlyFromCheckpoint;
 /* 🔴 **브라우저·마우스 뒤로가기로도 앱 안에서 뒤로 간다** (동하 09-01 실기:
    「PC에서 뒤로가기로 세션 → 홈 화면 전환이 안 되고(마우스 뒤로가기 버튼)」).
    앱은 화면 전환에 history를 안 써서, 마우스 4번 버튼은 **앱을 벗어나는 쪽**으로만 갔다.
