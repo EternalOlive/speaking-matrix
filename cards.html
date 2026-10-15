@@ -1334,6 +1334,25 @@ details.ym-subj>summary small{font-weight:600;color:var(--mute);font-size:12.5px
 .last-action-chip .lac-undo{color:var(--c-sec);font-size:10px;margin-left:1px;}
 #cFront{font-family:var(--font);font-size:var(--t-q);font-weight:500;line-height:1.55;letter-spacing:-.012em;color:var(--c-label);}
 #cFront.is-long{font-size:var(--t-q-long);letter-spacing:0;max-width:72ch;hyphens:auto;}
+.c-user-hint{margin:8px 0 10px;display:flex;align-items:center;min-height:28px;}
+.c-uh-box{display:inline-flex;align-items:center;gap:8px;background:rgba(255,149,0,0.12);border:1px solid rgba(255,149,0,0.28);border-radius:10px;padding:4px 10px;max-width:100%;box-sizing:border-box;}
+.c-uh-badge{font-size:11px;font-weight:700;color:var(--c-orange,#ff9500);background:rgba(255,149,0,0.18);padding:2px 6px;border-radius:6px;flex:0 0 auto;letter-spacing:-.01em;}
+.c-uh-text{font-size:14px;font-weight:600;color:var(--c-label);line-height:1.4;word-break:break-word;cursor:pointer;}
+.c-uh-text:hover{text-decoration:underline;}
+.c-uh-actions{display:flex;align-items:center;gap:2px;margin-left:4px;flex:0 0 auto;}
+.c-uh-btn-edit,.c-uh-btn-del{border:0;background:transparent;color:var(--c-sec);cursor:pointer;width:24px;height:24px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px;padding:0;transition:all .12s ease;}
+.c-uh-btn-edit:hover{background:var(--c-fill);color:var(--c-label);}
+.c-uh-btn-del:hover{background:rgba(255,59,48,0.15);color:var(--c-red,#ff3b30);}
+.c-uh-add{display:inline-flex;align-items:center;gap:5px;border:1px dashed var(--c-sep);background:transparent;color:var(--c-ter);font-size:12px;font-weight:600;padding:4px 10px;border-radius:8px;cursor:pointer;transition:all .15s ease;line-height:16px;}
+.c-uh-add:hover{border-color:var(--c-sec);color:var(--c-sec);background:var(--c-fill);}
+.c-uh-add-ic{width:13px;height:13px;flex:0 0 auto;}
+.c-uh-editor{display:flex;align-items:center;gap:6px;width:100%;max-width:500px;box-sizing:border-box;}
+.c-uh-input{flex:1;min-width:0;height:34px;padding:0 10px;background:var(--c-fill);border:1px solid var(--c-acc);border-radius:8px;color:var(--c-label);font-size:13.5px;font-family:var(--font);outline:none;box-sizing:border-box;}
+.c-uh-input:focus{box-shadow:0 0 0 2px rgba(10,132,255,0.25);}
+.c-uh-save-btn{height:34px;padding:0 12px;background:var(--c-acc);color:#fff;border:0;border-radius:8px;font-size:12.5px;font-weight:600;cursor:pointer;flex:0 0 auto;}
+.c-uh-save-btn:active{opacity:.85;}
+.c-uh-cancel-btn{height:34px;padding:0 10px;background:var(--c-fill);color:var(--c-sec);border:0;border-radius:8px;font-size:12.5px;font-weight:600;cursor:pointer;flex:0 0 auto;}
+.c-uh-cancel-btn:hover{color:var(--c-label);}
 .c-line-wrap{position:relative;flex:0 0 auto;display:flex;align-items:center;justify-content:center;margin-bottom:8px;}
 #cLine{width:100%;height:1px;transform:scaleY(.5);background:var(--c-sep);}
 .cline-dots{position:absolute;display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:0 8px;background:var(--c-card);cursor:pointer;user-select:none;-webkit-user-select:none;transition:opacity .4s ease-out;}
@@ -2299,6 +2318,7 @@ details.gr-fold[open]>summary .s2-chev{transform:rotate(90deg);}
             <div id="cUpper">
               <div class="c-imgs front" id="cImgF"></div>
               <div id="cFront"></div>
+              <div id="cUserHint" class="c-user-hint"></div>
               <div id="cDiag"></div>
             </div>
             <div id="cLineWrap" class="c-line-wrap">
@@ -5749,7 +5769,7 @@ function saveDirtyLogs(){ const v=[...dirtyLogs]; v.length?lsSet(K_DLOGS,v.join(
      retired 은퇴 · by 오늘 미룸 · t 임의 태그
      base    「처음부터 다시」·「일정 조정」 — {at:초, fsrs:상태|null}
              = 그 시각의 상태에서 다시 시작하라는 표시. 재계산은 at 이후 로그만 얹는다. */
-const MARK_KEYS=['retired','by','t','base','u'];
+const MARK_KEYS=['retired','by','t','base','hint','u'];
 /* 재생성으로 사라진 카드의 되짚기·마크를 치운다 (2026-08-22).
    spec을 고치면 카드 ID가 갈리고, 그 카드에 달아 둔 플래그·@주석은 갈 곳이 없어진다.
    계약상 「죽은 카드 청소는 앱이 한다」인데 구현이 없어서, 루틴이 돌 때마다 그 항목이
@@ -5778,7 +5798,7 @@ function pruneOrphans(){
     if(dkDiff(T, first) < ORPH_DAYS){ next[id]=first; held++; continue; }   // 아직 유예 중 — 손대지 않는다
     const s=state.cards[id]||{};
     const hasFb   = s.flag!=null || (s.ann&&s.ann.length);
-    const hasMark = s.retired || s.by || (Array.isArray(s.t)&&s.t.length) || s.base;
+    const hasMark = s.retired || s.by || (Array.isArray(s.t)&&s.t.length) || s.base || s.hint;
     delete state.cards[id];
     if(hasFb||hasMark) gone.push({id, memo:(typeof s.flag==='string'&&s.flag)?s.flag:''});
   }
@@ -5805,6 +5825,7 @@ function splitState(){               // 메모리 state → 파일 두 벌 (마�
       if(k==='retired'&&!v) continue;
       if(k==='by'&&!v) continue;
       if(k==='t'&&(!Array.isArray(v)||!v.length)) continue;
+      if(k==='hint'&&!v) continue;
       e[k]=v;
     }
     // 🔴 마크가 하나도 없으면 엔트리를 만들지 마라. 예전 조건은 {u:""}(채점만 하고 조작은 없는 카드)를
@@ -8926,6 +8947,7 @@ function showCard(){
   $('revealHint').textContent = (c.typ==='도식' ? '다 그렸으면 카드를 눌러요' : '카드를 누르면 정답이 보여요') + (reN>0?' · 재출':'');
   const m=c.front.match(/^〔([^〕]*)〕\s*(.*)$/s);
   $('cScope').innerHTML=scopeHtml(c); $('cFront').textContent=m?m[2]:c.front;
+  renderUserHint(c);
   $('cFront').classList.toggle('is-long', (m?m[2]:c.front).length>200);   // 긴 문면 = 질문 20(폰 16) · 디자인 §4
   $('card').classList.toggle('tbl', !!c.table);                           // 표 카드는 표가 곧 답 칸 — 가림 면 없음
   $('cBackWrap').classList.remove('on');
@@ -9083,6 +9105,7 @@ function unreveal(){   // 뒷면 → 앞면. 항목 체크(itemMarks)와 응답 
   $('cMeta').classList.remove('on');
   $('card').classList.remove('rev');
   renderHintBox(c);                          // 앞면으로 돌아오면 칩도 돌아온다(연 것은 연 채로)
+  renderUserHint(c);
   showDiag(c,false);
   $('cardScroll').scrollTop=0;
 }
@@ -9096,6 +9119,94 @@ function renderCardTags(c){ // 임의 태그 (사용자 부착 축) — 탭하�
   }
   $('cTagInput').classList.remove('on'); $('cTagInput').value='';
 }
+function userHint(id){
+  const s=state.cards[id];
+  return (s && s.hint) || '';
+}
+function renderUserHint(c){
+  const el=$('cUserHint');
+  if(!el) return;
+  if(!c){ el.innerHTML=''; return; }
+  const hint=userHint(c.id);
+
+  if(hint){
+    el.innerHTML=`<div class="c-uh-box" onclick="event.stopPropagation();">`
+      +`<span class="c-uh-badge">💡 힌트</span>`
+      +`<span class="c-uh-text" title="클릭하여 수정" onclick="openUserHintInput()">${esc(hint)}</span>`
+      +`<div class="c-uh-actions">`
+      +`<button type="button" class="c-uh-btn-edit" title="힌트 수정" aria-label="힌트 수정" onclick="openUserHintInput()">✎</button>`
+      +`<button type="button" class="c-uh-btn-del" title="힌트 삭제" aria-label="힌트 삭제" onclick="deleteUserHint()">✕</button>`
+      +`</div></div>`;
+  } else {
+    el.innerHTML=`<button type="button" class="c-uh-add" onclick="event.stopPropagation(); openUserHintInput();">`
+      +`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="c-uh-add-ic"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>`
+      +`<span>힌트 추가</span></button>`;
+  }
+}
+function openUserHintInput(){
+  const c=cur();
+  if(!c) return;
+  const currentHint=userHint(c.id);
+  const el=$('cUserHint');
+  if(!el) return;
+
+  el.innerHTML=`<div class="c-uh-editor" onclick="event.stopPropagation();">`
+    +`<input type="text" id="cUhInput" class="c-uh-input" placeholder="전면에 띄울 힌트 입력..." value="${esc(currentHint)}" maxlength="100" />`
+    +`<button type="button" class="c-uh-save-btn" onclick="saveUserHint()">저장</button>`
+    +`<button type="button" class="c-uh-cancel-btn" onclick="cancelUserHint()">취소</button>`
+    +`</div>`;
+  const inp=$('cUhInput');
+  if(inp){
+    inp.focus();
+    inp.select();
+    inp.addEventListener('keydown', e=>{
+      e.stopPropagation();
+      if(e.key==='Enter'){ e.preventDefault(); saveUserHint(); }
+      else if(e.key==='Escape'){ e.preventDefault(); cancelUserHint(); }
+    });
+  }
+}
+function saveUserHint(){
+  const c=cur();
+  if(!c) return;
+  const inp=$('cUhInput');
+  const val=inp ? inp.value.trim() : '';
+  const s=st(c.id);
+  if(val){
+    s.hint=val;
+    toast('힌트를 저장했어요');
+  } else {
+    delete s.hint;
+    toast('힌트를 삭제했어요');
+  }
+  touch(s);
+  cacheState();
+  setDirty(true);
+  renderUserHint(c);
+  requestAnimationFrame(fitCard);
+}
+function cancelUserHint(){
+  const c=cur();
+  if(c) renderUserHint(c);
+  requestAnimationFrame(fitCard);
+}
+function deleteUserHint(){
+  const c=cur();
+  if(!c) return;
+  const s=st(c.id);
+  delete s.hint;
+  touch(s);
+  cacheState();
+  setDirty(true);
+  toast('힌트를 삭제했어요');
+  renderUserHint(c);
+  requestAnimationFrame(fitCard);
+}
+window.openUserHintInput = openUserHintInput;
+window.saveUserHint = saveUserHint;
+window.cancelUserHint = cancelUserHint;
+window.deleteUserHint = deleteUserHint;
+
 function esc(s){ // 속성 자리(data-*="…"·value="…")에도 쓰이므로 따옴표까지 막는다 — textContent 방식은 "를 안 막았다
   return s==null?'':String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 }
@@ -9446,6 +9557,8 @@ function cardTextCopy(c){
   if(sc) lines.push(`[${sc}]`);
   const m = c.front.match(/^〔([^〕]*)〕\s*(.*)$/s);
   lines.push(`Q. ${m ? m[2] : c.front}`);
+  const uh = userHint(c.id);
+  if(uh) lines.push(`💡 힌트: ${uh}`);
   if(Array.isArray(c.items) && c.items.length){
     lines.push('A.');
     c.items.forEach((it, idx) => lines.push(` ${idx+1}) ${it}`));
@@ -13144,6 +13257,7 @@ function renderCardSheet(){
     <div class="cs-scope">${esc(scopeOf(c))}</div>
     ${csImgs(c,'f')}
     <div class="cs-front">${esc(m?m[2]:c.front)}</div>
+    ${userHint(c.id)?`<div class="cs-hint" style="font-size:13px;font-weight:600;color:var(--c-orange);margin:4px 0 2px">💡 힌트: ${esc(userHint(c.id))}</div>`:''}
     ${hasItems?`<div class="cs-items">${c.items.map(i=>`<div>· ${esc(i)}</div>`).join('')}</div>`
               :`<div class="cs-back">${esc(c.back)}</div>`}
     ${csImgs(c,'b')}
