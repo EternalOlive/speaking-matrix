@@ -1334,25 +1334,28 @@ details.ym-subj>summary small{font-weight:600;color:var(--mute);font-size:12.5px
 .last-action-chip .lac-undo{color:var(--c-sec);font-size:10px;margin-left:1px;}
 #cFront{font-family:var(--font);font-size:var(--t-q);font-weight:500;line-height:1.55;letter-spacing:-.012em;color:var(--c-label);}
 #cFront.is-long{font-size:var(--t-q-long);letter-spacing:0;max-width:72ch;hyphens:auto;}
-.c-user-hint{margin:8px 0 10px;display:flex;align-items:center;min-height:28px;}
-.c-uh-box{display:inline-flex;align-items:center;gap:8px;background:rgba(255,149,0,0.12);border:1px solid rgba(255,149,0,0.28);border-radius:10px;padding:4px 10px;max-width:100%;box-sizing:border-box;}
-.c-uh-badge{font-size:11px;font-weight:700;color:var(--c-orange,#ff9500);background:rgba(255,149,0,0.18);padding:2px 6px;border-radius:6px;flex:0 0 auto;letter-spacing:-.01em;}
-.c-uh-text{font-size:14px;font-weight:600;color:var(--c-label);line-height:1.4;word-break:break-word;cursor:pointer;}
-.c-uh-text:hover{text-decoration:underline;}
-.c-uh-actions{display:flex;align-items:center;gap:2px;margin-left:4px;flex:0 0 auto;}
-.c-uh-btn-edit,.c-uh-btn-del{border:0;background:transparent;color:var(--c-sec);cursor:pointer;width:24px;height:24px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px;padding:0;transition:all .12s ease;}
+.c-user-hint{margin:4px 0 6px;display:flex;align-items:center;min-height:20px;}
+.c-uh-box{display:inline-flex;align-items:center;gap:5px;background:transparent;border:0;border-radius:6px;padding:2px 4px;max-width:100%;box-sizing:border-box;}
+.c-uh-label{font-size:11px;font-weight:500;color:var(--c-ter);flex:0 0 auto;letter-spacing:-.01em;user-select:none;}
+.c-uh-text{font-size:12.5px;font-weight:400;color:var(--c-sec);line-height:1.4;word-break:break-word;cursor:pointer;transition:color .12s ease;}
+.c-uh-text:hover{color:var(--c-label);text-decoration:underline;}
+.c-uh-actions{display:flex;align-items:center;gap:2px;margin-left:3px;flex:0 0 auto;opacity:0;transition:opacity .15s ease;}
+.c-uh-box:hover .c-uh-actions,.c-uh-box:focus-within .c-uh-actions,.c-uh-box:active .c-uh-actions{opacity:1;}
+.c-uh-btn-edit,.c-uh-btn-del{border:0;background:transparent;color:var(--c-ter);cursor:pointer;width:20px;height:20px;border-radius:5px;display:flex;align-items:center;justify-content:center;padding:0;transition:all .12s ease;}
 .c-uh-btn-edit:hover{background:var(--c-fill);color:var(--c-label);}
-.c-uh-btn-del:hover{background:rgba(255,59,48,0.15);color:var(--c-red,#ff3b30);}
-.c-uh-add{display:inline-flex;align-items:center;gap:5px;border:1px dashed var(--c-sep);background:transparent;color:var(--c-ter);font-size:12px;font-weight:600;padding:4px 10px;border-radius:8px;cursor:pointer;transition:all .15s ease;line-height:16px;}
-.c-uh-add:hover{border-color:var(--c-sec);color:var(--c-sec);background:var(--c-fill);}
-.c-uh-add-ic{width:13px;height:13px;flex:0 0 auto;}
-.c-uh-editor{display:flex;align-items:center;gap:6px;width:100%;max-width:500px;box-sizing:border-box;}
-.c-uh-input{flex:1;min-width:0;height:34px;padding:0 10px;background:var(--c-fill);border:1px solid var(--c-acc);border-radius:8px;color:var(--c-label);font-size:13.5px;font-family:var(--font);outline:none;box-sizing:border-box;}
-.c-uh-input:focus{box-shadow:0 0 0 2px rgba(10,132,255,0.25);}
-.c-uh-save-btn{height:34px;padding:0 12px;background:var(--c-acc);color:#fff;border:0;border-radius:8px;font-size:12.5px;font-weight:600;cursor:pointer;flex:0 0 auto;}
+.c-uh-btn-del:hover{background:rgba(255,59,48,0.12);color:var(--c-red,#ff3b30);}
+.c-uh-add{display:inline-flex;align-items:center;gap:3px;border:0;background:transparent;color:var(--c-ter);font-size:11px;font-weight:400;padding:2px 5px;border-radius:5px;cursor:pointer;opacity:.35;transition:all .15s ease;line-height:14px;}
+.c-uh-add:hover{opacity:1;color:var(--c-sec);background:var(--c-fill);}
+.c-uh-add-ic{width:11px;height:11px;flex:0 0 auto;}
+.c-uh-editor{display:flex;align-items:center;gap:6px;width:100%;max-width:440px;box-sizing:border-box;}
+.c-uh-input{flex:1;min-width:0;height:30px;padding:0 8px;background:var(--c-fill);border:1px solid var(--c-sep);border-radius:6px;color:var(--c-label);font-size:12.5px;font-family:var(--font);outline:none;box-sizing:border-box;}
+.c-uh-input:focus{border-color:var(--c-acc);box-shadow:0 0 0 2px rgba(10,132,255,0.2);}
+.c-uh-save-btn{height:30px;padding:0 10px;background:var(--c-acc);color:#fff;border:0;border-radius:6px;font-size:12px;font-weight:500;cursor:pointer;flex:0 0 auto;}
 .c-uh-save-btn:active{opacity:.85;}
-.c-uh-cancel-btn{height:34px;padding:0 10px;background:var(--c-fill);color:var(--c-sec);border:0;border-radius:8px;font-size:12.5px;font-weight:600;cursor:pointer;flex:0 0 auto;}
+.c-uh-cancel-btn{height:30px;padding:0 8px;background:var(--c-fill);color:var(--c-sec);border:0;border-radius:6px;font-size:12px;font-weight:500;cursor:pointer;flex:0 0 auto;}
 .c-uh-cancel-btn:hover{color:var(--c-label);}
+.cs-hint{font-size:12px;font-weight:400;color:var(--c-sec);margin:3px 0 2px;display:flex;align-items:center;gap:4px;}
+.cs-hint-lbl{font-size:11px;font-weight:500;color:var(--c-ter);}
 .c-note-link{display:inline-flex;align-items:center;gap:3px;background:var(--c-fill);color:var(--c-label);border:0;border-radius:14px;padding:3px 10px;font-size:12.5px;font-weight:600;cursor:pointer;transition:all .12s ease;}
 .c-note-link:hover{background:var(--c-fill-hi, rgba(120,120,128,0.22));}
 .c-note-link .s2-chev{width:7px;height:12px;color:var(--c-sec);margin-left:1px;}
@@ -9142,16 +9145,16 @@ function renderUserHint(c){
 
   if(hint){
     el.innerHTML=`<div class="c-uh-box" onclick="event.stopPropagation();">`
-      +`<span class="c-uh-badge">힌트</span>`
+      +`<span class="c-uh-label">힌트</span>`
       +`<span class="c-uh-text" title="클릭하여 수정" onclick="openUserHintInput()">${esc(hint)}</span>`
       +`<div class="c-uh-actions">`
-      +`<button type="button" class="c-uh-btn-edit" title="힌트 수정" aria-label="힌트 수정" onclick="openUserHintInput()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></button>`
-      +`<button type="button" class="c-uh-btn-del" title="힌트 삭제" aria-label="힌트 삭제" onclick="deleteUserHint()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;"><path d="M18 6 6 18M6 6l12 12"/></svg></button>`
+      +`<button type="button" class="c-uh-btn-edit" title="힌트 수정" aria-label="힌트 수정" onclick="openUserHintInput()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px;"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></button>`
+      +`<button type="button" class="c-uh-btn-del" title="힌트 삭제" aria-label="힌트 삭제" onclick="deleteUserHint()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:11px;height:11px;"><path d="M18 6 6 18M6 6l12 12"/></svg></button>`
       +`</div></div>`;
   } else {
     el.innerHTML=`<button type="button" class="c-uh-add" onclick="event.stopPropagation(); openUserHintInput();">`
       +`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="c-uh-add-ic"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>`
-      +`<span>힌트 추가</span></button>`;
+      +`<span>힌트</span></button>`;
   }
 }
 function openUserHintInput(){
@@ -13268,7 +13271,7 @@ function renderCardSheet(){
     <div class="cs-scope">${esc(scopeOf(c))}</div>
     ${csImgs(c,'f')}
     <div class="cs-front">${esc(m?m[2]:c.front)}</div>
-    ${userHint(c.id)?`<div class="cs-hint" style="font-size:13px;font-weight:600;color:var(--c-orange);margin:4px 0 2px">힌트: ${esc(userHint(c.id))}</div>`:''}
+    ${userHint(c.id)?`<div class="cs-hint"><span class="cs-hint-lbl">힌트</span>${esc(userHint(c.id))}</div>`:''}
     ${hasItems?`<div class="cs-items">${c.items.map(i=>`<div>· ${esc(i)}</div>`).join('')}</div>`
               :`<div class="cs-back">${esc(c.back)}</div>`}
     ${csImgs(c,'b')}
