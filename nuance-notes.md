@@ -30,7 +30,7 @@ Speaking Matrix 900제 문장의 뉘앙스, 원어민 어감 차이, 실전 활�
   - **`I'm extra tired.`**: 유난히 피곤하다. (상태)
   - **`I feel extra tired.`**: 유난히 피곤하게 느껴진다. (주관적 감각)
   - **`I think I'm extra tired.`**: 유난히 피곤한 것 같다. (판단·추측)
-  - **차이:** `I'm`은 상태를, `I feel`은 주관적인 느낌을, `I think`는 판단이나 추측을 강조한다.
+  - **차이:** `I'm`은 상태를, `I feel`은 주관적인 느낌을, `I think`는 판단이나 추측을 강조한다. 둘다가능
 
 <div id="day-04"></div>
 ### Day 04
