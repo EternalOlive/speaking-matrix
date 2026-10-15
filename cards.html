@@ -1982,8 +1982,13 @@ input,select{border-radius:10px;}
 .cum-chart-wrap{position:relative;width:100%;user-select:none;-webkit-user-select:none;}
 .cum-top-badge{position:absolute;top:2px;right:4px;display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--c-acc);font-variant-numeric:tabular-nums;cursor:default;padding:2px 8px;border-radius:6px;background:var(--c-fill);transition:all .15s ease;z-index:5;}
 .cum-top-badge:hover{background:var(--c-acc-tint);}
-.cum-top-daily{font-size:11px;font-weight:600;color:var(--c-sec);opacity:0.85;margin-left:4px;}
+.cum-top-val{display:inline-flex;align-items:center;gap:4px;}
+.cum-top-daily{font-size:11px;font-weight:600;color:var(--c-sec);opacity:0.85;margin-left:4px;display:inline-flex;align-items:center;gap:4px;}
 .cum-top-daily b{color:var(--c-acc);}
+.cum-leg-line{display:inline-block;width:10px;height:2.5px;border-radius:2px;background:var(--c-acc);}
+.cum-leg-bar{display:inline-block;width:3.5px;height:9px;border-radius:1.5px;background:var(--c-acc);opacity:0.65;}
+.cum-daily-bar{transition:opacity .12s ease;cursor:crosshair;}
+.cum-daily-bar.on{opacity:0.88 !important;}
 
 .cum-hover-tip{position:absolute;pointer-events:none;z-index:25;background:var(--c-card);border:1px solid var(--c-sep);border-radius:10px;padding:7px 10px;box-shadow:0 4px 18px rgba(0,0,0,0.12);font-size:11.5px;color:var(--c-label);white-space:nowrap;transform:translate(-50%,-100%);margin-top:-6px;transition:opacity .1s ease;}
 .cum-hover-tip .cht-date{font-size:10.5px;font-weight:600;color:var(--c-sec);margin-bottom:3px;}
@@ -1991,6 +1996,8 @@ input,select{border-radius:10px;}
 .cum-hover-tip .cht-row b{font-weight:700;color:var(--c-label);font-variant-numeric:tabular-nums;}
 .cum-hover-tip .cht-daily b{color:var(--c-acc);}
 .cum-hover-tip .cht-sub{font-size:10px;color:var(--c-sec);font-weight:500;}
+.cum-hover-tip .cht-dot-line{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--c-acc);margin-right:4px;}
+.cum-hover-tip .cht-dot-bar{display:inline-block;width:3.5px;height:7.5px;border-radius:1px;background:var(--c-acc);opacity:0.75;margin-right:5px;}
 
 
 /* ═══════════════ 디자인 이식 E(2) — 세션 화면 (캔버스 「세션」 판) ═══════════════ */
@@ -14171,10 +14178,11 @@ function repsHistogramChart(repsDist, maxVal){
   return `<div style="position:relative"><svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" style="width:100%;height:${H}px;display:block">${bars}</svg>${labels}</div>`;
 }
 
-/* 2. 누적 풀이 추이 (누적 훈련량 곡선) */
+/* 2. 누적 풀이 추이 (누적 훈련량 곡선 + 일일 학습량 막대) */
 function cumReviewsChart(cumArr){
   if(!cumArr.length) return '';
   window._cumArrData = cumArr;
+  window._activeCumBarIdx = null;
   const W=680, H=165, PADB=22, PADT=20;
   const n=cumArr.length;
   const maxCum = cumArr[n-1].cum || 1;
@@ -14185,9 +14193,26 @@ function cumReviewsChart(cumArr){
   const poly = [`0,${H-PADB}`, ...pts, `${W},${H-PADB}`].join(' ');
   const line = pts.join(' ');
 
+  // 일일 학습량 막대 계산 (하단 약 42% 영역)
+  const maxDaily = Math.max(1, ...cumArr.map(d => d.dailyCards || 0));
+  const maxBarH = (H - PADB - PADT) * 0.42;
+  const bw = Math.max(2.2, Math.min(14, (W / n) * 0.68));
+  const rx = Math.min(bw / 2, 2);
+
+  let bars = '';
+  cumArr.forEach((d, i) => {
+    const v = d.dailyCards || 0;
+    const barH = v > 0 ? Math.max(2.5, (v / maxDaily) * maxBarH) : 0;
+    const cx = x(i);
+    const bx = n === 1 ? (W - bw) / 2 : Math.max(0, Math.min(W - bw, cx - bw / 2));
+    const by = H - PADB - barH;
+    bars += `<rect id="cumBar_${i}" class="cum-daily-bar" data-idx="${i}" x="${bx.toFixed(1)}" y="${by.toFixed(1)}" width="${bw.toFixed(1)}" height="${barH.toFixed(1)}" rx="${rx.toFixed(1)}" fill="var(--c-acc)" opacity="0.28"><title>${d.d}: 일일 ${v}장 (${d.dailyReps || 0}회)</title></rect>`;
+  });
+
   const gradId = 'cumGrad_' + Math.floor(Math.random()*1000);
   let g = `<defs><linearGradient id="${gradId}" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="var(--c-acc)" stop-opacity="0.38"/><stop offset="100%" stop-color="var(--c-acc)" stop-opacity="0.04"/></linearGradient></defs>`;
   g += `<polygon points="${poly}" fill="url(#${gradId})"/>`;
+  g += `<g class="cum-bars">${bars}</g>`;
   g += `<polyline points="${line}" fill="none" stroke="var(--c-acc)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>`;
   g += `<line x1="0" y1="${y(maxCum).toFixed(1)}" x2="${W}" y2="${y(maxCum).toFixed(1)}" stroke="var(--c-sep)" stroke-width="1" stroke-dasharray="3 3"/>`;
 
@@ -14204,8 +14229,8 @@ function cumReviewsChart(cumArr){
   const todayCards = todayEntry ? (todayEntry.dailyCards || 0) : 0;
   const todayReps = todayEntry ? (todayEntry.dailyReps || 0) : 0;
   const topLab = `<div class="cum-top-badge" id="cumTopBadge" title="오늘 일일 학습량: ${todayCards.toLocaleString()}장 (${todayReps.toLocaleString()}회)">
-    <span class="cum-top-val">누적 ${maxCum.toLocaleString()}회</span>
-    <span class="cum-top-daily">오늘 일일 <b>+${todayCards.toLocaleString()}장</b></span>
+    <span class="cum-top-val"><i class="cum-leg-line"></i>누적 ${maxCum.toLocaleString()}회</span>
+    <span class="cum-top-daily"><i class="cum-leg-bar"></i>오늘 <b>+${todayCards.toLocaleString()}장</b></span>
   </div>`;
 
   return `<div class="cum-chart-wrap" id="cumChartWrap" onmousemove="onCumChartMove(event)" onmouseleave="onCumChartLeave()" ontouchmove="onCumChartMove(event)" ontouchend="onCumChartLeave()">
@@ -14246,14 +14271,23 @@ function onCumChartMove(e){
     dot.setAttribute('cy', posY.toFixed(1));
     dot.style.opacity = '1';
   }
+  if(window._activeCumBarIdx !== idx){
+    if(window._activeCumBarIdx != null){
+      const prevBar = document.getElementById('cumBar_' + window._activeCumBarIdx);
+      if(prevBar) prevBar.classList.remove('on');
+    }
+    const curBar = document.getElementById('cumBar_' + idx);
+    if(curBar) curBar.classList.add('on');
+    window._activeCumBarIdx = idx;
+  }
   if(tip){
     const dObj = new Date(item.d + 'T12:00:00');
     const dayName = '일월화수목금토'[dObj.getDay()];
     const dStr = `${Number(item.d.slice(5,7))}월 ${Number(item.d.slice(8))}일 (${dayName})`;
     tip.innerHTML = `
       <div class="cht-date">${dStr}</div>
-      <div class="cht-row"><span>누적 학습량</span><b>${item.cum.toLocaleString()}회</b></div>
-      <div class="cht-row cht-daily"><span>일일 학습량</span><b>${item.dailyCards.toLocaleString()}장</b> <span class="cht-sub">(${item.dailyReps.toLocaleString()}회)</span></div>
+      <div class="cht-row"><span><i class="cht-dot-line"></i>누적 풀이</span><b>${item.cum.toLocaleString()}회</b></div>
+      <div class="cht-row cht-daily"><span><i class="cht-dot-bar"></i>일일 학습</span><b>${item.dailyCards.toLocaleString()}장</b> <span class="cht-sub">(${item.dailyReps.toLocaleString()}회)</span></div>
     `;
     const leftPx = (posX / W) * rect.width;
     const topPx = (posY / H) * rect.height;
@@ -14270,6 +14304,11 @@ function onCumChartLeave(){
   if(line) line.style.opacity = '0';
   if(dot) dot.style.opacity = '0';
   if(tip) tip.style.display = 'none';
+  if(window._activeCumBarIdx != null){
+    const prevBar = document.getElementById('cumBar_' + window._activeCumBarIdx);
+    if(prevBar) prevBar.classList.remove('on');
+    window._activeCumBarIdx = null;
+  }
 }
 window.onCumChartMove = onCumChartMove;
 window.onCumChartLeave = onCumChartLeave;
@@ -14390,7 +14429,7 @@ function renderTrajCardInner(){
   } else if(trajTab === 'cum'){
     h += cumReviewsChart(cumArr);
     const daysN = cumArr.length || 1;
-    h += `<div class="cap" style="margin-top:8px">첫 채점부터 오늘까지 <b>총 ${totalReps.toLocaleString()}회</b>의 실전 말하기 훈련 누적 (풀이한 날 하루 평균 ${Math.round(totalReps/daysN)}회)</div>`;
+    h += `<div class="cap" style="margin-top:8px">첫 채점부터 오늘까지 <b>총 ${totalReps.toLocaleString()}회</b> 실전 말하기 훈련 누적 (하루 평균 ${Math.round(totalReps/daysN)}회) · 하단 막대는 <b>일일 학습량(장)</b></div>`;
   } else {
     const hist = maturityHistory();
     h += ankiCardCountsChart(hist);
