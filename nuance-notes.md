@@ -6,9 +6,7 @@ Speaking Matrix 900제 문장의 뉘앙스, 원어민 어감 차이, 실전 활�
 
 <div id="day-01"></div>
 ### Day 01
-- **I just woke up.**
-  - `just`: 직전의 순간을 강조하는 부사로, '방금 막' 일어났음을 나타냅니다.
-  - `wake up` vs `get up`: `wake up`은 눈을 뜬 상태, `get up`은 침대에서 몸을 일으켜 나온 상태를 의미합니다.
+*등록된 뉘앙스 노트가 없습니다.*
 
 <div id="day-02"></div>
 ### Day 02
