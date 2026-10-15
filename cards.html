@@ -1434,7 +1434,7 @@ details.ym-subj>summary small{font-weight:600;color:var(--mute);font-size:12.5px
 .cn-hint{font-size:11px;color:var(--c-ter);}
 /* 스프린트 모드 & 30초 타임아웃 게이지 */
 .sprint-controls{position:relative;display:inline-flex;align-items:center;margin-left:6px;}
-.sprint-chip{border:1px solid var(--c-sep);background:var(--c-fill);color:var(--c-sec);font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;cursor:pointer;display:inline-flex;align-items:center;gap:5px;transition:all .15s ease;font-family:var(--font);height:26px;}
+.sprint-chip{border:1px solid var(--c-sep);background:var(--c-fill);color:var(--c-sec);font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;cursor:pointer;display:inline-flex;align-items:center;gap:5px;transition:all .15s ease;font-family:var(--font);height:26px;white-space:nowrap;font-variant-numeric:tabular-nums;}
 .sprint-chip:hover{color:var(--c-label);border-color:var(--c-sec);}
 .sprint-chip.active{background:var(--c-acc-tint);border-color:var(--c-acc);color:var(--c-acc);}
 .sprint-pulse-dot{width:6px;height:6px;border-radius:50%;background:var(--c-acc);animation:sprintPulse 1.2s infinite ease-in-out;}
@@ -2443,7 +2443,7 @@ details.gr-fold[open]>summary .s2-chev{transform:rotate(90deg);}
         <!-- 🔴 디자인 이식 09-24: 카드 = 위아래 반반. 답면 내용은 **앞면에서도 미리 채워 visibility:hidden**으로 깔고 가림 면으로 덮는다 →
              앞면↔답면에서 질문·선·버튼이 1px도 안 움직인다(디자인_언어 §1-1 · §7.1). 가림은 visibility라 글자가 선택·낭독되지 않는다. -->
         <div id="card">
-          <div id="cHead"><div class="c-head-top"><div id="cScope"></div><div id="phaseLine"></div></div><div class="c-head-sub" id="cHeadSub"><span id="lastActionChip" class="last-action-chip" style="display:none;" title="직전 채점 (탭하면 되돌리기)"></span><span id="solveStudyChip" class="sc-badge"></span><div id="sprintControls" class="sprint-controls"><button type="button" class="sprint-chip" id="btnSprint" onclick="toggleSprintMenu(event)"><span>스프린트</span></button><div id="sprintMenu" class="sprint-menu" style="display:none;"><button type="button" class="sprint-opt" onclick="startSprint(180)">3분 스프린트</button><button type="button" class="sprint-opt" onclick="startSprint(300)">5분 스프린트</button></div></div><div class="c-upper-act"><button type="button" class="c-copy-btn c-gpt-btn" id="btnGptFront" title="ChatGPT 앱 열기" aria-label="ChatGPT 앱 열기"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1683a.071.071 0 0 1 .038.052v5.5826a4.5045 4.5045 0 0 1-4.4945 4.4947zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4998 4.4998 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1683a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.8956zm16.0993 3.8558L12.5973 8.3829l2.02-1.1636a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.402-.6862zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L8.909 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4998 4.4998 0 0 1 6.6802 4.6604v.0001zm-4.4664 4.3713L10.1504 9.7348 12.0142 8.66l5.834 3.3685-1.8638 1.0709zm-2.006 1.1541L12 15.3401l-5.834-3.3685 1.8638-1.0709 3.834 2.2132v2.1378z"/></svg></button><button type="button" class="c-copy-btn" id="btnCopyFront" title="카드 내용 복사" aria-label="카드 내용 복사"><svg class="ic-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><svg class="ic-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:none;"><path d="M20 6 9 17l-5-5"/></svg></button></div></div></div>
+          <div id="cHead"><div class="c-head-top"><div id="cScope"></div><div id="phaseLine"></div></div><div class="c-head-sub" id="cHeadSub"><span id="lastActionChip" class="last-action-chip" style="display:none;" title="직전 채점 (탭하면 되돌리기)"></span><span id="solveStudyChip" class="sc-badge"></span><div id="sprintControls" class="sprint-controls" onclick="event.stopPropagation()"><button type="button" class="sprint-chip" id="btnSprint" onclick="toggleSprintMenu(event)"><span>스프린트</span></button><div id="sprintMenu" class="sprint-menu" style="display:none;" onclick="event.stopPropagation()"><button type="button" class="sprint-opt" onclick="startSprint(180, event)">3분 스프린트</button><button type="button" class="sprint-opt" onclick="startSprint(300, event)">5분 스프린트</button></div></div><div class="c-upper-act"><button type="button" class="c-copy-btn c-gpt-btn" id="btnGptFront" title="ChatGPT 앱 열기" aria-label="ChatGPT 앱 열기"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1683a.071.071 0 0 1 .038.052v5.5826a4.5045 4.5045 0 0 1-4.4945 4.4947zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4998 4.4998 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1683a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.8956zm16.0993 3.8558L12.5973 8.3829l2.02-1.1636a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.402-.6862zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L8.909 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4998 4.4998 0 0 1 6.6802 4.6604v.0001zm-4.4664 4.3713L10.1504 9.7348 12.0142 8.66l5.834 3.3685-1.8638 1.0709zm-2.006 1.1541L12 15.3401l-5.834-3.3685 1.8638-1.0709 3.834 2.2132v2.1378z"/></svg></button><button type="button" class="c-copy-btn" id="btnCopyFront" title="카드 내용 복사" aria-label="카드 내용 복사"><svg class="ic-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><svg class="ic-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:none;"><path d="M20 6 9 17l-5-5"/></svg></button></div></div></div>
           <div id="sprintGaugeWrap" class="sprint-gauge-wrap" style="display:none;"><div id="sprintGauge" class="sprint-gauge"></div></div>
           <div id="cardScroll"><div id="cSplit">
             <div id="cUpper">
@@ -9851,7 +9851,8 @@ function selecting(){   // 지금 글자가 실제로 잡혀 있나 = 방금 동
   const s=window.getSelection&&window.getSelection();
   return !!(s && !s.isCollapsed && String(s).trim());
 }
-$('card').addEventListener('click',()=>{ if(Date.now()-lastSwipeAt<450)return;
+$('card').addEventListener('click',(e)=>{ if(Date.now()-lastSwipeAt<450)return;
+  if(e && e.target && e.target.closest && e.target.closest('#sprintControls, #sprintMenu, .sprint-controls, .sprint-menu, .c-copy-btn, .c-gpt-btn')) return;
   /* 문면을 끌어 선택하면 mouseup 뒤에 click이 따라온다 — 그걸 탭으로 먹으면 복사하려다 답면이 접힌다.
      선택을 지우는 평범한 클릭은 mousedown 시점에 이미 선택이 풀려 여기 안 걸린다. */
   if(selecting())return;
@@ -15830,7 +15831,9 @@ let sprintRemaining = 180;
 let sprintInterval = null;
 let sprintRestInterval = null;
 let sprintRestRemaining = 60;
-let sprintCardTimer = null;
+let sprintCardTimerInterval = null;
+let sprintCardElapsed = 0;
+let sprintCardRevealed = false;
 let sprintTtsTimer = null;
 let currentSpeechSessionId = 0;
 let sprintSpeechActive = false;
@@ -15889,9 +15892,17 @@ function speakSentenceTwice(text, onDone){
 }
 
 function cancelSprintCardTimer(){
-  if(sprintCardTimer){ clearTimeout(sprintCardTimer); sprintCardTimer = null; }
-  if(sprintTtsTimer){ clearTimeout(sprintTtsTimer); sprintTtsTimer = null; }
+  if(sprintCardTimerInterval){
+    clearInterval(sprintCardTimerInterval);
+    sprintCardTimerInterval = null;
+  }
+  if(sprintTtsTimer){
+    clearTimeout(sprintTtsTimer);
+    sprintTtsTimer = null;
+  }
   cancelTTS();
+  sprintCardElapsed = 0;
+  sprintCardRevealed = false;
   const gw = document.getElementById('sprintGaugeWrap');
   if(gw) gw.style.display = 'none';
   const g = document.getElementById('sprintGauge');
@@ -15899,7 +15910,12 @@ function cancelSprintCardTimer(){
 }
 
 function stopSprintCardTimer(){
-  if(sprintCardTimer){ clearTimeout(sprintCardTimer); sprintCardTimer = null; }
+  if(sprintCardTimerInterval){
+    clearInterval(sprintCardTimerInterval);
+    sprintCardTimerInterval = null;
+  }
+  sprintCardRevealed = true;
+  updateSprintPill();
   const gw = document.getElementById('sprintGaugeWrap');
   if(gw) gw.style.display = 'none';
   const g = document.getElementById('sprintGauge');
@@ -15934,6 +15950,10 @@ function startSprintCardTimer(c){
   if(!sprintActive || !c) return;
   if(typeof revealed !== 'undefined' && revealed) return;
   cancelSprintCardTimer();
+  sprintCardElapsed = 0;
+  sprintCardRevealed = false;
+  updateSprintPill();
+
   const gw = document.getElementById('sprintGaugeWrap');
   const g = document.getElementById('sprintGauge');
   if(gw && g){
@@ -15944,10 +15964,22 @@ function startSprintCardTimer(c){
     g.style.transition = 'transform 30s linear';
     g.style.transform = 'scaleX(0)';
   }
-  sprintCardTimer = setTimeout(() => {
-    sprintCardTimer = null;
-    handleCardTimeout(c);
-  }, 30000);
+
+  sprintCardTimerInterval = setInterval(() => {
+    if(!sprintActive){
+      cancelSprintCardTimer();
+      return;
+    }
+    if(!sprintCardRevealed){
+      sprintCardElapsed++;
+      updateSprintPill();
+      if(sprintCardElapsed >= 30){
+        clearInterval(sprintCardTimerInterval);
+        sprintCardTimerInterval = null;
+        handleCardTimeout(c);
+      }
+    }
+  }, 1000);
 }
 
 function toggleSprintMenu(e){
@@ -15955,25 +15987,33 @@ function toggleSprintMenu(e){
   const menu = document.getElementById('sprintMenu');
   if(!menu) return;
   if(sprintActive){
-    menu.innerHTML = `<button type="button" class="sprint-opt" onclick="stopSprint(true)">스프린트 조기 종료</button>`;
+    menu.innerHTML = `<button type="button" class="sprint-opt" onclick="stopSprint(true, event)">스프린트 조기 종료</button>`;
   } else {
     menu.innerHTML = `
-      <button type="button" class="sprint-opt" onclick="startSprint(180)">3분 스프린트</button>
-      <button type="button" class="sprint-opt" onclick="startSprint(300)">5분 스프린트</button>
+      <button type="button" class="sprint-opt" onclick="startSprint(180, event)">3분 스프린트</button>
+      <button type="button" class="sprint-opt" onclick="startSprint(300, event)">5분 스프린트</button>
     `;
   }
   menu.style.display = menu.style.display === 'none' ? 'flex' : 'none';
 }
 
-function startSprint(durationSec){
+function startSprint(durationSec, e){
+  if(e) e.stopPropagation();
   const menu = document.getElementById('sprintMenu');
   if(menu) menu.style.display = 'none';
   closeSprintSummary();
   if(sprintRestInterval){ clearInterval(sprintRestInterval); sprintRestInterval = null; }
 
+  // 이미 정답이 열려있었다면 앞면으로 복귀시켜 깨끗하게 시작
+  if(typeof revealed !== 'undefined' && revealed && typeof unreveal === 'function'){
+    unreveal();
+  }
+
   sprintActive = true;
   sprintDuration = durationSec;
   sprintRemaining = durationSec;
+  sprintCardElapsed = 0;
+  sprintCardRevealed = false;
   sprintStats = {
     cards: 0,
     ratings: { 1: 0, 2: 0, 3: 0, 4: 0 },
@@ -15986,7 +16026,7 @@ function startSprint(durationSec){
   sprintInterval = setInterval(tickSprint, 1000);
 
   const c = (typeof cur === 'function') ? cur() : null;
-  if(c && typeof revealed !== 'undefined' && !revealed){
+  if(c){
     startSprintCardTimer(c);
   }
 }
@@ -16012,10 +16052,12 @@ function updateSprintPill(){
   const m = Math.floor(sprintRemaining / 60);
   const s = sprintRemaining % 60;
   const timeStr = `${m}:${s < 10 ? '0' : ''}${s}`;
-  btn.innerHTML = `<span class="sprint-pulse-dot"></span><span>${timeStr}</span>`;
+  const cardStr = `${sprintCardElapsed}초`;
+  btn.innerHTML = `<span class="sprint-pulse-dot"></span><span>${timeStr} · ${cardStr}</span>`;
 }
 
-function stopSprint(showSummary = false){
+function stopSprint(showSummary = false, e){
+  if(e) e.stopPropagation();
   sprintActive = false;
   if(sprintInterval){ clearInterval(sprintInterval); sprintInterval = null; }
   cancelSprintCardTimer();
