@@ -190,7 +190,12 @@ Speaking Matrix 900제 문장의 뉘앙스, 원어민 어감 차이, 실전 활�
 
 <div id="day-28"></div>
 ### Day 28
-*등록된 뉘앙스 노트가 없습니다.*
+- **The file wouldn't open.**: 파일을 열려고 했지만 열리지 않았다. `wouldn't + 동사원형`은 과거에 어떤 일이 뜻대로 되지 않았음을 나타낼 수 있다.
+
+- **The file wasn't open.**: 파일이 열려 있지 않았다. 파일의 상태를 설명한다.
+
+- **The file wasn't opening.**: 파일이 열리는 중이 아니었다 또는 열리지 않고 있었다. 진행 상황을 묘사한다.
+**차이:** `wouldn't open`은 파일을 열려는 시도가 실패했다는 의미에 적합하다.
 
 <div id="day-29"></div>
 ### Day 29
