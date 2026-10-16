@@ -199,7 +199,15 @@ Speaking Matrix 900제 문장의 뉘앙스, 원어민 어감 차이, 실전 활�
 
 <div id="day-29"></div>
 ### Day 29
-*등록된 뉘앙스 노트가 없습니다.*
+- **I feel proud.**: 자랑스러운 기분이 든다. 감정에 초점을 둔다.
+- **I'm proud of it.**: 그것이 자랑스럽다. 자랑스럽게 여기는 대상을 나타낸다.
+- **I'm proud of myself.**: 내 자신이 자랑스럽다.
+
+**비교**
+- I think I did my best, and I feel proud.
+- I think I did my best, and I'm proud of it.
+
+두 문장 모두 자연스럽다. 자신의 노력이나 결과를 자랑스럽게 여긴다는 의미를 명확히 하려면 `I'm proud of it`을 사용할 수 있다.
 
 <div id="day-30"></div>
 ### Day 30
