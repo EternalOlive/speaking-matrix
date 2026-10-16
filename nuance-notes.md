@@ -63,7 +63,10 @@ Speaking Matrix 900제 문장의 뉘앙스, 원어민 어감 차이, 실전 활�
 
 <div id="day-09"></div>
 ### Day 09
-*등록된 뉘앙스 노트가 없습니다.*
+- **There are many busy days, so we don't see each other often.** <!-- id: sm_1790710445041 -->
+  - **don't see each other often**: 서로 자주 만나지 않는다. 만나는 빈도가 낮음을 나타낸다.
+  - **can't see each other often**: 서로 자주 만날 수 없다. 시간이나 상황상의 제약을 강조한다.
+  - **차이:** `don't`는 만나는 빈도, `can't`는 만날 수 없는 제약에 초점을 둔다.
 
 <div id="day-10"></div>
 ### Day 10
