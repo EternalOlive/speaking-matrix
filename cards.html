@@ -2284,6 +2284,9 @@ details.gr-fold[open]>summary .s2-chev{transform:rotate(90deg);}
 .coach-btn.mic { background: rgba(0,122,255,.12); color: var(--c-acc); }
 .coach-btn.mic.recording { background: var(--c-red); color: #fff; animation: coachPulse 1.2s infinite; }
 
+.coach-btn.tts-playing { background: rgba(255,59,48,.12) !important; color: var(--c-red) !important; border-color: rgba(255,59,48,.3) !important; }
+
+
 @keyframes coachPulse {
   0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,59,48,.5); }
   70% { transform: scale(1.03); box-shadow: 0 0 0 8px rgba(255,59,48,0); }
@@ -18842,6 +18845,8 @@ let coachLastEvaFeedback = null;
 let coachArchiveFilterTag = null;
 let coachSitCards = null;
 let coachEvaAnchorEditing = false;
+let coachCurrentTtsBtn = null;
+let coachActiveUtterance = null;
 
 const COACH_PRESET_QUESTIONS = [
   {
@@ -19100,12 +19105,55 @@ function coachCleanJson(text){
   return JSON.parse(text);
 }
 
-function coachSpeak(text){
+function coachStopSpeak(){
+  if('speechSynthesis' in window){
+    window.speechSynthesis.cancel();
+  }
+  if(coachCurrentTtsBtn){
+    if(coachCurrentTtsBtn.dataset.origHtml){
+      coachCurrentTtsBtn.innerHTML = coachCurrentTtsBtn.dataset.origHtml;
+    }
+    coachCurrentTtsBtn.classList.remove('tts-playing');
+    coachCurrentTtsBtn = null;
+  }
+  coachActiveUtterance = null;
+}
+
+function coachSpeak(text, btn){
   if(!('speechSynthesis' in window)) return;
-  window.speechSynthesis.cancel();
+
+  // If already speaking and user clicked the same button, stop immediately
+  if(window.speechSynthesis.speaking && coachCurrentTtsBtn === btn){
+    coachStopSpeak();
+    return;
+  }
+
+  // Stop any other currently playing speech
+  coachStopSpeak();
+
+  if(!text) return;
+
   const u = new SpeechSynthesisUtterance(text);
   u.lang = 'en-US';
   u.rate = 0.92;
+  coachActiveUtterance = u;
+
+  if(btn){
+    coachCurrentTtsBtn = btn;
+    if(!btn.dataset.origHtml){
+      btn.dataset.origHtml = btn.innerHTML;
+    }
+    btn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" width="11" height="11"><rect x="6" y="6" width="12" height="12" rx="2"/></svg>소리 정지';
+    btn.classList.add('tts-playing');
+  }
+
+  u.onend = () => {
+    coachStopSpeak();
+  };
+  u.onerror = () => {
+    coachStopSpeak();
+  };
+
   window.speechSynthesis.speak(u);
 }
 
@@ -19156,6 +19204,7 @@ function coachSaveKey(){
 }
 
 function setCoachTab(tab){
+  coachStopSpeak();
   coachTab = tab;
   localStorage.setItem('cards_coach_tab_v1', tab);
   renderSpeakingCoach();
@@ -19336,11 +19385,12 @@ function renderCoachSituations(){
   });
 
   el.querySelectorAll('[data-sit-tts]').forEach(btn => {
-    btn.onclick = () => coachSpeak(btn.dataset.sitTts);
+    btn.onclick = () => coachSpeak(btn.dataset.sitTts, btn);
   });
 }
 
 function coachToggleSitMic(idx){
+  coachStopSpeak();
   const btn = document.getElementById('coachSitMicBtn_' + idx);
   const txt = document.getElementById('coachSitMicTxt_' + idx);
   const inp = document.getElementById('coachSitInp_' + idx);
@@ -19572,7 +19622,7 @@ function renderCoachEva(){
   if(nextBtn) nextBtn.onclick = coachNextEvaQuestion;
 
   const speakQBtn = document.getElementById('btnCoachSpeakEvaQ');
-  if(speakQBtn) speakQBtn.onclick = () => coachSpeak(q.eng);
+  if(speakQBtn) speakQBtn.onclick = () => coachSpeak(q.eng, speakQBtn);
 
   const toggleAnchorBtn = document.getElementById('btnCoachToggleAnchorEdit');
   if(toggleAnchorBtn){
@@ -19614,7 +19664,7 @@ function renderCoachEva(){
 
   if(coachLastEvaBlob){
     const player = document.getElementById('evaAudioPlayer');
-    if(player) player.src = URL.createObjectURL(coachLastEvaBlob);
+    if(player){ player.src = URL.createObjectURL(coachLastEvaBlob); player.onplay = () => coachStopSpeak(); }
   }
   if(coachLastEvaFeedback){
     renderEvaReport(coachLastEvaFeedback);
@@ -19622,6 +19672,7 @@ function renderCoachEva(){
 }
 
 function coachPrevEvaQuestion(){
+  coachStopSpeak();
   if(coachActiveRecorder) coachToggleEvaRec();
   coachEvaQIndex = (coachEvaQIndex - 1 + COACH_PRESET_QUESTIONS.length) % COACH_PRESET_QUESTIONS.length;
   localStorage.setItem('cards_coach_eva_idx_v1', coachEvaQIndex);
@@ -19633,6 +19684,7 @@ function coachPrevEvaQuestion(){
 }
 
 function coachNextEvaQuestion(){
+  coachStopSpeak();
   if(coachActiveRecorder) coachToggleEvaRec();
   coachEvaQIndex = (coachEvaQIndex + 1) % COACH_PRESET_QUESTIONS.length;
   localStorage.setItem('cards_coach_eva_idx_v1', coachEvaQIndex);
@@ -19862,10 +19914,10 @@ function renderEvaReport(fb){
   el.innerHTML = h;
   
   const speakAlBtn = document.getElementById('btnCoachSpeakAlUpgrade');
-  if(speakAlBtn && fb.alUpgrade) speakAlBtn.onclick = () => coachSpeak(fb.alUpgrade.polished);
+  if(speakAlBtn && fb.alUpgrade) speakAlBtn.onclick = () => coachSpeak(fb.alUpgrade.polished, speakAlBtn);
 
   const speakBtn = document.getElementById('btnCoachSpeakModel');
-  if(speakBtn) speakBtn.onclick = () => coachSpeak(fb.modelAnswer || '');
+  if(speakBtn) speakBtn.onclick = () => coachSpeak(fb.modelAnswer || '', speakBtn);
 
   el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
@@ -20215,7 +20267,7 @@ async function coachLoadArchiveItem(id){
     const fb = item.feedback || {};
 
     let detailsH = '<div style="display:flex;flex-direction:column;gap:10px;margin-top:6px;width:100%;">'
-      + '<audio controls style="width:100%;border-radius:8px;" src="' + audioUrl + '"></audio>'
+      + '<audio controls onplay="coachStopSpeak()" style="width:100%;border-radius:8px;" src="' + audioUrl + '"></audio>'
       + '<div style="background:var(--c-fill);border-radius:10px;padding:10px 12px;font-size:13px;line-height:1.5;">'
       + '<div><b>내 답변:</b> ' + esc(item.transcript || '(녹음만 저장됨)') + '</div>';
 
@@ -20252,10 +20304,10 @@ async function coachLoadArchiveItem(id){
     wrap.innerHTML = detailsH;
     
     const playAlBtn = document.getElementById('btnCoachPlayAlArchive_' + id);
-    if(playAlBtn && fb.alUpgrade) playAlBtn.onclick = () => coachSpeak(fb.alUpgrade.polished);
+    if(playAlBtn && fb.alUpgrade) playAlBtn.onclick = () => coachSpeak(fb.alUpgrade.polished, playAlBtn);
 
     const playModelBtn = document.getElementById('btnCoachPlayModelArchive_' + id);
-    if(playModelBtn && fb.modelAnswer) playModelBtn.onclick = () => coachSpeak(fb.modelAnswer);
+    if(playModelBtn && fb.modelAnswer) playModelBtn.onclick = () => coachSpeak(fb.modelAnswer, playModelBtn);
 
     const gradeSingleDetailBtn = document.getElementById('btnCoachGradeSingleDetail_' + id);
     if(gradeSingleDetailBtn) gradeSingleDetailBtn.onclick = () => coachGradeArchiveItem(id);
