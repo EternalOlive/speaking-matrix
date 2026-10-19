@@ -2514,6 +2514,78 @@ details.gr-fold[open]>summary .s2-chev{transform:rotate(90deg);}
   color: #fff;
 }
 
+/* ── 통계 화면: 교재 선택 세그먼트 & 루틴 달성 목표 ── */
+.stat-course-bar {
+  display: flex;
+  gap: 6px;
+  background: var(--c-fill);
+  padding: 4px;
+  border-radius: 12px;
+  margin-bottom: 14px;
+}
+.stat-course-btn {
+  flex: 1;
+  border: 0;
+  background: transparent;
+  padding: 8px 10px;
+  border-radius: 9px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--c-sec);
+  cursor: pointer;
+  transition: all .15s ease;
+  white-space: nowrap;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.stat-course-btn:hover {
+  color: var(--c-label);
+}
+.stat-course-btn.on {
+  background: var(--c-card);
+  color: var(--c-label);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+.stat-course-btn .badge {
+  font-size: 11px;
+  padding: 1px 6px;
+  border-radius: 10px;
+  background: var(--c-fill-sub, rgba(0,0,0,0.06));
+  color: var(--c-sec);
+  font-variant-numeric: tabular-nums;
+}
+.stat-course-btn.on .badge {
+  background: var(--c-acc-tint);
+  color: var(--c-acc);
+}
+.rt-goal-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 12px;
+  margin-top: 8px;
+}
+.rt-goal-card {
+  background: var(--c-fill);
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--c-sep-sub);
+}
+.rt-prog-bar {
+  height: 6px;
+  background: var(--c-fill-sub, rgba(0,0,0,0.08));
+  border-radius: 3px;
+  overflow: hidden;
+  margin: 6px 0;
+}
+.rt-prog-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
 /* ── Option A: 오늘의 루틴 카드 대시보드 ── */
 .routine-hub {
   display: flex;
@@ -14625,9 +14697,10 @@ function retentionSplit(days, keyFn){
 }
 /* 굳은 정도 — 안키의 young/mature를 그대로 쓴다(간격 21일 경계).
    「몇 장 봤나」보다 「몇 장이 굳었나」가 시험 관점의 질문이다. */
-function maturitySplit(){
+function maturitySplit(course){
   const o={nw:0, young:0, mature:0, ret:0};
-  for(const c of DATA){ const s=state.cards[c.id];
+  const list = (typeof getStatCards === 'function') ? getStatCards(course) : DATA;
+  for(const c of list){ const s=state.cards[c.id];
     if(s&&s.retired){o.ret++;continue;}
     if(!s||!s.fsrs){o.nw++;continue;}
     ((s.fsrs.scheduled_days||0)>=21 ? o.mature++ : o.young++);
@@ -14761,12 +14834,15 @@ function statInputs(){
 /* 실측 구간 — 로그를 시간순으로 재생하며 하루 경계마다 스냅숏.
    ⚠ `replayLog`은 카드별로 도는 구조라 날짜별 중간값을 못 준다. 그래서 여기서만 따로 한 바퀴 돈다.
    ⚠ 사람 조작(`base`)은 안 본다 — 그래서 마지막 날 값이 `maturitySplit()`과 조금 다를 수 있다(퇴역·묻힘 몫). */
-function maturityHistory(){
+function maturityHistory(course){
+  const list = (typeof getStatCards === 'function') ? getStatCards(course) : DATA;
+  const idSet = new Set(list.map(c=>c.id));
   const cards={}, seen=new Set(), out=[]; let cur=null;
-  const alive=DATA.filter(c=>{ const s=state.cards[c.id]; return !(s&&s.retired); }).length;
+  const alive=list.filter(c=>{ const s=state.cards[c.id]; return !(s&&s.retired); }).length;
   const snap=k=>{ let hard=0; for(const id in cards){ const f=cards[id].fsrs; if(f&&(f.scheduled_days||0)>=MATURE_IVL) hard++; }
     out.push({k, hard, soft:seen.size-hard, unseen:Math.max(0, alive-seen.size)}); };
   for(const e of state.log){
+    if(!idSet.has(e[0])) continue;
     const k=dayKey(logDate(e));
     if(cur!==null && k!==cur){ snap(cur); /* 빈 날은 앞 값을 그대로 잇는다 */
       for(let g=dkAdd(cur,1); g<k; g=dkAdd(g,1)){ const p=out[out.length-1]; out.push({k:g, hard:p.hard, soft:p.soft, unseen:p.unseen}); } }
@@ -15025,18 +15101,38 @@ function ankiCardCountsChart(hist){
     +lab(0, d0, '0')+lab(50, dMid, '-50%')+lab(100, dEnd + ' (오늘)', '-100%')+'</div>';
 }
 
+let statCourse = localStorage.getItem('cards_stat_course_v1') || (typeof curCourse !== 'undefined' ? curCourse : 'ht');
+if(statCourse !== 'ht' && statCourse !== 'sm' && statCourse !== 'all') statCourse = 'ht';
+
+function setStatCourse(c){
+  statCourse = c;
+  localStorage.setItem('cards_stat_course_v1', c);
+  renderStats();
+}
+
+function getStatCards(c){
+  const target = c || statCourse || 'all';
+  if(target === 'ht') return DATA.filter(x => x.id.startsWith('ht_'));
+  if(target === 'sm') return DATA.filter(x => x.id.startsWith('sm_'));
+  return DATA;
+}
+
 function renderTrajCardInner(){
+  const targetCards = getStatCards(statCourse);
+  const targetIdSet = new Set(targetCards.map(c => c.id));
   const repsMap = {};
   const byDay = {};
+  let totalReps = 0;
   for(const e of state.log){
+    if(!targetIdSet.has(e[0])) continue;
     repsMap[e[0]] = (repsMap[e[0]]||0) + 1;
+    totalReps++;
     const d = dayKey(logDate(e));
     byDay[d] = (byDay[d]||0) + 1;
   }
   const studiedCount = Object.keys(repsMap).length;
-  const totalCards = DATA.length;
+  const totalCards = targetCards.length;
   const unseenCount = Math.max(0, totalCards - studiedCount);
-  const totalReps = state.log.length;
   const avgReps = studiedCount ? (totalReps / studiedCount) : 0;
 
   let maxReps = 0;
@@ -15063,13 +15159,13 @@ function renderTrajCardInner(){
     cumArr.push({d, cum, dailyCards, dailyReps});
   }
 
-  const M = maturitySplit();
+  const M = maturitySplit(statCourse);
 
   let h = `<div class="traj-kpi-grid">
     <div class="traj-kpi-item has-hover" title="오늘 일일 학습량: ${today.cards.toLocaleString()}장 (신규 ${today.nw} · 복습 ${Math.max(0,today.cards-today.nw)})">
       <small>학습한 카드</small>
       <b>${studiedCount.toLocaleString()}<small>/${totalCards}장</small></b>
-      <span class="sub">진도율 ${Math.round(studiedCount/totalCards*100)}% · 미학습 ${unseenCount}장</span>
+      <span class="sub">진도율 ${totalCards ? Math.round(studiedCount/totalCards*100) : 0}% · 미학습 ${unseenCount}장</span>
       <div class="traj-kpi-tooltip">오늘 일일 <b>+${today.cards.toLocaleString()}장</b> (신규 ${today.nw} · 복습 ${Math.max(0,today.cards-today.nw)})</div>
     </div>
     <div class="traj-kpi-item has-hover" title="오늘 일일 채점량: ${today.n.toLocaleString()}회 (학습 ${today.cards}장)">
@@ -15086,7 +15182,7 @@ function renderTrajCardInner(){
     <div class="traj-kpi-item">
       <small>굳은 카드 (21일+)</small>
       <b>${M.mature.toLocaleString()}<small>장</small></b>
-      <span class="sub">전체의 ${Math.round(M.mature/totalCards*100)}% 마스터</span>
+      <span class="sub">전체의 ${totalCards ? Math.round(M.mature/totalCards*100) : 0}% 마스터</span>
     </div>
   </div>`;
 
@@ -15108,9 +15204,9 @@ function renderTrajCardInner(){
     const daysN = cumArr.length || 1;
     h += `<div class="cap" style="margin-top:8px">첫 채점부터 오늘까지 <b>총 ${totalReps.toLocaleString()}회</b> 실전 말하기 훈련 누적 (하루 평균 ${Math.round(totalReps/daysN)}회) · 하단 막대는 <b>일일 풀이 횟수(회)</b></div>`;
   } else {
-    const hist = maturityHistory();
+    const hist = maturityHistory(statCourse);
     h += ankiCardCountsChart(hist);
-    h += `<div class="cap" style="margin-top:8px">굳음(21일 이상, 녹색) <b>${M.mature}장</b> · 복습중(주황) <b>${M.soft}장</b> · 새 카드(회색) <b>${unseenCount}장</b></div>`;
+    h += `<div class="cap" style="margin-top:8px">굳음(21일 이상, 녹색) <b>${M.mature}장</b> · 복습중(주황) <b>${M.young||0}장</b> · 새 카드(회색) <b>${unseenCount}장</b></div>`;
   }
   h += `</div>`;
   return h;
@@ -15248,7 +15344,7 @@ function statSignals(){
    단계 문턱 = 푼 날들의 4분위(날마다 양이 크게 달라 고정 문턱이면 다 같은 색이 된다). 칸을 누르면 아래 줄에 그날 내역. */
 let hmSel=null;
 function heatmapHtml(by, T){
-  const tk=todayKey(), endKey=EXAM_DAY>tk?EXAM_DAY:tk;
+  const tk=todayKey(), endKey=tk;
   const days=Object.keys(by).filter(k=>by[k].cards>0).sort();
   let startKey=days.length?days[0]:tk; const minKey=dkAdd(tk,-7*26); if(startKey<minKey) startKey=minKey;   // 최대 26주 뒤로
   const dow=k=>(new Date(k+'T12:00:00').getDay()+6)%7;   // 월=0 … 일=6
@@ -15262,7 +15358,7 @@ function heatmapHtml(by, T){
     if(dow(k)===0){ const m=Number(k.slice(5,7)); months+=`<span>${m!==Number(lastMon)?m+'월':''}</span>`; if(m!==Number(lastMon)) lastMon=String(m); col++; }
     const e=by[k], v=e?e.cards:0, fut=k>tk, cls=['hm-c'];
     if(fut) cls.push('fut'); else if(!v && isRestDay(k)) cls.push('rest'); else cls.push('l'+lvl(v));
-    if(k===tk) cls.push('today'); if(k===EXAM_DAY) cls.push('exam'); if(hmSel===k) cls.push('sel');
+    if(k===tk) cls.push('today'); if(hmSel===k) cls.push('sel');
     cells+=`<i class="${cls.join(' ')}" data-k="${k}"></i>`;
     k=dkAdd(k,1); }
   /* 요약 — 연속(쉬는 날은 끊지 않음 · 오늘 아직 0이면 어제까지) · 최근 7일 평균(푼 날 기준 아님 = 달력 7일) · 최다 */
@@ -15272,17 +15368,16 @@ function heatmapHtml(by, T){
   let w7=0; for(let i=0;i<7;i++){ const d=dkAdd(tk,-i); w7+=by[d]?by[d].cards:0; }
   let best=null; for(const d of days) if(d<=tk && (!best||by[d].cards>by[best].cards)) best=d;
   const md=d=>Number(d.slice(5,7))+'/'+Number(d.slice(8));
-  const dd=Math.round((new Date(EXAM_DAY+'T12:00:00')-new Date(tk+'T12:00:00'))/86400000);
   const today=by[tk]||emptyDay();
   const stat=(n,l)=>`<div><b>${n}</b><small>${l}</small></div>`;
-  return `<div class="hm-stats">${stat(today.cards.toLocaleString(),'오늘 장')}${stat(streak+'일','연속')}${stat(Math.round(w7/7).toLocaleString(),'7일 평균')}${stat(best?by[best].cards.toLocaleString():'—', best?'최다 '+md(best):'최다')}${dd>=0?stat('D-'+dd,'시험'):''}</div>`
+  return `<div class="hm-stats">${stat(today.cards.toLocaleString(),'오늘 장')}${stat(streak+'일','연속')}${stat(Math.round(w7/7).toLocaleString(),'7일 평균')}${stat(best?by[best].cards.toLocaleString():'—', best?'최다 '+md(best):'최다')}</div>`
     + `<div class="hm" data-cols="${col}"><div class="hm-days"><span></span><span>월</span><span></span><span>수</span><span></span><span>금</span><span></span></div>`
     + `<div class="hm-body"><div class="hm-months" style="grid-template-columns:repeat(${col},var(--hc))">${months}</div><div class="hm-grid">${cells}</div></div></div>`
     + `<div class="hm-foot"><span class="hm-line" id="hmLine">${hmLine(hmSel||tk, by, hard)}</span>`
-    + `<span class="hm-key">적게<i class="hm-c l0"></i><i class="hm-c l1"></i><i class="hm-c l2"></i><i class="hm-c l3"></i><i class="hm-c l4"></i>많이<i class="hm-c rest" style="margin-left:8px"></i>쉼<i class="hm-c exam fut"></i>시험</span></div>`; }
+    + `<span class="hm-key">적게<i class="hm-c l0"></i><i class="hm-c l1"></i><i class="hm-c l2"></i><i class="hm-c l3"></i><i class="hm-c l4"></i>많이<i class="hm-c rest" style="margin-left:8px"></i>쉼</span></div>`; }
 function hmLine(k, by, hard){
   const tk=todayKey(), W='일월화수목금토'[new Date(k+'T12:00:00').getDay()], d=`${Number(k.slice(5,7))}월 ${Number(k.slice(8))}일 (${W})`;
-  if(k>tk){ const n=Math.round((new Date(EXAM_DAY+'T12:00:00')-new Date(k+'T12:00:00'))/86400000); return `${d} · ${k===EXAM_DAY?'시험날':n>0?'시험 '+n+'일 전':''}`; }
+  if(k>tk) return `${d} · 예정일`;
   const e=by[k]; if(!e||!e.cards) return `${d} · ${isRestDay(k)?'쉬는 날':'안 풂'}`;
   return `${d} · <b>${e.cards.toLocaleString()}장</b> · 신규 ${e.nw.toLocaleString()} · 복습 ${Math.max(0,e.cards-e.nw).toLocaleString()} · ${fmtMin(e.ms)}${hard&&hard[k]!=null?' · 새로 굳음 +'+hard[k]:''}`; }
 function renderStats(){
@@ -15292,8 +15387,9 @@ function renderStats(){
     loadWeeks(weeksBack(13).filter(k=>HAVE.has(k))).then(ok=>{ if(ok&&$('scrStats').classList.contains('on'))renderStats(); }); }
   const tk=todayKey(), by=dailyStats();
   const today=by[tk]||emptyDay();
+  const targetCards = getStatCards(statCourse);
   let ret=0,bur=0,learned=0; const bySubj={};
-  for(const c of DATA){
+  for(const c of targetCards){
     const s=state.cards[c.id];
     if(s&&s.retired){ret++;continue;}
     if(buried(c))bur++;
@@ -15302,15 +15398,75 @@ function renderStats(){
     if(!isNew(c)){ learned++; e.done++; }
     if(isDue(c)&&!buried(c)) e.due++;
   }
-  const alive=DATA.length-ret;
+  const alive=targetCards.length-ret;
   const cap=dailyThroughput();
-  const histM=maturityHistory();
+  const histM=maturityHistory(statCourse);
   const T={hist:histM};
   let h='';
 
+  /* ═══ 0. 상단 교재 선택 세그먼트 컨트롤 ═══ */
+  h += `<div class="stat-course-bar">`
+    + `<button type="button" class="stat-course-btn ${statCourse==='ht'?'on':''}" onclick="setStatCourse('ht')"><span>해커스톡 10분의 기적</span><span class="badge">300</span></button>`
+    + `<button type="button" class="stat-course-btn ${statCourse==='sm'?'on':''}" onclick="setStatCourse('sm')"><span>Speaking Matrix</span><span class="badge">900</span></button>`
+    + `<button type="button" class="stat-course-btn ${statCourse==='all'?'on':''}" onclick="setStatCourse('all')"><span>전체 교재</span><span class="badge">1,200</span></button>`
+    + `</div>`;
+
+  /* ═══ 1. 오늘의 루틴 달성 현황 ═══ */
+  const htTodayCards = new Set();
+  const smTodayCards = new Set();
+  for(const e of state.log){
+    if(dayKey(logDate(e)) === tk){
+      if(e[0].startsWith('ht_')) htTodayCards.add(e[0]);
+      else if(e[0].startsWith('sm_')) smTodayCards.add(e[0]);
+    }
+  }
+  const htDone = htTodayCards.size;
+  const htGoal = 9;
+  const htPct = Math.min(100, Math.round(htDone / htGoal * 100));
+
+  let smDue = 0;
+  for(const c of DATA){
+    if(c.id.startsWith('sm_') && isDue(c) && !buried(c)) smDue++;
+  }
+  const smDone = smTodayCards.size;
+  const smTot = smDone + smDue;
+  const smPct = smTot > 0 ? Math.min(100, Math.round(smDone / smTot * 100)) : 100;
+
+  h += `<div class="card-box" style="padding:16px 18px">`
+    + `<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">`
+    + `<h3 style="margin:0;font-size:16px;font-weight:700">오늘의 루틴 목표</h3>`
+    + `<span style="font-size:12px;font-weight:600;color:var(--c-sec)">${tk}</span>`
+    + `</div>`
+    + `<div class="rt-goal-grid">`
+    + `<div class="rt-goal-card">`
+    + `<div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px">`
+    + `<span style="font-size:13px;font-weight:600;color:var(--c-label)">해커스톡 1일 3일치</span>`
+    + `<b style="font-size:15px;color:${htDone>=htGoal?'var(--c-green, #30d158)':'var(--c-acc, #007aff)'};font-variant-numeric:tabular-nums">${htDone} / ${htGoal}문장</b>`
+    + `</div>`
+    + `<div class="rt-prog-bar"><div class="rt-prog-fill" style="width:${htPct}%;background:${htDone>=htGoal?'var(--c-green, #30d158)':'var(--c-acc, #007aff)'}"></div></div>`
+    + `<div style="display:flex;justify-content:space-between;margin-top:6px;font-size:11.5px;color:var(--c-sec)">`
+    + `<span>${htDone>=htGoal ? '오늘 9문장 완료' : '남은 분량 ' + (htGoal - htDone) + '문장'}</span>`
+    + `<span style="font-weight:600;color:${htDone>=htGoal?'var(--c-green, #30d158)':'var(--c-sec)'}">${htPct}%</span>`
+    + `</div></div>`
+    + `<div class="rt-goal-card">`
+    + `<div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px">`
+    + `<span style="font-size:13px;font-weight:600;color:var(--c-label)">Speaking Matrix 복습</span>`
+    + `<b style="font-size:15px;color:var(--c-label);font-variant-numeric:tabular-nums">${smDone}장 완료</b>`
+    + `</div>`
+    + `<div class="rt-prog-bar"><div class="rt-prog-fill" style="width:${smPct}%;background:var(--c-teal, #64d2ff)"></div></div>`
+    + `<div style="display:flex;justify-content:space-between;margin-top:6px;font-size:11.5px;color:var(--c-sec)">`
+    + `<span>${smDue>0 ? '오늘 대기 복습 ' + smDue + '장' : '오늘 복습 완료'}</span>`
+    + `<span style="font-weight:600">${smDue>0 ? smDue + '장 남음' : '모두 완료'}</span>`
+    + `</div></div>`
+    + `</div></div>`;
+
   /* ═══ A. 누적 학습량 & 회독 궤적 ═══ */
+  const courseDesc = statCourse === 'ht' ? '해커스톡 10분의 기적 300문장 실전 회화 체화 진도와 다회독 반복 훈련량'
+    : statCourse === 'sm' ? 'Speaking Matrix 900제 실전 문장 체화 진도와 다회독 반복 훈련량'
+    : '전체 1,200문장 실전 회화 체화 진도와 다회독 반복 훈련량';
+
   h+='<div class="card-box"><h3>누적 학습량 & 회독 궤적</h3>'
-    +'<div class="cap">Speaking Matrix 900제 실전 문장 체화 진도와 다회독 반복 훈련량</div>'
+    +'<div class="cap">'+courseDesc+'</div>'
     +'<div id="trajBoxInner">'+renderTrajCardInner()+'</div>'
     +'</div>';
 
@@ -15356,17 +15512,20 @@ function renderStats(){
     +'<div class="cap" style="margin-top:8px">앞 7일에 <b>새로</b> 복습일이 되는 건 '+wk1.toLocaleString()+'장 · 가장 몰리는 날 <b>'+peak.toLocaleString()+'장</b></div></div>'
     +sigH+'</div>';
 
-  /* ═══ E. 과목별 — 유지율 오름차순(나쁜 과목이 위) ═══ */
+  /* ═══ E. 과목/단원별 — 유지율 오름차순(나쁜 과목이 위) ═══ */
   const sr=retentionSplit(0, (e,c)=>c.subj);
-  const rows=SUBJECTS.map(sj=>{ const e=bySubj[sj]||{tot:0,done:0,due:0}; const o=sr[sj];
+  const rows=SUBJECTS.map(sj=>{
+      if(statCourse === 'ht' && !sj.includes('해커스톡')) return null;
+      if(statCourse === 'sm' && sj.includes('해커스톡')) return null;
+      const e=bySubj[sj]||{tot:0,done:0,due:0}; const o=sr[sj];
       return {sj:sj, e:e, p:(o&&o.n>=30)?Math.round(o.pass/o.n*100):null, n:o?o.n:0}; })
-    .filter(r=>r.e.done)
+    .filter(r=>r && r.e && r.e.tot > 0)
     .sort((a,b)=>(a.p==null?999:a.p)-(b.p==null?999:b.p));
-  h+='<div class="card-box"><h3>과목별 — 진도와 유지율</h3>'
-    +'<div class="cap">유지율 낮은 과목이 위 · 막대 = 학습 진입 · 오른쪽 = 오늘 복습</div>'
+  h+='<div class="card-box"><h3>단원별 — 진도와 유지율</h3>'
+    +'<div class="cap">유지율 낮은 단원이 위 · 막대 = 학습 진입 · 오른쪽 = 오늘 복습</div>'
     +'<div class="bar-list" style="background:none;padding:4px 0;margin:0">';
   for(const r of rows){ const pr=r.e.tot?Math.round(r.e.done/r.e.tot*100):0;
-    h+='<div class="bl-row"><span class="n" style="min-width:52px">'+esc(r.sj.split('.')[1]||r.sj)+'</span>'
+    h+='<div class="bl-row"><span class="n" style="min-width:70px">'+esc(r.sj.split('.')[1]||r.sj)+'</span>'
       +'<span class="bar" title="'+r.e.done+'/'+r.e.tot+'장"><i style="width:'+pr+'%"></i></span>'
       +'<span class="m '+(r.p!=null&&r.p<70?'warn':'')+'" style="min-width:44px;text-align:right" title="'+(r.n?r.n+'회 복습':'복습 없음')+'">'+(r.p==null?'—':r.p+'%')+'</span>'
       +'<span class="c">'+(r.e.due?r.e.due:'·')+'</span></div>'; }
