@@ -2451,6 +2451,60 @@ details.gr-fold[open]>summary .s2-chev{transform:rotate(90deg);}
 .fw-fc tr.sum td{border-top:.5px solid var(--c-sep);padding-top:5px;}
 .fw-msg{font-size:13px;line-height:18px;color:var(--c-sec);margin:6px 0;}
 .fw-btns{display:flex;gap:8px;flex-wrap:wrap;}
+
+/* ══ 코스 선택기 & 오디오 버튼 스타일 (2026-10-20) ══ */
+.course-sel-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 12px;
+  margin-bottom: 12px;
+  background: var(--c-fill);
+  border-radius: var(--r-tile);
+  border: 1px solid var(--c-sep);
+}
+.course-sel-label {
+  font-size: var(--t-sub);
+  font-weight: 600;
+  color: var(--c-label);
+  white-space: nowrap;
+}
+.course-select {
+  flex: 1;
+  max-width: 260px;
+  padding: 6px 10px;
+  font-size: var(--t-sub);
+  font-weight: 600;
+  color: var(--c-label);
+  background: var(--c-card);
+  border: 1px solid var(--c-sep);
+  border-radius: var(--r-cell);
+  outline: none;
+  cursor: pointer;
+}
+.c-audio-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 8px;
+  padding: 4px 8px;
+  background: var(--c-acc-tint);
+  color: var(--c-acc);
+  border: 1px solid var(--c-acc);
+  border-radius: var(--r-pill);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  vertical-align: middle;
+  transition: transform 0.1s ease, background 0.15s ease;
+}
+.c-audio-btn:active {
+  transform: scale(0.95);
+  background: var(--c-acc-fill);
+  color: #fff;
+}
+
 </style>
 </head>
 <body>
@@ -2459,6 +2513,14 @@ details.gr-fold[open]>summary .s2-chev{transform:rotate(90deg);}
   <aside id="hSide">
     <div class="hs-head"><span class="hs-title">카드</span><span class="hs-dday" id="hDday"></span></div>
     <div class="hs-tiles" id="hTiles"></div>
+    <div style="padding: 10px 14px 4px;">
+      <select id="courseSelectSide" class="course-select" style="width:100%;" onchange="setCourse(this.value)">
+        <option value="all">📚 전체 교재</option>
+        <option value="sm">🗣️ Speaking Matrix</option>
+        <option value="ht">⚡ 해커스톡 10분의 기적</option>
+      </select>
+    </div>
+
     <nav class="hs-nav"><div class="hs-grp">보기</div>
       <button class="hs-row" id="hsTocRow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5h16M9 10.5h11M9 15.5h11M4 20.5h16"/></svg>목차</button>
       <button class="hs-row" id="hsHd"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 6.5C10 5 7 4.5 3.5 5v13c3.5-.5 6.5 0 8.5 1.5 2-1.5 5-2 8.5-1.5V5C17 4.5 14 5 12 6.5z"/><path d="M12 6.5v13"/></svg>회독본</button>
@@ -2618,7 +2680,16 @@ details.gr-fold[open]>summary .s2-chev{transform:rotate(90deg);}
         <div class="sub-title">단위</div>
       </div>
       <div class="sub-body"><div class="sub-inner">
-        <div class="search-row"><input id="uSearch" type="search" placeholder="단위 검색">
+        
+        <div class="course-sel-bar">
+          <span class="course-sel-label">📚 교재 선택</span>
+          <select id="courseSelectUnits" class="course-select" onchange="setCourse(this.value)">
+            <option value="all">전체 교재 (Speaking Matrix + 해커스톡)</option>
+            <option value="sm">Speaking Matrix (1분 스피킹 900제)</option>
+            <option value="ht">해커스톡 10분의 기적 (300제)</option>
+          </select>
+        </div>
+<div class="search-row"><input id="uSearch" type="search" placeholder="단위 검색">
           <select id="uSort"><option value="plan">수강일순</option><option value="due">복습 많은 순</option><option value="new">신규 많은 순</option><option value="last">오래 안 푼 순</option></select></div>
         <div id="unitList"></div>
         <div class="bulkbar" id="uBar">
@@ -9375,7 +9446,11 @@ function scopeHtml(c){   // 경로 = 과목 › 갈래 › 주제 (과목 번호
   const parts=String(scopeOf(c)||'').split(/\s+·\s+/).filter(Boolean);
   if(parts.length) parts[0]=parts[0].replace(/^\d+\./,'');
   const chev='<svg class="sc-chev" viewBox="0 0 9 15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m1.5 1.5 6 6-6 6"/></svg>';
-  return parts.map((p,i)=>`<span class="sc-p${i===0?' sc-first':''}${i===parts.length-1?' sc-last':''}">${esc(p)}</span>`).join(chev);
+  let scHtml = parts.map((p,i)=>`<span class="sc-p${i===0?' sc-first':''}${i===parts.length-1?' sc-last':''}">${esc(p)}</span>`).join(chev);
+  if(c.audio){
+    scHtml += ` <button type="button" class="c-audio-btn" title="원음 재생 (단축키 R)" onclick="playCardAudio(event)">🔊 음원</button>`;
+  }
+  return scHtml;
 }
 function reveal(){
   if(typeof stopSprintCardTimer === 'function') stopSprintCardTimer();
@@ -12385,6 +12460,8 @@ function renderUnits(){
   for(const k of keys){ const sj=TAGMETA[k].subj; if(!grp.has(sj))grp.set(sj,[]); grp.get(sj).push(k); }
   const order=new Map(SUBJECTS.map((s,i)=>[s,i]));
   for(const sj of [...grp.keys()].sort((a,b)=>(order.has(a)?order.get(a):99)-(order.has(b)?order.get(b):99))){
+    if(curCourse==='sm' && sj.includes('해커스톡')) continue;
+    if(curCourse==='ht' && !sj.includes('해커스톡')) continue;
     const ks=grp.get(sj), open=!!q||uOpen.has(sj);
     let due=0,nw=0,read=0;
     for(const k of ks){ const t=stats[k]||{}; due+=t.due||0; nw+=t.nw||0;
@@ -13080,6 +13157,7 @@ document.addEventListener('keydown',e=>{
   /* 🔴 조합키는 원래 **통째로** 무시한다 — 브라우저 단축키(Cmd+R·Cmd+F…)를 가로채지 않으려고.
      딱 하나 연다: **Ctrl+1~4 = 플래그 사유 칩 넷** (동하 09-09 · 게임패드 R을 Ctrl로 두고 쥔다).
      채점 1~4와 손가락 자리가 같고 Ctrl만 얹는 꼴이라 외울 것이 없다. 그 밖의 조합은 여전히 버린다. */
+  if(e.key==='r' || e.key==='R'){ const c=cur(); if(c&&c.audio){ e.preventDefault(); playCardAudio(); return; } }
   if((!kbdOn && !_padEv) || e.metaKey || e.altKey)return;
   { const tg=e.target&&e.target.tagName; if(!(tg==='INPUT'||tg==='TEXTAREA'||tg==='SELECT')) document.documentElement.dataset.keys='on'; }   // 키 표시(09-24)
   if(!e.ctrlKey && !(e.target&&/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) && typeof ymTodayKey==='function' && (!e.repeat||/^Arrow/.test(e.key)) && ymTodayKey(e)){ e.preventDefault(); return; }
@@ -17829,6 +17907,36 @@ $('ovlImg').onclick=closeImg;
     if(C.getBoundingClientRect().height + off + padT <= Z.clientHeight - 10){ Z.classList.add('anchored'); C.style.marginTop=off+'px'; }
     requestAnimationFrame(fitCard); return r; };
   const _s2=showCard; showCard=function(){ const Z=$('cardZone'); Z.classList.remove('anchored'); $('card').style.marginTop=''; return _s2.apply(this,arguments); }; }
+
+
+/* ═══════════ 다중 교재(코스) 선택 & 오디오 재생 기능 (2026-10-20) ═══════════ */
+let curCourse = localStorage.getItem('cards_course_v1') || 'all';
+
+function setCourse(val){
+  curCourse = val;
+  localStorage.setItem('cards_course_v1', val);
+  const selU = $('courseSelectUnits'); if(selU) selU.value = val;
+  const selS = $('courseSelectSide'); if(selS) selS.value = val;
+  if(typeof renderUnits === 'function') renderUnits();
+  if(typeof counts === 'function') counts();
+  if(typeof toast === 'function') {
+    const name = val === 'ht' ? '해커스톡 10분의 기적' : val === 'sm' ? 'Speaking Matrix' : '전체 교재';
+    toast(name + ' 선택됨');
+  }
+}
+
+let currentCardAudio = null;
+function playCardAudio(ev){
+  if(ev) ev.stopPropagation();
+  const c = (typeof cur === 'function') ? cur() : null;
+  if(!c || !c.audio) return;
+  if(currentCardAudio){
+    currentCardAudio.pause();
+    currentCardAudio.currentTime = 0;
+  }
+  currentCardAudio = new Audio(c.audio);
+  currentCardAudio.play().catch(e => console.warn('오디오 재생 차단/오류:', e));
+}
 
 </script>
 </body>

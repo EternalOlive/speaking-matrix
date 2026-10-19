@@ -16200,6 +16200,5406 @@
       ],
       "node": "Speaking Matrix/6.Unit 06 (Day 26-30)/Day 30/Output",
       "items": []
+    },
+    {
+      "id": "ht_d01_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 01 · go out〕 나 지금 나가.",
+      "back": "I'm going out.",
+      "note": "청크: I'm going / out\n상황: Day 01 · go out (나가다)",
+      "src": "Day 01 · go out · 01번",
+      "audio": "media/hackerstalk/DAY 01_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 01 (Day 01-03)",
+        "Day 01",
+        "go-out",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 01 (Day 01-03)/Day 01",
+      "items": []
+    },
+    {
+      "id": "ht_d01_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 01 · go out〕 오늘 저녁 먹으러 나가자.",
+      "back": "Let's go out tonight for dinner.",
+      "note": "청크: Let's go out / tonight / for dinner\n상황: Day 01 · go out (나가다)",
+      "src": "Day 01 · go out · 02번",
+      "audio": "media/hackerstalk/DAY 01_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 01 (Day 01-03)",
+        "Day 01",
+        "go-out",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 01 (Day 01-03)/Day 01",
+      "items": []
+    },
+    {
+      "id": "ht_d01_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 01 · go out〕 나가서 재미있게 놀아.",
+      "back": "Go out and have fun.",
+      "note": "청크: Go out / and have fun\n상황: Day 01 · go out (나가다)",
+      "src": "Day 01 · go out · 03번",
+      "audio": "media/hackerstalk/DAY 01_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 01 (Day 01-03)",
+        "Day 01",
+        "go-out",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 01 (Day 01-03)/Day 01",
+      "items": []
+    },
+    {
+      "id": "ht_d02_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 02 · go back〕 나 집에 돌아가야 돼.",
+      "back": "I have to go back home.",
+      "note": "청크: I have to / go back home\n상황: Day 02 · go back (돌아가다)",
+      "src": "Day 02 · go back · 01번",
+      "audio": "media/hackerstalk/DAY 02_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 01 (Day 01-03)",
+        "Day 02",
+        "go-back",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 01 (Day 01-03)/Day 02",
+      "items": []
+    },
+    {
+      "id": "ht_d02_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 02 · go back〕 사무실로 돌아갈 거야.",
+      "back": "I'm going back to work.",
+      "note": "청크: I'm going back / to work\n상황: Day 02 · go back (돌아가다)",
+      "src": "Day 02 · go back · 02번",
+      "audio": "media/hackerstalk/DAY 02_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 01 (Day 01-03)",
+        "Day 02",
+        "go-back",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 01 (Day 01-03)/Day 02",
+      "items": []
+    },
+    {
+      "id": "ht_d02_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 02 · go back〕 다시 자러 가.",
+      "back": "Go back to bed.",
+      "note": "청크: Go back / to bed\n상황: Day 02 · go back (돌아가다)",
+      "src": "Day 02 · go back · 03번",
+      "audio": "media/hackerstalk/DAY 02_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 01 (Day 01-03)",
+        "Day 02",
+        "go-back",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 01 (Day 01-03)/Day 02",
+      "items": []
+    },
+    {
+      "id": "ht_d03_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 03 · go down〕 기온이 많이 떨어졌어.",
+      "back": "The temperature went down a lot.",
+      "note": "청크: The temperature / went down / a lot\n상황: Day 03 · go down (떨어지다)",
+      "src": "Day 03 · go down · 01번",
+      "audio": "media/hackerstalk/DAY 03_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 01 (Day 01-03)",
+        "Day 03",
+        "go-down",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 01 (Day 01-03)/Day 03",
+      "items": []
+    },
+    {
+      "id": "ht_d03_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 03 · go down〕 걔 성적 떨어졌어.",
+      "back": "Her grades went down.",
+      "note": "청크: Her grades / went down\n상황: Day 03 · go down (떨어지다)",
+      "src": "Day 03 · go down · 02번",
+      "audio": "media/hackerstalk/DAY 03_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 01 (Day 01-03)",
+        "Day 03",
+        "go-down",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 01 (Day 01-03)/Day 03",
+      "items": []
+    },
+    {
+      "id": "ht_d03_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 03 · go down〕 가격이 계속 떨어질 거야.",
+      "back": "The price will keep going down.",
+      "note": "청크: The price / will keep / going down\n상황: Day 03 · go down (떨어지다)",
+      "src": "Day 03 · go down · 03번",
+      "audio": "media/hackerstalk/DAY 03_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 01 (Day 01-03)",
+        "Day 03",
+        "go-down",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 01 (Day 01-03)/Day 03",
+      "items": []
+    },
+    {
+      "id": "ht_d04_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 04 · go up〕 기름값이 또 올랐어.",
+      "back": "Gas prices went up again.",
+      "note": "청크: Gas prices / went up / again\n상황: Day 04 · go up (오르다)",
+      "src": "Day 04 · go up · 01번",
+      "audio": "media/hackerstalk/DAY 04_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 02 (Day 04-06)",
+        "Day 04",
+        "go-up",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 02 (Day 04-06)/Day 04",
+      "items": []
+    },
+    {
+      "id": "ht_d04_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 04 · go up〕 물가가 올랐어.",
+      "back": "Prices went up.",
+      "note": "청크: Prices / went up\n상황: Day 04 · go up (오르다)",
+      "src": "Day 04 · go up · 02번",
+      "audio": "media/hackerstalk/DAY 04_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 02 (Day 04-06)",
+        "Day 04",
+        "go-up",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 02 (Day 04-06)/Day 04",
+      "items": []
+    },
+    {
+      "id": "ht_d04_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 04 · go up〕 세금이 계속 올라.",
+      "back": "Taxes keep going up.",
+      "note": "청크: Taxes / keep going up\n상황: Day 04 · go up (오르다)",
+      "src": "Day 04 · go up · 03번",
+      "audio": "media/hackerstalk/DAY 04_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 02 (Day 04-06)",
+        "Day 04",
+        "go-up",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 02 (Day 04-06)/Day 04",
+      "items": []
+    },
+    {
+      "id": "ht_d05_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 05 · go around〕 루머가 돌고 있어.",
+      "back": "A rumor is going around.",
+      "note": "청크: A rumor / is going around\n상황: Day 05 · go around (돌다)",
+      "src": "Day 05 · go around · 01번",
+      "audio": "media/hackerstalk/DAY 05_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 02 (Day 04-06)",
+        "Day 05",
+        "go-around",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 02 (Day 04-06)/Day 05",
+      "items": []
+    },
+    {
+      "id": "ht_d05_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 05 · go around〕 지독한 독감이 사무실에 돌고 있어.",
+      "back": "A bad flu is going around the office.",
+      "note": "청크: A bad flu / is going around / the office\n상황: Day 05 · go around (돌다)",
+      "src": "Day 05 · go around · 02번",
+      "audio": "media/hackerstalk/DAY 05_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 02 (Day 04-06)",
+        "Day 05",
+        "go-around",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 02 (Day 04-06)/Day 05",
+      "items": []
+    },
+    {
+      "id": "ht_d05_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 05 · go around〕 너 요즘 돌고 있는 루머들 들었어?",
+      "back": "Did you hear the rumors going around?",
+      "note": "청크: Did you hear / the rumors going around?\n상황: Day 05 · go around (돌다)",
+      "src": "Day 05 · go around · 03번",
+      "audio": "media/hackerstalk/DAY 05_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 02 (Day 04-06)",
+        "Day 05",
+        "go-around",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 02 (Day 04-06)/Day 05",
+      "items": []
+    },
+    {
+      "id": "ht_d06_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 06 · go with〕 치킨은 맥주와 잘 어울려.",
+      "back": "Chicken goes well with beer.",
+      "note": "청크: Chicken / goes well / with beer\n상황: Day 06 · go with (어울리다)",
+      "src": "Day 06 · go with · 01번",
+      "audio": "media/hackerstalk/DAY 06_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 02 (Day 04-06)",
+        "Day 06",
+        "go-with",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 02 (Day 04-06)/Day 06",
+      "items": []
+    },
+    {
+      "id": "ht_d06_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 06 · go with〕 이건 치즈와 아주 잘 어울려.",
+      "back": "This goes great with cheese.",
+      "note": "청크: This / goes great / with cheese\n상황: Day 06 · go with (어울리다)",
+      "src": "Day 06 · go with · 02번",
+      "audio": "media/hackerstalk/DAY 06_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 02 (Day 04-06)",
+        "Day 06",
+        "go-with",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 02 (Day 04-06)/Day 06",
+      "items": []
+    },
+    {
+      "id": "ht_d06_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 06 · go with〕 이 스웨터는 어떤 옷에든 어울려.",
+      "back": "This sweater goes with everything.",
+      "note": "청크: This sweater / goes with / everything\n상황: Day 06 · go with (어울리다)",
+      "src": "Day 06 · go with · 03번",
+      "audio": "media/hackerstalk/DAY 06_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 02 (Day 04-06)",
+        "Day 06",
+        "go-with",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 02 (Day 04-06)/Day 06",
+      "items": []
+    },
+    {
+      "id": "ht_d07_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 07 · go over〕 이거 다시 한번 확인해 보자.",
+      "back": "Let's go over this one more time.",
+      "note": "청크: Let's go over this / one more time\n상황: Day 07 · go over (다시 확인하다)",
+      "src": "Day 07 · go over · 01번",
+      "audio": "media/hackerstalk/DAY 07_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 03 (Day 07-09)",
+        "Day 07",
+        "go-over",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 03 (Day 07-09)/Day 07",
+      "items": []
+    },
+    {
+      "id": "ht_d07_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 07 · go over〕 우리 일정 다시 확인하는 게 좋겠어.",
+      "back": "We should go over the schedule.",
+      "note": "청크: We should go over / the schedule\n상황: Day 07 · go over (다시 확인하다)",
+      "src": "Day 07 · go over · 02번",
+      "audio": "media/hackerstalk/DAY 07_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 03 (Day 07-09)",
+        "Day 07",
+        "go-over",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 03 (Day 07-09)/Day 07",
+      "items": []
+    },
+    {
+      "id": "ht_d07_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 07 · go over〕 나 이 보고서 검토해야 돼.",
+      "back": "I need to go over this report.",
+      "note": "청크: I need to / go over / this report\n상황: Day 07 · go over (다시 확인하다)",
+      "src": "Day 07 · go over · 03번",
+      "audio": "media/hackerstalk/DAY 07_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 03 (Day 07-09)",
+        "Day 07",
+        "go-over",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 03 (Day 07-09)/Day 07",
+      "items": []
+    },
+    {
+      "id": "ht_d08_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 08 · go through〕 걔 이별 후유증을 겪고 있어.",
+      "back": "He's going through a breakup.",
+      "note": "청크: He's going through / a breakup\n상황: Day 08 · go through (겪다)",
+      "src": "Day 08 · go through · 01번",
+      "audio": "media/hackerstalk/DAY 08_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 03 (Day 07-09)",
+        "Day 08",
+        "go-through",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 03 (Day 07-09)/Day 08",
+      "items": []
+    },
+    {
+      "id": "ht_d08_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 08 · go through〕 걔 힘든 시기를 겪고 있어.",
+      "back": "She's going through a hard time.",
+      "note": "청크: She's going through / a hard time\n상황: Day 08 · go through (겪다)",
+      "src": "Day 08 · go through · 02번",
+      "audio": "media/hackerstalk/DAY 08_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 03 (Day 07-09)",
+        "Day 08",
+        "go-through",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 03 (Day 07-09)/Day 08",
+      "items": []
+    },
+    {
+      "id": "ht_d08_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 08 · go through〕 그 사람은 많은 일을 겪고 있어.",
+      "back": "He's going through a lot.",
+      "note": "청크: He's going through / a lot\n상황: Day 08 · go through (겪다)",
+      "src": "Day 08 · go through · 03번",
+      "audio": "media/hackerstalk/DAY 08_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 03 (Day 07-09)",
+        "Day 08",
+        "go-through",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 03 (Day 07-09)/Day 08",
+      "items": []
+    },
+    {
+      "id": "ht_d09_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 09 · go off〕 알람이 안 울렸어.",
+      "back": "My alarm didn't go off.",
+      "note": "청크: My alarm / didn't go off\n상황: Day 09 · go off (울리다)",
+      "src": "Day 09 · go off · 01번",
+      "audio": "media/hackerstalk/DAY 09_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 03 (Day 07-09)",
+        "Day 09",
+        "go-off",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 03 (Day 07-09)/Day 09",
+      "items": []
+    },
+    {
+      "id": "ht_d09_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 09 · go off〕 알람이 울렸었어?",
+      "back": "Did the alarm go off?",
+      "note": "청크: Did the alarm / go off?\n상황: Day 09 · go off (울리다)",
+      "src": "Day 09 · go off · 02번",
+      "audio": "media/hackerstalk/DAY 09_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 03 (Day 07-09)",
+        "Day 09",
+        "go-off",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 03 (Day 07-09)/Day 09",
+      "items": []
+    },
+    {
+      "id": "ht_d09_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 09 · go off〕 자동차 경보기가 길거리에서 울리고 있어.",
+      "back": "A car alarm is going off in the street.",
+      "note": "청크: A car alarm / is going off / in the street\n상황: Day 09 · go off (울리다)",
+      "src": "Day 09 · go off · 03번",
+      "audio": "media/hackerstalk/DAY 09_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 03 (Day 07-09)",
+        "Day 09",
+        "go-off",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 03 (Day 07-09)/Day 09",
+      "items": []
+    },
+    {
+      "id": "ht_d10_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 10 · come in〕 들어와.",
+      "back": "Come in.",
+      "note": "청크: Come in\n상황: Day 10 · come in (들어오다)",
+      "src": "Day 10 · come in · 01번",
+      "audio": "media/hackerstalk/DAY 10_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 04 (Day 10-12)",
+        "Day 10",
+        "come-in",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 04 (Day 10-12)/Day 10",
+      "items": []
+    },
+    {
+      "id": "ht_d10_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 10 · come in〕 들어올래?",
+      "back": "Do you want to come in?",
+      "note": "청크: Do you want to / come in?\n상황: Day 10 · come in (들어오다)",
+      "src": "Day 10 · come in · 02번",
+      "audio": "media/hackerstalk/DAY 10_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 04 (Day 10-12)",
+        "Day 10",
+        "come-in",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 04 (Day 10-12)/Day 10",
+      "items": []
+    },
+    {
+      "id": "ht_d10_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 10 · come in〕 나 들어가도 돼?",
+      "back": "Can I come in?",
+      "note": "청크: Can I / come in?\n상황: Day 10 · come in (들어오다)",
+      "src": "Day 10 · come in · 03번",
+      "audio": "media/hackerstalk/DAY 10_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 04 (Day 10-12)",
+        "Day 10",
+        "come-in",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 04 (Day 10-12)/Day 10",
+      "items": []
+    },
+    {
+      "id": "ht_d11_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 11 · come down〕 이리 내려와.",
+      "back": "Come down here.",
+      "note": "청크: Come down / here\n상황: Day 11 · come down (내려오다)",
+      "src": "Day 11 · come down · 01번",
+      "audio": "media/hackerstalk/DAY 11_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 04 (Day 10-12)",
+        "Day 11",
+        "come-down",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 04 (Day 10-12)/Day 11",
+      "items": []
+    },
+    {
+      "id": "ht_d11_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 11 · come down〕 내가 내려갈게.",
+      "back": "I'll come down.",
+      "note": "청크: I'll / come down\n상황: Day 11 · come down (내려오다)",
+      "src": "Day 11 · come down · 02번",
+      "audio": "media/hackerstalk/DAY 11_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 04 (Day 10-12)",
+        "Day 11",
+        "come-down",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 04 (Day 10-12)/Day 11",
+      "items": []
+    },
+    {
+      "id": "ht_d11_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 11 · come down〕 나 내려가고 있어.",
+      "back": "I'm coming down.",
+      "note": "청크: I'm / coming down\n상황: Day 11 · come down (내려오다)",
+      "src": "Day 11 · come down · 03번",
+      "audio": "media/hackerstalk/DAY 11_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 04 (Day 10-12)",
+        "Day 11",
+        "come-down",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 04 (Day 10-12)/Day 11",
+      "items": []
+    },
+    {
+      "id": "ht_d12_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 12 · come back〕 나중에 다시 올게.",
+      "back": "I'll come back later.",
+      "note": "청크: I'll come back / later\n상황: Day 12 · come back (다시 오다)",
+      "src": "Day 12 · come back · 01번",
+      "audio": "media/hackerstalk/DAY 12_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 04 (Day 10-12)",
+        "Day 12",
+        "come-back",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 04 (Day 10-12)/Day 12",
+      "items": []
+    },
+    {
+      "id": "ht_d12_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 12 · come back〕 그는 다시 오지 않을 거야.",
+      "back": "He's not coming back.",
+      "note": "청크: He's not / coming back\n상황: Day 12 · come back (다시 오다)",
+      "src": "Day 12 · come back · 02번",
+      "audio": "media/hackerstalk/DAY 12_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 04 (Day 10-12)",
+        "Day 12",
+        "come-back",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 04 (Day 10-12)/Day 12",
+      "items": []
+    },
+    {
+      "id": "ht_d12_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 12 · come back〕 나중에 다시 와줄래?",
+      "back": "Could you come back later?",
+      "note": "청크: Could you come back / later?\n상황: Day 12 · come back (다시 오다)",
+      "src": "Day 12 · come back · 03번",
+      "audio": "media/hackerstalk/DAY 12_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 04 (Day 10-12)",
+        "Day 12",
+        "come-back",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 04 (Day 10-12)/Day 12",
+      "items": []
+    },
+    {
+      "id": "ht_d13_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 13 · come off〕 가격표가 떨어졌어요.",
+      "back": "The price tag has come off.",
+      "note": "청크: The price tag / has come off\n상황: Day 13 · come off (떨어지다)",
+      "src": "Day 13 · come off · 01번",
+      "audio": "media/hackerstalk/DAY 13_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 05 (Day 13-15)",
+        "Day 13",
+        "come-off",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 05 (Day 13-15)/Day 13",
+      "items": []
+    },
+    {
+      "id": "ht_d13_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 13 · come off〕 포스터가 벽에서 떨어졌어.",
+      "back": "The poster has come off the wall.",
+      "note": "청크: The poster / has come off / the wall\n상황: Day 13 · come off (떨어지다)",
+      "src": "Day 13 · come off · 02번",
+      "audio": "media/hackerstalk/DAY 13_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 05 (Day 13-15)",
+        "Day 13",
+        "come-off",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 05 (Day 13-15)/Day 13",
+      "items": []
+    },
+    {
+      "id": "ht_d13_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 13 · come off〕 이거 완전 쉽게 떨어지네.",
+      "back": "It comes off really easy.",
+      "note": "청크: It comes off / really easy\n상황: Day 13 · come off (떨어지다)",
+      "src": "Day 13 · come off · 03번",
+      "audio": "media/hackerstalk/DAY 13_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 05 (Day 13-15)",
+        "Day 13",
+        "come-off",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 05 (Day 13-15)/Day 13",
+      "items": []
+    },
+    {
+      "id": "ht_d14_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 14 · come out〕 이 한정판 가방 오늘 나왔어.",
+      "back": "This limited edition bag came out today.",
+      "note": "청크: This limited edition bag / came out today\n상황: Day 14 · come out (나오다/출시되다)",
+      "src": "Day 14 · come out · 01번",
+      "audio": "media/hackerstalk/DAY 14_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 05 (Day 13-15)",
+        "Day 14",
+        "come-out",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 05 (Day 13-15)/Day 14",
+      "items": []
+    },
+    {
+      "id": "ht_d14_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 14 · come out〕 신상 게임이 출시됐어.",
+      "back": "A new game came out.",
+      "note": "청크: A new game / came out\n상황: Day 14 · come out (나오다/출시되다)",
+      "src": "Day 14 · come out · 02번",
+      "audio": "media/hackerstalk/DAY 14_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 05 (Day 13-15)",
+        "Day 14",
+        "come-out",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 05 (Day 13-15)/Day 14",
+      "items": []
+    },
+    {
+      "id": "ht_d14_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 14 · come out〕 그 영화 어제 개봉했어.",
+      "back": "The movie came out yesterday.",
+      "note": "청크: The movie / came out / yesterday\n상황: Day 14 · come out (나오다/출시되다)",
+      "src": "Day 14 · come out · 03번",
+      "audio": "media/hackerstalk/DAY 14_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 05 (Day 13-15)",
+        "Day 14",
+        "come-out",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 05 (Day 13-15)/Day 14",
+      "items": []
+    },
+    {
+      "id": "ht_d15_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 15 · come over〕 내일 들를게.",
+      "back": "I'll come over tomorrow.",
+      "note": "청크: I'll come over / tomorrow\n상황: Day 15 · come over (들르다)",
+      "src": "Day 15 · come over · 01번",
+      "audio": "media/hackerstalk/DAY 15_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 05 (Day 13-15)",
+        "Day 15",
+        "come-over",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 05 (Day 13-15)/Day 15",
+      "items": []
+    },
+    {
+      "id": "ht_d15_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 15 · come over〕 이따가 들러.",
+      "back": "Come over later.",
+      "note": "청크: Come over / later\n상황: Day 15 · come over (들르다)",
+      "src": "Day 15 · come over · 02번",
+      "audio": "media/hackerstalk/DAY 15_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 05 (Day 13-15)",
+        "Day 15",
+        "come-over",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 05 (Day 13-15)/Day 15",
+      "items": []
+    },
+    {
+      "id": "ht_d15_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 15 · come over〕 내일 들러도 돼?",
+      "back": "Can I come over tomorrow?",
+      "note": "청크: Can I come over / tomorrow?\n상황: Day 15 · come over (들르다)",
+      "src": "Day 15 · come over · 03번",
+      "audio": "media/hackerstalk/DAY 15_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 05 (Day 13-15)",
+        "Day 15",
+        "come-over",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 05 (Day 13-15)/Day 15",
+      "items": []
+    },
+    {
+      "id": "ht_d16_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 16 · come to mind〕 아무 생각도 안 나.",
+      "back": "Nothing comes to mind.",
+      "note": "청크: Nothing / comes to mind\n상황: Day 16 · come to mind (생각나다)",
+      "src": "Day 16 · come to mind · 01번",
+      "audio": "media/hackerstalk/DAY 16_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 06 (Day 16-18)",
+        "Day 16",
+        "come-to-mind",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 06 (Day 16-18)/Day 16",
+      "items": []
+    },
+    {
+      "id": "ht_d16_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 16 · come to mind〕 생각나는 거 있어?",
+      "back": "What comes to mind?",
+      "note": "청크: What / comes to mind?\n상황: Day 16 · come to mind (생각나다)",
+      "src": "Day 16 · come to mind · 02번",
+      "audio": "media/hackerstalk/DAY 16_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 06 (Day 16-18)",
+        "Day 16",
+        "come-to-mind",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 06 (Day 16-18)/Day 16",
+      "items": []
+    },
+    {
+      "id": "ht_d16_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 16 · come to mind〕 그게 어떻게 생각난 거야?",
+      "back": "How did it come to you?",
+      "note": "청크: How did it / come to you?\n상황: Day 16 · come to mind (생각나다)",
+      "src": "Day 16 · come to mind · 03번",
+      "audio": "media/hackerstalk/DAY 16_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 06 (Day 16-18)",
+        "Day 16",
+        "come-to-mind",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 06 (Day 16-18)/Day 16",
+      "items": []
+    },
+    {
+      "id": "ht_d17_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 17 · come up〕 크리스마스가 다가오고 있어.",
+      "back": "Christmas is coming up.",
+      "note": "청크: Christmas / is coming up\n상황: Day 17 · come up (다가오다)",
+      "src": "Day 17 · come up · 01번",
+      "audio": "media/hackerstalk/DAY 17_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 06 (Day 16-18)",
+        "Day 17",
+        "come-up",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 06 (Day 16-18)/Day 17",
+      "items": []
+    },
+    {
+      "id": "ht_d17_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 17 · come up〕 내 생일이 다가오고 있어.",
+      "back": "My birthday is coming up.",
+      "note": "청크: My birthday / is coming up\n상황: Day 17 · come up (다가오다)",
+      "src": "Day 17 · come up · 02번",
+      "audio": "media/hackerstalk/DAY 17_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 06 (Day 16-18)",
+        "Day 17",
+        "come-up",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 06 (Day 16-18)/Day 17",
+      "items": []
+    },
+    {
+      "id": "ht_d17_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 17 · come up〕 기말고사가 다가오고 있어.",
+      "back": "Finals are coming up.",
+      "note": "청크: Finals / are coming up\n상황: Day 17 · come up (다가오다)",
+      "src": "Day 17 · come up · 03번",
+      "audio": "media/hackerstalk/DAY 17_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 06 (Day 16-18)",
+        "Day 17",
+        "come-up",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 06 (Day 16-18)/Day 17",
+      "items": []
+    },
+    {
+      "id": "ht_d18_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 18 · come up with〕 우리가 근사한 계획을 생각해냈어.",
+      "back": "We came up with an awesome plan.",
+      "note": "청크: We came up with / an awesome plan\n상황: Day 18 · come up with (생각해내다)",
+      "src": "Day 18 · come up with · 01번",
+      "audio": "media/hackerstalk/DAY 18_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 06 (Day 16-18)",
+        "Day 18",
+        "come-up-with",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 06 (Day 16-18)/Day 18",
+      "items": []
+    },
+    {
+      "id": "ht_d18_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 18 · come up with〕 이거 내가 생각해냈어.",
+      "back": "I came up with it.",
+      "note": "청크: I came up / with it\n상황: Day 18 · come up with (생각해내다)",
+      "src": "Day 18 · come up with · 02번",
+      "audio": "media/hackerstalk/DAY 18_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 06 (Day 16-18)",
+        "Day 18",
+        "come-up-with",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 06 (Day 16-18)/Day 18",
+      "items": []
+    },
+    {
+      "id": "ht_d18_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 18 · come up with〕 너 이걸 어떻게 생각해낸 거야?",
+      "back": "How did you come up with this?",
+      "note": "청크: How did you / come up with this?\n상황: Day 18 · come up with (생각해내다)",
+      "src": "Day 18 · come up with · 03번",
+      "audio": "media/hackerstalk/DAY 18_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 06 (Day 16-18)",
+        "Day 18",
+        "come-up-with",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 06 (Day 16-18)/Day 18",
+      "items": []
+    },
+    {
+      "id": "ht_d19_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 19 · look around〕 둘러봐도 될까?",
+      "back": "Mind if I look around?",
+      "note": "청크: Mind if / I look around?\n상황: Day 19 · look around (둘러보다)",
+      "src": "Day 19 · look around · 01번",
+      "audio": "media/hackerstalk/DAY 19_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 07 (Day 19-21)",
+        "Day 19",
+        "look-around",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 07 (Day 19-21)/Day 19",
+      "items": []
+    },
+    {
+      "id": "ht_d19_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 19 · look around〕 그냥 둘러보는 중이야.",
+      "back": "I'm just looking around.",
+      "note": "청크: I'm just / looking around\n상황: Day 19 · look around (둘러보다)",
+      "src": "Day 19 · look around · 02번",
+      "audio": "media/hackerstalk/DAY 19_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 07 (Day 19-21)",
+        "Day 19",
+        "look-around",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 07 (Day 19-21)/Day 19",
+      "items": []
+    },
+    {
+      "id": "ht_d19_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 19 · look around〕 구경해 보자.",
+      "back": "Let's look around.",
+      "note": "청크: Let's / look around\n상황: Day 19 · look around (둘러보다)",
+      "src": "Day 19 · look around · 03번",
+      "audio": "media/hackerstalk/DAY 19_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 07 (Day 19-21)",
+        "Day 19",
+        "look-around",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 07 (Day 19-21)/Day 19",
+      "items": []
+    },
+    {
+      "id": "ht_d20_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 20 · look for〕 뭐 찾아?",
+      "back": "What are you looking for?",
+      "note": "청크: What / are you looking for?\n상황: Day 20 · look for (찾다)",
+      "src": "Day 20 · look for · 01번",
+      "audio": "media/hackerstalk/DAY 20_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 07 (Day 19-21)",
+        "Day 20",
+        "look-for",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 07 (Day 19-21)/Day 20",
+      "items": []
+    },
+    {
+      "id": "ht_d20_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 20 · look for〕 나 일자리를 찾고 있어.",
+      "back": "I'm looking for a job.",
+      "note": "청크: I'm looking / for a job\n상황: Day 20 · look for (찾다)",
+      "src": "Day 20 · look for · 02번",
+      "audio": "media/hackerstalk/DAY 20_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 07 (Day 19-21)",
+        "Day 20",
+        "look-for",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 07 (Day 19-21)/Day 20",
+      "items": []
+    },
+    {
+      "id": "ht_d20_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 20 · look for〕 나 리모컨 찾고 있어.",
+      "back": "I'm looking for the remote control.",
+      "note": "청크: I'm looking / for the remote control\n상황: Day 20 · look for (찾다)",
+      "src": "Day 20 · look for · 03번",
+      "audio": "media/hackerstalk/DAY 20_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 07 (Day 19-21)",
+        "Day 20",
+        "look-for",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 07 (Day 19-21)/Day 20",
+      "items": []
+    },
+    {
+      "id": "ht_d21_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 21 · look after〕 애들 좀 돌봐줘.",
+      "back": "Look after the children.",
+      "note": "청크: Look after / the children\n상황: Day 21 · look after (돌보다)",
+      "src": "Day 21 · look after · 01번",
+      "audio": "media/hackerstalk/DAY 21_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 07 (Day 19-21)",
+        "Day 21",
+        "look-after",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 07 (Day 19-21)/Day 21",
+      "items": []
+    },
+    {
+      "id": "ht_d21_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 21 · look after〕 우리 고양이 좀 봐줄 수 있어?",
+      "back": "Can you look after my cat?",
+      "note": "청크: Can you look after / my cat?\n상황: Day 21 · look after (돌보다)",
+      "src": "Day 21 · look after · 02번",
+      "audio": "media/hackerstalk/DAY 21_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 07 (Day 19-21)",
+        "Day 21",
+        "look-after",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 07 (Day 19-21)/Day 21",
+      "items": []
+    },
+    {
+      "id": "ht_d21_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 21 · look after〕 가족들 좀 챙겨줘.",
+      "back": "Look after the family.",
+      "note": "청크: Look after / the family\n상황: Day 21 · look after (돌보다)",
+      "src": "Day 21 · look after · 03번",
+      "audio": "media/hackerstalk/DAY 21_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 07 (Day 19-21)",
+        "Day 21",
+        "look-after",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 07 (Day 19-21)/Day 21",
+      "items": []
+    },
+    {
+      "id": "ht_d22_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 22 · look forward to〕 휴가가 기대돼.",
+      "back": "I'm looking forward to my vacation.",
+      "note": "청크: I'm looking forward to / my vacation\n상황: Day 22 · look forward to (기대하다)",
+      "src": "Day 22 · look forward to · 01번",
+      "audio": "media/hackerstalk/DAY 22_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 08 (Day 22-24)",
+        "Day 22",
+        "look-forward-to",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 08 (Day 22-24)/Day 22",
+      "items": []
+    },
+    {
+      "id": "ht_d22_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 22 · look forward to〕 토요일이 기대돼.",
+      "back": "I'm looking forward to Saturday.",
+      "note": "청크: I'm looking forward to / Saturday\n상황: Day 22 · look forward to (기대하다)",
+      "src": "Day 22 · look forward to · 02번",
+      "audio": "media/hackerstalk/DAY 22_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 08 (Day 22-24)",
+        "Day 22",
+        "look-forward-to",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 08 (Day 22-24)/Day 22",
+      "items": []
+    },
+    {
+      "id": "ht_d22_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 22 · look forward to〕 걔 만나는 걸 기대할게.",
+      "back": "I look forward to meeting him.",
+      "note": "청크: I look forward to / meeting him\n상황: Day 22 · look forward to (기대하다)",
+      "src": "Day 22 · look forward to · 03번",
+      "audio": "media/hackerstalk/DAY 22_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 08 (Day 22-24)",
+        "Day 22",
+        "look-forward-to",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 08 (Day 22-24)/Day 22",
+      "items": []
+    },
+    {
+      "id": "ht_d23_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 23 · look back〕 이제 와 돌이켜보니 나 실수했던 것 같아.",
+      "back": "Looking back now I think I made a mistake.",
+      "note": "청크: Looking back now / I think / I made a mistake\n상황: Day 23 · look back (돌이켜보다)",
+      "src": "Day 23 · look back · 01번",
+      "audio": "media/hackerstalk/DAY 23_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 08 (Day 22-24)",
+        "Day 23",
+        "look-back",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 08 (Day 22-24)/Day 23",
+      "items": []
+    },
+    {
+      "id": "ht_d23_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 23 · look back〕 돌이켜 보지 마.",
+      "back": "Don't look back.",
+      "note": "청크: Don't / look back\n상황: Day 23 · look back (돌이켜보다)",
+      "src": "Day 23 · look back · 02번",
+      "audio": "media/hackerstalk/DAY 23_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 08 (Day 22-24)",
+        "Day 23",
+        "look-back",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 08 (Day 22-24)/Day 23",
+      "items": []
+    },
+    {
+      "id": "ht_d23_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 23 · look back〕 지난 한 해를 돌이켜봐.",
+      "back": "Look back over the last year.",
+      "note": "청크: Look back / over the last year\n상황: Day 23 · look back (돌이켜보다)",
+      "src": "Day 23 · look back · 03번",
+      "audio": "media/hackerstalk/DAY 23_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 08 (Day 22-24)",
+        "Day 23",
+        "look-back",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 08 (Day 22-24)/Day 23",
+      "items": []
+    },
+    {
+      "id": "ht_d24_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 24 · look down on〕 나 무시하지 마.",
+      "back": "Don't look down on me.",
+      "note": "청크: Don't / look down on me\n상황: Day 24 · look down on (무시하다)",
+      "src": "Day 24 · look down on · 01번",
+      "audio": "media/hackerstalk/DAY 24_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 08 (Day 22-24)",
+        "Day 24",
+        "look-down-on",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 08 (Day 22-24)/Day 24",
+      "items": []
+    },
+    {
+      "id": "ht_d24_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 24 · look down on〕 걔 우릴 너무 무시해.",
+      "back": "He looks down on us too much.",
+      "note": "청크: He looks down on us / too much\n상황: Day 24 · look down on (무시하다)",
+      "src": "Day 24 · look down on · 02번",
+      "audio": "media/hackerstalk/DAY 24_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 08 (Day 22-24)",
+        "Day 24",
+        "look-down-on",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 08 (Day 22-24)/Day 24",
+      "items": []
+    },
+    {
+      "id": "ht_d24_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 24 · look down on〕 다른 사람을 무시하면 안 돼.",
+      "back": "You shouldn't look down on other people.",
+      "note": "청크: You shouldn't / look down on other people\n상황: Day 24 · look down on (무시하다)",
+      "src": "Day 24 · look down on · 03번",
+      "audio": "media/hackerstalk/DAY 24_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 08 (Day 22-24)",
+        "Day 24",
+        "look-down-on",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 08 (Day 22-24)/Day 24",
+      "items": []
+    },
+    {
+      "id": "ht_d25_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 25 · look up〕 그거 인터넷에 검색해 봐.",
+      "back": "Look it up on the internet.",
+      "note": "청크: Look it up / on the internet\n상황: Day 25 · look up (검색하다/찾아보다)",
+      "src": "Day 25 · look up · 01번",
+      "audio": "media/hackerstalk/DAY 25_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 09 (Day 25-27)",
+        "Day 25",
+        "look-up",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 09 (Day 25-27)/Day 25",
+      "items": []
+    },
+    {
+      "id": "ht_d25_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 25 · look up〕 페이스북에서 나 찾아봐.",
+      "back": "Look me up on Facebook.",
+      "note": "청크: Look me up / on Facebook\n상황: Day 25 · look up (검색하다/찾아보다)",
+      "src": "Day 25 · look up · 02번",
+      "audio": "media/hackerstalk/DAY 25_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 09 (Day 25-27)",
+        "Day 25",
+        "look-up",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 09 (Day 25-27)/Day 25",
+      "items": []
+    },
+    {
+      "id": "ht_d25_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 25 · look up〕 나 그거 사전에서 찾아봤어.",
+      "back": "I looked it up in the dictionary.",
+      "note": "청크: I looked it up / in the dictionary\n상황: Day 25 · look up (검색하다/찾아보다)",
+      "src": "Day 25 · look up · 03번",
+      "audio": "media/hackerstalk/DAY 25_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 09 (Day 25-27)",
+        "Day 25",
+        "look-up",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 09 (Day 25-27)/Day 25",
+      "items": []
+    },
+    {
+      "id": "ht_d26_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 26 · look up to〕 난 부모님을 존경해.",
+      "back": "I look up to my parents.",
+      "note": "청크: I look up to / my parents\n상황: Day 26 · look up to (존경하다)",
+      "src": "Day 26 · look up to · 01번",
+      "audio": "media/hackerstalk/DAY 26_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 09 (Day 25-27)",
+        "Day 26",
+        "look-up-to",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 09 (Day 25-27)/Day 26",
+      "items": []
+    },
+    {
+      "id": "ht_d26_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 26 · look up to〕 나 그분 존경해.",
+      "back": "I look up to her.",
+      "note": "청크: I look up / to her\n상황: Day 26 · look up to (존경하다)",
+      "src": "Day 26 · look up to · 02번",
+      "audio": "media/hackerstalk/DAY 26_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 09 (Day 25-27)",
+        "Day 26",
+        "look-up-to",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 09 (Day 25-27)/Day 26",
+      "items": []
+    },
+    {
+      "id": "ht_d26_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 26 · look up to〕 사람들은 그를 존경했어.",
+      "back": "People looked up to him.",
+      "note": "청크: People / looked up to him\n상황: Day 26 · look up to (존경하다)",
+      "src": "Day 26 · look up to · 03번",
+      "audio": "media/hackerstalk/DAY 26_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 09 (Day 25-27)",
+        "Day 26",
+        "look-up-to",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 09 (Day 25-27)/Day 26",
+      "items": []
+    },
+    {
+      "id": "ht_d27_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 27 · put down〕 그거 내려놔.",
+      "back": "Put that down.",
+      "note": "청크: Put that / down\n상황: Day 27 · put down (내려놓다)",
+      "src": "Day 27 · put down · 01번",
+      "audio": "media/hackerstalk/DAY 27_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 09 (Day 25-27)",
+        "Day 27",
+        "put-down",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 09 (Day 25-27)/Day 27",
+      "items": []
+    },
+    {
+      "id": "ht_d27_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 27 · put down〕 그 책 내려놔.",
+      "back": "Put the book down.",
+      "note": "청크: Put / the book down\n상황: Day 27 · put down (내려놓다)",
+      "src": "Day 27 · put down · 02번",
+      "audio": "media/hackerstalk/DAY 27_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 09 (Day 25-27)",
+        "Day 27",
+        "put-down",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 09 (Day 25-27)/Day 27",
+      "items": []
+    },
+    {
+      "id": "ht_d27_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 27 · put down〕 여기다 가방 좀 내려놔도 돼?",
+      "back": "Can I put this bag down here?",
+      "note": "청크: Can I put this bag down / here?\n상황: Day 27 · put down (내려놓다)",
+      "src": "Day 27 · put down · 03번",
+      "audio": "media/hackerstalk/DAY 27_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 09 (Day 25-27)",
+        "Day 27",
+        "put-down",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 09 (Day 25-27)/Day 27",
+      "items": []
+    },
+    {
+      "id": "ht_d28_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 28 · put on〕 나 오늘 정장 입었어.",
+      "back": "Today I put on a suit.",
+      "note": "청크: Today / I put on a suit\n상황: Day 28 · put on (입다/걸치다)",
+      "src": "Day 28 · put on · 01번",
+      "audio": "media/hackerstalk/DAY 28_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 10 (Day 28-30)",
+        "Day 28",
+        "put-on",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 10 (Day 28-30)/Day 28",
+      "items": []
+    },
+    {
+      "id": "ht_d28_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 28 · put on〕 코트 입어.",
+      "back": "Put on your coat.",
+      "note": "청크: Put on / your coat\n상황: Day 28 · put on (입다/걸치다)",
+      "src": "Day 28 · put on · 02번",
+      "audio": "media/hackerstalk/DAY 28_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 10 (Day 28-30)",
+        "Day 28",
+        "put-on",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 10 (Day 28-30)/Day 28",
+      "items": []
+    },
+    {
+      "id": "ht_d28_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 28 · put on〕 장갑 껴.",
+      "back": "Put on your gloves.",
+      "note": "청크: Put on / your gloves\n상황: Day 28 · put on (입다/걸치다)",
+      "src": "Day 28 · put on · 03번",
+      "audio": "media/hackerstalk/DAY 28_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 10 (Day 28-30)",
+        "Day 28",
+        "put-on",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 10 (Day 28-30)/Day 28",
+      "items": []
+    },
+    {
+      "id": "ht_d29_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 29 · put up〕 이 사진 저기에 걸자.",
+      "back": "Let's put up this picture over there.",
+      "note": "청크: Let's put up this picture / over there\n상황: Day 29 · put up (게시하다/걸다)",
+      "src": "Day 29 · put up · 01번",
+      "audio": "media/hackerstalk/DAY 29_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 10 (Day 28-30)",
+        "Day 29",
+        "put-up",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 10 (Day 28-30)/Day 29",
+      "items": []
+    },
+    {
+      "id": "ht_d29_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 29 · put up〕 우리 영화 포스터 걸고 있어.",
+      "back": "We are putting up a movie poster.",
+      "note": "청크: We are putting up / a movie poster\n상황: Day 29 · put up (게시하다/걸다)",
+      "src": "Day 29 · put up · 02번",
+      "audio": "media/hackerstalk/DAY 29_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 10 (Day 28-30)",
+        "Day 29",
+        "put-up",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 10 (Day 28-30)/Day 29",
+      "items": []
+    },
+    {
+      "id": "ht_d29_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 29 · put up〕 공지를 게시하는 게 어때?",
+      "back": "Why don't you put up a notice?",
+      "note": "청크: Why don't you / put up a notice?\n상황: Day 29 · put up (게시하다/걸다)",
+      "src": "Day 29 · put up · 03번",
+      "audio": "media/hackerstalk/DAY 29_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 10 (Day 28-30)",
+        "Day 29",
+        "put-up",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 10 (Day 28-30)/Day 29",
+      "items": []
+    },
+    {
+      "id": "ht_d30_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 30 · put back〕 제자리에 돌려놔.",
+      "back": "Put it back.",
+      "note": "청크: Put / it back\n상황: Day 30 · put back (제자리에 돌려놓다)",
+      "src": "Day 30 · put back · 01번",
+      "audio": "media/hackerstalk/DAY 30_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 10 (Day 28-30)",
+        "Day 30",
+        "put-back",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 10 (Day 28-30)/Day 30",
+      "items": []
+    },
+    {
+      "id": "ht_d30_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 30 · put back〕 그거 제자리에 돌려놓는 게 좋을걸?",
+      "back": "You'd better put that back.",
+      "note": "청크: You'd better / put that back\n상황: Day 30 · put back (제자리에 돌려놓다)",
+      "src": "Day 30 · put back · 02번",
+      "audio": "media/hackerstalk/DAY 30_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 10 (Day 28-30)",
+        "Day 30",
+        "put-back",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 10 (Day 28-30)/Day 30",
+      "items": []
+    },
+    {
+      "id": "ht_d30_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 30 · put back〕 그 우유는 냉장고에 다시 넣어놔.",
+      "back": "Put the milk back in the fridge.",
+      "note": "청크: Put the milk back / in the fridge\n상황: Day 30 · put back (제자리에 돌려놓다)",
+      "src": "Day 30 · put back · 03번",
+      "audio": "media/hackerstalk/DAY 30_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 10 (Day 28-30)",
+        "Day 30",
+        "put-back",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 10 (Day 28-30)/Day 30",
+      "items": []
+    },
+    {
+      "id": "ht_d31_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 31 · put aside〕 돈 좀 따로 모아두자.",
+      "back": "Let's put aside some money.",
+      "note": "청크: Let's put aside / some money\n상황: Day 31 · put aside (따로 모아두다)",
+      "src": "Day 31 · put aside · 01번",
+      "audio": "media/hackerstalk/DAY 31_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 11 (Day 31-33)",
+        "Day 31",
+        "put-aside",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 11 (Day 31-33)/Day 31",
+      "items": []
+    },
+    {
+      "id": "ht_d31_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 31 · put aside〕 난 월급의 일부를 따로 모아둬.",
+      "back": "I put aside part of my salary.",
+      "note": "청크: I put aside / part of my salary\n상황: Day 31 · put aside (따로 모아두다)",
+      "src": "Day 31 · put aside · 02번",
+      "audio": "media/hackerstalk/DAY 31_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 11 (Day 31-33)",
+        "Day 31",
+        "put-aside",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 11 (Day 31-33)/Day 31",
+      "items": []
+    },
+    {
+      "id": "ht_d31_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 31 · put aside〕 그 회의를 위해 시간 좀 비울 수 있어?",
+      "back": "Can you put aside some time for the meeting?",
+      "note": "청크: Can you put aside some time / for the meeting?\n상황: Day 31 · put aside (따로 모아두다)",
+      "src": "Day 31 · put aside · 03번",
+      "audio": "media/hackerstalk/DAY 31_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 11 (Day 31-33)",
+        "Day 31",
+        "put-aside",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 11 (Day 31-33)/Day 31",
+      "items": []
+    },
+    {
+      "id": "ht_d32_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 32 · put together〕 나 팀을 모으고 있어.",
+      "back": "I'm putting together a team.",
+      "note": "청크: I'm putting together / a team\n상황: Day 32 · put together (모으다/결성하다)",
+      "src": "Day 32 · put together · 01번",
+      "audio": "media/hackerstalk/DAY 32_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 11 (Day 31-33)",
+        "Day 32",
+        "put-together",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 11 (Day 31-33)/Day 32",
+      "items": []
+    },
+    {
+      "id": "ht_d32_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 32 · put together〕 우린 팀을 만들 수 있어.",
+      "back": "We can put together a team.",
+      "note": "청크: We can / put together a team\n상황: Day 32 · put together (모으다/결성하다)",
+      "src": "Day 32 · put together · 02번",
+      "audio": "media/hackerstalk/DAY 32_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 11 (Day 31-33)",
+        "Day 32",
+        "put-together",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 11 (Day 31-33)/Day 32",
+      "items": []
+    },
+    {
+      "id": "ht_d32_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 32 · put together〕 네가 그룹을 결성한다는 걸 들었어.",
+      "back": "I heard you're putting together a group.",
+      "note": "청크: I heard / you're putting together a group\n상황: Day 32 · put together (모으다/결성하다)",
+      "src": "Day 32 · put together · 03번",
+      "audio": "media/hackerstalk/DAY 32_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 11 (Day 31-33)",
+        "Day 32",
+        "put-together",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 11 (Day 31-33)/Day 32",
+      "items": []
+    },
+    {
+      "id": "ht_d33_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 33 · put off〕 오늘 저녁 약속 좀 뒤로 미루자.",
+      "back": "Let's put off our dinner tonight.",
+      "note": "청크: Let's put off / our dinner tonight\n상황: Day 33 · put off (미루다)",
+      "src": "Day 33 · put off · 01번",
+      "audio": "media/hackerstalk/DAY 33_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 11 (Day 31-33)",
+        "Day 33",
+        "put-off",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 11 (Day 31-33)/Day 33",
+      "items": []
+    },
+    {
+      "id": "ht_d33_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 33 · put off〕 이 일을 더 이상 미룰 수 없어.",
+      "back": "I can't put it off any longer.",
+      "note": "청크: I can't put it off / any longer\n상황: Day 33 · put off (미루다)",
+      "src": "Day 33 · put off · 02번",
+      "audio": "media/hackerstalk/DAY 33_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 11 (Day 31-33)",
+        "Day 33",
+        "put-off",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 11 (Day 31-33)/Day 33",
+      "items": []
+    },
+    {
+      "id": "ht_d33_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 33 · put off〕 나 공부를 너무 오래 미뤄뒀어.",
+      "back": "I've put off studying too long.",
+      "note": "청크: I've put off studying / too long\n상황: Day 33 · put off (미루다)",
+      "src": "Day 33 · put off · 03번",
+      "audio": "media/hackerstalk/DAY 33_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 11 (Day 31-33)",
+        "Day 33",
+        "put-off",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 11 (Day 31-33)/Day 33",
+      "items": []
+    },
+    {
+      "id": "ht_d34_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 34 · put out〕 담배 좀 꺼주실래요?",
+      "back": "Could you put out your cigarette please?",
+      "note": "청크: Could you put out / your cigarette please?\n상황: Day 34 · put out (끄다)",
+      "src": "Day 34 · put out · 01번",
+      "audio": "media/hackerstalk/DAY 34_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 12 (Day 34-36)",
+        "Day 34",
+        "put-out",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 12 (Day 34-36)/Day 34",
+      "items": []
+    },
+    {
+      "id": "ht_d34_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 34 · put out〕 촛불 끄는 거 잊지 마.",
+      "back": "Don't forget to put out the candles.",
+      "note": "청크: Don't forget / to put out the candles\n상황: Day 34 · put out (끄다)",
+      "src": "Day 34 · put out · 02번",
+      "audio": "media/hackerstalk/DAY 34_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 12 (Day 34-36)",
+        "Day 34",
+        "put-out",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 12 (Day 34-36)/Day 34",
+      "items": []
+    },
+    {
+      "id": "ht_d34_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 34 · put out〕 전등 좀 꺼줄래?",
+      "back": "Can you put out the lights?",
+      "note": "청크: Can you / put out the lights?\n상황: Day 34 · put out (끄다)",
+      "src": "Day 34 · put out · 03번",
+      "audio": "media/hackerstalk/DAY 34_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 12 (Day 34-36)",
+        "Day 34",
+        "put-out",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 12 (Day 34-36)/Day 34",
+      "items": []
+    },
+    {
+      "id": "ht_d35_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 35 · take out〕 연필 꺼내.",
+      "back": "Take out your pencils.",
+      "note": "청크: Take out / your pencils\n상황: Day 35 · take out (꺼내다)",
+      "src": "Day 35 · take out · 01번",
+      "audio": "media/hackerstalk/DAY 35_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 12 (Day 34-36)",
+        "Day 35",
+        "take-out",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 12 (Day 34-36)/Day 35",
+      "items": []
+    },
+    {
+      "id": "ht_d35_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 35 · take out〕 휴대폰 꺼내서 걔한테 전화해.",
+      "back": "Take out your phone and call him.",
+      "note": "청크: Take out your phone / and call him\n상황: Day 35 · take out (꺼내다)",
+      "src": "Day 35 · take out · 02번",
+      "audio": "media/hackerstalk/DAY 35_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 12 (Day 34-36)",
+        "Day 35",
+        "take-out",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 12 (Day 34-36)/Day 35",
+      "items": []
+    },
+    {
+      "id": "ht_d35_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 35 · take out〕 유심 카드 좀 꺼내줄 수 있어?",
+      "back": "Can you take out the SIM card?",
+      "note": "청크: Can you take out / the SIM card?\n상황: Day 35 · take out (꺼내다)",
+      "src": "Day 35 · take out · 03번",
+      "audio": "media/hackerstalk/DAY 35_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 12 (Day 34-36)",
+        "Day 35",
+        "take-out",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 12 (Day 34-36)/Day 35",
+      "items": []
+    },
+    {
+      "id": "ht_d36_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 36 · take down〕 네 번호 좀 받아 적을게.",
+      "back": "Let me take down your phone number.",
+      "note": "청크: Let me take down / your phone number\n상황: Day 36 · take down (받아 적다)",
+      "src": "Day 36 · take down · 01번",
+      "audio": "media/hackerstalk/DAY 36_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 12 (Day 34-36)",
+        "Day 36",
+        "take-down",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 12 (Day 34-36)/Day 36",
+      "items": []
+    },
+    {
+      "id": "ht_d36_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 36 · take down〕 주소 받아 적었어.",
+      "back": "I took down the address.",
+      "note": "청크: I took down / the address\n상황: Day 36 · take down (받아 적다)",
+      "src": "Day 36 · take down · 02번",
+      "audio": "media/hackerstalk/DAY 36_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 12 (Day 34-36)",
+        "Day 36",
+        "take-down",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 12 (Day 34-36)/Day 36",
+      "items": []
+    },
+    {
+      "id": "ht_d36_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 36 · take down〕 자세한 것까지 다 받아 적었어?",
+      "back": "Did you take down all the details?",
+      "note": "청크: Did you take down / all the details?\n상황: Day 36 · take down (받아 적다)",
+      "src": "Day 36 · take down · 03번",
+      "audio": "media/hackerstalk/DAY 36_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 12 (Day 34-36)",
+        "Day 36",
+        "take-down",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 12 (Day 34-36)/Day 36",
+      "items": []
+    },
+    {
+      "id": "ht_d37_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 37 · take off〕 신발 좀 벗어줘.",
+      "back": "Please take your shoes off.",
+      "note": "청크: Please take / your shoes off\n상황: Day 37 · take off (벗다)",
+      "src": "Day 37 · take off · 01번",
+      "audio": "media/hackerstalk/DAY 37_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 13 (Day 37-39)",
+        "Day 37",
+        "take-off",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 13 (Day 37-39)/Day 37",
+      "items": []
+    },
+    {
+      "id": "ht_d37_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 37 · take off〕 재킷 좀 벗을게.",
+      "back": "Let me take this jacket off.",
+      "note": "청크: Let me take / this jacket off\n상황: Day 37 · take off (벗다)",
+      "src": "Day 37 · take off · 02번",
+      "audio": "media/hackerstalk/DAY 37_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 13 (Day 37-39)",
+        "Day 37",
+        "take-off",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 13 (Day 37-39)/Day 37",
+      "items": []
+    },
+    {
+      "id": "ht_d37_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 37 · take off〕 안경 벗지 마.",
+      "back": "Don't take off your glasses.",
+      "note": "청크: Don't take off / your glasses\n상황: Day 37 · take off (벗다)",
+      "src": "Day 37 · take off · 03번",
+      "audio": "media/hackerstalk/DAY 37_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 13 (Day 37-39)",
+        "Day 37",
+        "take-off",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 13 (Day 37-39)/Day 37",
+      "items": []
+    },
+    {
+      "id": "ht_d38_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 38 · take after〕 넌 엄마를 쏙 빼닮았구나.",
+      "back": "You really take after your mom.",
+      "note": "청크: You really / take after your mom\n상황: Day 38 · take after (닮다)",
+      "src": "Day 38 · take after · 01번",
+      "audio": "media/hackerstalk/DAY 38_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 13 (Day 37-39)",
+        "Day 38",
+        "take-after",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 13 (Day 37-39)/Day 38",
+      "items": []
+    },
+    {
+      "id": "ht_d38_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 38 · take after〕 얘는 엄마 닮았어.",
+      "back": "She takes after her mother.",
+      "note": "청크: She takes after / her mother\n상황: Day 38 · take after (닮다)",
+      "src": "Day 38 · take after · 02번",
+      "audio": "media/hackerstalk/DAY 38_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 13 (Day 37-39)",
+        "Day 38",
+        "take-after",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 13 (Day 37-39)/Day 38",
+      "items": []
+    },
+    {
+      "id": "ht_d38_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 38 · take after〕 너희 아들은 아빠 닮은 것 같아.",
+      "back": "I think your son takes after his dad.",
+      "note": "청크: I think / your son takes after his dad\n상황: Day 38 · take after (닮다)",
+      "src": "Day 38 · take after · 03번",
+      "audio": "media/hackerstalk/DAY 38_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 13 (Day 37-39)",
+        "Day 38",
+        "take-after",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 13 (Day 37-39)/Day 38",
+      "items": []
+    },
+    {
+      "id": "ht_d39_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 39 · take on〕 그 일 내가 맡았어.",
+      "back": "I took on the job.",
+      "note": "청크: I took on / the job\n상황: Day 39 · take on (맡다)",
+      "src": "Day 39 · take on · 01번",
+      "audio": "media/hackerstalk/DAY 39_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 13 (Day 37-39)",
+        "Day 39",
+        "take-on",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 13 (Day 37-39)/Day 39",
+      "items": []
+    },
+    {
+      "id": "ht_d39_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 39 · take on〕 걔 일을 너무 많이 맡고 있어.",
+      "back": "She's taking on too much.",
+      "note": "청크: She's taking on / too much\n상황: Day 39 · take on (맡다)",
+      "src": "Day 39 · take on · 02번",
+      "audio": "media/hackerstalk/DAY 39_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 13 (Day 37-39)",
+        "Day 39",
+        "take-on",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 13 (Day 37-39)/Day 39",
+      "items": []
+    },
+    {
+      "id": "ht_d39_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 39 · take on〕 걔가 팀장 자리를 맡았어.",
+      "back": "He took on the position of team leader.",
+      "note": "청크: He took on / the position of team leader\n상황: Day 39 · take on (맡다)",
+      "src": "Day 39 · take on · 03번",
+      "audio": "media/hackerstalk/DAY 39_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 13 (Day 37-39)",
+        "Day 39",
+        "take-on",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 13 (Day 37-39)/Day 39",
+      "items": []
+    },
+    {
+      "id": "ht_d40_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 40 · take up〕 시간 많이 안 잡아먹을게.",
+      "back": "I won't take up much time.",
+      "note": "청크: I won't / take up much time\n상황: Day 40 · take up (차지하다/잡아먹다)",
+      "src": "Day 40 · take up · 01번",
+      "audio": "media/hackerstalk/DAY 40_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 14 (Day 40-42)",
+        "Day 40",
+        "take-up",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 14 (Day 40-42)/Day 40",
+      "items": []
+    },
+    {
+      "id": "ht_d40_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 40 · take up〕 그게 내 시간을 다 잡아먹어.",
+      "back": "It takes up all my time.",
+      "note": "청크: It takes up / all my time\n상황: Day 40 · take up (차지하다/잡아먹다)",
+      "src": "Day 40 · take up · 02번",
+      "audio": "media/hackerstalk/DAY 40_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 14 (Day 40-42)",
+        "Day 40",
+        "take-up",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 14 (Day 40-42)/Day 40",
+      "items": []
+    },
+    {
+      "id": "ht_d40_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 40 · take up〕 네 시간을 뺏고 싶진 않아.",
+      "back": "I don't want to take up your time.",
+      "note": "청크: I don't want to / take up your time\n상황: Day 40 · take up (차지하다/잡아먹다)",
+      "src": "Day 40 · take up · 03번",
+      "audio": "media/hackerstalk/DAY 40_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 14 (Day 40-42)",
+        "Day 40",
+        "take-up",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 14 (Day 40-42)/Day 40",
+      "items": []
+    },
+    {
+      "id": "ht_d41_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 41 · take back〕 그 말 취소해.",
+      "back": "Take it back.",
+      "note": "청크: Take it / back\n상황: Day 41 · take back (취소하다)",
+      "src": "Day 41 · take back · 01번",
+      "audio": "media/hackerstalk/DAY 41_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 14 (Day 40-42)",
+        "Day 41",
+        "take-back",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 14 (Day 40-42)/Day 41",
+      "items": []
+    },
+    {
+      "id": "ht_d41_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 41 · take back〕 내가 전에 했던 말 취소할게.",
+      "back": "I take back what I said before.",
+      "note": "청크: I take back / what I said before\n상황: Day 41 · take back (취소하다)",
+      "src": "Day 41 · take back · 02번",
+      "audio": "media/hackerstalk/DAY 41_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 14 (Day 40-42)",
+        "Day 41",
+        "take-back",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 14 (Day 40-42)/Day 41",
+      "items": []
+    },
+    {
+      "id": "ht_d41_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 41 · take back〕 그 말 다시 주워 담고 싶어.",
+      "back": "I wish I could take it back.",
+      "note": "청크: I wish / I could take it back\n상황: Day 41 · take back (취소하다)",
+      "src": "Day 41 · take back · 03번",
+      "audio": "media/hackerstalk/DAY 41_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 14 (Day 40-42)",
+        "Day 41",
+        "take-back",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 14 (Day 40-42)/Day 41",
+      "items": []
+    },
+    {
+      "id": "ht_d42_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 42 · take over〕 내가 대신해 줄까?",
+      "back": "Do you want me to take over?",
+      "note": "청크: Do you want me / to take over?\n상황: Day 42 · take over (대신하다/인계받다)",
+      "src": "Day 42 · take over · 01번",
+      "audio": "media/hackerstalk/DAY 42_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 14 (Day 40-42)",
+        "Day 42",
+        "take-over",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 14 (Day 40-42)/Day 42",
+      "items": []
+    },
+    {
+      "id": "ht_d42_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 42 · take over〕 네가 대신해 줄 수 있어?",
+      "back": "Can you take over?",
+      "note": "청크: Can you / take over?\n상황: Day 42 · take over (대신하다/인계받다)",
+      "src": "Day 42 · take over · 02번",
+      "audio": "media/hackerstalk/DAY 42_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 14 (Day 40-42)",
+        "Day 42",
+        "take-over",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 14 (Day 40-42)/Day 42",
+      "items": []
+    },
+    {
+      "id": "ht_d42_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 42 · take over〕 네가 운전 좀 대신해 줄 수 있어?",
+      "back": "Can you take over the driving?",
+      "note": "청크: Can you take over / the driving?\n상황: Day 42 · take over (대신하다/인계받다)",
+      "src": "Day 42 · take over · 03번",
+      "audio": "media/hackerstalk/DAY 42_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 14 (Day 40-42)",
+        "Day 42",
+        "take-over",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 14 (Day 40-42)/Day 42",
+      "items": []
+    },
+    {
+      "id": "ht_d43_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 43 · get in〕 집으로 들어가.",
+      "back": "Get in the house.",
+      "note": "청크: Get in / the house\n상황: Day 43 · get in (들어가다)",
+      "src": "Day 43 · get in · 01번",
+      "audio": "media/hackerstalk/DAY 43_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 15 (Day 43-45)",
+        "Day 43",
+        "get-in",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 15 (Day 43-45)/Day 43",
+      "items": []
+    },
+    {
+      "id": "ht_d43_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 43 · get in〕 교회로 들어가.",
+      "back": "Get in the church.",
+      "note": "청크: Get in / the church\n상황: Day 43 · get in (들어가다)",
+      "src": "Day 43 · get in · 02번",
+      "audio": "media/hackerstalk/DAY 43_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 15 (Day 43-45)",
+        "Day 43",
+        "get-in",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 15 (Day 43-45)/Day 43",
+      "items": []
+    },
+    {
+      "id": "ht_d43_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 43 · get in〕 너 여기 어떻게 들어왔어?",
+      "back": "How did you get in here?",
+      "note": "청크: How did you / get in here?\n상황: Day 43 · get in (들어가다)",
+      "src": "Day 43 · get in · 03번",
+      "audio": "media/hackerstalk/DAY 43_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 15 (Day 43-45)",
+        "Day 43",
+        "get-in",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 15 (Day 43-45)/Day 43",
+      "items": []
+    },
+    {
+      "id": "ht_d44_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 44 · get out〕 내 방에서 나가.",
+      "back": "Get out of my room.",
+      "note": "청크: Get out / of my room\n상황: Day 44 · get out (나가다)",
+      "src": "Day 44 · get out · 01번",
+      "audio": "media/hackerstalk/DAY 44_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 15 (Day 43-45)",
+        "Day 44",
+        "get-out",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 15 (Day 43-45)/Day 44",
+      "items": []
+    },
+    {
+      "id": "ht_d44_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 44 · get out〕 나가.",
+      "back": "Get out.",
+      "note": "청크: Get out\n상황: Day 44 · get out (나가다)",
+      "src": "Day 44 · get out · 02번",
+      "audio": "media/hackerstalk/DAY 44_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 15 (Day 43-45)",
+        "Day 44",
+        "get-out",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 15 (Day 43-45)/Day 44",
+      "items": []
+    },
+    {
+      "id": "ht_d44_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 44 · get out〕 여기서 어떻게 나가요?",
+      "back": "How do I get out of here?",
+      "note": "청크: How do I / get out of here?\n상황: Day 44 · get out (나가다)",
+      "src": "Day 44 · get out · 03번",
+      "audio": "media/hackerstalk/DAY 44_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 15 (Day 43-45)",
+        "Day 44",
+        "get-out",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 15 (Day 43-45)/Day 44",
+      "items": []
+    },
+    {
+      "id": "ht_d45_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 45 · get on〕 나 저 버스 타야 돼.",
+      "back": "I got to get on that bus.",
+      "note": "청크: I got to / get on that bus\n상황: Day 45 · get on (타다)",
+      "src": "Day 45 · get on · 01번",
+      "audio": "media/hackerstalk/DAY 45_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 15 (Day 43-45)",
+        "Day 45",
+        "get-on",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 15 (Day 43-45)/Day 45",
+      "items": []
+    },
+    {
+      "id": "ht_d45_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 45 · get on〕 그냥 기차에 타.",
+      "back": "Just get on the train.",
+      "note": "청크: Just get on / the train\n상황: Day 45 · get on (타다)",
+      "src": "Day 45 · get on · 02번",
+      "audio": "media/hackerstalk/DAY 45_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 15 (Day 43-45)",
+        "Day 45",
+        "get-on",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 15 (Day 43-45)/Day 45",
+      "items": []
+    },
+    {
+      "id": "ht_d45_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 45 · get on〕 걔 비행기에 안 탔어.",
+      "back": "She didn't get on the plane.",
+      "note": "청크: She didn't / get on the plane\n상황: Day 45 · get on (타다)",
+      "src": "Day 45 · get on · 03번",
+      "audio": "media/hackerstalk/DAY 45_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 15 (Day 43-45)",
+        "Day 45",
+        "get-on",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 15 (Day 43-45)/Day 45",
+      "items": []
+    },
+    {
+      "id": "ht_d46_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 46 · get off〕 나 방금 비행기에서 내렸어.",
+      "back": "I just got off the plane.",
+      "note": "청크: I just / got off the plane\n상황: Day 46 · get off (내리다)",
+      "src": "Day 46 · get off · 01번",
+      "audio": "media/hackerstalk/DAY 46_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 16 (Day 46-48)",
+        "Day 46",
+        "get-off",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 16 (Day 46-48)/Day 46",
+      "items": []
+    },
+    {
+      "id": "ht_d46_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 46 · get off〕 버스에서 내려.",
+      "back": "Get off the bus.",
+      "note": "청크: Get off / the bus\n상황: Day 46 · get off (내리다)",
+      "src": "Day 46 · get off · 02번",
+      "audio": "media/hackerstalk/DAY 46_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 16 (Day 46-48)",
+        "Day 46",
+        "get-off",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 16 (Day 46-48)/Day 46",
+      "items": []
+    },
+    {
+      "id": "ht_d46_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 46 · get off〕 너 여기서 내려?",
+      "back": "Are you getting off here?",
+      "note": "청크: Are you getting off / here?\n상황: Day 46 · get off (내리다)",
+      "src": "Day 46 · get off · 03번",
+      "audio": "media/hackerstalk/DAY 46_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 16 (Day 46-48)",
+        "Day 46",
+        "get-off",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 16 (Day 46-48)/Day 46",
+      "items": []
+    },
+    {
+      "id": "ht_d47_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 47 · get up〕 일어날 시간이야.",
+      "back": "It's time to get up.",
+      "note": "청크: It's time / to get up\n상황: Day 47 · get up (일어나다)",
+      "src": "Day 47 · get up · 01번",
+      "audio": "media/hackerstalk/DAY 47_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 16 (Day 46-48)",
+        "Day 47",
+        "get-up",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 16 (Day 46-48)/Day 47",
+      "items": []
+    },
+    {
+      "id": "ht_d47_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 47 · get up〕 나 아침에 일찍 일어나야 돼.",
+      "back": "I got to get up early in the morning.",
+      "note": "청크: I got to get up / early in the morning\n상황: Day 47 · get up (일어나다)",
+      "src": "Day 47 · get up · 02번",
+      "audio": "media/hackerstalk/DAY 47_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 16 (Day 46-48)",
+        "Day 47",
+        "get-up",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 16 (Day 46-48)/Day 47",
+      "items": []
+    },
+    {
+      "id": "ht_d47_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 47 · get up〕 넌 왜 그렇게 일찍 일어나?",
+      "back": "Why do you get up so early?",
+      "note": "청크: Why do you / get up so early?\n상황: Day 47 · get up (일어나다)",
+      "src": "Day 47 · get up · 03번",
+      "audio": "media/hackerstalk/DAY 47_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 16 (Day 46-48)",
+        "Day 47",
+        "get-up",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 16 (Day 46-48)/Day 47",
+      "items": []
+    },
+    {
+      "id": "ht_d48_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 48 · get away〕 난 벗어나고 싶어.",
+      "back": "I want to get away.",
+      "note": "청크: I want to / get away\n상황: Day 48 · get away (벗어나다)",
+      "src": "Day 48 · get away · 01번",
+      "audio": "media/hackerstalk/DAY 48_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 16 (Day 46-48)",
+        "Day 48",
+        "get-away",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 16 (Day 46-48)/Day 48",
+      "items": []
+    },
+    {
+      "id": "ht_d48_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 48 · get away〕 넌 벗어나야만 해.",
+      "back": "You must get away.",
+      "note": "청크: You must / get away\n상황: Day 48 · get away (벗어나다)",
+      "src": "Day 48 · get away · 02번",
+      "audio": "media/hackerstalk/DAY 48_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 16 (Day 46-48)",
+        "Day 48",
+        "get-away",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 16 (Day 46-48)/Day 48",
+      "items": []
+    },
+    {
+      "id": "ht_d48_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 48 · get away〕 난 도시에서 벗어나고 싶어.",
+      "back": "I want to get away from the city.",
+      "note": "청크: I want to get away / from the city\n상황: Day 48 · get away (벗어나다)",
+      "src": "Day 48 · get away · 03번",
+      "audio": "media/hackerstalk/DAY 48_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 16 (Day 46-48)",
+        "Day 48",
+        "get-away",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 16 (Day 46-48)/Day 48",
+      "items": []
+    },
+    {
+      "id": "ht_d49_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 49 · get over〕 넌 극복해낼 거야.",
+      "back": "You'll get over it.",
+      "note": "청크: You'll / get over it\n상황: Day 49 · get over (극복하다)",
+      "src": "Day 49 · get over · 01번",
+      "audio": "media/hackerstalk/DAY 49_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 17 (Day 49-51)",
+        "Day 49",
+        "get-over",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 17 (Day 49-51)/Day 49",
+      "items": []
+    },
+    {
+      "id": "ht_d49_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 49 · get over〕 걔 슬럼프를 극복했어.",
+      "back": "He got over his slump.",
+      "note": "청크: He got over / his slump\n상황: Day 49 · get over (극복하다)",
+      "src": "Day 49 · get over · 02번",
+      "audio": "media/hackerstalk/DAY 49_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 17 (Day 49-51)",
+        "Day 49",
+        "get-over",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 17 (Day 49-51)/Day 49",
+      "items": []
+    },
+    {
+      "id": "ht_d49_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 49 · get over〕 넌 극복해야 돼.",
+      "back": "You need to get over it.",
+      "note": "청크: You need to / get over it\n상황: Day 49 · get over (극복하다)",
+      "src": "Day 49 · get over · 03번",
+      "audio": "media/hackerstalk/DAY 49_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 17 (Day 49-51)",
+        "Day 49",
+        "get-over",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 17 (Day 49-51)/Day 49",
+      "items": []
+    },
+    {
+      "id": "ht_d50_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 50 · turn around〕 뒤돌아봐.",
+      "back": "Turn around.",
+      "note": "청크: Turn / around\n상황: Day 50 · turn around (뒤돌아보다)",
+      "src": "Day 50 · turn around · 01번",
+      "audio": "media/hackerstalk/DAY 50_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 17 (Day 49-51)",
+        "Day 50",
+        "turn-around",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 17 (Day 49-51)/Day 50",
+      "items": []
+    },
+    {
+      "id": "ht_d50_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 50 · turn around〕 뒤돌아 있을게.",
+      "back": "I'll turn around.",
+      "note": "청크: I'll / turn around\n상황: Day 50 · turn around (뒤돌아보다)",
+      "src": "Day 50 · turn around · 02번",
+      "audio": "media/hackerstalk/DAY 50_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 17 (Day 49-51)",
+        "Day 50",
+        "turn-around",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 17 (Day 49-51)/Day 50",
+      "items": []
+    },
+    {
+      "id": "ht_d50_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 50 · turn around〕 뒤돌아서 집에 가.",
+      "back": "Turn around and go home.",
+      "note": "청크: Turn around / and go home\n상황: Day 50 · turn around (뒤돌아보다)",
+      "src": "Day 50 · turn around · 03번",
+      "audio": "media/hackerstalk/DAY 50_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 17 (Day 49-51)",
+        "Day 50",
+        "turn-around",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 17 (Day 49-51)/Day 50",
+      "items": []
+    },
+    {
+      "id": "ht_d51_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 51 · turn up〕 볼륨 좀 높여봐.",
+      "back": "Turn up the volume.",
+      "note": "청크: Turn up / the volume\n상황: Day 51 · turn up (높이다)",
+      "src": "Day 51 · turn up · 01번",
+      "audio": "media/hackerstalk/DAY 51_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 17 (Day 49-51)",
+        "Day 51",
+        "turn-up",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 17 (Day 49-51)/Day 51",
+      "items": []
+    },
+    {
+      "id": "ht_d51_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 51 · turn up〕 음악 소리를 높여.",
+      "back": "Turn up the music.",
+      "note": "청크: Turn up / the music\n상황: Day 51 · turn up (높이다)",
+      "src": "Day 51 · turn up · 02번",
+      "audio": "media/hackerstalk/DAY 51_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 17 (Day 49-51)",
+        "Day 51",
+        "turn-up",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 17 (Day 49-51)/Day 51",
+      "items": []
+    },
+    {
+      "id": "ht_d51_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 51 · turn up〕 내가 온도를 높였어.",
+      "back": "I turned up the heat.",
+      "note": "청크: I turned up / the heat\n상황: Day 51 · turn up (높이다)",
+      "src": "Day 51 · turn up · 03번",
+      "audio": "media/hackerstalk/DAY 51_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 17 (Day 49-51)",
+        "Day 51",
+        "turn-up",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 17 (Day 49-51)/Day 51",
+      "items": []
+    },
+    {
+      "id": "ht_d52_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 52 · turn off〕 TV 좀 꺼줄래?",
+      "back": "Could you turn off the TV?",
+      "note": "청크: Could you turn off / the TV?\n상황: Day 52 · turn off (끄다)",
+      "src": "Day 52 · turn off · 01번",
+      "audio": "media/hackerstalk/DAY 52_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 18 (Day 52-54)",
+        "Day 52",
+        "turn-off",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 18 (Day 52-54)/Day 52",
+      "items": []
+    },
+    {
+      "id": "ht_d52_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 52 · turn off〕 휴대폰을 꺼주세요.",
+      "back": "Please turn off your cell phones.",
+      "note": "청크: Please turn off / your cell phones\n상황: Day 52 · turn off (끄다)",
+      "src": "Day 52 · turn off · 02번",
+      "audio": "media/hackerstalk/DAY 52_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 18 (Day 52-54)",
+        "Day 52",
+        "turn-off",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 18 (Day 52-54)/Day 52",
+      "items": []
+    },
+    {
+      "id": "ht_d52_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 52 · turn off〕 내가 전원 껐어.",
+      "back": "I turned it off.",
+      "note": "청크: I turned / it off\n상황: Day 52 · turn off (끄다)",
+      "src": "Day 52 · turn off · 03번",
+      "audio": "media/hackerstalk/DAY 52_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 18 (Day 52-54)",
+        "Day 52",
+        "turn-off",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 18 (Day 52-54)/Day 52",
+      "items": []
+    },
+    {
+      "id": "ht_d53_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 53 · turn over〕 그거 뒤집어.",
+      "back": "Turn it over.",
+      "note": "청크: Turn / it over\n상황: Day 53 · turn over (뒤집다)",
+      "src": "Day 53 · turn over · 01번",
+      "audio": "media/hackerstalk/DAY 53_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 18 (Day 52-54)",
+        "Day 53",
+        "turn-over",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 18 (Day 52-54)/Day 53",
+      "items": []
+    },
+    {
+      "id": "ht_d53_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 53 · turn over〕 팬케이크 뒤집어.",
+      "back": "Turn the pancake over.",
+      "note": "청크: Turn the pancake / over\n상황: Day 53 · turn over (뒤집다)",
+      "src": "Day 53 · turn over · 02번",
+      "audio": "media/hackerstalk/DAY 53_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 18 (Day 52-54)",
+        "Day 53",
+        "turn-over",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 18 (Day 52-54)/Day 53",
+      "items": []
+    },
+    {
+      "id": "ht_d53_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 53 · turn over〕 스테이크를 뒤집을 때야.",
+      "back": "It's time to turn the steak over.",
+      "note": "청크: It's time / to turn the steak over\n상황: Day 53 · turn over (뒤집다)",
+      "src": "Day 53 · turn over · 03번",
+      "audio": "media/hackerstalk/DAY 53_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 18 (Day 52-54)",
+        "Day 53",
+        "turn-over",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 18 (Day 52-54)/Day 53",
+      "items": []
+    },
+    {
+      "id": "ht_d54_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 54 · turn down〕 걔 그 돈 거절했어.",
+      "back": "She turned down the money.",
+      "note": "청크: She turned down / the money\n상황: Day 54 · turn down (거절하다)",
+      "src": "Day 54 · turn down · 01번",
+      "audio": "media/hackerstalk/DAY 54_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 18 (Day 52-54)",
+        "Day 54",
+        "turn-down",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 18 (Day 52-54)/Day 54",
+      "items": []
+    },
+    {
+      "id": "ht_d54_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 54 · turn down〕 넌 거래를 거절했어.",
+      "back": "You turned down a deal.",
+      "note": "청크: You turned down / a deal\n상황: Day 54 · turn down (거절하다)",
+      "src": "Day 54 · turn down · 02번",
+      "audio": "media/hackerstalk/DAY 54_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 18 (Day 52-54)",
+        "Day 54",
+        "turn-down",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 18 (Day 52-54)/Day 54",
+      "items": []
+    },
+    {
+      "id": "ht_d54_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 54 · turn down〕 나 그 일자리 거절했어.",
+      "back": "I turned down the job.",
+      "note": "청크: I turned down / the job\n상황: Day 54 · turn down (거절하다)",
+      "src": "Day 54 · turn down · 03번",
+      "audio": "media/hackerstalk/DAY 54_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 18 (Day 52-54)",
+        "Day 54",
+        "turn-down",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 18 (Day 52-54)/Day 54",
+      "items": []
+    },
+    {
+      "id": "ht_d55_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 55 · turn to〕 난 의지할 사람이 없어.",
+      "back": "I have no one to turn to.",
+      "note": "청크: I have no one / to turn to\n상황: Day 55 · turn to (의지하다)",
+      "src": "Day 55 · turn to · 01번",
+      "audio": "media/hackerstalk/DAY 55_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 19 (Day 55-57)",
+        "Day 55",
+        "turn-to",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 19 (Day 55-57)/Day 55",
+      "items": []
+    },
+    {
+      "id": "ht_d55_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 55 · turn to〕 난 네게 의지하고 있어.",
+      "back": "I'm turning to you.",
+      "note": "청크: I'm turning / to you\n상황: Day 55 · turn to (의지하다)",
+      "src": "Day 55 · turn to · 02번",
+      "audio": "media/hackerstalk/DAY 55_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 19 (Day 55-57)",
+        "Day 55",
+        "turn-to",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 19 (Day 55-57)/Day 55",
+      "items": []
+    },
+    {
+      "id": "ht_d55_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 55 · turn to〕 넌 신에게 의지했구나.",
+      "back": "You turn to God.",
+      "note": "청크: You turn / to God\n상황: Day 55 · turn to (의지하다)",
+      "src": "Day 55 · turn to · 03번",
+      "audio": "media/hackerstalk/DAY 55_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 19 (Day 55-57)",
+        "Day 55",
+        "turn-to",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 19 (Day 55-57)/Day 55",
+      "items": []
+    },
+    {
+      "id": "ht_d56_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 56 · turn out〕 알고 보니 네가 옳았어.",
+      "back": "It turns out that you're right.",
+      "note": "청크: It turns out / that you're right\n상황: Day 56 · turn out (알고 보니 ~이다)",
+      "src": "Day 56 · turn out · 01번",
+      "audio": "media/hackerstalk/DAY 56_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 19 (Day 55-57)",
+        "Day 56",
+        "turn-out",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 19 (Day 55-57)/Day 56",
+      "items": []
+    },
+    {
+      "id": "ht_d56_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 56 · turn out〕 알고 보니 내가 수학을 못하더라.",
+      "back": "It turns out I'm bad at math.",
+      "note": "청크: It turns out / I'm bad at math\n상황: Day 56 · turn out (알고 보니 ~이다)",
+      "src": "Day 56 · turn out · 02번",
+      "audio": "media/hackerstalk/DAY 56_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 19 (Day 55-57)",
+        "Day 56",
+        "turn-out",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 19 (Day 55-57)/Day 56",
+      "items": []
+    },
+    {
+      "id": "ht_d56_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 56 · turn out〕 알고 보니 걔가 거짓말을 한 거였어.",
+      "back": "It turned out she was lying.",
+      "note": "청크: It turned out / she was lying\n상황: Day 56 · turn out (알고 보니 ~이다)",
+      "src": "Day 56 · turn out · 03번",
+      "audio": "media/hackerstalk/DAY 56_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 19 (Day 55-57)",
+        "Day 56",
+        "turn-out",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 19 (Day 55-57)/Day 56",
+      "items": []
+    },
+    {
+      "id": "ht_d57_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 57 · stand by〕 내가 네 편이 되어줄게.",
+      "back": "I'll stand by you.",
+      "note": "청크: I'll stand by / you\n상황: Day 57 · stand by (곁에 있다/지지하다)",
+      "src": "Day 57 · stand by · 01번",
+      "audio": "media/hackerstalk/DAY 57_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 19 (Day 55-57)",
+        "Day 57",
+        "stand-by",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 19 (Day 55-57)/Day 57",
+      "items": []
+    },
+    {
+      "id": "ht_d57_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 57 · stand by〕 내 편이 되어줄래?",
+      "back": "Will you stand by me?",
+      "note": "청크: Will you / stand by me?\n상황: Day 57 · stand by (곁에 있다/지지하다)",
+      "src": "Day 57 · stand by · 02번",
+      "audio": "media/hackerstalk/DAY 57_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 19 (Day 55-57)",
+        "Day 57",
+        "stand-by",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 19 (Day 55-57)/Day 57",
+      "items": []
+    },
+    {
+      "id": "ht_d57_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 57 · stand by〕 내 곁에 있어줘서 고마워.",
+      "back": "Thank you for standing by me.",
+      "note": "청크: Thank you / for standing by me\n상황: Day 57 · stand by (곁에 있다/지지하다)",
+      "src": "Day 57 · stand by · 03번",
+      "audio": "media/hackerstalk/DAY 57_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 19 (Day 55-57)",
+        "Day 57",
+        "stand-by",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 19 (Day 55-57)/Day 57",
+      "items": []
+    },
+    {
+      "id": "ht_d58_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 58 · stand for〕 그게 뭐의 줄임말이야?",
+      "back": "What does that stand for?",
+      "note": "청크: What does that / stand for?\n상황: Day 58 · stand for (줄임말이다/의미하다)",
+      "src": "Day 58 · stand for · 01번",
+      "audio": "media/hackerstalk/DAY 58_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 20 (Day 58-60)",
+        "Day 58",
+        "stand-for",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 20 (Day 58-60)/Day 58",
+      "items": []
+    },
+    {
+      "id": "ht_d58_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 58 · stand for〕 TMI는 너무 많은 정보의 줄임말이야.",
+      "back": "TMI stands for too much information.",
+      "note": "청크: TMI stands for / too much information\n상황: Day 58 · stand for (줄임말이다/의미하다)",
+      "src": "Day 58 · stand for · 02번",
+      "audio": "media/hackerstalk/DAY 58_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 20 (Day 58-60)",
+        "Day 58",
+        "stand-for",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 20 (Day 58-60)/Day 58",
+      "items": []
+    },
+    {
+      "id": "ht_d58_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 58 · stand for〕 IT가 뭐의 줄임말이야?",
+      "back": "What does IT stand for?",
+      "note": "청크: What does IT / stand for?\n상황: Day 58 · stand for (줄임말이다/의미하다)",
+      "src": "Day 58 · stand for · 03번",
+      "audio": "media/hackerstalk/DAY 58_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 20 (Day 58-60)",
+        "Day 58",
+        "stand-for",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 20 (Day 58-60)/Day 58",
+      "items": []
+    },
+    {
+      "id": "ht_d59_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 59 · stand out〕 걔 존재감이 있어.",
+      "back": "She stands out.",
+      "note": "청크: She / stands out\n상황: Day 59 · stand out (눈에 띄다/돋보이다)",
+      "src": "Day 59 · stand out · 01번",
+      "audio": "media/hackerstalk/DAY 59_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 20 (Day 58-60)",
+        "Day 59",
+        "stand-out",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 20 (Day 58-60)/Day 59",
+      "items": []
+    },
+    {
+      "id": "ht_d59_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 59 · stand out〕 누가 제일 눈에 띄어?",
+      "back": "Who stands out the most?",
+      "note": "청크: Who stands out / the most?\n상황: Day 59 · stand out (눈에 띄다/돋보이다)",
+      "src": "Day 59 · stand out · 02번",
+      "audio": "media/hackerstalk/DAY 59_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 20 (Day 58-60)",
+        "Day 59",
+        "stand-out",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 20 (Day 58-60)/Day 59",
+      "items": []
+    },
+    {
+      "id": "ht_d59_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 59 · stand out〕 난 돋보이고 싶어.",
+      "back": "I want to stand out.",
+      "note": "청크: I want to / stand out\n상황: Day 59 · stand out (눈에 띄다/돋보이다)",
+      "src": "Day 59 · stand out · 03번",
+      "audio": "media/hackerstalk/DAY 59_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 20 (Day 58-60)",
+        "Day 59",
+        "stand-out",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 20 (Day 58-60)/Day 59",
+      "items": []
+    },
+    {
+      "id": "ht_d60_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 60 · stand up〕 그 사람이 날 바람맞혔어.",
+      "back": "She stood me up.",
+      "note": "청크: She stood me / up\n상황: Day 60 · stand up (바람맞히다)",
+      "src": "Day 60 · stand up · 01번",
+      "audio": "media/hackerstalk/DAY 60_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 20 (Day 58-60)",
+        "Day 60",
+        "stand-up",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 20 (Day 58-60)/Day 60",
+      "items": []
+    },
+    {
+      "id": "ht_d60_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 60 · stand up〕 나 또 바람맞히지 마.",
+      "back": "Don't stand me up again.",
+      "note": "청크: Don't stand me up / again\n상황: Day 60 · stand up (바람맞히다)",
+      "src": "Day 60 · stand up · 02번",
+      "audio": "media/hackerstalk/DAY 60_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 20 (Day 58-60)",
+        "Day 60",
+        "stand-up",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 20 (Day 58-60)/Day 60",
+      "items": []
+    },
+    {
+      "id": "ht_d60_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 60 · stand up〕 왜 어젯밤에 날 바람맞힌 거야?",
+      "back": "Why did you stand me up last night?",
+      "note": "청크: Why did you stand me up / last night?\n상황: Day 60 · stand up (바람맞히다)",
+      "src": "Day 60 · stand up · 03번",
+      "audio": "media/hackerstalk/DAY 60_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 20 (Day 58-60)",
+        "Day 60",
+        "stand-up",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 20 (Day 58-60)/Day 60",
+      "items": []
+    },
+    {
+      "id": "ht_d61_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 61 · stand up to〕 넌 그에게 맞서야 돼.",
+      "back": "You should stand up to him.",
+      "note": "청크: You should / stand up to him\n상황: Day 61 · stand up to (맞서다)",
+      "src": "Day 61 · stand up to · 01번",
+      "audio": "media/hackerstalk/DAY 61_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 21 (Day 61-63)",
+        "Day 61",
+        "stand-up-to",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 21 (Day 61-63)/Day 61",
+      "items": []
+    },
+    {
+      "id": "ht_d61_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 61 · stand up to〕 아무도 그 사람한테 맞서지 않아.",
+      "back": "No one stands up to him.",
+      "note": "청크: No one / stands up to him\n상황: Day 61 · stand up to (맞서다)",
+      "src": "Day 61 · stand up to · 02번",
+      "audio": "media/hackerstalk/DAY 61_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 21 (Day 61-63)",
+        "Day 61",
+        "stand-up-to",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 21 (Day 61-63)/Day 61",
+      "items": []
+    },
+    {
+      "id": "ht_d61_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 61 · stand up to〕 난 두려움에 맞서겠어.",
+      "back": "I'll stand up to my fears.",
+      "note": "청크: I'll stand up / to my fears\n상황: Day 61 · stand up to (맞서다)",
+      "src": "Day 61 · stand up to · 03번",
+      "audio": "media/hackerstalk/DAY 61_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 21 (Day 61-63)",
+        "Day 61",
+        "stand-up-to",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 21 (Day 61-63)/Day 61",
+      "items": []
+    },
+    {
+      "id": "ht_d62_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 62 · run away〕 도망가.",
+      "back": "Run away.",
+      "note": "청크: Run / away\n상황: Day 62 · run away (도망가다/가출하다)",
+      "src": "Day 62 · run away · 01번",
+      "audio": "media/hackerstalk/DAY 62_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 21 (Day 61-63)",
+        "Day 62",
+        "run-away",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 21 (Day 61-63)/Day 62",
+      "items": []
+    },
+    {
+      "id": "ht_d62_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 62 · run away〕 우리 개가 도망갔어.",
+      "back": "My dog ran away.",
+      "note": "청크: My dog / ran away\n상황: Day 62 · run away (도망가다/가출하다)",
+      "src": "Day 62 · run away · 02번",
+      "audio": "media/hackerstalk/DAY 62_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 21 (Day 61-63)",
+        "Day 62",
+        "run-away",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 21 (Day 61-63)/Day 62",
+      "items": []
+    },
+    {
+      "id": "ht_d62_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 62 · run away〕 걔 가출했어.",
+      "back": "He ran away from home.",
+      "note": "청크: He ran away / from home\n상황: Day 62 · run away (도망가다/가출하다)",
+      "src": "Day 62 · run away · 03번",
+      "audio": "media/hackerstalk/DAY 62_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 21 (Day 61-63)",
+        "Day 62",
+        "run-away",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 21 (Day 61-63)/Day 62",
+      "items": []
+    },
+    {
+      "id": "ht_d63_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 63 · run into〕 나 밖에서 걔랑 우연히 마주쳤어.",
+      "back": "I ran into him outside.",
+      "note": "청크: I ran into him / outside\n상황: Day 63 · run into (우연히 마주치다)",
+      "src": "Day 63 · run into · 01번",
+      "audio": "media/hackerstalk/DAY 63_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 21 (Day 61-63)",
+        "Day 63",
+        "run-into",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 21 (Day 61-63)/Day 63",
+      "items": []
+    },
+    {
+      "id": "ht_d63_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 63 · run into〕 나 오늘 아침에 걔랑 우연히 마주쳤어.",
+      "back": "I ran into him in the morning.",
+      "note": "청크: I ran into him / in the morning\n상황: Day 63 · run into (우연히 마주치다)",
+      "src": "Day 63 · run into · 02번",
+      "audio": "media/hackerstalk/DAY 63_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 21 (Day 61-63)",
+        "Day 63",
+        "run-into",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 21 (Day 61-63)/Day 63",
+      "items": []
+    },
+    {
+      "id": "ht_d63_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 63 · run into〕 널 우연히 마주치다니 정말 반갑다.",
+      "back": "So good running into you.",
+      "note": "청크: So good / running into you\n상황: Day 63 · run into (우연히 마주치다)",
+      "src": "Day 63 · run into · 03번",
+      "audio": "media/hackerstalk/DAY 63_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 21 (Day 61-63)",
+        "Day 63",
+        "run-into",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 21 (Day 61-63)/Day 63",
+      "items": []
+    },
+    {
+      "id": "ht_d64_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 64 · run over〕 욕조 물이 넘쳤어.",
+      "back": "The water in the bathtub ran over.",
+      "note": "청크: The water in the bathtub / ran over\n상황: Day 64 · run over (넘치다)",
+      "src": "Day 64 · run over · 01번",
+      "audio": "media/hackerstalk/DAY 64_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 22 (Day 64-66)",
+        "Day 64",
+        "run-over",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 22 (Day 64-66)/Day 64",
+      "items": []
+    },
+    {
+      "id": "ht_d64_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 64 · run over〕 수프가 넘치고 있어.",
+      "back": "The soup is running over.",
+      "note": "청크: The soup / is running over\n상황: Day 64 · run over (넘치다)",
+      "src": "Day 64 · run over · 02번",
+      "audio": "media/hackerstalk/DAY 64_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 22 (Day 64-66)",
+        "Day 64",
+        "run-over",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 22 (Day 64-66)/Day 64",
+      "items": []
+    },
+    {
+      "id": "ht_d64_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 64 · run over〕 물이 넘치게 두지 마.",
+      "back": "Don't let the water run over.",
+      "note": "청크: Don't let / the water run over\n상황: Day 64 · run over (넘치다)",
+      "src": "Day 64 · run over · 03번",
+      "audio": "media/hackerstalk/DAY 64_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 22 (Day 64-66)",
+        "Day 64",
+        "run-over",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 22 (Day 64-66)/Day 64",
+      "items": []
+    },
+    {
+      "id": "ht_d65_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 65 · run out of〕 나 돈 떨어졌어.",
+      "back": "I ran out of money.",
+      "note": "청크: I ran out / of money\n상황: Day 65 · run out of (다 떨어지다)",
+      "src": "Day 65 · run out of · 01번",
+      "audio": "media/hackerstalk/DAY 65_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 22 (Day 64-66)",
+        "Day 65",
+        "run-out-of",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 22 (Day 64-66)/Day 65",
+      "items": []
+    },
+    {
+      "id": "ht_d65_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 65 · run out of〕 내 차에 기름이 떨어졌어.",
+      "back": "My car ran out of gas.",
+      "note": "청크: My car / ran out of gas\n상황: Day 65 · run out of (다 떨어지다)",
+      "src": "Day 65 · run out of · 02번",
+      "audio": "media/hackerstalk/DAY 65_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 22 (Day 64-66)",
+        "Day 65",
+        "run-out-of",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 22 (Day 64-66)/Day 65",
+      "items": []
+    },
+    {
+      "id": "ht_d65_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 65 · run out of〕 우리 시간이 없어.",
+      "back": "We are running out of time.",
+      "note": "청크: We are running out / of time\n상황: Day 65 · run out of (다 떨어지다)",
+      "src": "Day 65 · run out of · 03번",
+      "audio": "media/hackerstalk/DAY 65_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 22 (Day 64-66)",
+        "Day 65",
+        "run-out-of",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 22 (Day 64-66)/Day 65",
+      "items": []
+    },
+    {
+      "id": "ht_d66_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 66 · pass by〕 난 그냥 지나가는 중이었어.",
+      "back": "I was just passing by.",
+      "note": "청크: I was just / passing by\n상황: Day 66 · pass by (지나가다/스쳐 지나다)",
+      "src": "Day 66 · pass by · 01번",
+      "audio": "media/hackerstalk/DAY 66_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 22 (Day 64-66)",
+        "Day 66",
+        "pass-by",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 22 (Day 64-66)/Day 66",
+      "items": []
+    },
+    {
+      "id": "ht_d66_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 66 · pass by〕 그 버스가 날 지나쳐 갔어.",
+      "back": "The bus passed by me.",
+      "note": "청크: The bus / passed by me\n상황: Day 66 · pass by (지나가다/스쳐 지나다)",
+      "src": "Day 66 · pass by · 02번",
+      "audio": "media/hackerstalk/DAY 66_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 22 (Day 64-66)",
+        "Day 66",
+        "pass-by",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 22 (Day 64-66)/Day 66",
+      "items": []
+    },
+    {
+      "id": "ht_d66_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 66 · pass by〕 고양이가 방금 내 옆을 지나갔어.",
+      "back": "A cat just passed by me.",
+      "note": "청크: A cat / just passed by me\n상황: Day 66 · pass by (지나가다/스쳐 지나다)",
+      "src": "Day 66 · pass by · 03번",
+      "audio": "media/hackerstalk/DAY 66_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 22 (Day 64-66)",
+        "Day 66",
+        "pass-by",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 22 (Day 64-66)/Day 66",
+      "items": []
+    },
+    {
+      "id": "ht_d67_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 67 · pass on〕 축하 전해줘.",
+      "back": "Pass on my congratulations.",
+      "note": "청크: Pass on / my congratulations\n상황: Day 67 · pass on (전하다)",
+      "src": "Day 67 · pass on · 01번",
+      "audio": "media/hackerstalk/DAY 67_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 23 (Day 67-69)",
+        "Day 67",
+        "pass-on",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 23 (Day 67-69)/Day 67",
+      "items": []
+    },
+    {
+      "id": "ht_d67_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 67 · pass on〕 메시지 전해줄 수 있어?",
+      "back": "Can you pass on a message?",
+      "note": "청크: Can you pass on / a message?\n상황: Day 67 · pass on (전하다)",
+      "src": "Day 67 · pass on · 02번",
+      "audio": "media/hackerstalk/DAY 67_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 23 (Day 67-69)",
+        "Day 67",
+        "pass-on",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 23 (Day 67-69)/Day 67",
+      "items": []
+    },
+    {
+      "id": "ht_d67_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 67 · pass on〕 이걸 전해줘.",
+      "back": "Pass it on.",
+      "note": "청크: Pass / it on\n상황: Day 67 · pass on (전하다)",
+      "src": "Day 67 · pass on · 03번",
+      "audio": "media/hackerstalk/DAY 67_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 23 (Day 67-69)",
+        "Day 67",
+        "pass-on",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 23 (Day 67-69)/Day 67",
+      "items": []
+    },
+    {
+      "id": "ht_d68_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 68 · pass out〕 기절할 것 같아.",
+      "back": "I'm going to pass out.",
+      "note": "청크: I'm going to / pass out\n상황: Day 68 · pass out (기절하다)",
+      "src": "Day 68 · pass out · 01번",
+      "audio": "media/hackerstalk/DAY 68_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 23 (Day 67-69)",
+        "Day 68",
+        "pass-out",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 23 (Day 67-69)/Day 68",
+      "items": []
+    },
+    {
+      "id": "ht_d68_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 68 · pass out〕 너 기절했었어.",
+      "back": "You passed out.",
+      "note": "청크: You / passed out\n상황: Day 68 · pass out (기절하다)",
+      "src": "Day 68 · pass out · 02번",
+      "audio": "media/hackerstalk/DAY 68_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 23 (Day 67-69)",
+        "Day 68",
+        "pass-out",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 23 (Day 67-69)/Day 68",
+      "items": []
+    },
+    {
+      "id": "ht_d68_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 68 · pass out〕 나 너무 배고파서 기절할 뻔했어.",
+      "back": "I almost passed out because I was starving.",
+      "note": "청크: I almost passed out / because I was starving\n상황: Day 68 · pass out (기절하다)",
+      "src": "Day 68 · pass out · 03번",
+      "audio": "media/hackerstalk/DAY 68_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 23 (Day 67-69)",
+        "Day 68",
+        "pass-out",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 23 (Day 67-69)/Day 68",
+      "items": []
+    },
+    {
+      "id": "ht_d69_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 69 · pass away〕 할아버지께서 돌아가셨어.",
+      "back": "My grandfather passed away.",
+      "note": "청크: My grandfather / passed away\n상황: Day 69 · pass away (돌아가시다/세상을 떠나다)",
+      "src": "Day 69 · pass away · 01번",
+      "audio": "media/hackerstalk/DAY 69_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 23 (Day 67-69)",
+        "Day 69",
+        "pass-away",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 23 (Day 67-69)/Day 69",
+      "items": []
+    },
+    {
+      "id": "ht_d69_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 69 · pass away〕 그분께서 몇 달 전에 돌아가셨어.",
+      "back": "He passed away a few months ago.",
+      "note": "청크: He passed away / a few months ago\n상황: Day 69 · pass away (돌아가시다/세상을 떠나다)",
+      "src": "Day 69 · pass away · 02번",
+      "audio": "media/hackerstalk/DAY 69_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 23 (Day 67-69)",
+        "Day 69",
+        "pass-away",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 23 (Day 67-69)/Day 69",
+      "items": []
+    },
+    {
+      "id": "ht_d69_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 69 · pass away〕 내 아내는 여러 해 전에 세상을 떠났어.",
+      "back": "My wife passed away many years ago.",
+      "note": "청크: My wife passed away / many years ago\n상황: Day 69 · pass away (돌아가시다/세상을 떠나다)",
+      "src": "Day 69 · pass away · 03번",
+      "audio": "media/hackerstalk/DAY 69_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 23 (Day 67-69)",
+        "Day 69",
+        "pass-away",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 23 (Day 67-69)/Day 69",
+      "items": []
+    },
+    {
+      "id": "ht_d70_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 70 · fall down〕 나 넘어질 뻔했어.",
+      "back": "I almost fell down.",
+      "note": "청크: I almost / fell down\n상황: Day 70 · fall down (넘어지다)",
+      "src": "Day 70 · fall down · 01번",
+      "audio": "media/hackerstalk/DAY 70_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 24 (Day 70-72)",
+        "Day 70",
+        "fall-down",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 24 (Day 70-72)/Day 70",
+      "items": []
+    },
+    {
+      "id": "ht_d70_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 70 · fall down〕 나 계단에서 넘어졌어.",
+      "back": "I fell down the stairs.",
+      "note": "청크: I fell down / the stairs\n상황: Day 70 · fall down (넘어지다)",
+      "src": "Day 70 · fall down · 02번",
+      "audio": "media/hackerstalk/DAY 70_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 24 (Day 70-72)",
+        "Day 70",
+        "fall-down",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 24 (Day 70-72)/Day 70",
+      "items": []
+    },
+    {
+      "id": "ht_d70_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 70 · fall down〕 쟤 오늘 두 번 넘어졌어.",
+      "back": "He fell down twice today.",
+      "note": "청크: He fell down / twice today\n상황: Day 70 · fall down (넘어지다)",
+      "src": "Day 70 · fall down · 03번",
+      "audio": "media/hackerstalk/DAY 70_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 24 (Day 70-72)",
+        "Day 70",
+        "fall-down",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 24 (Day 70-72)/Day 70",
+      "items": []
+    },
+    {
+      "id": "ht_d71_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 71 · fall apart〕 나 멘붕이야.",
+      "back": "I'm falling apart.",
+      "note": "청크: I'm / falling apart\n상황: Day 71 · fall apart (무너지다/멘붕에 빠지다)",
+      "src": "Day 71 · fall apart · 01번",
+      "audio": "media/hackerstalk/DAY 71_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 24 (Day 70-72)",
+        "Day 71",
+        "fall-apart",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 24 (Day 70-72)/Day 71",
+      "items": []
+    },
+    {
+      "id": "ht_d71_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 71 · fall apart〕 걔 멘붕이었어.",
+      "back": "He fell apart.",
+      "note": "청크: He / fell apart\n상황: Day 71 · fall apart (무너지다/멘붕에 빠지다)",
+      "src": "Day 71 · fall apart · 02번",
+      "audio": "media/hackerstalk/DAY 71_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 24 (Day 70-72)",
+        "Day 71",
+        "fall-apart",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 24 (Day 70-72)/Day 71",
+      "items": []
+    },
+    {
+      "id": "ht_d71_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 71 · fall apart〕 네가 무너지는 걸 봤어.",
+      "back": "I saw you fall apart.",
+      "note": "청크: I saw you / fall apart\n상황: Day 71 · fall apart (무너지다/멘붕에 빠지다)",
+      "src": "Day 71 · fall apart · 03번",
+      "audio": "media/hackerstalk/DAY 71_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 24 (Day 70-72)",
+        "Day 71",
+        "fall-apart",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 24 (Day 70-72)/Day 71",
+      "items": []
+    },
+    {
+      "id": "ht_d72_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 72 · fall for〕 나 걔한테 반했어.",
+      "back": "I fell for her.",
+      "note": "청크: I fell / for her\n상황: Day 72 · fall for (반하다)",
+      "src": "Day 72 · fall for · 01번",
+      "audio": "media/hackerstalk/DAY 72_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 24 (Day 70-72)",
+        "Day 72",
+        "fall-for",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 24 (Day 70-72)/Day 72",
+      "items": []
+    },
+    {
+      "id": "ht_d72_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 72 · fall for〕 너 나한테 반했구나.",
+      "back": "You fell for me.",
+      "note": "청크: You fell / for me\n상황: Day 72 · fall for (반하다)",
+      "src": "Day 72 · fall for · 02번",
+      "audio": "media/hackerstalk/DAY 72_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 24 (Day 70-72)",
+        "Day 72",
+        "fall-for",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 24 (Day 70-72)/Day 72",
+      "items": []
+    },
+    {
+      "id": "ht_d72_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 72 · fall for〕 그는 너에게 반하지 않았어.",
+      "back": "He didn't fall for you.",
+      "note": "청크: He didn't / fall for you\n상황: Day 72 · fall for (반하다)",
+      "src": "Day 72 · fall for · 03번",
+      "audio": "media/hackerstalk/DAY 72_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 24 (Day 70-72)",
+        "Day 72",
+        "fall-for",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 24 (Day 70-72)/Day 72",
+      "items": []
+    },
+    {
+      "id": "ht_d73_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 73 · fall behind〕 걔 절대 유행에 뒤처지지 않아.",
+      "back": "He never falls behind the trends.",
+      "note": "청크: He never falls behind / the trends\n상황: Day 73 · fall behind (뒤처지다)",
+      "src": "Day 73 · fall behind · 01번",
+      "audio": "media/hackerstalk/DAY 73_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 25 (Day 73-75)",
+        "Day 73",
+        "fall-behind",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 25 (Day 73-75)/Day 73",
+      "items": []
+    },
+    {
+      "id": "ht_d73_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 73 · fall behind〕 뒤처지지 마.",
+      "back": "Don't fall behind.",
+      "note": "청크: Don't / fall behind\n상황: Day 73 · fall behind (뒤처지다)",
+      "src": "Day 73 · fall behind · 02번",
+      "audio": "media/hackerstalk/DAY 73_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 25 (Day 73-75)",
+        "Day 73",
+        "fall-behind",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 25 (Day 73-75)/Day 73",
+      "items": []
+    },
+    {
+      "id": "ht_d73_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 73 · fall behind〕 난 수업에서 뒤처지기 싫어.",
+      "back": "I don't want to fall behind in my class.",
+      "note": "청크: I don't want to / fall behind in my class\n상황: Day 73 · fall behind (뒤처지다)",
+      "src": "Day 73 · fall behind · 03번",
+      "audio": "media/hackerstalk/DAY 73_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 25 (Day 73-75)",
+        "Day 73",
+        "fall-behind",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 25 (Day 73-75)/Day 73",
+      "items": []
+    },
+    {
+      "id": "ht_d74_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 74 · give away〕 저 샘플 누가 나눠주는 거야?",
+      "back": "Who's giving away those samples?",
+      "note": "청크: Who's giving away / those samples?\n상황: Day 74 · give away (나눠주다)",
+      "src": "Day 74 · give away · 01번",
+      "audio": "media/hackerstalk/DAY 74_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 25 (Day 73-75)",
+        "Day 74",
+        "give-away",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 25 (Day 73-75)/Day 74",
+      "items": []
+    },
+    {
+      "id": "ht_d74_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 74 · give away〕 무료 샌드위치를 나눠주고 있어.",
+      "back": "They're giving away free sandwiches.",
+      "note": "청크: They're giving away / free sandwiches\n상황: Day 74 · give away (나눠주다)",
+      "src": "Day 74 · give away · 02번",
+      "audio": "media/hackerstalk/DAY 74_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 25 (Day 73-75)",
+        "Day 74",
+        "give-away",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 25 (Day 73-75)/Day 74",
+      "items": []
+    },
+    {
+      "id": "ht_d74_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 74 · give away〕 우리 쿠폰을 나눠주는 게 좋겠어.",
+      "back": "We should give away coupons.",
+      "note": "청크: We should give away / coupons\n상황: Day 74 · give away (나눠주다)",
+      "src": "Day 74 · give away · 03번",
+      "audio": "media/hackerstalk/DAY 74_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 25 (Day 73-75)",
+        "Day 74",
+        "give-away",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 25 (Day 73-75)/Day 74",
+      "items": []
+    },
+    {
+      "id": "ht_d75_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 75 · give back〕 내 돈 돌려줘.",
+      "back": "Give me back my money.",
+      "note": "청크: Give me back / my money\n상황: Day 75 · give back (돌려주다)",
+      "src": "Day 75 · give back · 01번",
+      "audio": "media/hackerstalk/DAY 75_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 25 (Day 73-75)",
+        "Day 75",
+        "give-back",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 25 (Day 73-75)/Day 75",
+      "items": []
+    },
+    {
+      "id": "ht_d75_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 75 · give back〕 내 옷 돌려줘.",
+      "back": "Give me back my clothes.",
+      "note": "청크: Give me back / my clothes\n상황: Day 75 · give back (돌려주다)",
+      "src": "Day 75 · give back · 02번",
+      "audio": "media/hackerstalk/DAY 75_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 25 (Day 73-75)",
+        "Day 75",
+        "give-back",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 25 (Day 73-75)/Day 75",
+      "items": []
+    },
+    {
+      "id": "ht_d75_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 75 · give back〕 그거 나한테 언제 돌려줄 거야?",
+      "back": "When will you give it back to me?",
+      "note": "청크: When will you / give it back to me?\n상황: Day 75 · give back (돌려주다)",
+      "src": "Day 75 · give back · 03번",
+      "audio": "media/hackerstalk/DAY 75_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 25 (Day 73-75)",
+        "Day 75",
+        "give-back",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 25 (Day 73-75)/Day 75",
+      "items": []
+    },
+    {
+      "id": "ht_d76_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 76 · give up〕 난 포기야.",
+      "back": "I give up.",
+      "note": "청크: I / give up\n상황: Day 76 · give up (포기하다)",
+      "src": "Day 76 · give up · 01번",
+      "audio": "media/hackerstalk/DAY 76_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 26 (Day 76-78)",
+        "Day 76",
+        "give-up",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 26 (Day 76-78)/Day 76",
+      "items": []
+    },
+    {
+      "id": "ht_d76_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 76 · give up〕 절대 네 꿈을 포기하지 마.",
+      "back": "Never give up on your dreams.",
+      "note": "청크: Never give up / on your dreams\n상황: Day 76 · give up (포기하다)",
+      "src": "Day 76 · give up · 02번",
+      "audio": "media/hackerstalk/DAY 76_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 26 (Day 76-78)",
+        "Day 76",
+        "give-up",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 26 (Day 76-78)/Day 76",
+      "items": []
+    },
+    {
+      "id": "ht_d76_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 76 · give up〕 난 절대 희망을 버리지 않아.",
+      "back": "I never give up hope.",
+      "note": "청크: I never / give up hope\n상황: Day 76 · give up (포기하다)",
+      "src": "Day 76 · give up · 03번",
+      "audio": "media/hackerstalk/DAY 76_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 26 (Day 76-78)",
+        "Day 76",
+        "give-up",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 26 (Day 76-78)/Day 76",
+      "items": []
+    },
+    {
+      "id": "ht_d77_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 77 · make over〕 우리가 쟤 변신시켜 주자.",
+      "back": "Let's make her over.",
+      "note": "청크: Let's / make her over\n상황: Day 77 · make over (변신시키다)",
+      "src": "Day 77 · make over · 01번",
+      "audio": "media/hackerstalk/DAY 77_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 26 (Day 76-78)",
+        "Day 77",
+        "make-over",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 26 (Day 76-78)/Day 77",
+      "items": []
+    },
+    {
+      "id": "ht_d77_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 77 · make over〕 네가 걔를 변신시켰잖아.",
+      "back": "You made her over.",
+      "note": "청크: You made / her over\n상황: Day 77 · make over (변신시키다)",
+      "src": "Day 77 · make over · 02번",
+      "audio": "media/hackerstalk/DAY 77_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 26 (Day 76-78)",
+        "Day 77",
+        "make-over",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 26 (Day 76-78)/Day 77",
+      "items": []
+    },
+    {
+      "id": "ht_d77_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 77 · make over〕 널 꼭 변신시켜야겠어.",
+      "back": "I must make you over.",
+      "note": "청크: I must / make you over\n상황: Day 77 · make over (변신시키다)",
+      "src": "Day 77 · make over · 03번",
+      "audio": "media/hackerstalk/DAY 77_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 26 (Day 76-78)",
+        "Day 77",
+        "make-over",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 26 (Day 76-78)/Day 77",
+      "items": []
+    },
+    {
+      "id": "ht_d78_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 78 · make up〕 뭐라도 지어내 봐.",
+      "back": "Make something up.",
+      "note": "청크: Make / something up\n상황: Day 78 · make up (지어내다)",
+      "src": "Day 78 · make up · 01번",
+      "audio": "media/hackerstalk/DAY 78_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 26 (Day 76-78)",
+        "Day 78",
+        "make-up",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 26 (Day 76-78)/Day 78",
+      "items": []
+    },
+    {
+      "id": "ht_d78_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 78 · make up〕 내가 뭐라도 지어낼게.",
+      "back": "I'll make something up.",
+      "note": "청크: I'll make / something up\n상황: Day 78 · make up (지어내다)",
+      "src": "Day 78 · make up · 02번",
+      "audio": "media/hackerstalk/DAY 78_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 26 (Day 76-78)",
+        "Day 78",
+        "make-up",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 26 (Day 76-78)/Day 78",
+      "items": []
+    },
+    {
+      "id": "ht_d78_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 78 · make up〕 변명 지어내지 마.",
+      "back": "Don't make up excuses.",
+      "note": "청크: Don't make up / excuses\n상황: Day 78 · make up (지어내다)",
+      "src": "Day 78 · make up · 03번",
+      "audio": "media/hackerstalk/DAY 78_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 26 (Day 76-78)",
+        "Day 78",
+        "make-up",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 26 (Day 76-78)/Day 78",
+      "items": []
+    },
+    {
+      "id": "ht_d79_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 79 · make up for〕 내 실수를 만회하고 싶어.",
+      "back": "I want to make up for my mistakes.",
+      "note": "청크: I want to make up / for my mistakes\n상황: Day 79 · make up for (만회하다)",
+      "src": "Day 79 · make up for · 01번",
+      "audio": "media/hackerstalk/DAY 79_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 27 (Day 79-81)",
+        "Day 79",
+        "make-up-for",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 27 (Day 79-81)/Day 79",
+      "items": []
+    },
+    {
+      "id": "ht_d79_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 79 · make up for〕 나 그 일 만회하고 싶어.",
+      "back": "I want to make up for it.",
+      "note": "청크: I want to make up / for it\n상황: Day 79 · make up for (만회하다)",
+      "src": "Day 79 · make up for · 02번",
+      "audio": "media/hackerstalk/DAY 79_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 27 (Day 79-81)",
+        "Day 79",
+        "make-up-for",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 27 (Day 79-81)/Day 79",
+      "items": []
+    },
+    {
+      "id": "ht_d79_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 79 · make up for〕 우린 잃어버린 시간을 만회해야 돼.",
+      "back": "We need to make up for lost time.",
+      "note": "청크: We need to make up / for lost time\n상황: Day 79 · make up for (만회하다)",
+      "src": "Day 79 · make up for · 03번",
+      "audio": "media/hackerstalk/DAY 79_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 27 (Day 79-81)",
+        "Day 79",
+        "make-up-for",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 27 (Day 79-81)/Day 79",
+      "items": []
+    },
+    {
+      "id": "ht_d80_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 80 · show around〕 집 구경시켜 줄게.",
+      "back": "Let me show you around the house.",
+      "note": "청크: Let me show you around / the house\n상황: Day 80 · show around (구경시켜 주다)",
+      "src": "Day 80 · show around · 01번",
+      "audio": "media/hackerstalk/DAY 80_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 27 (Day 79-81)",
+        "Day 80",
+        "show-around",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 27 (Day 79-81)/Day 80",
+      "items": []
+    },
+    {
+      "id": "ht_d80_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 80 · show around〕 내가 구경시켜 줄게.",
+      "back": "I'll show you around.",
+      "note": "청크: I'll show / you around\n상황: Day 80 · show around (구경시켜 주다)",
+      "src": "Day 80 · show around · 02번",
+      "audio": "media/hackerstalk/DAY 80_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 27 (Day 79-81)",
+        "Day 80",
+        "show-around",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 27 (Day 79-81)/Day 80",
+      "items": []
+    },
+    {
+      "id": "ht_d80_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 80 · show around〕 캠퍼스 구경시켜 줘서 고마워.",
+      "back": "Thanks for showing me around the campus.",
+      "note": "청크: Thanks for showing me / around the campus\n상황: Day 80 · show around (구경시켜 주다)",
+      "src": "Day 80 · show around · 03번",
+      "audio": "media/hackerstalk/DAY 80_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 27 (Day 79-81)",
+        "Day 80",
+        "show-around",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 27 (Day 79-81)/Day 80",
+      "items": []
+    },
+    {
+      "id": "ht_d81_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 81 · show off〕 잘난 척 좀 그만해.",
+      "back": "Stop showing off.",
+      "note": "청크: Stop / showing off\n상황: Day 81 · show off (잘난 척하다/자랑하다)",
+      "src": "Day 81 · show off · 01번",
+      "audio": "media/hackerstalk/DAY 81_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 27 (Day 79-81)",
+        "Day 81",
+        "show-off",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 27 (Day 79-81)/Day 81",
+      "items": []
+    },
+    {
+      "id": "ht_d81_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 81 · show off〕 잘난 척 좀 해도 돼.",
+      "back": "You can show off.",
+      "note": "청크: You can / show off\n상황: Day 81 · show off (잘난 척하다/자랑하다)",
+      "src": "Day 81 · show off · 02번",
+      "audio": "media/hackerstalk/DAY 81_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 27 (Day 79-81)",
+        "Day 81",
+        "show-off",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 27 (Day 79-81)/Day 81",
+      "items": []
+    },
+    {
+      "id": "ht_d81_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 81 · show off〕 걔 근육 자랑하기 좋아해.",
+      "back": "He likes to show off his muscles.",
+      "note": "청크: He likes to show off / his muscles\n상황: Day 81 · show off (잘난 척하다/자랑하다)",
+      "src": "Day 81 · show off · 03번",
+      "audio": "media/hackerstalk/DAY 81_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 27 (Day 79-81)",
+        "Day 81",
+        "show-off",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 27 (Day 79-81)/Day 81",
+      "items": []
+    },
+    {
+      "id": "ht_d82_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 82 · show up〕 교수님이 안 나타나셨어.",
+      "back": "The professor didn't show up.",
+      "note": "청크: The professor / didn't show up\n상황: Day 82 · show up (나타나다/오다)",
+      "src": "Day 82 · show up · 01번",
+      "audio": "media/hackerstalk/DAY 82_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 28 (Day 82-84)",
+        "Day 82",
+        "show-up",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 28 (Day 82-84)/Day 82",
+      "items": []
+    },
+    {
+      "id": "ht_d82_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 82 · show up〕 걔 회사에 늦게 나타났어.",
+      "back": "He showed up late for work.",
+      "note": "청크: He showed up / late for work\n상황: Day 82 · show up (나타나다/오다)",
+      "src": "Day 82 · show up · 02번",
+      "audio": "media/hackerstalk/DAY 82_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 28 (Day 82-84)",
+        "Day 82",
+        "show-up",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 28 (Day 82-84)/Day 82",
+      "items": []
+    },
+    {
+      "id": "ht_d82_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 82 · show up〕 왜 아무도 안 온 거야?",
+      "back": "Why didn't anyone show up?",
+      "note": "청크: Why didn't / anyone show up?\n상황: Day 82 · show up (나타나다/오다)",
+      "src": "Day 82 · show up · 03번",
+      "audio": "media/hackerstalk/DAY 82_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 28 (Day 82-84)",
+        "Day 82",
+        "show-up",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 28 (Day 82-84)/Day 82",
+      "items": []
+    },
+    {
+      "id": "ht_d83_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 83 · break down〕 이거 또 고장 났어.",
+      "back": "It broke down again.",
+      "note": "청크: It broke down / again\n상황: Day 83 · break down (고장 나다)",
+      "src": "Day 83 · break down · 01번",
+      "audio": "media/hackerstalk/DAY 83_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 28 (Day 82-84)",
+        "Day 83",
+        "break-down",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 28 (Day 82-84)/Day 83",
+      "items": []
+    },
+    {
+      "id": "ht_d83_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 83 · break down〕 내 차 고장 났어.",
+      "back": "My car broke down.",
+      "note": "청크: My car / broke down\n상황: Day 83 · break down (고장 나다)",
+      "src": "Day 83 · break down · 02번",
+      "audio": "media/hackerstalk/DAY 83_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 28 (Day 82-84)",
+        "Day 83",
+        "break-down",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 28 (Day 82-84)/Day 83",
+      "items": []
+    },
+    {
+      "id": "ht_d83_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 83 · break down〕 에어컨이 고장 났어.",
+      "back": "The air conditioning broke down.",
+      "note": "청크: The air conditioning / broke down\n상황: Day 83 · break down (고장 나다)",
+      "src": "Day 83 · break down · 03번",
+      "audio": "media/hackerstalk/DAY 83_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 28 (Day 82-84)",
+        "Day 83",
+        "break-down",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 28 (Day 82-84)/Day 83",
+      "items": []
+    },
+    {
+      "id": "ht_d84_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 84 · break out〕 난 초콜릿 먹으면 뾰루지가 나.",
+      "back": "Chocolate makes me break out.",
+      "note": "청크: Chocolate makes me / break out\n상황: Day 84 · break out (뾰루지가 나다/발발하다)",
+      "src": "Day 84 · break out · 01번",
+      "audio": "media/hackerstalk/DAY 84_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 28 (Day 82-84)",
+        "Day 84",
+        "break-out",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 28 (Day 82-84)/Day 84",
+      "items": []
+    },
+    {
+      "id": "ht_d84_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 84 · break out〕 난 피자 먹으면 뾰루지가 나.",
+      "back": "Pizza makes me break out.",
+      "note": "청크: Pizza makes me / break out\n상황: Day 84 · break out (뾰루지가 나다/발발하다)",
+      "src": "Day 84 · break out · 02번",
+      "audio": "media/hackerstalk/DAY 84_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 28 (Day 82-84)",
+        "Day 84",
+        "break-out",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 28 (Day 82-84)/Day 84",
+      "items": []
+    },
+    {
+      "id": "ht_d84_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 84 · break out〕 내 피부에 뾰루지가 나고 있어.",
+      "back": "My skin is breaking out.",
+      "note": "청크: My skin / is breaking out\n상황: Day 84 · break out (뾰루지가 나다/발발하다)",
+      "src": "Day 84 · break out · 03번",
+      "audio": "media/hackerstalk/DAY 84_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 28 (Day 82-84)",
+        "Day 84",
+        "break-out",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 28 (Day 82-84)/Day 84",
+      "items": []
+    },
+    {
+      "id": "ht_d85_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 85 · break up〕 나 걔랑 헤어졌어.",
+      "back": "I broke up with him.",
+      "note": "청크: I broke up / with him\n상황: Day 85 · break up (헤어지다)",
+      "src": "Day 85 · break up · 01번",
+      "audio": "media/hackerstalk/DAY 85_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 29 (Day 85-87)",
+        "Day 85",
+        "break-up",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 29 (Day 85-87)/Day 85",
+      "items": []
+    },
+    {
+      "id": "ht_d85_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 85 · break up〕 너 언제 헤어졌어?",
+      "back": "When did you break up?",
+      "note": "청크: When did you / break up?\n상황: Day 85 · break up (헤어지다)",
+      "src": "Day 85 · break up · 02번",
+      "audio": "media/hackerstalk/DAY 85_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 29 (Day 85-87)",
+        "Day 85",
+        "break-up",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 29 (Day 85-87)/Day 85",
+      "items": []
+    },
+    {
+      "id": "ht_d85_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 85 · break up〕 너 나랑 헤어지자는 거야?",
+      "back": "Are you breaking up with me?",
+      "note": "청크: Are you breaking up / with me?\n상황: Day 85 · break up (헤어지다)",
+      "src": "Day 85 · break up · 03번",
+      "audio": "media/hackerstalk/DAY 85_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 29 (Day 85-87)",
+        "Day 85",
+        "break-up",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 29 (Day 85-87)/Day 85",
+      "items": []
+    },
+    {
+      "id": "ht_d86_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 86 · move in〕 나 막 이사 왔어.",
+      "back": "I just moved in.",
+      "note": "청크: I just / moved in\n상황: Day 86 · move in (이사 오다)",
+      "src": "Day 86 · move in · 01번",
+      "audio": "media/hackerstalk/DAY 86_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 29 (Day 85-87)",
+        "Day 86",
+        "move-in",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 29 (Day 85-87)/Day 86",
+      "items": []
+    },
+    {
+      "id": "ht_d86_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 86 · move in〕 너 언제 이사 와?",
+      "back": "When are you moving in?",
+      "note": "청크: When are you / moving in?\n상황: Day 86 · move in (이사 오다)",
+      "src": "Day 86 · move in · 02번",
+      "audio": "media/hackerstalk/DAY 86_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 29 (Day 85-87)",
+        "Day 86",
+        "move-in",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 29 (Day 85-87)/Day 86",
+      "items": []
+    },
+    {
+      "id": "ht_d86_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 86 · move in〕 걔 오늘 이사 와.",
+      "back": "He's moving in today.",
+      "note": "청크: He's moving in / today\n상황: Day 86 · move in (이사 오다)",
+      "src": "Day 86 · move in · 03번",
+      "audio": "media/hackerstalk/DAY 86_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 29 (Day 85-87)",
+        "Day 86",
+        "move-in",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 29 (Day 85-87)/Day 86",
+      "items": []
+    },
+    {
+      "id": "ht_d87_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 87 · move up〕 나 승진했어.",
+      "back": "I moved up.",
+      "note": "청크: I / moved up\n상황: Day 87 · move up (승진하다)",
+      "src": "Day 87 · move up · 01번",
+      "audio": "media/hackerstalk/DAY 87_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 29 (Day 85-87)",
+        "Day 87",
+        "move-up",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 29 (Day 85-87)/Day 87",
+      "items": []
+    },
+    {
+      "id": "ht_d87_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 87 · move up〕 나 승진해.",
+      "back": "I'm moving up.",
+      "note": "청크: I'm / moving up\n상황: Day 87 · move up (승진하다)",
+      "src": "Day 87 · move up · 02번",
+      "audio": "media/hackerstalk/DAY 87_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 29 (Day 85-87)",
+        "Day 87",
+        "move-up",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 29 (Day 85-87)/Day 87",
+      "items": []
+    },
+    {
+      "id": "ht_d87_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 87 · move up〕 네가 승진할 거라고 장담해.",
+      "back": "I'm sure you'll move up.",
+      "note": "청크: I'm sure / you'll move up\n상황: Day 87 · move up (승진하다)",
+      "src": "Day 87 · move up · 03번",
+      "audio": "media/hackerstalk/DAY 87_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 29 (Day 85-87)",
+        "Day 87",
+        "move-up",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 29 (Day 85-87)/Day 87",
+      "items": []
+    },
+    {
+      "id": "ht_d88_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 88 · move on〕 그냥 넘어가자.",
+      "back": "Let's move on.",
+      "note": "청크: Let's / move on\n상황: Day 88 · move on (넘어가다)",
+      "src": "Day 88 · move on · 01번",
+      "audio": "media/hackerstalk/DAY 88_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 30 (Day 88-90)",
+        "Day 88",
+        "move-on",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 30 (Day 88-90)/Day 88",
+      "items": []
+    },
+    {
+      "id": "ht_d88_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 88 · move on〕 그냥 좀 넘어갈 수 있을까?",
+      "back": "Can we just move on?",
+      "note": "청크: Can we / just move on?\n상황: Day 88 · move on (넘어가다)",
+      "src": "Day 88 · move on · 02번",
+      "audio": "media/hackerstalk/DAY 88_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 30 (Day 88-90)",
+        "Day 88",
+        "move-on",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 30 (Day 88-90)/Day 88",
+      "items": []
+    },
+    {
+      "id": "ht_d88_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 88 · move on〕 다음 질문으로 넘어가도 될까?",
+      "back": "Can we move on to the next question?",
+      "note": "청크: Can we move on / to the next question?\n상황: Day 88 · move on (넘어가다)",
+      "src": "Day 88 · move on · 03번",
+      "audio": "media/hackerstalk/DAY 88_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 30 (Day 88-90)",
+        "Day 88",
+        "move-on",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 30 (Day 88-90)/Day 88",
+      "items": []
+    },
+    {
+      "id": "ht_d89_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 89 · pick on〕 날 좀 그만 괴롭혀.",
+      "back": "Stop picking on me.",
+      "note": "청크: Stop / picking on me\n상황: Day 89 · pick on (괴롭히다)",
+      "src": "Day 89 · pick on · 01번",
+      "audio": "media/hackerstalk/DAY 89_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 30 (Day 88-90)",
+        "Day 89",
+        "pick-on",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 30 (Day 88-90)/Day 89",
+      "items": []
+    },
+    {
+      "id": "ht_d89_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 89 · pick on〕 걔네가 널 괴롭혔어?",
+      "back": "They picked on you?",
+      "note": "청크: They / picked on you?\n상황: Day 89 · pick on (괴롭히다)",
+      "src": "Day 89 · pick on · 02번",
+      "audio": "media/hackerstalk/DAY 89_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 30 (Day 88-90)",
+        "Day 89",
+        "pick-on",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 30 (Day 88-90)/Day 89",
+      "items": []
+    },
+    {
+      "id": "ht_d89_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 89 · pick on〕 내 친구들이 날 괴롭히고 있어.",
+      "back": "My friends are picking on me.",
+      "note": "청크: My friends / are picking on me\n상황: Day 89 · pick on (괴롭히다)",
+      "src": "Day 89 · pick on · 03번",
+      "audio": "media/hackerstalk/DAY 89_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 30 (Day 88-90)",
+        "Day 89",
+        "pick-on",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 30 (Day 88-90)/Day 89",
+      "items": []
+    },
+    {
+      "id": "ht_d90_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 90 · pick out〕 뭐 골랐어?",
+      "back": "What did you pick out?",
+      "note": "청크: What did you / pick out?\n상황: Day 90 · pick out (고르다)",
+      "src": "Day 90 · pick out · 01번",
+      "audio": "media/hackerstalk/DAY 90_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 30 (Day 88-90)",
+        "Day 90",
+        "pick-out",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 30 (Day 88-90)/Day 90",
+      "items": []
+    },
+    {
+      "id": "ht_d90_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 90 · pick out〕 네가 원하는 걸로 골라.",
+      "back": "Pick out what you want.",
+      "note": "청크: Pick out / what you want\n상황: Day 90 · pick out (고르다)",
+      "src": "Day 90 · pick out · 02번",
+      "audio": "media/hackerstalk/DAY 90_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 30 (Day 88-90)",
+        "Day 90",
+        "pick-out",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 30 (Day 88-90)/Day 90",
+      "items": []
+    },
+    {
+      "id": "ht_d90_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 90 · pick out〕 가구 네가 골랐어?",
+      "back": "Did you pick out the furniture?",
+      "note": "청크: Did you pick out / the furniture?\n상황: Day 90 · pick out (고르다)",
+      "src": "Day 90 · pick out · 03번",
+      "audio": "media/hackerstalk/DAY 90_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 30 (Day 88-90)",
+        "Day 90",
+        "pick-out",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 30 (Day 88-90)/Day 90",
+      "items": []
+    },
+    {
+      "id": "ht_d91_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 91 · pick up〕 널 데리러 갈게.",
+      "back": "I'll pick you up.",
+      "note": "청크: I'll / pick you up\n상황: Day 91 · pick up (데리러 가다)",
+      "src": "Day 91 · pick up · 01번",
+      "audio": "media/hackerstalk/DAY 91_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 31 (Day 91-93)",
+        "Day 91",
+        "pick-up",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 31 (Day 91-93)/Day 91",
+      "items": []
+    },
+    {
+      "id": "ht_d91_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 91 · pick up〕 내가 일 끝나고 걔 데리러 갈게.",
+      "back": "I'll pick her up after work.",
+      "note": "청크: I'll pick her up / after work\n상황: Day 91 · pick up (데리러 가다)",
+      "src": "Day 91 · pick up · 02번",
+      "audio": "media/hackerstalk/DAY 91_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 31 (Day 91-93)",
+        "Day 91",
+        "pick-up",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 31 (Day 91-93)/Day 91",
+      "items": []
+    },
+    {
+      "id": "ht_d91_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 91 · pick up〕 나 데리러 올 수 있어?",
+      "back": "Can you pick me up?",
+      "note": "청크: Can you / pick me up?\n상황: Day 91 · pick up (데리러 가다)",
+      "src": "Day 91 · pick up · 03번",
+      "audio": "media/hackerstalk/DAY 91_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 31 (Day 91-93)",
+        "Day 91",
+        "pick-up",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 31 (Day 91-93)/Day 91",
+      "items": []
+    },
+    {
+      "id": "ht_d92_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 92 · pull out〕 플러그 뽑아.",
+      "back": "Pull the plug out.",
+      "note": "청크: Pull / the plug out\n상황: Day 92 · pull out (뽑다/꺼내다)",
+      "src": "Day 92 · pull out · 01번",
+      "audio": "media/hackerstalk/DAY 92_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 31 (Day 91-93)",
+        "Day 92",
+        "pull-out",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 31 (Day 91-93)/Day 92",
+      "items": []
+    },
+    {
+      "id": "ht_d92_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 92 · pull out〕 그거 내가 뽑아줄게.",
+      "back": "Let me pull it out.",
+      "note": "청크: Let me / pull it out\n상황: Day 92 · pull out (뽑다/꺼내다)",
+      "src": "Day 92 · pull out · 02번",
+      "audio": "media/hackerstalk/DAY 92_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 31 (Day 91-93)",
+        "Day 92",
+        "pull-out",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 31 (Day 91-93)/Day 92",
+      "items": []
+    },
+    {
+      "id": "ht_d92_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 92 · pull out〕 나 이 병에서 코르크 마개를 못 뽑겠어.",
+      "back": "I can't pull the cork out of the bottle.",
+      "note": "청크: I can't pull the cork / out of the bottle\n상황: Day 92 · pull out (뽑다/꺼내다)",
+      "src": "Day 92 · pull out · 03번",
+      "audio": "media/hackerstalk/DAY 92_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 31 (Day 91-93)",
+        "Day 92",
+        "pull-out",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 31 (Day 91-93)/Day 92",
+      "items": []
+    },
+    {
+      "id": "ht_d93_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 93 · pull over〕 차 세워.",
+      "back": "Pull over.",
+      "note": "청크: Pull / over\n상황: Day 93 · pull over (차를 길가에 대다)",
+      "src": "Day 93 · pull over · 01번",
+      "audio": "media/hackerstalk/DAY 93_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 31 (Day 91-93)",
+        "Day 93",
+        "pull-over",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 31 (Day 91-93)/Day 93",
+      "items": []
+    },
+    {
+      "id": "ht_d93_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 93 · pull over〕 여기서 세워줘.",
+      "back": "Pull over here please.",
+      "note": "청크: Pull over here / please\n상황: Day 93 · pull over (차를 길가에 대다)",
+      "src": "Day 93 · pull over · 02번",
+      "audio": "media/hackerstalk/DAY 93_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 31 (Day 91-93)",
+        "Day 93",
+        "pull-over",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 31 (Day 91-93)/Day 93",
+      "items": []
+    },
+    {
+      "id": "ht_d93_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 93 · pull over〕 우리 차 세워야 돼.",
+      "back": "We need to pull over.",
+      "note": "청크: We need to / pull over\n상황: Day 93 · pull over (차를 길가에 대다)",
+      "src": "Day 93 · pull over · 03번",
+      "audio": "media/hackerstalk/DAY 93_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 31 (Day 91-93)",
+        "Day 93",
+        "pull-over",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 31 (Day 91-93)/Day 93",
+      "items": []
+    },
+    {
+      "id": "ht_d94_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 94 · pull off〕 내가 그 일을 해냈어.",
+      "back": "I pulled it off.",
+      "note": "청크: I pulled / it off\n상황: Day 94 · pull off (해내다)",
+      "src": "Day 94 · pull off · 01번",
+      "audio": "media/hackerstalk/DAY 94_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 32 (Day 94-96)",
+        "Day 94",
+        "pull-off",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 32 (Day 94-96)/Day 94",
+      "items": []
+    },
+    {
+      "id": "ht_d94_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 94 · pull off〕 난 네가 그 일을 해낼 줄 알았어.",
+      "back": "I know you can pull it off.",
+      "note": "청크: I know / you can pull it off\n상황: Day 94 · pull off (해내다)",
+      "src": "Day 94 · pull off · 02번",
+      "audio": "media/hackerstalk/DAY 94_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 32 (Day 94-96)",
+        "Day 94",
+        "pull-off",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 32 (Day 94-96)/Day 94",
+      "items": []
+    },
+    {
+      "id": "ht_d94_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 94 · pull off〕 어떻게 이 일을 해냈어?",
+      "back": "How did you pull this off?",
+      "note": "청크: How did you / pull this off?\n상황: Day 94 · pull off (해내다)",
+      "src": "Day 94 · pull off · 03번",
+      "audio": "media/hackerstalk/DAY 94_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 32 (Day 94-96)",
+        "Day 94",
+        "pull-off",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 32 (Day 94-96)/Day 94",
+      "items": []
+    },
+    {
+      "id": "ht_d95_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 95 · stay away〕 술 좀 멀리해.",
+      "back": "Stay away from alcohol.",
+      "note": "청크: Stay away / from alcohol\n상황: Day 95 · stay away (멀리하다)",
+      "src": "Day 95 · stay away · 01번",
+      "audio": "media/hackerstalk/DAY 95_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 32 (Day 94-96)",
+        "Day 95",
+        "stay-away",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 32 (Day 94-96)/Day 95",
+      "items": []
+    },
+    {
+      "id": "ht_d95_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 95 · stay away〕 담배 좀 멀리해.",
+      "back": "Stay away from cigarettes.",
+      "note": "청크: Stay away / from cigarettes\n상황: Day 95 · stay away (멀리하다)",
+      "src": "Day 95 · stay away · 02번",
+      "audio": "media/hackerstalk/DAY 95_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 32 (Day 94-96)",
+        "Day 95",
+        "stay-away",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 32 (Day 94-96)/Day 95",
+      "items": []
+    },
+    {
+      "id": "ht_d95_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 95 · stay away〕 넌 정크푸드를 멀리해야 돼.",
+      "back": "You should stay away from junk food.",
+      "note": "청크: You should stay away / from junk food\n상황: Day 95 · stay away (멀리하다)",
+      "src": "Day 95 · stay away · 03번",
+      "audio": "media/hackerstalk/DAY 95_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 32 (Day 94-96)",
+        "Day 95",
+        "stay-away",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 32 (Day 94-96)/Day 95",
+      "items": []
+    },
+    {
+      "id": "ht_d96_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 96 · stay over〕 나 너희 집에서 자고 가도 돼?",
+      "back": "Can I stay over at your place?",
+      "note": "청크: Can I stay over / at your place?\n상황: Day 96 · stay over (자고 가다/머물다)",
+      "src": "Day 96 · stay over · 01번",
+      "audio": "media/hackerstalk/DAY 96_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 32 (Day 94-96)",
+        "Day 96",
+        "stay-over",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 32 (Day 94-96)/Day 96",
+      "items": []
+    },
+    {
+      "id": "ht_d96_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 96 · stay over〕 자고 가도 돼.",
+      "back": "You can stay over.",
+      "note": "청크: You can / stay over\n상황: Day 96 · stay over (자고 가다/머물다)",
+      "src": "Day 96 · stay over · 02번",
+      "audio": "media/hackerstalk/DAY 96_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 32 (Day 94-96)",
+        "Day 96",
+        "stay-over",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 32 (Day 94-96)/Day 96",
+      "items": []
+    },
+    {
+      "id": "ht_d96_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 96 · stay over〕 자고 가는 건 안 돼.",
+      "back": "No staying over.",
+      "note": "청크: No / staying over\n상황: Day 96 · stay over (자고 가다/머물다)",
+      "src": "Day 96 · stay over · 03번",
+      "audio": "media/hackerstalk/DAY 96_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 32 (Day 94-96)",
+        "Day 96",
+        "stay-over",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 32 (Day 94-96)/Day 96",
+      "items": []
+    },
+    {
+      "id": "ht_d97_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 97 · stay up〕 나 3시까지 깨어 있었어.",
+      "back": "I stayed up until three.",
+      "note": "청크: I stayed up / until three\n상황: Day 97 · stay up (안 자고 깨어 있다)",
+      "src": "Day 97 · stay up · 01번",
+      "audio": "media/hackerstalk/DAY 97_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 33 (Day 97-99)",
+        "Day 97",
+        "stay-up",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 33 (Day 97-99)/Day 97",
+      "items": []
+    },
+    {
+      "id": "ht_d97_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 97 · stay up〕 나 영화 보느라 늦게까지 안 잤어.",
+      "back": "I stayed up watching a film.",
+      "note": "청크: I stayed up / watching a film\n상황: Day 97 · stay up (안 자고 깨어 있다)",
+      "src": "Day 97 · stay up · 02번",
+      "audio": "media/hackerstalk/DAY 97_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 33 (Day 97-99)",
+        "Day 97",
+        "stay-up",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 33 (Day 97-99)/Day 97",
+      "items": []
+    },
+    {
+      "id": "ht_d97_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 97 · stay up〕 너무 늦게까지 깨어 있지 마.",
+      "back": "Don't stay up too late.",
+      "note": "청크: Don't stay up / too late\n상황: Day 97 · stay up (안 자고 깨어 있다)",
+      "src": "Day 97 · stay up · 03번",
+      "audio": "media/hackerstalk/DAY 97_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 33 (Day 97-99)",
+        "Day 97",
+        "stay-up",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 33 (Day 97-99)/Day 97",
+      "items": []
+    },
+    {
+      "id": "ht_d98_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 98 · keep on〕 계속 노력해야 해.",
+      "back": "You've got to keep on trying.",
+      "note": "청크: You've got to / keep on trying\n상황: Day 98 · keep on (계속하다)",
+      "src": "Day 98 · keep on · 01번",
+      "audio": "media/hackerstalk/DAY 98_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 33 (Day 97-99)",
+        "Day 98",
+        "keep-on",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 33 (Day 97-99)/Day 98",
+      "items": []
+    },
+    {
+      "id": "ht_d98_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 98 · keep on〕 계속 뛰어.",
+      "back": "Keep on running.",
+      "note": "청크: Keep on / running\n상황: Day 98 · keep on (계속하다)",
+      "src": "Day 98 · keep on · 02번",
+      "audio": "media/hackerstalk/DAY 98_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 33 (Day 97-99)",
+        "Day 98",
+        "keep-on",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 33 (Day 97-99)/Day 98",
+      "items": []
+    },
+    {
+      "id": "ht_d98_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 98 · keep on〕 왜 계속 그런 말을 해?",
+      "back": "Why do you keep on saying that?",
+      "note": "청크: Why do you / keep on saying that?\n상황: Day 98 · keep on (계속하다)",
+      "src": "Day 98 · keep on · 03번",
+      "audio": "media/hackerstalk/DAY 98_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 33 (Day 97-99)",
+        "Day 98",
+        "keep-on",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 33 (Day 97-99)/Day 98",
+      "items": []
+    },
+    {
+      "id": "ht_d99_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 99 · keep out〕 넌 이 일에서 좀 빠져.",
+      "back": "Keep out of this.",
+      "note": "청크: Keep out / of this\n상황: Day 99 · keep out (빠져 있다/가까이 가지 않다)",
+      "src": "Day 99 · keep out · 01번",
+      "audio": "media/hackerstalk/DAY 99_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 33 (Day 97-99)",
+        "Day 99",
+        "keep-out",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 33 (Day 97-99)/Day 99",
+      "items": []
+    },
+    {
+      "id": "ht_d99_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 99 · keep out〕 쟤 그 일에서 좀 빠지라고 해.",
+      "back": "Keep him out of it.",
+      "note": "청크: Keep him / out of it\n상황: Day 99 · keep out (빠져 있다/가까이 가지 않다)",
+      "src": "Day 99 · keep out · 02번",
+      "audio": "media/hackerstalk/DAY 99_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 33 (Day 97-99)",
+        "Day 99",
+        "keep-out",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 33 (Day 97-99)/Day 99",
+      "items": []
+    },
+    {
+      "id": "ht_d99_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 99 · keep out〕 난 그 일에 끼지 않으려고 해.",
+      "back": "I'm trying to keep out of it.",
+      "note": "청크: I'm trying to / keep out of it\n상황: Day 99 · keep out (빠져 있다/가까이 가지 않다)",
+      "src": "Day 99 · keep out · 03번",
+      "audio": "media/hackerstalk/DAY 99_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 33 (Day 97-99)",
+        "Day 99",
+        "keep-out",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 33 (Day 97-99)/Day 99",
+      "items": []
+    },
+    {
+      "id": "ht_d100_01",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 100 · keep up with〕 내가 시사에 좀 밝잖아.",
+      "back": "I keep up with the news.",
+      "note": "청크: I keep up with / the news\n상황: Day 100 · keep up with (따라가다/(소식에) 밝다)",
+      "src": "Day 100 · keep up with · 01번",
+      "audio": "media/hackerstalk/DAY 100_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 34 (Day 100)",
+        "Day 100",
+        "keep-up-with",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 34 (Day 100)/Day 100",
+      "items": []
+    },
+    {
+      "id": "ht_d100_02",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 100 · keep up with〕 유행에 밝아야 해.",
+      "back": "You've got to keep up with the trends.",
+      "note": "청크: You've got to / keep up with the trends\n상황: Day 100 · keep up with (따라가다/(소식에) 밝다)",
+      "src": "Day 100 · keep up with · 02번",
+      "audio": "media/hackerstalk/DAY 100_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 34 (Day 100)",
+        "Day 100",
+        "keep-up-with",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 34 (Day 100)/Day 100",
+      "items": []
+    },
+    {
+      "id": "ht_d100_03",
+      "subj": "해커스톡 10분의 기적",
+      "typ": "Pattern",
+      "front": "〔Day 100 · keep up with〕 난 최신 유행을 잘 못 따라가겠어.",
+      "back": "I can't keep up with the latest fashions.",
+      "note": "청크: I can't keep up with / the latest fashions\n상황: Day 100 · keep up with (따라가다/(소식에) 밝다)",
+      "src": "Day 100 · keep up with · 03번",
+      "audio": "media/hackerstalk/DAY 100_3 우리말 보고 문장 말해보기.mp3",
+      "tags": [
+        "Session 34 (Day 100)",
+        "Day 100",
+        "keep-up-with",
+        "해커스톡"
+      ],
+      "node": "해커스톡/Session 34 (Day 100)/Day 100",
+      "items": []
     }
   ]
 }
