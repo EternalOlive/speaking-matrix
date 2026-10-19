@@ -101,6 +101,12 @@ Speaking Matrix 900제 문장의 뉘앙스, 원어민 어감 차이, 실전 활�
   - **`like + 동명사(-ing)`**: ~하는 것을 좋아하다 (활동 자체를 즐김)
   - **차이:** 의미가 겹치는 경우가 많으며, 이 문장에서는 둘 다 자연스럽다.
 
+- **I'm resting today because I feel heavy.** <!-- id: sm_1790710445369 -->
+  - **I'm resting today.**: 오늘은 쉬고 있다.
+  - **I'm taking a rest today.**: 오늘은 휴식을 취하고 있다.
+  - **I'm taking a break.**: 잠시 쉬고 있다. (하던 일이나 활동을 중단하고 쉬는 경우)
+  - **핵심:** `rest`는 동사와 명사로 모두 사용할 수 있다. `take a rest`도 맞는 표현이지만, 일상 회화에서는 `rest`나 `take a break`를 자주 사용한다.
+
 <div id="day-12"></div>
 ### Day 12
 - **`going out`** → 외출하다 (외출·여가 활동 전반) **`heading out`** → 나가다, 출발하다 (어딘가로 떠나는 동작 강조) **핵심:** 평소 여가 취향을 물을 때는 `going out`이 더 자연스러워.
