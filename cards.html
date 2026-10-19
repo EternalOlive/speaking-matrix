@@ -2353,6 +2353,19 @@ details.gr-fold[open]>summary .s2-chev{transform:rotate(90deg);}
 
 /* Stitched Full Story */
 
+
+/* 입영작 내가 한 거 vs AL 비교 카드 */
+.coach-compare-card { background: var(--c-fill); border-radius: 12px; padding: 12px 14px; display: flex; flex-direction: column; gap: 8px; border: 0.5px solid var(--c-sep); margin-top: 6px; }
+.coach-compare-row { display: flex; flex-direction: column; gap: 4px; }
+.coach-compare-tag { font-size: 11px; font-weight: 700; display: inline-flex; align-items: center; gap: 4px; width: fit-content; padding: 2px 8px; border-radius: 6px; }
+.coach-compare-tag.user { background: var(--c-card); color: var(--c-sec); border: 0.5px solid var(--c-sep); }
+.coach-compare-tag.al { background: rgba(52,199,89,.15); color: var(--c-green); border: 0.5px solid rgba(52,199,89,.3); }
+.coach-compare-text.user { font-size: 14px; color: var(--c-sec); line-height: 1.45; word-break: break-word; }
+.coach-compare-text.al { font-size: 15px; font-weight: 600; color: var(--c-label); line-height: 1.5; word-break: break-word; }
+.coach-compare-meaning { font-size: 12px; color: var(--c-sec); }
+.coach-compare-feedback { font-size: 12px; color: var(--c-acc); background: var(--c-card); padding: 8px 10px; border-radius: 8px; border-left: 3px solid var(--c-acc); line-height: 1.45; }
+.coach-compare-divider { height: 1px; background: var(--c-sep); margin: 2px 0; }
+
 .coach-pending-banner { background: rgba(255,149,0,.12); border: 1.5px solid var(--c-orange); border-radius: 14px; padding: 14px 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
 
 .coach-stitch-box { background: linear-gradient(135deg, rgba(0,122,255,.06), rgba(52,199,89,.06)); border: 1.5px solid rgba(0,122,255,.2); border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 10px; }
@@ -18846,6 +18859,7 @@ let coachArchiveFilterTag = null;
 let coachSitCards = null;
 let coachEvaAnchorEditing = false;
 let coachCurrentTtsBtn = null;
+let coachRevealedPatterns = {};
 let coachActiveUtterance = null;
 
 const COACH_PRESET_QUESTIONS = [
@@ -19277,6 +19291,7 @@ function coachLoadCardsFromData(){
     alert('학습 가능한 카드가 없습니다.');
     return;
   }
+  coachRevealedPatterns = {};
   const shuffled = [...validCards].sort(() => Math.random() - 0.5).slice(0, 5);
   coachSitCards = shuffled.map((c, idx) => {
     const cleanFront = c.front.replace(/^〔.*?〕\s*/, '').trim();
@@ -19288,7 +19303,7 @@ function coachLoadCardsFromData(){
       hintChunk: c.note ? c.note.split('\n')[0].replace(/^청크:\s*/, '') : c.back
     };
   });
-  toast('내 학습 카드에서 5개 표현을 불러왔습니다!');
+  toast('내 학습 카드에서 5개 표현을 불러왔습니다! 목표 패턴을 먼저 떠올려 말해보세요.');
   renderCoachSituations();
 }
 
@@ -19312,11 +19327,12 @@ function renderCoachSituations(){
     + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>'
     + '핵심 표현 입영작 (문장 뱉기 훈련)'
     + '</span>'
-    + '<div style="display:flex;gap:6px;">'
+    + '<div style="display:flex;gap:6px;flex-wrap:wrap;">'
     + '<button class="coach-btn sm ' + (isCustomCards ? 'primary' : 'outline') + '" id="btnCoachLoadCardPhrases"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>내 학습 카드 표현 (5개)</button>'
     + '<button class="coach-btn sm ' + (!isCustomCards ? 'primary' : 'outline') + '" id="btnCoachResetPresetSit">빈출 상황 5선</button>'
+    + '<button class="coach-btn sm outline" id="btnCoachGoArchiveSit" style="color:var(--c-purple);border-color:rgba(175,82,222,.3);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/></svg>저장된 비교 기록 모아보기</button>'
     + '</div></div>'
-    + '<p style="font-size:13px;color:var(--c-sec);line-height:1.5;margin:0;">외운 구동사나 패턴을 눈으로만 보지 않고 즉시 입으로 뱉어보는 훈련입니다. 생각나는 대로 한 문장 말해보면, AI가 실전 AL급 자연스러운 문장으로 다듬어 줍니다.</p>'
+    + '<p style="font-size:13px;color:var(--c-sec);line-height:1.5;margin:0;">목표 표현은 기억 인출을 위해 <b>기본 가림 처리</b>되어 있습니다. 상황을 보고 생각나는 대로 입으로 뱉어보세요! 점검 버튼을 누르면 정답 패턴과 <b>내가 한 거 vs AL급 비교 리포트</b>가 나타납니다.</p>'
     + '</div>';
 
   items.forEach((item, idx) => {
@@ -19326,20 +19342,29 @@ function renderCoachSituations(){
     if(savedFbRaw){
       try { savedFb = JSON.parse(savedFbRaw); } catch(e){}
     }
+    const isRevealed = !!coachRevealedPatterns[item.id] || !!savedFb;
+    const isSaved = !!localStorage.getItem('cards_sit_saved_' + item.id);
 
     h += '<div class="coach-card">'
       + '<div class="coach-card-head">'
       + '<span class="coach-card-title"><span class="coach-badge ' + (isCustomCards ? 'purple' : 'blue') + '">' + esc(item.topic) + '</span> ' + (idx + 1) + '. 문장 뱉기</span>'
-      + '<span class="coach-badge orange">' + esc(item.targetPattern) + '</span>'
+      + '<div style="display:flex;align-items:center;gap:6px;">'
+      + (isRevealed
+        ? '<span class="coach-badge orange">' + esc(item.targetPattern) + '</span>'
+        : '<button class="coach-btn sm outline" data-sit-reveal="' + idx + '" style="font-size:11px;padding:2px 8px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="11" height="11"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>목표 패턴 가려짐 (확인)</button>')
+      + '</div>'
       + '</div>'
       + '<div class="coach-q-box">'
       + '<div style="font-size:15px;font-weight:600;color:var(--c-label);margin-bottom:6px;">' + esc(item.situation) + '</div>'
       + '<div style="font-size:13px;color:var(--c-sec);display:flex;align-items:center;gap:6px;">'
-      + '<span>목표 패턴:</span><code style="font-size:13px;color:var(--c-acc);background:var(--c-card);padding:2px 6px;border-radius:4px;border:0.5px solid var(--c-sep);">' + esc(item.targetPattern) + '</code>'
+      + '<span>말하기 미션:</span>'
+      + (isRevealed
+        ? '<code style="font-size:13px;color:var(--c-acc);background:var(--c-card);padding:2px 6px;border-radius:4px;border:0.5px solid var(--c-sep);">' + esc(item.targetPattern) + '</code>'
+        : '<span style="color:var(--c-sec);font-style:italic;">상황을 떠올려 영어 문장으로 말해보세요 (AI 점검 시 자동 공개)</span>')
       + '</div>'
       + '</div>'
       + '<div class="coach-input-wrap">'
-      + '<textarea id="coachSitInp_' + idx + '" class="coach-input" placeholder="이 표현을 활용해 편하게 영어 한 문장을 말해보세요...">' + esc(savedDraft) + '</textarea>'
+      + '<textarea id="coachSitInp_' + idx + '" class="coach-input" placeholder="생각나는 영어 문장을 자연스럽게 말씀하거나 입력해 보세요...">' + esc(savedDraft) + '</textarea>'
       + '<div class="coach-input-acts">'
       + '<button id="coachSitMicBtn_' + idx + '" class="coach-btn sm mic" data-sit-mic="' + idx + '"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg><span id="coachSitMicTxt_' + idx + '">음성 입력</span></button>'
       + '<div style="display:flex;gap:6px;">'
@@ -19347,15 +19372,32 @@ function renderCoachSituations(){
       + '<button class="coach-btn sm primary" data-sit-check="' + idx + '"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3z"/></svg>AI 표현 점검 & AL 업그레이드</button>'
       + '</div></div></div>';
 
+    // 내가 한 거 vs AL급 비교 리포트 카드
     if(savedFb){
-      h += '<div class="coach-al-box" style="margin-top:2px;">'
-        + '<div style="display:flex;align-items:center;justify-content:space-between;gap:6px;">'
-        + '<span style="font-weight:700;color:var(--c-green);font-size:13px;display:flex;align-items:center;gap:4px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><polyline points="20 6 9 17 4 12"/></svg>AL급 원어민 표현 다듬기:</span>'
+      h += '<div class="coach-compare-card">'
+        + '<div class="coach-card-head" style="margin-bottom:2px;">'
+        + '<span style="font-size:13px;font-weight:700;color:var(--c-label);display:flex;align-items:center;gap:6px;">'
+        + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>'
+        + '내가 한 거 vs AL급 비교 리포트'
+        + '</span>'
+        + '<div style="display:flex;gap:4px;">'
         + '<button class="coach-btn sm outline" style="padding:2px 8px;font-size:11px;" data-sit-tts="' + esc(savedFb.alUpgrade || '') + '"><svg viewBox="0 0 24 24" fill="currentColor" width="11" height="11"><polygon points="6 4 20 12 6 20 6 4"/></svg>소리 듣기</button>'
+        + '<button class="coach-btn sm ' + (isSaved ? 'outline' : 'primary') + '" style="padding:2px 8px;font-size:11px;" data-sit-save="' + idx + '">'
+        + (isSaved ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="11" height="11"><polyline points="20 6 9 17 4 12"/></svg>보관함 저장됨' : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="11" height="11"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/></svg>비교 기록 저장')
+        + '</button>'
+        + '</div></div>'
+        + '<div style="font-size:12px;color:var(--c-sec);margin-bottom:2px;"><b>목표 정답 표현:</b> <code style="color:var(--c-acc);font-weight:600;">' + esc(item.targetPattern) + '</code></div>'
+        + '<div class="coach-compare-row">'
+        + '<span class="coach-compare-tag user">내가 뱉은 문장 (My Draft)</span>'
+        + '<div class="coach-compare-text user">' + esc(savedDraft || '(작성된 내용 없음)') + '</div>'
         + '</div>'
-        + '<div style="font-size:14px;color:var(--c-label);margin-top:4px;font-weight:600;">' + esc(savedFb.alUpgrade || '-') + '</div>'
-        + (savedFb.koreanMeaning ? '<div style="font-size:12px;color:var(--c-sec);margin-top:2px;">' + esc(savedFb.koreanMeaning) + '</div>' : '')
-        + (savedFb.feedback ? '<div class="coach-al-points" style="font-size:12px;color:var(--c-acc);margin-top:4px;"><b>피드백:</b> ' + esc(savedFb.feedback) + '</div>' : '')
+        + '<div class="coach-compare-divider"></div>'
+        + '<div class="coach-compare-row">'
+        + '<span class="coach-compare-tag al"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="11" height="11"><polyline points="20 6 9 17 4 12"/></svg>AL급 원어민 표현 (Polished AL)</span>'
+        + '<div class="coach-compare-text al">' + esc(savedFb.alUpgrade || '-') + '</div>'
+        + (savedFb.koreanMeaning ? '<div class="coach-compare-meaning">' + esc(savedFb.koreanMeaning) + '</div>' : '')
+        + '</div>'
+        + (savedFb.feedback ? '<div class="coach-compare-feedback"><b>코칭 포인트:</b> ' + esc(savedFb.feedback) + '</div>' : '')
         + '</div>';
     }
 
@@ -19370,6 +19412,25 @@ function renderCoachSituations(){
   const resetSitBtn = document.getElementById('btnCoachResetPresetSit');
   if(resetSitBtn) resetSitBtn.onclick = coachResetPresetSituations;
 
+  const goArchiveBtn = document.getElementById('btnCoachGoArchiveSit');
+  if(goArchiveBtn){
+    goArchiveBtn.onclick = () => {
+      coachArchiveFilterTag = '입영작';
+      setCoachTab('rec');
+    };
+  }
+
+  el.querySelectorAll('[data-sit-reveal]').forEach(btn => {
+    const idx = parseInt(btn.dataset.sitReveal, 10);
+    btn.onclick = () => {
+      const it = items[idx];
+      if(it){
+        coachRevealedPatterns[it.id] = true;
+        renderCoachSituations();
+      }
+    };
+  });
+
   el.querySelectorAll('[data-sit-mic]').forEach(btn => {
     const idx = parseInt(btn.dataset.sitMic, 10);
     btn.onclick = () => coachToggleSitMic(idx);
@@ -19378,6 +19439,11 @@ function renderCoachSituations(){
   el.querySelectorAll('[data-sit-check]').forEach(btn => {
     const idx = parseInt(btn.dataset.sitCheck, 10);
     btn.onclick = () => coachCheckSituation(idx);
+  });
+
+  el.querySelectorAll('[data-sit-save]').forEach(btn => {
+    const idx = parseInt(btn.dataset.sitSave, 10);
+    btn.onclick = () => coachSaveSitComparison(idx);
   });
 
   el.querySelectorAll('[data-sit-hint]').forEach(btn => {
@@ -19509,11 +19575,71 @@ async function coachCheckSituation(idx){
 
     const resp = await coachCallGemini('Draft: "' + draft + '"', sysPrompt);
     const parsed = coachCleanJson(resp);
+    coachRevealedPatterns[item.id] = true;
     localStorage.setItem('cards_sit_fb_' + item.id, JSON.stringify(parsed));
     toast('AL급 원어민 문장으로 다듬어졌습니다!');
     renderCoachSituations();
   } catch(e){
     alert('점검 오류: ' + e.message);
+  }
+}
+
+async function coachSaveSitComparison(idx){
+  const isCustomCards = Array.isArray(coachSitCards);
+  const items = isCustomCards ? coachSitCards : COACH_PRESET_SITUATIONS;
+  const item = items[idx];
+  if(!item) return;
+
+  const draft = (localStorage.getItem('cards_sit_draft_' + item.id) || '').trim();
+  const fbRaw = localStorage.getItem('cards_sit_fb_' + item.id);
+  if(!fbRaw){
+    alert('먼저 [AI 표현 점검 & AL 업그레이드]를 실행해 주세요.');
+    return;
+  }
+  let fb = null;
+  try { fb = JSON.parse(fbRaw); } catch(e){}
+  if(!fb || !fb.alUpgrade){
+    alert('저장할 AL 업그레이드 데이터가 없습니다.');
+    return;
+  }
+
+  const existingId = localStorage.getItem('cards_sit_saved_' + item.id);
+  const id = existingId || ('sit_' + Date.now());
+  const dateStr = new Date().toISOString().slice(0, 10);
+
+  const sitPayload = {
+    id: id,
+    type: 'sit',
+    date: dateStr,
+    topic: item.topic,
+    situation: item.situation,
+    targetPattern: item.targetPattern,
+    userDraft: draft,
+    alUpgrade: fb.alUpgrade,
+    koreanMeaning: fb.koreanMeaning,
+    feedback: fb.feedback,
+    tags: ['입영작', 'AL비교']
+  };
+
+  try {
+    let index = await idbGet('cards_eva_index_v1') || [];
+    index = index.filter(x => x.id !== id);
+    index.unshift({
+      id: id,
+      type: 'sit',
+      date: dateStr,
+      topic: item.topic,
+      level: '입영작',
+      tags: ['입영작', 'AL비교'],
+      question: '[' + item.targetPattern + '] ' + item.situation.slice(0, 45) + '...'
+    });
+    await idbSet('cards_eva_index_v1', index);
+    await idbSet('cards_eva_item_' + id, sitPayload);
+    localStorage.setItem('cards_sit_saved_' + item.id, id);
+    toast('내가 한 거 vs AL급 비교 기록이 보관함에 저장되었습니다!');
+    renderCoachSituations();
+  } catch(e){
+    alert('저장 실패: ' + e.message);
   }
 }
 
@@ -19987,7 +20113,7 @@ async function renderCoachRecordings(){
   }
 
   // 채점 대기 중인 항목 필터링
-  const pendingList = list.filter(x => x.level === '대기' || !x.tags || x.tags.length === 0);
+  const pendingList = list.filter(x => x.type !== 'sit' && (x.level === '대기' || !x.tags || x.tags.length === 0));
 
   // 1. 태그 통계 집계
   const tagCounts = {};
@@ -20044,19 +20170,28 @@ async function renderCoachRecordings(){
     h += '<div style="font-size:13px;color:var(--c-sec);">아직 태그가 분석된 채점 결과가 없습니다. 대기 녹음 채점을 실행해 보세요.</div>';
   }
 
-  // 필터 필즈
+  // 필터 필즈 (전체, 인터뷰, 입영작 및 태그)
+  const interviewCount = list.filter(x => x.type !== 'sit').length;
+  const sitCount = list.filter(x => x.type === 'sit').length;
+
   h += '<div class="coach-filter-pills" style="margin-top:6px;padding-top:10px;border-top:0.5px solid var(--c-sep);">'
-    + '<span style="font-size:12px;color:var(--c-sec);font-weight:600;">태그 필터:</span>'
-    + '<button class="coach-filter-pill' + (!coachArchiveFilterTag ? ' active' : '') + '" data-coach-filter="">전체 (' + list.length + ')</button>';
-  sortedTags.forEach(([tag, cnt]) => {
+    + '<span style="font-size:12px;color:var(--c-sec);font-weight:600;">유형/태그:</span>'
+    + '<button class="coach-filter-pill' + (!coachArchiveFilterTag ? ' active' : '') + '" data-coach-filter="">전체 (' + list.length + ')</button>'
+    + '<button class="coach-filter-pill' + (coachArchiveFilterTag==='인터뷰'?' active':'') + '" data-coach-filter="인터뷰">인터뷰 녹음 (' + interviewCount + ')</button>'
+    + '<button class="coach-filter-pill' + (coachArchiveFilterTag==='입영작'?' active':'') + '" data-coach-filter="입영작">입영작 비교 (' + sitCount + ')</button>';
+  sortedTags.filter(([t]) => t !== '입영작' && t !== 'AL비교').forEach(([tag, cnt]) => {
     h += '<button class="coach-filter-pill' + (coachArchiveFilterTag === tag ? ' active' : '') + '" data-coach-filter="' + esc(tag) + '">#' + esc(tag) + ' (' + cnt + ')</button>';
   });
   h += '</div></div>';
 
   // 3. 필터링된 녹음 목록
-  const displayList = coachArchiveFilterTag
-    ? list.filter(x => Array.isArray(x.tags) && x.tags.includes(coachArchiveFilterTag))
-    : list;
+  const displayList = !coachArchiveFilterTag
+    ? list
+    : coachArchiveFilterTag === '인터뷰'
+    ? list.filter(x => x.type !== 'sit')
+    : coachArchiveFilterTag === '입영작'
+    ? list.filter(x => x.type === 'sit' || (Array.isArray(x.tags) && x.tags.includes('입영작')))
+    : list.filter(x => Array.isArray(x.tags) && x.tags.includes(coachArchiveFilterTag));
 
   h += '<div style="display:flex;align-items:center;justify-content:space-between;margin:4px 0 2px;">'
     + '<span style="font-size:13px;font-weight:600;color:var(--c-sec);">' + (coachArchiveFilterTag ? ('[#' + esc(coachArchiveFilterTag) + '] 필터 적용: ') : '전체 녹음: ') + displayList.length + '개</span>'
@@ -20076,7 +20211,7 @@ async function renderCoachRecordings(){
       + '<span class="coach-badge purple">' + esc(entry.date) + '</span>'
       + '<span style="font-size:14px;font-weight:600;color:var(--c-label);">' + esc(entry.topic) + '</span>'
       + '</div>'
-      + '<span class="coach-badge ' + (isPending ? 'orange' : String(entry.level).includes('AL')?'green':'blue') + '">' + esc(entry.level || '대기') + '</span>'
+      + '<span class="coach-badge ' + (entry.type==='sit' ? 'green' : isPending ? 'orange' : String(entry.level).includes('AL')?'green':'blue') + '">' + (entry.type==='sit' ? '입영작 AL비교' : esc(entry.level || '대기')) + '</span>'
       + '</div>';
 
     if(entryTags.length > 0){
@@ -20259,7 +20394,48 @@ async function coachLoadArchiveItem(id){
 
   try {
     const item = await idbGet('cards_eva_item_' + id);
-    if(!item || !item.blob){
+    if(!item){
+      wrap.innerHTML = '<div style="font-size:12px;color:var(--c-red);">데이터를 찾을 수 없습니다.</div>';
+      return;
+    }
+
+    if(item.type === 'sit'){
+      let sitH = '<div class="coach-compare-card" style="margin-top:4px;">'
+        + '<div style="font-size:13px;color:var(--c-sec);line-height:1.45;">'
+        + '<b>상황 미션:</b> ' + esc(item.situation || '-')
+        + '<div style="margin-top:2px;"><b>목표 패턴:</b> <code style="color:var(--c-acc);font-weight:600;background:var(--c-card);padding:1px 6px;border-radius:4px;border:0.5px solid var(--c-sep);">' + esc(item.targetPattern || '-') + '</code></div>'
+        + '</div>'
+        + '<div class="coach-compare-divider"></div>'
+        + '<div class="coach-compare-row">'
+        + '<span class="coach-compare-tag user">내가 한 문장 (My Draft)</span>'
+        + '<div class="coach-compare-text user">' + esc(item.userDraft || '(작성된 내용 없음)') + '</div>'
+        + '</div>'
+        + '<div class="coach-compare-divider"></div>'
+        + '<div class="coach-compare-row">'
+        + '<div style="display:flex;align-items:center;justify-content:space-between;gap:6px;">'
+        + '<span class="coach-compare-tag al"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="11" height="11"><polyline points="20 6 9 17 4 12"/></svg>AL급 업그레이드 (Polished AL)</span>'
+        + '<button class="coach-btn sm outline" style="padding:2px 8px;font-size:11px;" id="btnCoachPlaySitArchive_' + id + '"><svg viewBox="0 0 24 24" fill="currentColor" width="10" height="10"><polygon points="6 4 20 12 6 20 6 4"/></svg>소리 듣기</button>'
+        + '</div>'
+        + '<div class="coach-compare-text al">' + esc(item.alUpgrade || '-') + '</div>'
+        + (item.koreanMeaning ? '<div class="coach-compare-meaning">' + esc(item.koreanMeaning) + '</div>' : '')
+        + '</div>'
+        + (item.feedback ? '<div class="coach-compare-feedback"><b>코칭 포인트:</b> ' + esc(item.feedback) + '</div>' : '')
+        + '<div style="display:flex;justify-content:flex-end;margin-top:6px;">'
+        + '<button class="coach-btn sm outline" style="color:var(--c-red);border-color:rgba(255,59,48,.3);" id="btnCoachDelRec_' + id + '"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>삭제</button>'
+        + '</div>'
+        + '</div>';
+
+      wrap.innerHTML = sitH;
+
+      const playSitBtn = document.getElementById('btnCoachPlaySitArchive_' + id);
+      if(playSitBtn && item.alUpgrade) playSitBtn.onclick = () => coachSpeak(item.alUpgrade, playSitBtn);
+
+      const delBtn = document.getElementById('btnCoachDelRec_' + id);
+      if(delBtn) delBtn.onclick = () => coachDeleteArchiveItem(id);
+      return;
+    }
+
+    if(!item.blob){
       wrap.innerHTML = '<div style="font-size:12px;color:var(--c-red);">음원 데이터를 찾을 수 없습니다.</div>';
       return;
     }
