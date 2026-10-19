@@ -2073,7 +2073,7 @@ input,select{border-radius:10px;}
 /* 09-24 세션 화면 한 열(동하 「헤더만 밑으로 내려와 UI가 움직이는 것처럼」 · 「기능 배열이 난잡」)
    사이드바가 보이는 폭: ‹ 숨김(「오늘」 타일이 돌아가는 길 · 세션 화면에서도 켜짐) · 큰 제목과 ✎를 한 줄에 → 제목 윗선 = 통계·설정 제목 윗선. 문풀 오늘도 같다. */
 @media (min-width:760px){
-  #scrYmToday .sub-head>.tb-btn:first-child{display:none;}
+  #scrYmToday .sub-head>.tb-btn:first-child{display:flex;}
   /* 🔴 세션 화면 = 제목 위 「‹ 오늘」 링크(동하 09-25 「세션에서 홈으로 갈 방법이 애매 · 헤더 위치가 홈과 달라」) — 아이폰 기본 앱의 큰 제목 위 뒤로 링크.
      제목 윗선 = 홈 「오늘」 제목 윗선(71 · 전엔 57로 14px 위) · 가로 위치도 홈과 같다(‹를 제목 옆에 붙이면 제목이 밀린다). 링크는 제목 위 빈자리에. */
   #scrSession .sub-head{position:relative;padding-top:30px;}
@@ -2871,6 +2871,7 @@ details.gr-fold[open]>summary .s2-chev{transform:rotate(90deg);}
     </div>
 
     <nav class="hs-nav"><div class="hs-grp">보기</div>
+      <button class="hs-row" data-go="scrYmToday" style="font-weight:600;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>스피킹 코치</button>
       <button class="hs-row" id="hsTocRow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5h16M9 10.5h11M9 15.5h11M4 20.5h16"/></svg>목차</button>
       <button class="hs-row" id="hsHd"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 6.5C10 5 7 4.5 3.5 5v13c3.5-.5 6.5 0 8.5 1.5 2-1.5 5-2 8.5-1.5V5C17 4.5 14 5 12 6.5z"/><path d="M12 6.5v13"/></svg>회독본</button>
       <button class="hs-row" id="ctOpen" title="음악·미술·체육 2022 내용 체계표 — 가리고 쓰기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="15" rx="3"/><path d="M9.5 4.5v15"/></svg>내용 체계표</button>
@@ -2999,7 +3000,8 @@ details.gr-fold[open]>summary .s2-chev{transform:rotate(90deg);}
         <div id="studyBox"></div>
         <div class="hp-views">
           <div class="hs-grp">보기</div>
-          <div class="hp-list"><button class="hs-row" id="ctOpenP"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="15" rx="3"/><path d="M9.5 4.5v15"/></svg>내용 체계표</button><button class="hs-row" data-go="scrStats"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20V11M11 20V5M17 20v-6"/></svg>통계</button><button class="hs-row" data-go="scrStudy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19.5c.6-3.2 2.8-5 5.5-5s4.9 1.8 5.5 5"/><circle cx="17" cy="9" r="2.6"/><path d="M15.8 14.6c2.4-.3 4.3 1.2 4.8 4.4"/></svg>스터디</button>
+          <div class="hp-list">
+          <button class="hs-row" data-go="scrYmToday" style="font-weight:600;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>스피킹 코치</button><button class="hs-row" id="ctOpenP"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="15" rx="3"/><path d="M9.5 4.5v15"/></svg>내용 체계표</button><button class="hs-row" data-go="scrStats"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20V11M11 20V5M17 20v-6"/></svg>통계</button><button class="hs-row" data-go="scrStudy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19.5c.6-3.2 2.8-5 5.5-5s4.9 1.8 5.5 5"/><circle cx="17" cy="9" r="2.6"/><path d="M15.8 14.6c2.4-.3 4.3 1.2 4.8 4.4"/></svg>스터디</button>
       <button class="hs-row" data-go="scrSite"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.4 2.6 3.6 5.4 3.6 8.5s-1.2 5.9-3.6 8.5c-2.4-2.6-3.6-5.4-3.6-8.5s1.2-5.9 3.6-8.5z"/></svg>공개 사이트</button></div>
           <div class="h-foot" id="hFootP"></div>
         </div>
@@ -18295,10 +18297,8 @@ function ymRenderCurrent(){
   else if($('scrYmUnit').classList.contains('on') && _ymUnit) ymRenderUnit(_ymUnit);
 }
 async function ymEnter(){
-  _ymSubOpen.clear(); _ymRowPos.clear(); _ymTodayPin.clear();     // 펼쳐 둔 소문항 판·행 자리는 화면을 새로 들어올 때 비운다(오늘 목록의 고정 행도 그때 빠진다)
-  if(!YM.loaded || !YM.cat){ $('ymTodayBody').innerHTML='<div class="ym-empty">문풀 카탈로그 여는 중…</div>'; go('scrYmToday'); await ymLoad(); }
-  else { go('scrYmToday'); ymPull(); }   // 다시 들어올 때마다 원격 문풀 로그를 당긴다(R6)
-  _ymReady=null; ymRenderToday();
+  go('scrYmToday');
+  if(typeof renderSpeakingCoach === 'function') renderSpeakingCoach();
 }
 /* ═══ 문풀 오늘 — 키·패드 안 씀 (동하 09-27 「문풀을 키보드 패드 조작할 일이 없음」) ═══
    09-24~25의 선택 행(↑↓ · Z/C/U · 패드 1/3)을 걷었다 — 첫 줄 파란 테두리가 둥근 묶음 모서리에 잘려 보였고 쓰지도 않았다.
@@ -18328,6 +18328,8 @@ function ymUnitFinished(u){                    // done · 전 문항 ▽ · 제�
   for(const k of its){ const s=YM.st.items[k]; if(!(s&&(s.closed||s.skip))) return false; } return true;
 }
 function ymRenderToday(){
+  if(typeof renderSpeakingCoach === 'function'){ renderSpeakingCoach(); return; }
+
   const body=$('ymTodayBody'); if(!YM.cat){ body.innerHTML='<div class="ym-empty">카탈로그를 못 받았어요 — 네트워크를 확인하고 다시 열어요</div>'; return; }
   let h='';
   if(!YM.remoteOK) h+='<div class="ym-warn">'+(cfg&&cfg.token?'문풀 기록을 GitHub에서 못 받았어요 — 이 기기 사본으로 보여요':'이 기기는 GitHub에 연결 안 됨 — 탭은 이 기기에만 쌓여요')+'</div>';
