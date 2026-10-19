@@ -18832,42 +18832,90 @@ const COACH_PRESET_SITUATIONS = [
 ];
 
 function coachGetApiKey(){ return localStorage.getItem('cards_gemini_key_v1') || ''; }
-function coachGetModel(){ return localStorage.getItem('cards_gemini_model_v1') || 'gemini-1.5-flash'; }
+function coachGetModel(){
+  let m = localStorage.getItem('cards_gemini_model_v1') || '';
+  if(!m || m.includes('1.5-flash') || m.includes('1.5-pro')){
+    m = m.includes('1.5-pro') ? 'gemini-2.5-pro' : 'gemini-2.5-flash';
+    localStorage.setItem('cards_gemini_model_v1', m);
+  }
+  return m;
+}
 
 async function coachCallGemini(prompt, systemPrompt){
   const key = coachGetApiKey();
   if(!key) throw new Error('Gemini API 키가 등록되지 않았습니다. 상단 설정 버튼을 눌러 키를 입력해 주세요.');
-  const model = coachGetModel();
-  const url = 'https://generativelanguage.googleapis.com/v1beta/models/' + encodeURIComponent(model) + ':generateContent?key=' + encodeURIComponent(key);
-  const payload = {
-    contents: [{ parts: [{ text: prompt }] }]
-  };
-  if(systemPrompt){
-    payload.systemInstruction = { parts: [{ text: systemPrompt }] };
+  
+  let primaryModel = coachGetModel();
+  if(primaryModel.includes('1.5-flash')) primaryModel = 'gemini-2.5-flash';
+  else if(primaryModel.includes('1.5-pro')) primaryModel = 'gemini-2.5-pro';
+
+  // 우선순위 후보군 (현재 설정 모델 -> 2.5 Flash -> 2.0 Flash -> 2.5 Pro)
+  const candidateModels = [
+    primaryModel,
+    'gemini-2.5-flash',
+    'gemini-2.0-flash',
+    'gemini-2.5-pro'
+  ].filter((v, i, a) => a.indexOf(v) === i);
+
+  let lastError = null;
+  for(const curModel of candidateModels){
+    try {
+      const url = 'https://generativelanguage.googleapis.com/v1beta/models/' + encodeURIComponent(curModel) + ':generateContent?key=' + encodeURIComponent(key);
+      const payload = {
+        contents: [{ parts: [{ text: prompt }] }]
+      };
+      if(systemPrompt){
+        payload.systemInstruction = { parts: [{ text: systemPrompt }] };
+      }
+      const res = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      if(!res.ok){
+        const errData = await res.json().catch(()=>({}));
+        const msg = errData.error?.message || ('HTTP ' + res.status);
+        if(res.status === 404 || /not found|not supported/i.test(msg)){
+          lastError = new Error(msg);
+          console.warn('Gemini 모델 ' + curModel + ' 사용 불가 (' + msg + '), 다음 후보 모델 시도...');
+          continue;
+        }
+        throw new Error(msg);
+      }
+      const data = await res.json();
+      const text = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
+      if(curModel !== coachGetModel()){
+        localStorage.setItem('cards_gemini_model_v1', curModel);
+      }
+      return text;
+    } catch(err){
+      lastError = err;
+      if(/not found|not supported/i.test(err.message)){
+        continue;
+      }
+      throw err;
+    }
   }
-  const res = await fetch(url, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload)
-  });
-  if(!res.ok){
-    const errData = await res.json().catch(()=>({}));
-    throw new Error(errData.error?.message || ('HTTP ' + res.status));
-  }
-  const data = await res.json();
-  const text = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
-  return text;
+  throw lastError || new Error('모든 Gemini 모델 요청에 실패했습니다.');
 }
 
 function coachCleanJson(text){
-  text = String(text||'').replace(/```json/gi, '').replace(/```/g, '').trim();
+  text = String(text||'')
+    .replace(/<thought>[\s\S]*?<\/thought>/gi, '')
+    .replace(/```json/gi, '')
+    .replace(/```/g, '')
+    .trim();
   const s = text.indexOf('{'), e = text.lastIndexOf('}');
   if(s >= 0 && e > s) text = text.slice(s, e + 1);
   return JSON.parse(text);
 }
 
 function coachCleanJsonArray(text){
-  text = String(text||'').replace(/```json/gi, '').replace(/```/g, '').trim();
+  text = String(text||'')
+    .replace(/<thought>[\s\S]*?<\/thought>/gi, '')
+    .replace(/```json/gi, '')
+    .replace(/```/g, '')
+    .trim();
   const s = text.indexOf('['), e = text.lastIndexOf(']');
   if(s >= 0 && e > s) text = text.slice(s, e + 1);
   return JSON.parse(text);
@@ -18900,9 +18948,9 @@ function coachOpenKeyModal(){
     + '<input id="coachKeyInput" type="password" value="' + esc(curKey) + '" placeholder="AIzaSy..." style="padding:10px 12px;border-radius:10px;border:1px solid var(--c-sep);background:var(--c-fill);color:var(--c-label);font-family:monospace;font-size:13px;">'
     + '<div style="display:flex;gap:8px;align-items:center;">'
     + '<select id="coachModelSelect" style="flex:1;padding:8px 10px;border-radius:8px;border:1px solid var(--c-sep);background:var(--c-fill);color:var(--c-label);font-size:13px;">'
-    + '<option value="gemini-1.5-flash"' + (curModel==='gemini-1.5-flash'?' selected':'') + '>Gemini 1.5 Flash (빠르고 가벼움)</option>'
-    + '<option value="gemini-2.0-flash"' + (curModel==='gemini-2.0-flash'?' selected':'') + '>Gemini 2.0 Flash (최신 모델)</option>'
-    + '<option value="gemini-1.5-pro"' + (curModel==='gemini-1.5-pro'?' selected':'') + '>Gemini 1.5 Pro (최고 정밀도 · 프로 추천)</option>'
+    + '<option value="gemini-2.5-flash"' + (curModel==='gemini-2.5-flash'?' selected':'') + '>Gemini 2.5 Flash (권장 · 초고속/최신)</option>'
+    + '<option value="gemini-2.0-flash"' + (curModel==='gemini-2.0-flash'?' selected':'') + '>Gemini 2.0 Flash (안정적 최신 모델)</option>'
+    + '<option value="gemini-2.5-pro"' + (curModel==='gemini-2.5-pro'?' selected':'') + '>Gemini 2.5 Pro (최고 정밀도 · 심층 피드백)</option>'
     + '</select>'
     + '<button class="coach-btn primary" id="btnCoachKeySave">저장</button>'
     + '</div></div></div>';
@@ -18920,7 +18968,7 @@ function coachSaveKey(){
   const sel = document.getElementById('coachModelSelect');
   if(!inp) return;
   const key = inp.value.trim();
-  const model = sel ? sel.value : 'gemini-1.5-flash';
+  const model = sel ? sel.value : 'gemini-2.5-flash';
   localStorage.setItem('cards_gemini_key_v1', key);
   localStorage.setItem('cards_gemini_model_v1', model);
   toast(key ? 'Gemini API 키가 저장되었습니다.' : 'API 키가 삭제되었습니다.');
@@ -19079,10 +19127,15 @@ function coachToggleSitMic(idx){
   const inp = document.getElementById('coachSitInp_' + idx);
   
   if(coachActiveSpeechRec){
+    coachActiveSpeechRec._manualStop = true;
     coachActiveSpeechRec.stop();
     coachActiveSpeechRec = null;
     if(btn) btn.classList.remove('recording');
     if(txt) txt.textContent = '음성 입력';
+    if(inp){
+      inp.value = inp.value.trim();
+      coachSitAnswers[idx] = inp.value;
+    }
     return;
   }
 
@@ -19098,26 +19151,42 @@ function coachToggleSitMic(idx){
     rec.continuous = true;
     rec.interimResults = true;
     
+    const baseInitial = inp ? inp.value.trim() : '';
+    let accumulatedFinal = baseInitial;
+    let sessionFinal = '';
+    let sessionInterim = '';
+
     rec.onresult = (e) => {
-      let final = '';
+      sessionFinal = '';
+      sessionInterim = '';
       for (let i = 0; i < e.results.length; i++) {
-        if (e.results[i].isFinal) final += e.results[i][0].transcript + ' ';
+        const chunk = e.results[i][0].transcript;
+        if (e.results[i].isFinal) sessionFinal += chunk + ' ';
+        else sessionInterim += chunk;
       }
-      if(final && inp){
-        inp.value = (inp.value ? inp.value.trim() + ' ' : '') + final.trim();
+      const full = ((accumulatedFinal ? accumulatedFinal + ' ' : '') + sessionFinal).trim() + (sessionInterim ? ' ' + sessionInterim.trim() : '');
+      if(inp){
+        inp.value = full.trim();
         coachSitAnswers[idx] = inp.value;
       }
     };
     rec.onerror = (err) => {
-      console.warn('음성 인식 오류:', err);
-      coachActiveSpeechRec = null;
-      if(btn) btn.classList.remove('recording');
-      if(txt) txt.textContent = '음성 입력';
+      if(err.error !== 'no-speech') console.warn('음성 인식 오류:', err);
     };
     rec.onend = () => {
+      accumulatedFinal = ((accumulatedFinal ? accumulatedFinal + ' ' : '') + sessionFinal).trim();
+      sessionFinal = '';
+      sessionInterim = '';
+      if(!rec._manualStop && coachActiveSpeechRec === rec){
+        try { rec.start(); return; } catch(err){}
+      }
       coachActiveSpeechRec = null;
       if(btn) btn.classList.remove('recording');
       if(txt) txt.textContent = '음성 입력';
+      if(inp){
+        inp.value = accumulatedFinal;
+        coachSitAnswers[idx] = inp.value;
+      }
     };
 
     coachActiveSpeechRec = rec;
@@ -19275,6 +19344,7 @@ function renderCoachEva(){
     + '<div id="evaMicLabel" style="font-size:14px;font-weight:600;color:var(--c-label);">'
     + (coachActiveRecorder ? '녹음 중… (누르면 완료)' : '마이크를 눌러 답변 녹음 시작')
     + '</div>'
+    + '<div id="evaLiveTrans" style="font-size:13px;color:var(--c-sec);min-height:22px;max-width:540px;margin:8px auto 0;line-height:1.45;word-break:break-word;font-style:italic;"></div>'
     + '</div>';
 
   // 녹음된 오디오 플레이어 & 텍스트 영역
@@ -19339,12 +19409,15 @@ async function coachToggleEvaRec(){
     coachActiveRecorder.stop();
     coachActiveRecorder.stream.getTracks().forEach(t => t.stop());
     if(coachActiveSpeechRec){
+      coachActiveSpeechRec._manualStop = true;
       coachActiveSpeechRec.stop();
       coachActiveSpeechRec = null;
     }
     coachActiveRecorder = null;
     if(btn) btn.classList.remove('recording');
     if(lbl) lbl.textContent = '녹음 완료됨';
+    const liveEl = document.getElementById('evaLiveTrans');
+    if(liveEl) liveEl.textContent = '';
     return;
   }
 
@@ -19377,17 +19450,44 @@ async function coachToggleEvaRec(){
       rec.lang = 'en-US';
       rec.continuous = true;
       rec.interimResults = true;
+
+      let accumulatedFinal = '';
+      let sessionFinal = '';
+      let sessionInterim = '';
+
       rec.onresult = (e) => {
-        let final = '';
+        sessionFinal = '';
+        sessionInterim = '';
         for (let i = 0; i < e.results.length; i++) {
-          if (e.results[i].isFinal) final += e.results[i][0].transcript + ' ';
+          const chunk = e.results[i][0].transcript;
+          if (e.results[i].isFinal) sessionFinal += chunk + ' ';
+          else sessionInterim += chunk;
         }
-        if(final){
-          coachLastEvaTranscript = (coachLastEvaTranscript ? coachLastEvaTranscript.trim() + ' ' : '') + final.trim();
-          const inp = document.getElementById('evaTranscriptInp');
-          if(inp) inp.value = coachLastEvaTranscript;
-        }
+        const full = ((accumulatedFinal ? accumulatedFinal + ' ' : '') + sessionFinal).trim() + (sessionInterim ? ' ' + sessionInterim.trim() : '');
+        coachLastEvaTranscript = full.trim();
+        const inp = document.getElementById('evaTranscriptInp');
+        if(inp) inp.value = coachLastEvaTranscript;
+        const live = document.getElementById('evaLiveTrans');
+        if(live) live.textContent = coachLastEvaTranscript ? ('“' + coachLastEvaTranscript + '”') : '';
       };
+      rec.onerror = (err) => {
+        if(err.error !== 'no-speech') console.warn('음성 인식 오류:', err);
+      };
+      rec.onend = () => {
+        accumulatedFinal = ((accumulatedFinal ? accumulatedFinal + ' ' : '') + sessionFinal).trim();
+        sessionFinal = '';
+        sessionInterim = '';
+        if(coachActiveRecorder && coachActiveSpeechRec === rec && !rec._manualStop){
+          try { rec.start(); return; } catch(err){}
+        }
+        coachActiveSpeechRec = null;
+        coachLastEvaTranscript = accumulatedFinal;
+        const inp = document.getElementById('evaTranscriptInp');
+        if(inp) inp.value = coachLastEvaTranscript;
+        const live = document.getElementById('evaLiveTrans');
+        if(live) live.textContent = '';
+      };
+
       coachActiveSpeechRec = rec;
       rec.start();
     }
