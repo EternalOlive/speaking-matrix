@@ -19260,59 +19260,112 @@ function renderSpeakingCoach(){
 }
 
 /* ═══════════ 탭 1: 핵심 표현 입영작 (학습 표현 기반 문장 뱉기) ═══════════ */
-function coachLoadCardsFromData(){
-  if(!Array.isArray(DATA) || DATA.length === 0){
-    alert('학습 카드 데이터를 아직 불러오는 중이거나 카드가 없습니다. 메인 카드 목록을 먼저 열어주세요.');
-    return;
+function getCoachStudiedCards(){
+  if(!Array.isArray(DATA) || DATA.length === 0) return [];
+  const revMap = typeof firstRevMap === 'function' ? firstRevMap() : null;
+  return DATA.filter(c => {
+    if(!c || !c.front || !c.back || c.back.includes('http')) return false;
+    const s = state && state.cards && state.cards[c.id];
+    const hasFsrs = !!(s && s.fsrs);
+    const hasReps = !!(s && ((s.reps > 0) || (s.fsrs && s.fsrs.reps > 0)));
+    const hasRevLog = !!(revMap && revMap[c.id] != null);
+    const isNotNew = typeof isNew === 'function' ? !isNew(c) : false;
+    return isNotNew || hasFsrs || hasReps || hasRevLog;
+  });
+}
+
+function coachParseStudiedCard(c, idx){
+  const cleanFront = (c.front || '').replace(/^〔.*?〕\s*/, '').trim();
+  let pat = '';
+  let meaning = '';
+  let hintChunk = '';
+  let mission = '';
+
+  if(c.subj === '해커스톡 10분의 기적'){
+    const sm = (c.src || '').match(/Day\s*\d+\s*·\s*([^·]+)/);
+    const fm = (c.front || '').match(/〔(?:Day\s*\d+\s*·\s*)?([^〕]+)〕/);
+    pat = sm ? sm[1].trim() : (fm ? fm[1].trim() : '핵심 패턴');
+    const parenM = (c.note || '').match(/상황:\s*(?:Day\s*\d+\s*·\s*)?[^(]*\(([^)]+)\)/);
+    const nm = (c.note || '').match(/상황:\s*(?:Day\s*\d+\s*·\s*)?([^\n\r]+)/);
+    meaning = parenM ? parenM[1].trim() : (nm ? nm[1].trim() : '');
+    hintChunk = pat + (meaning ? ' (' + meaning + ')' : '');
+    mission = '학습 패턴 [' + pat + (meaning ? ' · ' + meaning : '') + ']을 활용해, 교재 문장(' + cleanFront + ')과 다른 새로운 상황(약속, 직장, 주말 계획 등)의 나만의 문장을 직접 만들어 말해보세요!';
+  } else {
+    const nm = (c.note || '').match(/상황:\s*([^\n\r]+)/);
+    const cm = (c.note || '').match(/청크:\s*([^\n\r]+)/);
+    meaning = nm ? nm[1].trim() : '';
+    const chunkStr = cm ? cm[1].trim() : '';
+    pat = chunkStr || c.back;
+    hintChunk = chunkStr || c.back;
+    mission = '학습 표현 [' + pat + (meaning ? ' · ' + meaning : '') + ']을 활용해, 교재 문장(' + cleanFront + ')과 다른 새로운 상황(일상, 직장, 생각 등)의 나만의 문장을 직접 만들어 말해보세요!';
   }
-  const validCards = DATA.filter(c => c.front && c.back && !c.back.includes('http'));
-  if(!validCards.length){
-    alert('학습 가능한 카드가 없습니다.');
+
+  return {
+    id: 'studied_card_' + c.id + '_' + idx,
+    cardId: c.id,
+    topic: (c.subj ? c.subj.split('(')[0].trim() : '학습 카드') + (c.typ ? ' · ' + c.typ : ''),
+    targetPattern: pat,
+    origKor: cleanFront || c.front,
+    origEng: c.back,
+    hintChunk: hintChunk,
+    situation: mission,
+    customPrompt: ''
+  };
+}
+
+function coachLoadCardsFromData(isSilent){
+  const studied = getCoachStudiedCards();
+  if(!studied.length){
+    coachSitCards = [];
+    if(!isSilent) toast('아직 학습을 완료한 카드가 없습니다. 먼저 카드 학습을 진행해 주세요.');
+    renderCoachSituations();
     return;
   }
   coachRevealedPatterns = {};
-  const shuffled = [...validCards].sort(() => Math.random() - 0.5).slice(0, 5);
-  coachSitCards = shuffled.map((c, idx) => {
-    const cleanFront = c.front.replace(/^〔.*?〕\s*/, '').trim();
-    return {
-      id: 'card_' + c.id + '_' + idx,
-      topic: (c.subj ? c.subj.split('(')[0].trim() : '학습 카드') + (c.typ ? ' · ' + c.typ : ''),
-      situation: cleanFront || c.front,
-      targetPattern: c.back,
-      hintChunk: c.note ? c.note.split('\n')[0].replace(/^청크:\s*/, '') : c.back
-    };
-  });
-  toast('내 학습 카드에서 5개 표현을 불러왔습니다! 목표 패턴을 먼저 떠올려 말해보세요.');
-  renderCoachSituations();
-}
-
-function coachResetPresetSituations(){
-  coachSitCards = null;
-  toast('기본 빈출 상황 5선으로 전환되었습니다.');
+  const shuffled = [...studied].sort(() => Math.random() - 0.5).slice(0, 5);
+  coachSitCards = shuffled.map((c, idx) => coachParseStudiedCard(c, idx));
+  if(!isSilent) toast('내 학습 카드에서 5개 표현을 불러왔습니다! 새로운 응용 문장을 만들어보세요.');
   renderCoachSituations();
 }
 
 function renderCoachSituations(){
   const el = document.getElementById('coachTabBody');
   if(!el) return;
-  const isCustomCards = Array.isArray(coachSitCards);
-  const items = isCustomCards ? coachSitCards : COACH_PRESET_SITUATIONS;
+
+  if(coachSitCards === null){
+    coachLoadCardsFromData(true);
+    return;
+  }
+
+  const items = Array.isArray(coachSitCards) ? coachSitCards : [];
 
   let h = '';
-  // 상단 소스 선택 카드
+  // 상단 소스 선택 및 가이드 카드
   h += '<div class="coach-card">'
     + '<div class="coach-card-head">'
     + '<span class="coach-card-title">'
     + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>'
-    + '핵심 표현 입영작 (문장 뱉기 훈련)'
+    + '핵심 표현 입영작 (학습 카드 기반 새로운 문장 만들기)'
     + '</span>'
     + '<div style="display:flex;gap:6px;flex-wrap:wrap;">'
-    + '<button class="coach-btn sm ' + (isCustomCards ? 'primary' : 'outline') + '" id="btnCoachLoadCardPhrases"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>내 학습 카드 표현 (5개)</button>'
-    + '<button class="coach-btn sm ' + (!isCustomCards ? 'primary' : 'outline') + '" id="btnCoachResetPresetSit">빈출 상황 5선</button>'
+    + '<button class="coach-btn sm primary" id="btnCoachLoadCardPhrases"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>다른 학습 표현 5개 뽑기</button>'
+    + '<button class="coach-btn sm outline" id="btnCoachGenAllMissions"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3z"/></svg>AI 맞춤 상황 일괄 출제</button>'
     + '<button class="coach-btn sm outline" id="btnCoachGoArchiveSit" style="color:var(--c-purple);border-color:rgba(175,82,222,.3);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/></svg>저장된 비교 기록 모아보기</button>'
     + '</div></div>'
-    + '<p style="font-size:13px;color:var(--c-sec);line-height:1.5;margin:0;">목표 표현은 기억 인출을 위해 <b>기본 가림 처리</b>되어 있습니다. 상황을 보고 생각나는 대로 입으로 뱉어보세요! 점검 버튼을 누르면 정답 패턴과 <b>내가 한 거 vs AL급 비교 리포트</b>가 나타납니다.</p>'
+    + '<p style="font-size:13px;color:var(--c-sec);line-height:1.5;margin:0;">내가 <b>이미 공부한 카드에서 핵심 표현을 인출</b>하여 연습합니다. 교재에 나오는 문장을 그대로 읊는 것이 아니라, 그 표현을 응용해 <b>나만의 새로운 문장</b>을 직접 만들어 말해보세요! 점검 버튼을 누르면 목표 표현과 함께 <b>AL급 원어민 구어체 비교 리포트</b>가 제공됩니다.</p>'
     + '</div>';
+
+  if(items.length === 0){
+    h += '<div class="coach-card" style="text-align:center;padding:44px 20px;">'
+      + '<div style="font-size:16px;font-weight:700;color:var(--c-label);margin-bottom:8px;">아직 완료한 학습 카드가 없습니다</div>'
+      + '<p style="font-size:13px;color:var(--c-sec);line-height:1.6;margin-bottom:18px;">입영작 훈련은 <b>내가 이미 학습한 카드</b>의 핵심 표현을 인출하여 새로운 문장으로 응용 발화하는 기능입니다.<br>홈 화면이나 세션에서 카드를 먼저 1장 이상 학습(체크)해 보세요!</p>'
+      + '<button class="coach-btn primary" onclick="showScreen(\'scrHome\')">홈으로 가서 카드 학습하기</button>'
+      + '</div>';
+    el.innerHTML = h;
+    const reloadBtn = document.getElementById('btnCoachLoadCardPhrases');
+    if(reloadBtn) reloadBtn.onclick = () => coachLoadCardsFromData(false);
+    return;
+  }
 
   items.forEach((item, idx) => {
     const savedDraft = localStorage.getItem('cards_sit_draft_' + item.id) || '';
@@ -19326,7 +19379,7 @@ function renderCoachSituations(){
 
     h += '<div class="coach-card">'
       + '<div class="coach-card-head">'
-      + '<span class="coach-card-title"><span class="coach-badge ' + (isCustomCards ? 'purple' : 'blue') + '">' + esc(item.topic) + '</span> ' + (idx + 1) + '. 문장 뱉기</span>'
+      + '<span class="coach-card-title"><span class="coach-badge purple">' + esc(item.topic) + '</span> ' + (idx + 1) + '. 표현 응용 입영작</span>'
       + '<div style="display:flex;align-items:center;gap:6px;">'
       + (isRevealed
         ? '<span class="coach-badge orange">' + esc(item.targetPattern) + '</span>'
@@ -19334,21 +19387,26 @@ function renderCoachSituations(){
       + '</div>'
       + '</div>'
       + '<div class="coach-q-box">'
-      + '<div style="font-size:15px;font-weight:600;color:var(--c-label);margin-bottom:6px;">' + esc(item.situation) + '</div>'
-      + '<div style="font-size:13px;color:var(--c-sec);display:flex;align-items:center;gap:6px;">'
-      + '<span>말하기 미션:</span>'
+      + '<div style="font-size:12px;color:var(--c-sec);display:flex;align-items:center;justify-content:space-between;gap:8px;background:var(--c-fill);padding:6px 10px;border-radius:8px;margin-bottom:8px;flex-wrap:wrap;">'
+      + '<span>📖 학습했던 원문: <b>' + esc(item.origKor) + '</b> <span style="font-size:11px;opacity:.85;">(' + esc(item.origEng) + ')</span></span>'
+      + '<span style="font-size:11px;color:var(--c-orange);font-weight:700;flex-shrink:0;">💡 원문 복붙 ❌ 새로운 문장 만들기 ⭕</span>'
+      + '</div>'
+      + '<div style="font-size:14px;font-weight:600;color:var(--c-label);margin-bottom:6px;line-height:1.5;">' + esc(item.situation) + '</div>'
+      + '<div style="font-size:13px;color:var(--c-sec);display:flex;align-items:center;gap:6px;flex-wrap:wrap;">'
+      + '<span>응용할 핵심 표현:</span>'
       + (isRevealed
-        ? '<code style="font-size:13px;color:var(--c-acc);background:var(--c-card);padding:2px 6px;border-radius:4px;border:0.5px solid var(--c-sep);">' + esc(item.targetPattern) + '</code>'
-        : '<span style="color:var(--c-sec);font-style:italic;">상황을 떠올려 영어 문장으로 말해보세요 (AI 점검 시 자동 공개)</span>')
+        ? '<code style="font-size:13px;color:var(--c-acc);background:var(--c-card);padding:2px 6px;border-radius:4px;border:0.5px solid var(--c-sep);font-weight:700;">' + esc(item.targetPattern) + '</code>'
+        : '<span style="color:var(--c-sec);font-style:italic;">기억을 떠올려 새로운 문장으로 말해보세요 (AI 점검 시 자동 공개)</span>')
       + '</div>'
       + '</div>'
       + '<div class="coach-input-wrap">'
-      + '<textarea id="coachSitInp_' + idx + '" class="coach-input" placeholder="생각나는 영어 문장을 자연스럽게 말씀하거나 입력해 보세요...">' + esc(savedDraft) + '</textarea>'
+      + '<textarea id="coachSitInp_' + idx + '" class="coach-input" placeholder="핵심 표현을 응용한 나만의 새로운 영어 문장을 말하거나 입력해 보세요...">' + esc(savedDraft) + '</textarea>'
       + '<div class="coach-input-acts">'
       + '<button id="coachSitMicBtn_' + idx + '" class="coach-btn sm mic" data-sit-mic="' + idx + '"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg><span id="coachSitMicTxt_' + idx + '">음성 입력</span></button>'
-      + '<div style="display:flex;gap:6px;">'
+      + '<div style="display:flex;gap:6px;flex-wrap:wrap;">'
       + '<button class="coach-btn sm outline" data-sit-hint="' + esc(item.hintChunk) + '"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>힌트 예시</button>'
-      + '<button class="coach-btn sm primary" data-sit-check="' + idx + '"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3z"/></svg>AI 표현 점검 & AL 업그레이드</button>'
+      + '<button class="coach-btn sm outline" data-sit-gen-single="' + idx + '"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3z"/></svg>AI 맞춤 상황 출제</button>'
+      + '<button class="coach-btn sm primary" data-sit-check="' + idx + '"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>AI 표현 점검 & AL 업그레이드</button>'
       + '</div></div></div>';
 
     // 내가 한 거 vs AL급 비교 리포트 카드
@@ -19357,7 +19415,7 @@ function renderCoachSituations(){
         + '<div class="coach-card-head" style="margin-bottom:2px;">'
         + '<span style="font-size:13px;font-weight:700;color:var(--c-label);display:flex;align-items:center;gap:6px;">'
         + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>'
-        + '내가 한 거 vs AL급 비교 리포트'
+        + '내가 만든 문장 vs AL급 업그레이드 비교 리포트'
         + '</span>'
         + '<div style="display:flex;gap:4px;">'
         + '<button class="coach-btn sm outline" style="padding:2px 8px;font-size:11px;" data-sit-tts="' + esc(savedFb.alUpgrade || '') + '"><svg viewBox="0 0 24 24" fill="currentColor" width="11" height="11"><polygon points="6 4 20 12 6 20 6 4"/></svg>소리 듣기</button>'
@@ -19365,9 +19423,9 @@ function renderCoachSituations(){
         + (isSaved ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="11" height="11"><polyline points="20 6 9 17 4 12"/></svg>보관함 저장됨' : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="11" height="11"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/></svg>비교 기록 저장')
         + '</button>'
         + '</div></div>'
-        + '<div style="font-size:12px;color:var(--c-sec);margin-bottom:2px;"><b>목표 정답 표현:</b> <code style="color:var(--c-acc);font-weight:600;">' + esc(item.targetPattern) + '</code></div>'
+        + '<div style="font-size:12px;color:var(--c-sec);margin-bottom:2px;"><b>활용한 목표 표현:</b> <code style="color:var(--c-acc);font-weight:700;">' + esc(item.targetPattern) + '</code></div>'
         + '<div class="coach-compare-row">'
-        + '<span class="coach-compare-tag user">내가 뱉은 문장 (My Draft)</span>'
+        + '<span class="coach-compare-tag user">내가 직접 만든 문장 (My Original Draft)</span>'
         + '<div class="coach-compare-text user">' + esc(savedDraft || '(작성된 내용 없음)') + '</div>'
         + '</div>'
         + '<div class="coach-compare-divider"></div>'
@@ -19387,9 +19445,9 @@ function renderCoachSituations(){
 
   // 이벤트 바인딩
   const loadCardsBtn = document.getElementById('btnCoachLoadCardPhrases');
-  if(loadCardsBtn) loadCardsBtn.onclick = coachLoadCardsFromData;
-  const resetSitBtn = document.getElementById('btnCoachResetPresetSit');
-  if(resetSitBtn) resetSitBtn.onclick = coachResetPresetSituations;
+  if(loadCardsBtn) loadCardsBtn.onclick = () => coachLoadCardsFromData(false);
+  const genAllBtn = document.getElementById('btnCoachGenAllMissions');
+  if(genAllBtn) genAllBtn.onclick = coachGenerateAllAiMissions;
 
   const goArchiveBtn = document.getElementById('btnCoachGoArchiveSit');
   if(goArchiveBtn){
@@ -19415,6 +19473,11 @@ function renderCoachSituations(){
     btn.onclick = () => coachToggleSitMic(idx);
   });
 
+  el.querySelectorAll('[data-sit-gen-single]').forEach(btn => {
+    const idx = parseInt(btn.dataset.sitGenSingle, 10);
+    btn.onclick = () => coachGenerateSingleAiMission(idx);
+  });
+
   el.querySelectorAll('[data-sit-check]').forEach(btn => {
     const idx = parseInt(btn.dataset.sitCheck, 10);
     btn.onclick = () => coachCheckSituation(idx);
@@ -19434,13 +19497,83 @@ function renderCoachSituations(){
   });
 }
 
+async function coachGenerateSingleAiMission(idx){
+  const items = coachSitCards || [];
+  const item = items[idx];
+  if(!item) return;
+
+  const key = coachGetApiKey();
+  if(!key){
+    alert('AI 상황 출제를 위해 상단에서 Gemini API 키를 등록해 주세요.');
+    coachOpenKeyModal();
+    return;
+  }
+
+  toast('AI가 [' + item.targetPattern + '] 표현의 맞춤 응용 상황을 출제 중입니다…');
+  try {
+    const sysPrompt = 'You are a creative ACTFL OPIc speaking test maker.\n'
+      + 'Target English Expression/Pattern: "' + item.targetPattern + '"\n'
+      + 'Original Textbook Example Sentence: "' + item.origEng + '" (' + item.origKor + ')\n\n'
+      + 'Task: Create a single realistic, engaging everyday/work/OPIc speaking scenario prompt in Korean (1 sentence) for the Korean student to practice creating a BRAND NEW spoken English sentence using this expression.\n'
+      + 'Rules:\n'
+      + '1. It MUST be completely different from the original textbook situation.\n'
+      + '2. Write as an actionable speaking prompt in Korean ending with "~라고 말해보세요". (e.g., "퇴근 후 동료들과 술 한잔하러 나가는 상황이라고 말해보세요" or "외출하기 전에 가스레인지를 껐다고 가족에게 안심시키는 상황을 말해보세요")\n'
+      + '3. Return ONLY the Korean scenario prompt sentence, without quotes or extra text.';
+
+    const resp = await coachCallGemini('Target: ' + item.targetPattern, sysPrompt);
+    const cleaned = resp.replace(/^["'`\s]+|["'`\s]+$/g, '').trim();
+    if(cleaned){
+      item.situation = '🎯 AI 맞춤 상황: ' + cleaned;
+      renderCoachSituations();
+      toast('새로운 상황 미션이 출제되었습니다!');
+    }
+  } catch(e){
+    alert('상황 출제 오류: ' + e.message);
+  }
+}
+
+async function coachGenerateAllAiMissions(){
+  const items = coachSitCards || [];
+  if(!items.length) return;
+
+  const key = coachGetApiKey();
+  if(!key){
+    alert('AI 상황 출제를 위해 상단에서 Gemini API 키를 등록해 주세요.');
+    coachOpenKeyModal();
+    return;
+  }
+
+  toast('AI가 5개 표현 모두의 실전 응용 상황을 출제 중입니다…');
+  try {
+    const listDesc = items.map((it, i) => (i+1) + '. Pattern: "' + it.targetPattern + '", Orig: "' + it.origEng + '" (' + it.origKor + ')').join('\n');
+    const sysPrompt = 'You are a creative ACTFL OPIc speaking test maker.\n'
+      + 'Here are 5 target expressions learned by a student:\n'
+      + listDesc + '\n\n'
+      + 'Task: For each item, create a realistic everyday/OPIc speaking scenario prompt in Korean (1 sentence ending with "~라고 말해보세요") for the student to practice making a BRAND NEW English sentence using the expression (NOT repeating the original).\n'
+      + 'Output valid JSON array of 5 strings only: ["상황 1", "상황 2", "상황 3", "상황 4", "상황 5"]';
+
+    const resp = await coachCallGemini('Generate 5 scenarios', sysPrompt);
+    const parsed = coachCleanJson(resp);
+    if(Array.isArray(parsed) && parsed.length >= items.length){
+      items.forEach((it, i) => {
+        if(parsed[i]) it.situation = '🎯 AI 맞춤 상황: ' + parsed[i];
+      });
+      renderCoachSituations();
+      toast('5개 표현의 새로운 응용 상황이 모두 출제되었습니다!');
+    } else {
+      throw new Error('응답 형식 오류');
+    }
+  } catch(e){
+    alert('일괄 출제 오류: ' + e.message);
+  }
+}
+
 function coachToggleSitMic(idx){
   coachStopSpeak();
   const btn = document.getElementById('coachSitMicBtn_' + idx);
   const txt = document.getElementById('coachSitMicTxt_' + idx);
   const inp = document.getElementById('coachSitInp_' + idx);
-  const isCustomCards = Array.isArray(coachSitCards);
-  const items = isCustomCards ? coachSitCards : COACH_PRESET_SITUATIONS;
+  const items = coachSitCards || [];
   const item = items[idx];
 
   if(coachSitSpeechRec){
@@ -19516,9 +19649,10 @@ function coachToggleSitMic(idx){
 }
 
 async function coachCheckSituation(idx){
-  const isCustomCards = Array.isArray(coachSitCards);
-  const items = isCustomCards ? coachSitCards : COACH_PRESET_SITUATIONS;
+  const items = coachSitCards || [];
   const item = items[idx];
+  if(!item) return;
+
   const inp = document.getElementById('coachSitInp_' + idx);
   const draft = (inp ? inp.value : (localStorage.getItem('cards_sit_draft_' + item.id) || '')).trim();
 
@@ -19538,18 +19672,22 @@ async function coachCheckSituation(idx){
   toast('AI가 표현을 점검하고 AL 수준으로 다듬는 중입니다…');
   try {
     const sysPrompt = 'You are an elite ACTFL OPIc AL speaking coach.\n'
-      + 'Target Situation: "' + item.situation + '"\n'
-      + 'Target Expression/Pattern: "' + item.targetPattern + '"\n'
+      + 'Target Learned Expression/Pattern: "' + item.targetPattern + '"\n'
+      + 'Original Textbook Card (Reference only, student must NOT just copy this): "' + item.origEng + '" (' + item.origKor + ')\n'
+      + 'Speaking Mission Context: "' + item.situation + '"\n'
       + 'Student Spoken Draft: "' + draft + '"\n\n'
-      + 'Task:\n'
-      + '1. Check if the target expression is used accurately.\n'
-      + '2. Upgrade the draft into a high-scoring, natural spoken AL sentence (1-2 sentences) using natural fillers (Well, Actually, You know) or idiomatic flow.\n'
-      + '3. Provide brief encouraging feedback in Korean.\n\n'
+      + 'Core Practice Goal:\n'
+      + 'The student is practicing creating a BRAND NEW, DIFFERENT spoken sentence using the learned target expression (rather than reciting the textbook sentence).\n\n'
+      + 'Tasks:\n'
+      + '1. Check whether the target expression/pattern was applied accurately in the student\'s sentence.\n'
+      + '2. Check if the student created a new creative sentence or merely repeated the textbook sentence verbatim. (If repeated verbatim, encourage creative variation in feedback).\n'
+      + '3. Upgrade their spoken draft into a high-scoring ACTFL OPIc AL spoken response (1-2 natural spoken sentences) with authentic American cadence, discourse markers (Well, Honestly, Actually, You know), and idiomatic phrasing.\n'
+      + '4. Provide encouraging Korean feedback (1-2 sentences) highlighting how the AL version elevates their speaking.\n\n'
       + 'Output valid JSON only:\n'
       + '{\n'
       + '  "alUpgrade": "Polished spoken AL sentence(s)",\n'
       + '  "koreanMeaning": "자연스러운 한국어 해석",\n'
-      + '  "feedback": "표현 활용도 및 억양/시제 팁 (한국어 1~2줄)"\n'
+      + '  "feedback": "표현 활용도 및 AL 발화 꿀팁 (한국어 1~2줄)"\n'
       + '}';
 
     const resp = await coachCallGemini('Draft: "' + draft + '"', sysPrompt);
@@ -19564,8 +19702,7 @@ async function coachCheckSituation(idx){
 }
 
 async function coachSaveSitComparison(idx){
-  const isCustomCards = Array.isArray(coachSitCards);
-  const items = isCustomCards ? coachSitCards : COACH_PRESET_SITUATIONS;
+  const items = coachSitCards || [];
   const item = items[idx];
   if(!item) return;
 
@@ -19593,11 +19730,13 @@ async function coachSaveSitComparison(idx){
     topic: item.topic,
     situation: item.situation,
     targetPattern: item.targetPattern,
+    origKor: item.origKor || '',
+    origEng: item.origEng || '',
     userDraft: draft,
     alUpgrade: fb.alUpgrade,
     koreanMeaning: fb.koreanMeaning,
     feedback: fb.feedback,
-    tags: ['입영작', 'AL비교']
+    tags: ['입영작', 'AL비교', '응용문장']
   };
 
   try {
@@ -19610,7 +19749,7 @@ async function coachSaveSitComparison(idx){
       topic: item.topic,
       level: '입영작',
       tags: ['입영작', 'AL비교'],
-      question: '[' + item.targetPattern + '] ' + item.situation.slice(0, 45) + '...'
+      question: '[' + item.targetPattern + ' 응용] ' + (draft ? draft.slice(0, 45) : item.situation.slice(0, 45)) + '...'
     });
     await idbSet('cards_eva_index_v1', index);
     await idbSet('cards_eva_item_' + id, sitPayload);
@@ -20381,7 +20520,8 @@ async function coachLoadArchiveItem(id){
     if(item.type === 'sit'){
       let sitH = '<div class="coach-compare-card" style="margin-top:4px;">'
         + '<div style="font-size:13px;color:var(--c-sec);line-height:1.45;">'
-        + '<b>상황 미션:</b> ' + esc(item.situation || '-')
+        + (item.origKor ? '<div style="font-size:12px;color:var(--c-sec);margin-bottom:6px;background:var(--c-fill);padding:6px 10px;border-radius:8px;">📖 학습했던 원문: <b>' + esc(item.origKor) + '</b> <span style="font-size:11px;opacity:.85;">(' + esc(item.origEng || '') + ')</span></div>' : '')
+        + '<b>응용 발화 미션:</b> ' + esc(item.situation || '-')
         + '<div style="margin-top:2px;"><b>목표 패턴:</b> <code style="color:var(--c-acc);font-weight:600;background:var(--c-card);padding:1px 6px;border-radius:4px;border:0.5px solid var(--c-sep);">' + esc(item.targetPattern || '-') + '</code></div>'
         + '</div>'
         + '<div class="coach-compare-divider"></div>'
