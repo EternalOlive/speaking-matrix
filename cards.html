@@ -2713,9 +2713,9 @@ details.gr-fold[open]>summary .s2-chev{transform:rotate(90deg);}
     <div class="hs-tiles" id="hTiles"></div>
     <div style="padding: 10px 14px 4px;">
       <select id="courseSelectSide" class="course-select" style="width:100%;" onchange="setCourse(this.value)">
-        <option value="all">📚 전체 교재</option>
-        <option value="sm">🗣️ Speaking Matrix</option>
-        <option value="ht">⚡ 해커스톡 10분의 기적</option>
+        <option value="all">전체 교재</option>
+        <option value="sm">Speaking Matrix</option>
+        <option value="ht">해커스톡 10분의 기적</option>
       </select>
     </div>
 
@@ -2881,7 +2881,7 @@ details.gr-fold[open]>summary .s2-chev{transform:rotate(90deg);}
       <div class="sub-body"><div class="sub-inner">
         
         <div class="course-sel-bar">
-          <span class="course-sel-label">📚 교재 선택</span>
+          <span class="course-sel-label">교재 선택</span>
           <select id="courseSelectUnits" class="course-select" onchange="setCourse(this.value)">
             <option value="all">전체 교재 (Speaking Matrix + 해커스톡)</option>
             <option value="sm">Speaking Matrix (1분 스피킹 900제)</option>
@@ -3454,7 +3454,7 @@ details.gr-fold[open]>summary .s2-chev{transform:rotate(90deg);}
 <div class="ovl" id="ovlHkDays"><div class="sheet wide">
   <div class="hk-modal-head">
     <div>
-      <h2 style="margin:0 0 4px">⚡ 해커스톡 10분의 기적 — Day 선택</h2>
+      <h2 style="margin:0 0 4px">해커스톡 10분의 기적 — Day 선택</h2>
       <p class="desc" style="margin:0">학습할 Day 팩(3일치 9문장)을 선택하세요.</p>
     </div>
     <button type="button" class="tb-btn" id="hkDaysClose" aria-label="닫기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
@@ -12302,9 +12302,9 @@ function openHkDayModal(){
     const isAct = p.index === curPack.index;
     let badgeHtml = '';
     if(p.isComplete){
-      badgeHtml = '<span class="hk-dc-status-done">✔ 완료</span>';
+      badgeHtml = '<span class="hk-dc-status-done"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" width="12" height="12" style="vertical-align:-1px;margin-right:2px"><polyline points="20 6 9 17 4 12"/></svg>완료</span>';
     } else if(p.doneCount > 0){
-      badgeHtml = `<span style="font-size:12px;font-weight:700;color:#ff9500;">${p.doneCount}/${p.total} 학습중</span>`;
+      badgeHtml = `<span style="font-size:12px;font-weight:700;color:var(--c-orange, #ff9500);">${p.doneCount}/${p.total} 학습중</span>`;
     } else {
       badgeHtml = `<span style="font-size:12px;color:var(--c-ter);">미학습</span>`;
     }
@@ -12350,7 +12350,7 @@ function renderRoutineCards(){
     <!-- 해커스톡 10분의 기적 카드 -->
     <div class="rc-card">
       <div class="rc-badge-row">
-        <span class="rc-badge rc-badge-ht">⚡ 해커스톡 10분의 기적</span>
+        <span class="rc-badge rc-badge-ht">해커스톡 10분의 기적</span>
         <span class="rc-subtag">하루 3일치 9문장 루틴</span>
       </div>
       <div class="rc-title">${esc(curPack.title)}</div>
@@ -12364,11 +12364,11 @@ function renderRoutineCards(){
       </div>
       <div class="rc-actions">
         <button type="button" class="rc-btn-primary ht" onclick="startHackerstalkPack(${curPack.index})">
-          <svg viewBox="0 0 24 24" fill="currentColor" width="17" height="17" aria-hidden="true"><path d="M7 4.8v14.4a1 1 0 0 0 1.5.86l11.6-7.2a1 1 0 0 0 0-1.72L8.5 3.94A1 1 0 0 0 7 4.8z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16" aria-hidden="true"><path d="M7 4.8v14.4a1 1 0 0 0 1.5.86l11.6-7.2a1 1 0 0 0 0-1.72L8.5 3.94A1 1 0 0 0 7 4.8z"/></svg>
           오늘 9문장 바로 시작
         </button>
         <button type="button" class="rc-btn-sub" onclick="openHkDayModal()">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
           Day 목록
         </button>
       </div>
@@ -12377,11 +12377,11 @@ function renderRoutineCards(){
     <!-- Speaking Matrix 카드 -->
     <div class="rc-card">
       <div class="rc-badge-row">
-        <span class="rc-badge rc-badge-sm">📘 Speaking Matrix</span>
+        <span class="rc-badge rc-badge-sm">Speaking Matrix</span>
         <span class="rc-subtag">900제 스피킹 훈련</span>
       </div>
       <div class="rc-title">${esc(smName)}</div>
-      <div class="rc-meta">${smRemain > 0 ? `오늘 남은 카드 ${smRemain.toLocaleString()}장` : '오늘 할 일 완료!'}</div>
+      <div class="rc-meta">${smRemain > 0 ? `오늘 남은 카드 ${smRemain.toLocaleString()}장` : '오늘 할 일 완료'}</div>
       <div class="rc-actions" style="margin-top:14px;">
         <button type="button" class="rc-btn-primary" onclick="${smSess ? `viewSess=sessions.find(s=>s.id==='${smSess.id}');playSess(viewSess);` : `toast('세션이 없습니다');`}">
           <svg viewBox="0 0 24 24" fill="currentColor" width="17" height="17" aria-hidden="true"><path d="M7 4.8v14.4a1 1 0 0 0 1.5.86l11.6-7.2a1 1 0 0 0 0-1.72L8.5 3.94A1 1 0 0 0 7 4.8z"/></svg>
