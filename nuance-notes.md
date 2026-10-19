@@ -39,7 +39,14 @@ Speaking Matrix 900제 문장의 뉘앙스, 원어민 어감 차이, 실전 활�
 
 <div id="day-04"></div>
 ### Day 04
-*등록된 뉘앙스 노트가 없습니다.*
+- **I'm a bit sleepy, but I feel awake.** <!-- id: sm_1790710444311 -->
+  - **I'm awake.**: 깨어 있다.
+  - → 현재 깨어 있는 상태를 직접 표현한다.
+  - **I feel awake.**: 정신이 깨어 있는 느낌이다.
+  - → 실제로 느끼는 정신 상태에 초점을 둔다.
+  - **I'm a bit sleepy, but I'm awake.**: 조금 졸리지만 깨어 있다.
+  - **I'm a bit sleepy, but I feel awake.**: 조금 졸리지만 정신은 맑은 느낌이다.
+  - **핵심:** `be awake`는 깨어 있는 상태, `feel awake`는 정신이 맑다고 느끼는 상태를 강조한다.
 
 <div id="day-05"></div>
 ### Day 05
@@ -149,7 +156,8 @@ Speaking Matrix 900제 문장의 뉘앙스, 원어민 어감 차이, 실전 활�
 
 <div id="day-16"></div>
 ### Day 16
-*등록된 뉘앙스 노트가 없습니다.*
+- **I'm feeling exhausted at work.** <!-- id: sm_1790710445988 -->
+  - Feel 빼도 가느
 
 <div id="day-17"></div>
 ### Day 17
