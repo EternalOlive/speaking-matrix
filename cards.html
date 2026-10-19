@@ -2919,14 +2919,7 @@ details.gr-fold[open]>summary .s2-chev{transform:rotate(90deg);}
   <aside id="hSide">
     <div class="hs-head"><span class="hs-title">카드</span><span class="hs-dday" id="hDday"></span></div>
     <div class="hs-tiles" id="hTiles"></div>
-    <div style="padding: 10px 14px 4px;">
-      <select id="courseSelectSide" class="course-select" style="width:100%;" onchange="setCourse(this.value)">
-        <option value="all">전체 교재</option>
-        <option value="sm">Speaking Matrix 1분</option>
-        <option value="sm2">Speaking Matrix 2분</option>
-        <option value="ht">해커스톡 10분의 기적</option>
-      </select>
-    </div>
+    
 
     <nav class="hs-nav"><div class="hs-grp">보기</div>
       <button class="hs-row" data-go="scrYmToday" style="font-weight:600;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>스피킹 코치</button>
@@ -11117,6 +11110,51 @@ function renderHero(due){
 }
 function renderSessRows(){
   const box=$('sessList'); box.innerHTML='';
+
+  // [해커스톡 10분의 기적] 루틴 세션 (34팩 진행도 바 통합)
+  try {
+    const packs = getHackerstalkPacks();
+    const completedPacks = packs.filter(p => p.isComplete).length;
+    const curPack = getHkCurrentPack(packs);
+    const hkPct = Math.round((completedPacks / 34) * 100);
+
+    const htEl = document.createElement('div');
+    htEl.className = 'sess2 ht-routine-sess';
+    htEl.style.cssText = 'flex-direction:column;align-items:stretch;gap:8px;padding:14px 16px 14px 20px;cursor:pointer;';
+    htEl.innerHTML = `
+      <div style="display:flex;align-items:center;gap:14px;width:100%;">
+        <span class="s2-dot" style="background:var(--c-orange, #ff9500);flex-shrink:0;"></span>
+        <div class="s2-b" style="flex:1;min-width:0;">
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+            <span class="s2-n" style="font-weight:600;">해커스톡 10분의 기적</span>
+            <span style="font-size:12px;font-weight:700;color:var(--c-orange);background:rgba(255,149,0,.12);padding:1px 8px;border-radius:6px;">${esc(curPack.title)}</span>
+            <span style="font-size:12px;color:var(--c-sec);">${curPack.total}문장</span>
+          </div>
+          <div class="s2-s" style="margin-top:3px;color:var(--c-sec);">핵심 패턴: ${esc(curPack.patterns.slice(0, 3).join(' · ') || '패턴 훈련')}</div>
+        </div>
+        <div class="s2-r" style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
+          <button type="button" class="coach-btn sm outline" id="btnHkDayListInSess" style="padding:4px 9px;font-size:12px;" onclick="event.stopPropagation();openHkDayModal();">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>Day 목록
+          </button>
+          <svg class="s2-chev" viewBox="0 0 9 15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m1.5 1.5 6 6-6 6"/></svg>
+        </div>
+      </div>
+      <div style="width:100%;margin-top:2px;">
+        <div class="rc-prog-bar" style="margin:0;height:5px;background:var(--c-fill);border-radius:3px;overflow:hidden;">
+          <div class="rc-prog-fill ht" style="width:${Math.max(4, hkPct)}%;"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--c-sec);margin-top:4px;">
+          <span>진도: <b>${completedPacks}</b> / 34 팩 완료</span>
+          <b style="color:var(--c-orange);">${hkPct}%</b>
+        </div>
+      </div>
+    `;
+    htEl.onclick = () => startHackerstalkPack(curPack.index);
+    box.appendChild(htEl);
+  } catch(e){
+    console.error('해커스톡 루틴 세션 렌더링 오류:', e);
+  }
+
   sessions.forEach((sx,i)=>{
     if(sx.temp && sessRemain(sx)<=0) return; // 다 푼 임시 세션은 목록에 찌꺼기로 남기지 않음
     if(!isFixed(sx) && sx.day!==todayKey()) refillSess(sx);   // 전체 범위는 열 때마다 오늘치로
@@ -12568,66 +12606,7 @@ function closeHkDayModal(){
 function renderRoutineCards(){
   const hub = $('routineHub');
   if(!hub) return;
-  
-  // 1. 해커스톡 상태 산출
-  const packs = getHackerstalkPacks();
-  const completedPacks = packs.filter(p => p.isComplete).length;
-  const curPack = getHkCurrentPack(packs);
-  const hkPct = Math.round((completedPacks / 34) * 100);
-
-  // 2. Speaking Matrix 상태 산출
-  const smSess = sessions.find(s => s && !s.del && !s.name.includes('해커스톡')) || sessions[0];
-  const smRemain = smSess ? sessRemain(smSess) : 0;
-  const smName = smSess ? smSess.name : '스피킹 매트릭스';
-
-  hub.innerHTML = `
-    <!-- 해커스톡 10분의 기적 카드 -->
-    <div class="rc-card">
-      <div class="rc-badge-row">
-        <span class="rc-badge rc-badge-ht">해커스톡 10분의 기적</span>
-        <span class="rc-subtag">하루 3일치 9문장 루틴</span>
-      </div>
-      <div class="rc-title">${esc(curPack.title)}</div>
-      <div class="rc-meta">${curPack.total}문장 · 핵심 패턴: ${esc(curPack.patterns.slice(0, 3).join(' · '))}</div>
-      <div class="rc-prog-bar">
-        <div class="rc-prog-fill ht" style="width:${Math.max(4, hkPct)}%;"></div>
-      </div>
-      <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--c-sec);margin:-8px 0 12px;">
-        <span>진도: ${completedPacks} / 34 팩 완료</span>
-        <b>${hkPct}%</b>
-      </div>
-      <div class="rc-actions">
-        <button type="button" class="rc-btn-primary ht" onclick="startHackerstalkPack(${curPack.index})">
-          <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16" aria-hidden="true"><path d="M7 4.8v14.4a1 1 0 0 0 1.5.86l11.6-7.2a1 1 0 0 0 0-1.72L8.5 3.94A1 1 0 0 0 7 4.8z"/></svg>
-          오늘 9문장 바로 시작
-        </button>
-        <button type="button" class="rc-btn-sub" onclick="openHkDayModal()">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
-          Day 목록
-        </button>
-      </div>
-    </div>
-
-    <!-- Speaking Matrix 카드 -->
-    <div class="rc-card">
-      <div class="rc-badge-row">
-        <span class="rc-badge rc-badge-sm">Speaking Matrix</span>
-        <span class="rc-subtag">실전 스피킹 훈련</span>
-      </div>
-      <div class="rc-title">${esc(smName)}</div>
-      <div class="rc-meta">${smRemain > 0 ? `오늘 남은 카드 ${smRemain.toLocaleString()}장` : '오늘 할 일 완료'}</div>
-      <div class="rc-actions" style="margin-top:14px;">
-        <button type="button" class="rc-btn-primary" onclick="${smSess ? `viewSess=sessions.find(s=>s.id==='${smSess.id}');playSess(viewSess);` : `toast('세션이 없습니다');`}">
-          <svg viewBox="0 0 24 24" fill="currentColor" width="17" height="17" aria-hidden="true"><path d="M7 4.8v14.4a1 1 0 0 0 1.5.86l11.6-7.2a1 1 0 0 0 0-1.72L8.5 3.94A1 1 0 0 0 7 4.8z"/></svg>
-          학습 시작
-        </button>
-        <button type="button" class="rc-btn-sub" onclick="const sl=$('sessList'); if(sl) sl.scrollIntoView({behavior:'smooth'});">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
-          세션 목록
-        </button>
-      </div>
-    </div>
-  `;
+  hub.innerHTML = ''; // 세션 목록으로 통합되어 상단 중복 배너 비움
 }
 
 // 오버레이 닫기 바인딩
