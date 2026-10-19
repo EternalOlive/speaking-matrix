@@ -3266,7 +3266,7 @@ details.gr-fold[open]>summary .s2-chev{transform:rotate(90deg);}
     <div class="set-row" id="lightRow"><span>자동일 때 밝은 테마</span><div class="seg" id="lightSeg"><button data-lt="paper">페이퍼</button><button data-lt="white">화이트</button></div></div>
   </div>
   <div class="field" style="display:none"><label>하루 신규 권장량</label>
-    <input id="intakeCap" type="number" inputmode="numeric" min="0" placeholder="130"></div>
+    <input id="intakeCap" type="number" inputmode="numeric" min="0" placeholder="9"></div>
   <div class="field"><label>복습 강도</label>
     <div class="rng-row"><span class="rng-v" id="retVal">90%</span><span class="desc" id="retLoad"></span></div>
     <input class="rng" id="retRange" type="range" min="85" max="95" step="any" value="90">
@@ -7027,7 +7027,7 @@ function loadCfg(){
 function saveCfg(){ lsSet(K_CFG, JSON.stringify(cfg)); }
 
 /* ═══════════════ 신규 투입 계획 (과목 순서 + 하루 상한) + 회독 대기 큐 ═══════════════ */
-let intake={order:[...SUBJECTS], cap:130}; // order는 유보 필드 — 신규 순서 정본은 INTAKE_PLAN(수강일 기반)
+let intake={order:[...SUBJECTS], cap:9}; // 하루 권장 신규 9문장 (3일치)
 function loadIntake(){ const v=lsGet(K_INTAKE);
   if(v){ try{ const o=JSON.parse(v);
     if(Array.isArray(o.order)&&o.order.length)intake.order=o.order;
@@ -8808,7 +8808,7 @@ function nextTopic(skip, pool0){
    🔴 조립을 두 문으로 모아 놓고 **「무엇을 고를까」를 또 두 곳에 두면 같은 병이 난다.**
    그래서 고르는 자리도 여기 하나로 모은다. **표시도 이걸 부르고, 투입도 이걸 부른다.**
    ⚠ `qRest`(그때의 남은 큐)를 받는다 — 씨앗이자, 그 주제 카드가 이미 큐에 있으면 빼는 기준이다. */
-const NEW_BATCH=50;        // 전 범위 「＋ 다음 진도」 한 번 = 섞은 신규 50장(메타 검수 기준 「앞 50장」)
+const NEW_BATCH=9;         // 전 범위 「＋ 다음 진도」 한 번 = 섞은 신규 9장 (해커스톡 3일치 / 1세션 분량)
 function isFullScope(sc){ return !((sc.units||[]).length || (sc.mids||[]).length); }
 function usableTopic(qRest){
   /* 🔴 풀을 **한 번만** 만든다 — 막힌 주제를 건너뛸 때마다 `scopePool`+정렬을 다시 하면
