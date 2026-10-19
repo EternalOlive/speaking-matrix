@@ -1499,7 +1499,7 @@ details.ym-subj>summary small{font-weight:600;color:var(--mute);font-size:12.5px
 #cBackWrap.on{visibility:visible;}
 #cAnsBody{position:relative;flex:1 1 auto;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr);}
 #cAnsIn{grid-area:1/1;display:flex;flex-direction:column;justify-content:center;gap:8px;padding:8px 0;min-width:0;}
-#cAnsLab{font-size:13px;font-weight:600;line-height:18px;color:var(--c-sec);}
+#cAnsLab{font-size:13px;font-weight:600;line-height:18px;color:var(--c-sec);display:flex;align-items:center;justify-content:space-between;}
 #cBack{color:var(--c-label);}
 #cBack.ans-s{font-size:var(--t-ans-short);font-weight:700;line-height:1.2;letter-spacing:-.025em;}
 #cBack.ans-m{font-size:var(--t-ans-mid);font-weight:700;line-height:1.3;letter-spacing:-.02em;}
@@ -2936,7 +2936,7 @@ details.gr-fold[open]>summary .s2-chev{transform:rotate(90deg);}
               <div id="cBackWrap">
                 <div id="cAnsBody">
                   <div id="cAnsIn">
-                    <div id="cAnsLab">정답</div>
+                    <div id="cAnsLab"><span>정답</span><button type="button" class="c-audio-btn" id="btnTtsPlay" title="음성(TTS) 다시 듣기 (단축키 T)" onclick="event.stopPropagation(); replayCardSpeech();" style="margin:0;padding:2px 8px;font-size:12px;height:24px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="12" height="12" style="vertical-align:-1px;margin-right:3px" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg><span class="c-tts-label">듣기 (T)</span></button></div>
                     <div id="cBack"></div>
                     <div class="c-imgs back" id="cImgB"></div>
                     <div id="cItems"></div>
@@ -3667,6 +3667,8 @@ details.gr-fold[open]>summary .s2-chev{transform:rotate(90deg);}
     <div id="restList" style="margin-top:8px"></div>
   </div>
   <div class="field"><label>풀이</label>
+    <div class="tgl-row"><span>정답 열 때 음성(TTS) 자동 읽기</span><div class="tgl" id="tglAutoTts"></div></div>
+    <div class="set-row" id="ttsRateRow" style="margin-top:4px"><span>TTS 읽기 속도</span><div class="seg" id="ttsRateSeg"><button data-rate="0.85">0.8x</button><button data-rate="1.0">1.0x</button><button data-rate="1.2">1.2x</button></div></div>
     <div class="tgl-row"><span>채점 버튼에 다음 간격</span><div class="tgl" id="cfgIv"></div></div>
     <div class="tgl-row"><span>「다시」 카드 한 번 더</span><div class="tgl" id="tglReshow"></div></div>
     <div class="tgl-row"><span>여백 눌러도 정답 보기</span><div class="tgl" id="tglZtap"></div></div>
@@ -5771,6 +5773,7 @@ const K_REST='cards_rest_v1', K_CFG='cards_cfg_v1', K_DIRTY='cards_dirty_v1', K_
       K_THEME='cards_theme_v1', K_PRESETS='cards_presets_v1',
       K_DATA='cards_data_cache_v1', K_SWIPE='cards_swipe_v1', K_INTAKE='cards_intake_v1',
       K_ZTAP='cards_zonetap_v1',          // 카드 마당 전체 탭 (기본 켜짐 · 09-07 동하 요청)
+      K_AUTOTTS='cards_auto_tts_v1', K_TTS_RATE='cards_tts_rate_v1',
       K_RESHOW='cards_reshow_v1',         // 「다시」 당일 재출 (기본 꺼짐 — 동하가 09-11 인강 끝나고 켠다)
       K_RESUME='cards_resume_v1',        // 회독본 갔다 돌아올 자리 (세션·카드·답면 · 오늘 것만)
       K_KBD='cards_kbd_v1', K_SESS='cards_sessions_v1',
@@ -5779,6 +5782,11 @@ const K_REST='cards_rest_v1', K_CFG='cards_cfg_v1', K_DIRTY='cards_dirty_v1', K_
       K_FBSENT='cards_fb_sent_v1',        // 보냈지만 응답을 못 받은 피드백 PUT {msg, base} — fbSentConfirm
       K_FBSYNC='cards_fb_sync_v1',        // 마지막 성공 push 시각 — fb·marks 공용 기준선 (reapFb·reapMarks, 둘 다 같은 pushAll에서 올라간다)
       K_WKSYNC='cards_week_sync_v1';      // 지난 주 로그를 마지막으로 다시 받은 주차 — loadWeeks의 「주가 바뀌면 한 번 재수신」 기준선
+let autoTtsOn = lsGet(K_AUTOTTS) !== '0';
+let ttsRate = parseFloat(lsGet(K_TTS_RATE) || '1.0');
+if(isNaN(ttsRate) || ttsRate <= 0) ttsRate = 1.0;
+window.autoTtsOn = autoTtsOn;
+window.ttsRate = ttsRate;
 const OLD_CFG='review_cfg_v1';            // 관리앱(같은 오리진)의 토큰 재사용
 const DAY_CUT=4;                          // 하루 경계 = 새벽 4시
 /* 확인창 문턱 — 🔴 **연산자는 전부 `>=`로 통일한다** (전층 감사 F5-4 · 2026-09-06).
@@ -9676,6 +9684,7 @@ function showHoedokLink(c){
 }
 function showCard(){
   if(typeof stopCardAudio === 'function') stopCardAudio();
+  if(typeof cancelCardSpeech === 'function') cancelCardSpeech();
   if(typeof cancelSprintCardTimer === 'function') cancelSprintCardTimer();
   if(typeof cancelIdleMotivationalTimer === 'function') cancelIdleMotivationalTimer();
   cardNuanceEditingDay = null;
@@ -9877,8 +9886,12 @@ function reveal(){
      표 머리글(조음 위치·입술·잇몸)이 잘린 채 시작한다(09-05 헤드리스 캡처로 확인). */
   if($('cTable').childElementCount===0 && bw.getBoundingClientRect().top > scr.top + scr.height*0.8)
     bw.scrollIntoView({behavior:'smooth', block:'nearest'});
+  if(typeof autoTtsOn !== 'undefined' && autoTtsOn && c && c.back && typeof speakCardBack === 'function'){
+    speakCardBack(c.back);
+  }
 }
 function unreveal(){   // 뒷면 → 앞면. 항목 체크(itemMarks)와 응답 시간(shownAt)은 건드리지 않는다 —
+  if(typeof cancelCardSpeech === 'function') cancelCardSpeech();
   const c=cur(); if(!c||!revealed)return;   // 답을 봤다는 사실은 그대로 남아야 한다
   revealed=false;
   $('cBackWrap').classList.remove('on');
@@ -12585,6 +12598,7 @@ function renderHome(){
   $('scrSolve').classList.toggle('ztap',zoneTapOn);
   $('tglSwipe').classList.toggle('on',swipeOn);
   $('tglKbd').classList.toggle('on',kbdOn);
+  if(typeof syncTtsSettingsUI === 'function') syncTtsSettingsUI();
   renderToday();
   snapAllCharts($('todayBox'));   // 주간 미니 막대 정수 폭
   counts();
@@ -13268,6 +13282,7 @@ $('btnSettings').onclick=()=>{
   // 열 때 현재값을 채운다 — 비어 있으면 설정돼 있어도 미설정처럼 보인다 (감사 U7). 없으면 placeholder 130 유지.
   $('intakeCap').value = intake.cap!=null ? intake.cap : '';
   renderRestUI(); renderRetUI(); renderFwUI(); applyIv();
+  if(typeof syncTtsSettingsUI === 'function') syncTtsSettingsUI();
   /* 사이드바가 보이는 폭 = 본문 페이지로 연다(디자인_언어 §7 「최상위 화면: 사이드바 + 본문」 · 동하 09-24 「2열 스크롤은 일반적이지 않다」) — 왼쪽 끝 = 사이드바 오른쪽 */
   const sd=$('hSide'), pg=!!sd && getComputedStyle(sd).display!=='none';
   $('ovlSettings').classList.toggle('page', pg);
@@ -13600,6 +13615,25 @@ $('tglReshow').onclick=()=>setReshow(!reshowOn, Date.now(), false);   // 기기 
 $('tglZtap').onclick=()=>{ zoneTapOn=!zoneTapOn; lsSet(K_ZTAP,zoneTapOn?'1':'0');
   $('tglZtap').classList.toggle('on',zoneTapOn); $('scrSolve').classList.toggle('ztap',zoneTapOn); };
 $('tglKbd').onclick=()=>{ kbdOn=!kbdOn; lsSet(K_KBD,kbdOn?'1':'0'); $('tglKbd').classList.toggle('on',kbdOn); };
+if($('tglAutoTts')){
+  $('tglAutoTts').onclick=()=>{ autoTtsOn=!autoTtsOn; window.autoTtsOn=autoTtsOn; lsSet(K_AUTOTTS, autoTtsOn?'1':'0');
+    if(typeof syncTtsSettingsUI==='function') syncTtsSettingsUI();
+    if(typeof toast==='function') toast('정답 TTS 자동 읽기: ' + (autoTtsOn ? '켜짐' : '꺼짐')); };
+}
+if($('ttsRateSeg')){
+  $('ttsRateSeg').onclick=(e)=>{
+    const btn = e.target.closest('button[data-rate]');
+    if(!btn) return;
+    ttsRate = parseFloat(btn.dataset.rate || '1.0');
+    window.ttsRate = ttsRate;
+    lsSet(K_TTS_RATE, String(ttsRate));
+    if(typeof syncTtsSettingsUI==='function') syncTtsSettingsUI();
+    if(typeof toast==='function') toast('TTS 속도 ' + btn.textContent + ' 설정');
+    if(revealed && typeof cur==='function' && cur() && cur().back && typeof speakCardBack==='function'){
+      speakCardBack(cur().back);
+    }
+  };
+}
 
 /* ═══════════════ 키보드 (PC 전용 보조 — 터치 흐름은 그대로) ═══════════════ */
 let kbdOn = lsGet(K_KBD)!=='0';
@@ -13712,7 +13746,19 @@ document.addEventListener('keydown',e=>{
   /* 🔴 조합키는 원래 **통째로** 무시한다 — 브라우저 단축키(Cmd+R·Cmd+F…)를 가로채지 않으려고.
      딱 하나 연다: **Ctrl+1~4 = 플래그 사유 칩 넷** (동하 09-09 · 게임패드 R을 Ctrl로 두고 쥔다).
      채점 1~4와 손가락 자리가 같고 Ctrl만 얹는 꼴이라 외울 것이 없다. 그 밖의 조합은 여전히 버린다. */
-  if(e.key==='r' || e.key==='R'){ const c=cur(); if(c&&c.audio){ e.preventDefault(); if(typeof toggleCardAudio==='function') toggleCardAudio(); else playCardAudio(); return; } }
+  if(e.key==='r' || e.key==='R'){
+    const c=cur();
+    if(c&&c.audio){ e.preventDefault(); if(typeof toggleCardAudio==='function') toggleCardAudio(); else playCardAudio(); return; }
+    else if(c&&c.back&&revealed){ e.preventDefault(); if(typeof replayCardSpeech==='function') replayCardSpeech(); return; }
+  }
+  if((e.key==='t' || e.key==='T') && revealed && !e.ctrlKey && !e.metaKey && !e.altKey){
+    const tg=e.target&&e.target.tagName;
+    if(!(tg==='INPUT'||tg==='TEXTAREA'||tg==='SELECT')){
+      e.preventDefault();
+      if(typeof replayCardSpeech==='function') replayCardSpeech();
+      return;
+    }
+  }
   if((!kbdOn && !_padEv) || e.metaKey || e.altKey)return;
   { const tg=e.target&&e.target.tagName; if(!(tg==='INPUT'||tg==='TEXTAREA'||tg==='SELECT')) document.documentElement.dataset.keys='on'; }   // 키 표시(09-24)
   if(!e.ctrlKey && !(e.target&&/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) && typeof ymTodayKey==='function' && (!e.repeat||/^Arrow/.test(e.key)) && ymTodayKey(e)){ e.preventDefault(); return; }
@@ -13778,6 +13824,7 @@ document.addEventListener('keydown',e=>{
   }
   if(e.key==='Escape'){
     if(typeof stopCardAudio === 'function') stopCardAudio();
+    if(typeof cancelCardSpeech === 'function') cancelCardSpeech();
     if(ovl){ if(ovl.id==='ovlCard')closeCardSheet(); else if(ovl.id==='ovlHd')closeHoedok(); else if(ovl.id==='ovlImg')closeImg(); else ovl.classList.remove('show'); e.preventDefault(); }
     else if($('rail').classList.contains('open')){ $('rail').classList.remove('open'); $('railScrim').classList.remove('show'); }
     else if(typing){ t.blur(); }
@@ -18656,6 +18703,84 @@ function toggleCardAudio(ev){
 
 function playCardAudio(ev){
   toggleCardAudio(ev);
+}
+
+/* ═══════════ 정답 TTS 자동 읽기 & 음성 재생 (2026-10-20) ═══════════ */
+function cancelCardSpeech(){
+  if('speechSynthesis' in window){
+    try { window.speechSynthesis.cancel(); } catch(e){}
+  }
+  const btn = document.getElementById('btnTtsPlay');
+  if(btn){
+    btn.classList.remove('playing');
+    const lbl = btn.querySelector ? btn.querySelector('.c-tts-label') : null;
+    if(lbl) lbl.textContent = '듣기 (T)';
+  }
+}
+
+function speakCardBack(text){
+  if(!('speechSynthesis' in window)) return;
+  cancelCardSpeech();
+  if(!text) return;
+  const clean = String(text).replace(/<[^>]+>/g, '').trim();
+  if(!clean) return;
+  const u = new SpeechSynthesisUtterance(clean);
+  u.lang = 'en-US';
+  const curRate = (typeof ttsRate === 'number' && !isNaN(ttsRate) && ttsRate > 0) ? ttsRate : 1.0;
+  u.rate = curRate;
+
+  const voices = window.speechSynthesis.getVoices();
+  if(voices && voices.length){
+    const preferred = voices.find(v => v.lang === 'en-US' && (v.name.includes('Natural') || v.name.includes('Google') || v.name.includes('Siri') || v.name.includes('Samantha') || v.name.includes('Karen') || v.name.includes('Daniel')))
+      || voices.find(v => v.lang === 'en-US')
+      || voices.find(v => v.lang && v.lang.startsWith('en'));
+    if(preferred) u.voice = preferred;
+  }
+
+  const btn = document.getElementById('btnTtsPlay');
+  if(btn){
+    btn.classList.add('playing');
+    const lbl = btn.querySelector ? btn.querySelector('.c-tts-label') : null;
+    if(lbl) lbl.textContent = '중단 (T)';
+  }
+  u.onend = () => {
+    if(btn){
+      btn.classList.remove('playing');
+      const lbl = btn.querySelector ? btn.querySelector('.c-tts-label') : null;
+      if(lbl) lbl.textContent = '듣기 (T)';
+    }
+  };
+  u.onerror = () => {
+    if(btn){
+      btn.classList.remove('playing');
+      const lbl = btn.querySelector ? btn.querySelector('.c-tts-label') : null;
+      if(lbl) lbl.textContent = '듣기 (T)';
+    }
+  };
+  window.speechSynthesis.speak(u);
+}
+
+function replayCardSpeech(){
+  if('speechSynthesis' in window && window.speechSynthesis.speaking){
+    cancelCardSpeech();
+    return;
+  }
+  const c = (typeof cur === 'function') ? cur() : null;
+  if(c && c.back){
+    speakCardBack(c.back);
+  }
+}
+
+function syncTtsSettingsUI(){
+  const t = document.getElementById('tglAutoTts');
+  if(t && typeof autoTtsOn !== 'undefined') t.classList.toggle('on', autoTtsOn);
+  const seg = document.getElementById('ttsRateSeg');
+  if(seg && typeof ttsRate !== 'undefined'){
+    seg.querySelectorAll('button').forEach(btn => {
+      const r = parseFloat(btn.dataset.rate || '1.0');
+      btn.classList.toggle('on', Math.abs(r - ttsRate) < 0.05);
+    });
+  }
 }
 
 
