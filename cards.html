@@ -18860,16 +18860,16 @@ async function coachCallGemini(prompt, systemPrompt){
     'gemini-2.0-flash'
   ].filter((v, i, a) => a.indexOf(v) === i);
 
+  // 모든 Gemini 모델에서 500 스키마 오류를 방지하기 위해 단일 contents로 통합
+  const fullText = systemPrompt ? (systemPrompt + '\n\n' + prompt) : prompt;
+  const payload = {
+    contents: [{ parts: [{ text: fullText }] }]
+  };
+
   let lastError = null;
   for(const curModel of candidateModels){
     try {
       const url = 'https://generativelanguage.googleapis.com/v1beta/models/' + encodeURIComponent(curModel) + ':generateContent?key=' + encodeURIComponent(key);
-      const payload = {
-        contents: [{ parts: [{ text: prompt }] }]
-      };
-      if(systemPrompt){
-        payload.systemInstruction = { parts: [{ text: systemPrompt }] };
-      }
       const res = await fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -18878,11 +18878,11 @@ async function coachCallGemini(prompt, systemPrompt){
       if(!res.ok){
         const errData = await res.json().catch(()=>({}));
         const msg = errData.error?.message || ('HTTP ' + res.status);
-        const isFallbackable = res.status === 404 || res.status === 429 || res.status === 503
-          || /not found|not supported|no longer available|is not available|deprecated|high demand|overloaded|capacity|resource exhausted|temporarily|try again/i.test(msg);
+        const isFallbackable = res.status >= 500 || res.status === 429 || res.status === 404
+          || /internal error|not found|not supported|no longer available|is not available|deprecated|high demand|overloaded|capacity|resource exhausted|temporarily|try again/i.test(msg);
         if(isFallbackable){
           lastError = new Error(msg);
-          console.warn('Gemini 모델 ' + curModel + ' 일시적 사용 불가 (' + msg + '), 다음 후보 모델 시도...');
+          console.warn('Gemini 모델 ' + curModel + ' 일시적 오류 (' + msg + '), 다음 후보 모델 시도...');
           continue;
         }
         throw new Error(msg);
@@ -18895,7 +18895,7 @@ async function coachCallGemini(prompt, systemPrompt){
       return text;
     } catch(err){
       lastError = err;
-      if(/not found|not supported|no longer available|is not available|deprecated|high demand|overloaded|capacity|resource exhausted|temporarily|try again/i.test(err.message)){
+      if(/internal error|not found|not supported|no longer available|is not available|deprecated|high demand|overloaded|capacity|resource exhausted|temporarily|try again/i.test(err.message)){
         continue;
       }
       throw err;
