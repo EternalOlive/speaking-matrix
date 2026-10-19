@@ -2253,6 +2253,75 @@ details.gr-fold[open]>summary .s2-chev{transform:rotate(90deg);}
 }
 
 
+/* ═══════════ 스피킹 코치 & Eva OPIc 인터뷰 (2026-10-20) ═══════════ */
+.coach-wrap { max-width: 680px; margin: 0 auto; padding: 12px 16px 40px; display: flex; flex-direction: column; gap: 16px; }
+.coach-nav { display: flex; background: var(--c-fill); padding: 3px; border-radius: 12px; gap: 4px; }
+.coach-tab { flex: 1; border: 0; background: none; font-size: 14px; font-weight: 500; color: var(--c-sec); padding: 8px 10px; border-radius: 9px; cursor: pointer; transition: all .15s ease; text-align: center; white-space: nowrap; }
+.coach-tab.active { background: var(--c-card); color: var(--c-label); font-weight: 600; box-shadow: var(--sh-card); }
+.coach-card { background: var(--c-card); border-radius: 16px; padding: 18px 20px; box-shadow: var(--sh-card); display: flex; flex-direction: column; gap: 14px; border: 0.5px solid var(--c-sep); }
+.coach-card-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.coach-card-title { font-size: 17px; font-weight: 600; color: var(--c-label); display: flex; align-items: center; gap: 8px; }
+.coach-badge { font-size: 12px; font-weight: 600; padding: 3px 8px; border-radius: 6px; }
+.coach-badge.blue { background: rgba(0,122,255,.12); color: var(--c-acc); }
+.coach-badge.green { background: rgba(52,199,89,.12); color: var(--c-green); }
+.coach-badge.purple { background: rgba(175,82,222,.12); color: var(--c-purple); }
+.coach-badge.orange { background: rgba(255,149,0,.12); color: var(--c-orange); }
+
+.coach-q-box { background: var(--c-fill); border-radius: 12px; padding: 14px 16px; font-size: 15px; line-height: 1.55; color: var(--c-label); }
+.coach-hints { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font-size: 13px; color: var(--c-sec); }
+.coach-hint-chip { background: var(--c-card); border: 0.5px solid var(--c-sep); padding: 3px 8px; border-radius: 6px; font-family: monospace; font-size: 12px; color: var(--c-acc); }
+
+.coach-input-wrap { position: relative; display: flex; flex-direction: column; gap: 8px; }
+.coach-input { width: 100%; min-height: 64px; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--c-sep); background: var(--c-card); color: var(--c-label); font-size: 15px; line-height: 1.45; resize: vertical; box-sizing: border-box; font-family: inherit; }
+.coach-input:focus { outline: none; border-color: var(--c-acc); box-shadow: 0 0 0 3px rgba(0,122,255,.15); }
+.coach-input-acts { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+
+.coach-btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; font-size: 14px; font-weight: 600; padding: 8px 14px; border-radius: 10px; border: 0; cursor: pointer; transition: all .15s ease; user-select: none; }
+.coach-btn.primary { background: var(--c-acc); color: #fff; }
+.coach-btn.secondary { background: var(--c-fill); color: var(--c-label); }
+.coach-btn.outline { background: none; border: 1px solid var(--c-sep); color: var(--c-label); }
+.coach-btn.sm { font-size: 12px; padding: 5px 10px; border-radius: 8px; }
+.coach-btn.mic { background: rgba(0,122,255,.12); color: var(--c-acc); }
+.coach-btn.mic.recording { background: var(--c-red); color: #fff; animation: coachPulse 1.2s infinite; }
+
+@keyframes coachPulse {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,59,48,.5); }
+  70% { transform: scale(1.03); box-shadow: 0 0 0 8px rgba(255,59,48,0); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,59,48,0); }
+}
+
+.coach-feedback { background: rgba(52,199,89,.08); border-left: 3px solid var(--c-green); border-radius: 8px; padding: 12px 14px; font-size: 14px; line-height: 1.5; color: var(--c-label); display: flex; flex-direction: column; gap: 6px; }
+.coach-fb-native { font-size: 15px; font-weight: 600; color: var(--c-label); display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.coach-fb-tip { font-size: 13px; color: var(--c-sec); }
+
+/* Eva Interview styles */
+.eva-profile { display: flex; align-items: center; gap: 14px; padding: 4px 0; }
+.eva-avatar { width: 44px; height: 44px; border-radius: 22px; background: linear-gradient(135deg, #AF52DE, #5856D6); display: flex; align-items: center; justify-content: center; color: #fff; flex-shrink: 0; }
+.eva-meta { display: flex; flex-direction: column; gap: 2px; }
+.eva-name { font-size: 16px; font-weight: 700; color: var(--c-label); }
+.eva-desc { font-size: 13px; color: var(--c-sec); }
+
+.eva-timer-wrap { display: flex; flex-direction: column; gap: 6px; align-items: center; margin: 10px 0; }
+.eva-timer { font-size: 32px; font-weight: 700; font-variant-numeric: tabular-nums; color: var(--c-label); }
+.eva-timer.danger { color: var(--c-red); }
+.eva-prog-bar { width: 100%; height: 6px; border-radius: 3px; background: var(--c-fill); overflow: hidden; }
+.eva-prog-fill { height: 100%; background: var(--c-purple); transition: width .3s linear; }
+
+.eva-rec-box { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 14px 0; }
+.eva-big-mic { width: 68px; height: 68px; border-radius: 34px; background: var(--c-fill); border: 0; display: flex; align-items: center; justify-content: center; color: var(--c-label); cursor: pointer; transition: all .2s; }
+.eva-big-mic.recording { background: var(--c-red); color: #fff; animation: coachPulse 1.2s infinite; }
+
+.eva-audio-player { width: 100%; margin-top: 8px; border-radius: 10px; }
+.eva-report { display: flex; flex-direction: column; gap: 12px; }
+.eva-score-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 16px; font-weight: 800; padding: 6px 14px; border-radius: 10px; align-self: flex-start; }
+.eva-score-badge.al { background: rgba(52,199,89,.15); color: var(--c-green); }
+.eva-score-badge.ih { background: rgba(0,122,255,.15); color: var(--c-acc); }
+.eva-score-badge.im { background: rgba(255,149,0,.15); color: var(--c-orange); }
+
+.coach-archive-item { background: var(--c-card); border-radius: 14px; padding: 14px 16px; border: 0.5px solid var(--c-sep); box-shadow: var(--sh-card); display: flex; flex-direction: column; gap: 10px; }
+.coach-archive-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+
+
 /* 라이브러리 빠른 목록 (09-24 · 캔버스 「라이브러리」 판) */
 .lh-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:10px;}
 @media (max-width:759px){ .lh-grid{grid-template-columns:repeat(2,minmax(0,1fr));} }
@@ -2904,7 +2973,7 @@ details.gr-fold[open]>summary .s2-chev{transform:rotate(90deg);}
 
     <!-- ══ 연문 모드 (발주 2026-09-08) — 세 화면. 카드 모드 화면과 완전히 갈린다 ══ -->
     <div class="scr" id="scrYmToday">
-      <div class="sub-head"><button class="tb-btn" id="ymBack" title="카드 모드로"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button><div class="sub-title">문풀</div><button class="tb-btn" id="ymTodayUndo" title="되돌리기" aria-label="되돌리기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14L4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg></button></div>
+      <div class="sub-head"><button class="tb-btn" id="ymBack" title="홈으로"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button><div class="sub-title">스피킹 코치</div><button class="tb-btn" id="coachKeyBtn" title="Gemini API 설정" aria-label="Gemini API 설정" onclick="coachOpenKeyModal()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button></div>
       <div class="sub-body"><div class="sub-inner" id="ymTodayBody"></div></div>
     </div>
     <div class="scr" id="scrYmUnit">
@@ -2938,7 +3007,7 @@ details.gr-fold[open]>summary .s2-chev{transform:rotate(90deg);}
       </div></div>
       <nav id="tabBar">
         <button class="tab on" id="tabToday"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg><span>오늘</span></button>
-        <button class="tab" id="tabYm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 3 3 5-6"/></svg><span>문풀</span></button>
+        <button class="tab" id="tabYm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg><span>스피킹</span></button>
         <button class="tab" id="tabHd"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 6.5C10 5 7 4.5 3.5 5v13c3.5-.5 6.5 0 8.5 1.5 2-1.5 5-2 8.5-1.5V5C17 4.5 14 5 12 6.5z"/><path d="M12 6.5v13"/></svg><span>노트</span></button>
         <button class="tab" data-go="scrList"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4.5 6h.01M4.5 12h.01M4.5 18h.01"/></svg><span>라이브러리</span></button>
       </nav>
@@ -10670,6 +10739,7 @@ function go(id){
   if(id==='scrRead')renderRead();
   if(id==='scrWeak')renderWeak();
   if(id==='scrFlags')renderFlags();
+  if(id==='scrYmToday')renderSpeakingCoach();
 }
 document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>go(b.dataset.go));
 
