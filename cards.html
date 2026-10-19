@@ -2795,7 +2795,8 @@ details.gr-fold[open]>summary .s2-chev{transform:rotate(90deg);}
     <div style="padding: 10px 14px 4px;">
       <select id="courseSelectSide" class="course-select" style="width:100%;" onchange="setCourse(this.value)">
         <option value="all">전체 교재</option>
-        <option value="sm">Speaking Matrix</option>
+        <option value="sm">Speaking Matrix 1분</option>
+        <option value="sm2">Speaking Matrix 2분</option>
         <option value="ht">해커스톡 10분의 기적</option>
       </select>
     </div>
@@ -2964,8 +2965,9 @@ details.gr-fold[open]>summary .s2-chev{transform:rotate(90deg);}
         <div class="course-sel-bar">
           <span class="course-sel-label">교재 선택</span>
           <select id="courseSelectUnits" class="course-select" onchange="setCourse(this.value)">
-            <option value="all">전체 교재 (Speaking Matrix + 해커스톡)</option>
-            <option value="sm">Speaking Matrix (1분 스피킹 900제)</option>
+            <option value="all">전체 교재 (Speaking Matrix 1·2분 + 해커스톡)</option>
+            <option value="sm">Speaking Matrix (1분 말하기 900제)</option>
+            <option value="sm2">Speaking Matrix (2분 말하기 663제)</option>
             <option value="ht">해커스톡 10분의 기적 (300제)</option>
           </select>
         </div>
@@ -6066,7 +6068,7 @@ function tomorrowKey(){ return dayKey(new Date(Date.now()+86400000)); }
 let DATA=[], BYID={}, ALLTAGS=[], ALLTYPS=[], TAGMETA={};
 let curCourse = localStorage.getItem('cards_course_v1') || 'all';
 let statCourse = localStorage.getItem('cards_stat_course_v1') || (curCourse !== 'all' ? curCourse : 'ht');
-if(statCourse !== 'ht' && statCourse !== 'sm' && statCourse !== 'all') statCourse = 'ht';
+if(statCourse !== 'ht' && statCourse !== 'sm' && statCourse !== 'sm2' && statCourse !== 'all') statCourse = 'ht';
 /* 이번 부팅의 DATA가 **원격에서 방금 받은 것**인가 (캐시 폴백이면 false).
    BYID로 「없는 카드」를 판정하는 곳은 이 값을 먼저 봐야 한다 — pruneOrphans 참고. */
 let dataFresh=false;
@@ -7714,7 +7716,10 @@ async function loadData(){
   BYID={}; const tags=new Set(), typs=new Set(), subjs=new Set();
   DATA.forEach((c,i)=>{ c._i=i; BYID[c.id]=c; (c.tags||[]).forEach(t=>tags.add(t)); if(c.typ) typs.add(c.typ); if(c.subj) subjs.add(c.subj); });
   ALLTAGS=[...tags].sort(); ALLTYPS=[...typs].sort();
-  if(subjs.size) SUBJECTS=[...subjs].sort((a,b)=>a.localeCompare(b,undefined,{numeric:true}));
+  if(subjs.size){
+    const sOrd = s => (/^\d+\./.test(s) ? 1 : s.startsWith('2분.') ? 2 : s.includes('해커스톡') ? 3 : 4);
+    SUBJECTS=[...subjs].sort((a,b)=>(sOrd(a)-sOrd(b)) || a.localeCompare(b,undefined,{numeric:true}));
+  }
   TAGMETA={}; // 과목|대주제 → 첫 카드 위치·장수 (회독 대기 큐용)
   for(const c of DATA){ const k=tagKey(c);
     if(!TAGMETA[k])TAGMETA[k]={subj:c.subj, tag:unitTagName(c), i0:c._i, n:0};
@@ -12464,7 +12469,7 @@ function renderRoutineCards(){
     <div class="rc-card">
       <div class="rc-badge-row">
         <span class="rc-badge rc-badge-sm">Speaking Matrix</span>
-        <span class="rc-subtag">900제 스피킹 훈련</span>
+        <span class="rc-subtag">실전 스피킹 훈련</span>
       </div>
       <div class="rc-title">${esc(smName)}</div>
       <div class="rc-meta">${smRemain > 0 ? `오늘 남은 카드 ${smRemain.toLocaleString()}장` : '오늘 할 일 완료'}</div>
@@ -12936,7 +12941,8 @@ function renderUnits(){
   for(const k of keys){ const sj=TAGMETA[k].subj; if(!grp.has(sj))grp.set(sj,[]); grp.get(sj).push(k); }
   const order=new Map(SUBJECTS.map((s,i)=>[s,i]));
   for(const sj of [...grp.keys()].sort((a,b)=>(order.has(a)?order.get(a):99)-(order.has(b)?order.get(b):99))){
-    if(curCourse==='sm' && sj.includes('해커스톡')) continue;
+    if(curCourse==='sm' && (sj.includes('해커스톡') || sj.includes('2분'))) continue;
+    if(curCourse==='sm2' && !sj.includes('2분')) continue;
     if(curCourse==='ht' && !sj.includes('해커스톡')) continue;
     const ks=grp.get(sj), open=!!q||uOpen.has(sj);
     let due=0,nw=0,read=0;
@@ -12944,7 +12950,8 @@ function renderUnits(){
       if(state.hoedok&&state.hoedok[k])read++; }
     const sel=ks.filter(k=>uPicked.has(k)).length;
     const h=document.createElement('div'); h.className='u-grp'+(open?' open':'');
-    h.innerHTML=`<span class="cv">▸</span><span class="nm">${esc(sj.split('.')[1]||sj)}</span>
+    const dispTitle = sj.startsWith('2분.') ? '[2분] ' + sj.split('.')[1] : (sj.split('.')[1]||sj);
+    h.innerHTML=`<span class="cv">▸</span><span class="nm">${esc(dispTitle)}</span>
       <span class="mt">${ks.length}단위${due?` · <b>복습 ${due}</b>`:''}${nw?` · 신규 ${nw}`:''}${sel?` · <i>선택 ${sel}</i>`:''}</span>`;
     h.onclick=()=>{ uOpen.has(sj)?uOpen.delete(sj):uOpen.add(sj); saveUOpen(); renderUnits(); };
     box.appendChild(h);
@@ -12998,7 +13005,7 @@ function buildTree(){                     // 과목 → 단위(대주제) → �
     const u=byUnit[k];
     (bySubj[u.subj]=bySubj[u.subj]||[]).push(u);
   }
-  TREE=SUBJECTS.filter(sj=>bySubj[sj]).map(sj=>({subj:sj, label:sj.split('.')[1]||sj,
+  TREE=SUBJECTS.filter(sj=>bySubj[sj]).map(sj=>({subj:sj, label:sj.startsWith('2분.') ? '[2분] ' + sj.split('.')[1] : (sj.split('.')[1]||sj),
     units:bySubj[sj], n:bySubj[sj].reduce((a,u)=>a+u.n,0)}));
   return TREE;
 }
@@ -15114,6 +15121,7 @@ function getStatCards(c){
   const target = c || statCourse || 'all';
   if(target === 'ht') return DATA.filter(x => x.id.startsWith('ht_'));
   if(target === 'sm') return DATA.filter(x => x.id.startsWith('sm_'));
+  if(target === 'sm2') return DATA.filter(x => x.id.startsWith('sm2_'));
   return DATA;
 }
 
@@ -15407,16 +15415,19 @@ function renderStats(){
   /* ═══ 0. 상단 교재 선택 세그먼트 컨트롤 ═══ */
   h += `<div class="stat-course-bar">`
     + `<button type="button" class="stat-course-btn ${statCourse==='ht'?'on':''}" onclick="setStatCourse('ht')"><span>해커스톡 10분의 기적</span><span class="badge">300</span></button>`
-    + `<button type="button" class="stat-course-btn ${statCourse==='sm'?'on':''}" onclick="setStatCourse('sm')"><span>Speaking Matrix</span><span class="badge">900</span></button>`
-    + `<button type="button" class="stat-course-btn ${statCourse==='all'?'on':''}" onclick="setStatCourse('all')"><span>전체 교재</span><span class="badge">1,200</span></button>`
+    + `<button type="button" class="stat-course-btn ${statCourse==='sm'?'on':''}" onclick="setStatCourse('sm')"><span>Speaking Matrix 1분</span><span class="badge">900</span></button>`
+    + `<button type="button" class="stat-course-btn ${statCourse==='sm2'?'on':''}" onclick="setStatCourse('sm2')"><span>Speaking Matrix 2분</span><span class="badge">663</span></button>`
+    + `<button type="button" class="stat-course-btn ${statCourse==='all'?'on':''}" onclick="setStatCourse('all')"><span>전체 교재</span><span class="badge">1,863</span></button>`
     + `</div>`;
 
   /* ═══ 1. 오늘의 루틴 달성 현황 ═══ */
   const htTodayCards = new Set();
   const smTodayCards = new Set();
+  const sm2TodayCards = new Set();
   for(const e of state.log){
     if(dayKey(logDate(e)) === tk){
       if(e[0].startsWith('ht_')) htTodayCards.add(e[0]);
+      else if(e[0].startsWith('sm2_')) sm2TodayCards.add(e[0]);
       else if(e[0].startsWith('sm_')) smTodayCards.add(e[0]);
     }
   }
@@ -15431,6 +15442,14 @@ function renderStats(){
   const smDone = smTodayCards.size;
   const smTot = smDone + smDue;
   const smPct = smTot > 0 ? Math.min(100, Math.round(smDone / smTot * 100)) : 100;
+
+  let sm2Due = 0;
+  for(const c of DATA){
+    if(c.id.startsWith('sm2_') && isDue(c) && !buried(c)) sm2Due++;
+  }
+  const sm2Done = sm2TodayCards.size;
+  const sm2Tot = sm2Done + sm2Due;
+  const sm2Pct = sm2Tot > 0 ? Math.min(100, Math.round(sm2Done / sm2Tot * 100)) : 100;
 
   h += `<div class="card-box" style="padding:16px 18px">`
     + `<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">`
@@ -15450,7 +15469,7 @@ function renderStats(){
     + `</div></div>`
     + `<div class="rt-goal-card">`
     + `<div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px">`
-    + `<span style="font-size:13px;font-weight:600;color:var(--c-label)">Speaking Matrix 복습</span>`
+    + `<span style="font-size:13px;font-weight:600;color:var(--c-label)">Speaking Matrix 1분 복습</span>`
     + `<b style="font-size:15px;color:var(--c-label);font-variant-numeric:tabular-nums">${smDone}장 완료</b>`
     + `</div>`
     + `<div class="rt-prog-bar"><div class="rt-prog-fill" style="width:${smPct}%;background:var(--c-teal, #64d2ff)"></div></div>`
@@ -15458,12 +15477,23 @@ function renderStats(){
     + `<span>${smDue>0 ? '오늘 대기 복습 ' + smDue + '장' : '오늘 복습 완료'}</span>`
     + `<span style="font-weight:600">${smDue>0 ? smDue + '장 남음' : '모두 완료'}</span>`
     + `</div></div>`
+    + `<div class="rt-goal-card">`
+    + `<div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px">`
+    + `<span style="font-size:13px;font-weight:600;color:var(--c-label)">Speaking Matrix 2분 복습</span>`
+    + `<b style="font-size:15px;color:var(--c-label);font-variant-numeric:tabular-nums">${sm2Done}장 완료</b>`
+    + `</div>`
+    + `<div class="rt-prog-bar"><div class="rt-prog-fill" style="width:${sm2Pct}%;background:var(--c-purple, #bf5af2)"></div></div>`
+    + `<div style="display:flex;justify-content:space-between;margin-top:6px;font-size:11.5px;color:var(--c-sec)">`
+    + `<span>${sm2Due>0 ? '오늘 대기 복습 ' + sm2Due + '장' : '오늘 복습 완료'}</span>`
+    + `<span style="font-weight:600">${sm2Due>0 ? sm2Due + '장 남음' : '모두 완료'}</span>`
+    + `</div></div>`
     + `</div></div>`;
 
   /* ═══ A. 누적 학습량 & 회독 궤적 ═══ */
   const courseDesc = statCourse === 'ht' ? '해커스톡 10분의 기적 300문장 실전 회화 체화 진도와 다회독 반복 훈련량'
-    : statCourse === 'sm' ? 'Speaking Matrix 900제 실전 문장 체화 진도와 다회독 반복 훈련량'
-    : '전체 1,200문장 실전 회화 체화 진도와 다회독 반복 훈련량';
+    : statCourse === 'sm' ? 'Speaking Matrix 1분 900제 실전 문장 체화 진도와 다회독 반복 훈련량'
+    : statCourse === 'sm2' ? 'Speaking Matrix 2분 663제 실전 문장 체화 진도와 다회독 반복 훈련량'
+    : '전체 1,863문장 실전 회화 체화 진도와 다회독 반복 훈련량';
 
   h+='<div class="card-box"><h3>누적 학습량 & 회독 궤적</h3>'
     +'<div class="cap">'+courseDesc+'</div>'
@@ -15516,7 +15546,8 @@ function renderStats(){
   const sr=retentionSplit(0, (e,c)=>c.subj);
   const rows=SUBJECTS.map(sj=>{
       if(statCourse === 'ht' && !sj.includes('해커스톡')) return null;
-      if(statCourse === 'sm' && sj.includes('해커스톡')) return null;
+      if(statCourse === 'sm' && (sj.includes('해커스톡') || sj.includes('2분'))) return null;
+      if(statCourse === 'sm2' && !sj.includes('2분')) return null;
       const e=bySubj[sj]||{tot:0,done:0,due:0}; const o=sr[sj];
       return {sj:sj, e:e, p:(o&&o.n>=30)?Math.round(o.pass/o.n*100):null, n:o?o.n:0}; })
     .filter(r=>r && r.e && r.e.tot > 0)
@@ -15525,7 +15556,8 @@ function renderStats(){
     +'<div class="cap">유지율 낮은 단원이 위 · 막대 = 학습 진입 · 오른쪽 = 오늘 복습</div>'
     +'<div class="bar-list" style="background:none;padding:4px 0;margin:0">';
   for(const r of rows){ const pr=r.e.tot?Math.round(r.e.done/r.e.tot*100):0;
-    h+='<div class="bl-row"><span class="n" style="min-width:70px">'+esc(r.sj.split('.')[1]||r.sj)+'</span>'
+    const dispName = r.sj.startsWith('2분.') ? '[2분] ' + r.sj.split('.')[1] : (r.sj.split('.')[1]||r.sj);
+    h+='<div class="bl-row"><span class="n" style="min-width:70px">'+esc(dispName)+'</span>'
       +'<span class="bar" title="'+r.e.done+'/'+r.e.tot+'장"><i style="width:'+pr+'%"></i></span>'
       +'<span class="m '+(r.p!=null&&r.p<70?'warn':'')+'" style="min-width:44px;text-align:right" title="'+(r.n?r.n+'회 복습':'복습 없음')+'">'+(r.p==null?'—':r.p+'%')+'</span>'
       +'<span class="c">'+(r.e.due?r.e.due:'·')+'</span></div>'; }
@@ -18483,7 +18515,7 @@ function setCourse(val){
   if(typeof renderUnits === 'function') renderUnits();
   if(typeof counts === 'function') counts();
   if(typeof toast === 'function') {
-    const name = val === 'ht' ? '해커스톡 10분의 기적' : val === 'sm' ? 'Speaking Matrix' : '전체 교재';
+    const name = val === 'ht' ? '해커스톡 10분의 기적' : val === 'sm' ? 'Speaking Matrix 1분' : val === 'sm2' ? 'Speaking Matrix 2분' : '전체 교재';
     toast(name + ' 선택됨');
   }
 }
