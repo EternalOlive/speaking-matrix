@@ -2504,6 +2504,15 @@ details.gr-fold[open]>summary .s2-chev{transform:rotate(90deg);}
   background: var(--c-acc-fill);
   color: #fff;
 }
+.c-audio-btn.playing {
+  background: var(--c-danger-tint, rgba(255, 59, 48, 0.14));
+  color: var(--c-danger, #ff3b30);
+  border-color: var(--c-danger, #ff3b30);
+}
+.c-audio-btn.playing:active {
+  background: var(--c-danger, #ff3b30);
+  color: #fff;
+}
 
 /* ── Option A: 오늘의 루틴 카드 대시보드 ── */
 .routine-hub {
@@ -9515,6 +9524,7 @@ function showHoedokLink(c){
   el.innerHTML = `<button type="button" class="typ-tag c-note-link" onclick="event.stopPropagation(); openNuanceNotes(${d}, false, '${c.id}', '${bEsc}');"><span>노트</span><svg class="s2-chev" viewBox="0 0 9 15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m1.5 1.5 6 6-6 6"/></svg></button>`;
 }
 function showCard(){
+  if(typeof stopCardAudio === 'function') stopCardAudio();
   if(typeof cancelSprintCardTimer === 'function') cancelSprintCardTimer();
   if(typeof cancelIdleMotivationalTimer === 'function') cancelIdleMotivationalTimer();
   cardNuanceEditingDay = null;
@@ -9659,7 +9669,7 @@ function scopeHtml(c){   // 경로 = 과목 › 갈래 › 주제 (과목 번호
   const chev='<svg class="sc-chev" viewBox="0 0 9 15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m1.5 1.5 6 6-6 6"/></svg>';
   let scHtml = parts.map((p,i)=>`<span class="sc-p${i===0?' sc-first':''}${i===parts.length-1?' sc-last':''}">${esc(p)}</span>`).join(chev);
   if(c.audio){
-    scHtml += ` <button type="button" class="c-audio-btn" title="원음 재생 (단축키 R)" onclick="playCardAudio(event)">🔊 음원</button>`;
+    scHtml += ` <button type="button" class="c-audio-btn" id="btnCardAudio" title="원음 재생/중단 (단축키 R)" onclick="toggleCardAudio(event)"><svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12" style="vertical-align:-1px;margin-right:3px" aria-hidden="true"><polygon points="6 4 20 12 6 20 6 4"/></svg><span class="c-audio-label">음원 재생 (R)</span></button>`;
   }
   return scHtml;
 }
@@ -10544,6 +10554,7 @@ function gEnd(x,y){
 function go(id){
   document.getElementById('main').classList.toggle('solving', id==='scrSolve');   // 풀이 화면 밖에서는 윗줄(⌂) 숨김 — 하위 화면은 ‹ 하나(UI 리뷰 🟠 · 홈의 ⌂는 아무 일도 안 했다)
   if(id!=='scrSolve'){
+    if(typeof stopCardAudio === 'function') stopCardAudio();
     if(typeof cancelSprintCardTimer === 'function') cancelSprintCardTimer();
     if(typeof cancelIdleMotivationalTimer === 'function') cancelIdleMotivationalTimer();
     resumeSession(); syncSessQueue();
@@ -13547,7 +13558,7 @@ document.addEventListener('keydown',e=>{
   /* 🔴 조합키는 원래 **통째로** 무시한다 — 브라우저 단축키(Cmd+R·Cmd+F…)를 가로채지 않으려고.
      딱 하나 연다: **Ctrl+1~4 = 플래그 사유 칩 넷** (동하 09-09 · 게임패드 R을 Ctrl로 두고 쥔다).
      채점 1~4와 손가락 자리가 같고 Ctrl만 얹는 꼴이라 외울 것이 없다. 그 밖의 조합은 여전히 버린다. */
-  if(e.key==='r' || e.key==='R'){ const c=cur(); if(c&&c.audio){ e.preventDefault(); playCardAudio(); return; } }
+  if(e.key==='r' || e.key==='R'){ const c=cur(); if(c&&c.audio){ e.preventDefault(); if(typeof toggleCardAudio==='function') toggleCardAudio(); else playCardAudio(); return; } }
   if((!kbdOn && !_padEv) || e.metaKey || e.altKey)return;
   { const tg=e.target&&e.target.tagName; if(!(tg==='INPUT'||tg==='TEXTAREA'||tg==='SELECT')) document.documentElement.dataset.keys='on'; }   // 키 표시(09-24)
   if(!e.ctrlKey && !(e.target&&/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) && typeof ymTodayKey==='function' && (!e.repeat||/^Arrow/.test(e.key)) && ymTodayKey(e)){ e.preventDefault(); return; }
@@ -13612,6 +13623,7 @@ document.addEventListener('keydown',e=>{
     return;
   }
   if(e.key==='Escape'){
+    if(typeof stopCardAudio === 'function') stopCardAudio();
     if(ovl){ if(ovl.id==='ovlCard')closeCardSheet(); else if(ovl.id==='ovlHd')closeHoedok(); else if(ovl.id==='ovlImg')closeImg(); else ovl.classList.remove('show'); e.preventDefault(); }
     else if($('rail').classList.contains('open')){ $('rail').classList.remove('open'); $('railScrim').classList.remove('show'); }
     else if(typing){ t.blur(); }
@@ -18316,16 +18328,69 @@ function setCourse(val){
 }
 
 let currentCardAudio = null;
-function playCardAudio(ev){
-  if(ev) ev.stopPropagation();
+
+function stopCardAudio(){
+  if(currentCardAudio){
+    try {
+      currentCardAudio.pause();
+      currentCardAudio.currentTime = 0;
+    } catch(e){}
+    currentCardAudio = null;
+  }
+  updateAudioBtnState(false);
+}
+
+function updateAudioBtnState(isPlaying){
+  const btn = document.getElementById('btnCardAudio');
+  if(!btn) return;
+  if(isPlaying){
+    btn.classList.add('playing');
+    btn.title = '음원 일시정지/중단 (단축키 R 또는 Esc)';
+    btn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12" style="vertical-align:-1px;margin-right:3px" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg><span class="c-audio-label">중단 (R)</span>';
+  } else {
+    btn.classList.remove('playing');
+    btn.title = '원음 재생/중단 (단축키 R)';
+    btn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12" style="vertical-align:-1px;margin-right:3px" aria-hidden="true"><polygon points="6 4 20 12 6 20 6 4"/></svg><span class="c-audio-label">음원 재생 (R)</span>';
+  }
+}
+
+function toggleCardAudio(ev){
+  if(ev && typeof ev.stopPropagation === 'function') ev.stopPropagation();
+  if(currentCardAudio && !currentCardAudio.paused){
+    stopCardAudio();
+    return;
+  }
   const c = (typeof cur === 'function') ? cur() : null;
   if(!c || !c.audio) return;
-  if(currentCardAudio){
-    currentCardAudio.pause();
-    currentCardAudio.currentTime = 0;
-  }
-  currentCardAudio = new Audio(c.audio);
-  currentCardAudio.play().catch(e => console.warn('오디오 재생 차단/오류:', e));
+
+  stopCardAudio();
+  const audio = new Audio(c.audio);
+  currentCardAudio = audio;
+
+  audio.addEventListener('ended', () => {
+    if(currentCardAudio === audio){
+      stopCardAudio();
+    }
+  });
+  audio.addEventListener('error', (e) => {
+    console.warn('오디오 재생 차단/오류:', e);
+    if(currentCardAudio === audio){
+      stopCardAudio();
+    }
+  });
+
+  audio.play().then(() => {
+    if(currentCardAudio === audio){
+      updateAudioBtnState(true);
+    }
+  }).catch(e => {
+    console.warn('오디오 재생 차단/오류:', e);
+    stopCardAudio();
+  });
+}
+
+function playCardAudio(ev){
+  toggleCardAudio(ev);
 }
 
 </script>
