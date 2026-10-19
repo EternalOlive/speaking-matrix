@@ -10,7 +10,14 @@ Speaking Matrix 900제 문장의 뉘앙스, 원어민 어감 차이, 실전 활�
 
 <div id="day-02"></div>
 ### Day 02
-*등록된 뉘앙스 노트가 없습니다.*
+- **I work in the marketing department.** <!-- id: sm_1790710443902 -->
+  - **work in + 부서·분야·장소**: ~에서 일하다.
+  - I work in the marketing department. : 마케팅 부서에서 일한다.
+  - I work in finance. : 금융 분야에서 일한다.
+  - **work on + 업무·프로젝트·과제**: ~을 진행하다, ~에 공을 들이다.
+  - I'm working on a marketing campaign. : 마케팅 캠페인을 진행하고 있다.
+  - I'm working on a report. : 보고서를 작성하고 있다.
+  - **핵심:** `in`은 소속된 부서나 분야를, `on`은 작업 중인 대상이나 과제를 나타낸다.
 
 <div id="day-03"></div>
 ### Day 03
@@ -70,7 +77,15 @@ Speaking Matrix 900제 문장의 뉘앙스, 원어민 어감 차이, 실전 활�
 
 <div id="day-10"></div>
 ### Day 10
-*등록된 뉘앙스 노트가 없습니다.*
+- **I'm focusing on my music on the way to work.** <!-- id: sm_1790710445149 -->
+  - **my music**: 내가 듣는 음악, 내 음악
+  - **the music**: 특정한 음악, 앞서 언급한 음악
+  - **music**: 음악 일반 또는 음악이라는 활동·대상
+  - **비교**
+  - I'm focusing on my music. : 내가 듣는 음악에 집중하고 있다.
+  - I'm focusing on the music. : 그 음악에 집중하고 있다.
+  - I'm focusing on music. : 음악에 집중하고 있다. (일반적인 의미)
+  - **핵심:** `my`는 음악의 소유권보다 현재 나와 관련된 음악이라는 점을 나타낸다.
 
 ## Unit 03 (Day 11-15)
 
@@ -166,7 +181,9 @@ Speaking Matrix 900제 문장의 뉘앙스, 원어민 어감 차이, 실전 활�
 
 <div id="day-24"></div>
 ### Day 24
-*등록된 뉘앙스 노트가 없습니다.*
+- **I'm more tired today than yesterday.** <!-- id: sm_1790710447571 -->
+  - More 형용사
+  - 동사 more than
 
 <div id="day-25"></div>
 ### Day 25
@@ -180,6 +197,15 @@ Speaking Matrix 900제 문장의 뉘앙스, 원어민 어감 차이, 실전 활�
   - **`organized`**: 정리된, 체계적인 (효율적인 관리와 정돈)
   - **`structured`**: 구조화된, 체계가 잡힌 (명확한 계획·규칙·구조)
   - **차이:** `organized`는 정리와 관리, `structured`는 계획과 구조에 초점.
+
+- **I want to finish this week strong.** <!-- id: sm_1790710447956 -->
+  - **finish**: 하던 일이나 활동을 마무리하다.
+  - I want to finish this week strong. : 이번 주를 힘차게 마무리하고 싶다.
+  - I finished my work. : 일을 마쳤다.
+  - **end**: 기간이나 사건을 끝내다, 끝나다.
+  - I want to end the week on a positive note. : 긍정적으로 한 주를 마무리하고 싶다.
+  - The meeting ended at five. : 회의가 5시에 끝났다.
+  - **핵심:** 두 단어의 의미는 겹칠 수 있다. `finish this week strong`은 이번 주의 남은 시간을 좋은 성과나 활기찬 태도로 마무리한다는 자연스러운 표현이다.
 
 <div id="day-27"></div>
 ### Day 27
@@ -211,7 +237,20 @@ Speaking Matrix 900제 문장의 뉘앙스, 원어민 어감 차이, 실전 활�
 
 <div id="day-30"></div>
 ### Day 30
-*등록된 뉘앙스 노트가 없습니다.*
+- **I pushed through by speaking out loud.** <!-- id: sm_1790710448653 -->
+  - **push through**: 어려움에도 굴하지 않고 계속해 나가다, 버텨 내다.
+  - **go through**: 힘든 경험이나 과정을 겪다.
+  - **비교**
+  - I pushed through by speaking out loud. : 소리 내어 말하면서 어려움을 이겨 냈다.
+  - I went through a difficult time. : 힘든 시간을 겪었다.
+  - **차이:** `push through`는 어려움 속에서도 계속 나아가는 행동에, `go through`는 어려운 경험을 겪는 데 초점을 둔다.
+
+- **I trust the process now.** <!-- id: sm_1790710448614 -->
+  - **believe**: 사실·주장 등이 참이라고 믿다.
+  - I believe the process works. : 그 과정이 효과가 있다고 믿는다.
+  - **trust**: 대상이나 과정이 믿을 만하다고 신뢰하다.
+  - I trust the process now. : 이제 그 과정을 신뢰한다.
+  - **핵심:** `believe`는 참이라고 생각하는 데, `trust`는 신뢰하는 데 초점을 둔다. 문맥에 따라 의미가 겹칠 수 있다.
 
 ## Unit 07 (Day 31-35)
 
