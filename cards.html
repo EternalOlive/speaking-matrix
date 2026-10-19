@@ -18850,12 +18850,12 @@ async function coachCallGemini(prompt, systemPrompt){
     primaryModel = primaryModel.includes('pro') ? 'gemini-3.1-pro-preview' : 'gemini-3.5-flash';
   }
 
-  // 우선순위 후보군 (현재 설정 모델 -> 3.5 Flash -> 3.1 Pro -> 3.1 Flash-Lite -> 2.5 Flash -> 2.0 Flash)
+  // 우선순위 후보군 (현재 설정 모델 -> 3.1 Flash-Lite -> 3.5 Flash -> 3.1 Pro -> 2.5 Flash -> 2.0 Flash)
   const candidateModels = [
     primaryModel,
+    'gemini-3.1-flash-lite',
     'gemini-3.5-flash',
     'gemini-3.1-pro-preview',
-    'gemini-3.1-flash-lite',
     'gemini-2.5-flash',
     'gemini-2.0-flash'
   ].filter((v, i, a) => a.indexOf(v) === i);
@@ -18878,9 +18878,11 @@ async function coachCallGemini(prompt, systemPrompt){
       if(!res.ok){
         const errData = await res.json().catch(()=>({}));
         const msg = errData.error?.message || ('HTTP ' + res.status);
-        if(res.status === 404 || /not found|not supported|no longer available|is not available|deprecated/i.test(msg)){
+        const isFallbackable = res.status === 404 || res.status === 429 || res.status === 503
+          || /not found|not supported|no longer available|is not available|deprecated|high demand|overloaded|capacity|resource exhausted|temporarily|try again/i.test(msg);
+        if(isFallbackable){
           lastError = new Error(msg);
-          console.warn('Gemini 모델 ' + curModel + ' 사용 불가 (' + msg + '), 다음 후보 모델 시도...');
+          console.warn('Gemini 모델 ' + curModel + ' 일시적 사용 불가 (' + msg + '), 다음 후보 모델 시도...');
           continue;
         }
         throw new Error(msg);
@@ -18893,7 +18895,7 @@ async function coachCallGemini(prompt, systemPrompt){
       return text;
     } catch(err){
       lastError = err;
-      if(/not found|not supported|no longer available|is not available|deprecated/i.test(err.message)){
+      if(/not found|not supported|no longer available|is not available|deprecated|high demand|overloaded|capacity|resource exhausted|temporarily|try again/i.test(err.message)){
         continue;
       }
       throw err;
