@@ -2505,6 +2505,204 @@ details.gr-fold[open]>summary .s2-chev{transform:rotate(90deg);}
   color: #fff;
 }
 
+/* ── Option A: 오늘의 루틴 카드 대시보드 ── */
+.routine-hub {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 14px 0 10px;
+}
+.rc-card {
+  background: var(--c-card);
+  border: 1px solid var(--c-sep-sub);
+  border-radius: var(--r-group, 16px);
+  padding: 18px 18px 16px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  position: relative;
+}
+.rc-card:hover {
+  border-color: var(--c-sep);
+}
+.rc-badge-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.rc-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 999px;
+  letter-spacing: -0.01em;
+}
+.rc-badge-ht {
+  background: rgba(255, 149, 0, 0.14);
+  color: #ff9500;
+}
+.rc-badge-sm {
+  background: rgba(0, 122, 255, 0.12);
+  color: #007aff;
+}
+.rc-subtag {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--c-ter);
+}
+.rc-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--c-label);
+  margin-bottom: 4px;
+  letter-spacing: -0.02em;
+}
+.rc-meta {
+  font-size: 13px;
+  color: var(--c-sec);
+  line-height: 1.4;
+}
+.rc-prog-bar {
+  height: 6px;
+  background: var(--c-fill, rgba(0,0,0,0.06));
+  border-radius: 999px;
+  overflow: hidden;
+  margin: 12px 0 14px;
+}
+.rc-prog-fill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.3s ease;
+}
+.rc-prog-fill.ht {
+  background: linear-gradient(90deg, #ff9500, #ff5e3a);
+}
+.rc-prog-fill.sm {
+  background: linear-gradient(90deg, #007aff, #5856d6);
+}
+.rc-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.rc-btn-primary {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: var(--c-acc, #007aff);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 16px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.15s, transform 0.1s;
+}
+.rc-btn-primary.ht {
+  background: #ff9500;
+}
+.rc-btn-primary:active {
+  transform: scale(0.98);
+  opacity: 0.9;
+}
+.rc-btn-sub {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  background: var(--c-fill, rgba(0,0,0,0.06));
+  color: var(--c-label);
+  border: 1px solid var(--c-sep-sub);
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.rc-btn-sub:hover {
+  background: var(--c-fill-hi, rgba(0,0,0,0.1));
+}
+.rc-btn-sub:active {
+  transform: scale(0.98);
+}
+.hk-modal-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+.hk-day-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 10px;
+  max-height: 58vh;
+  overflow-y: auto;
+  padding: 4px 2px 14px;
+}
+.hk-day-card {
+  background: var(--c-card);
+  border: 1px solid var(--c-sep-sub);
+  border-radius: 12px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+.hk-day-card:hover {
+  border-color: #ff9500;
+  background: rgba(255, 149, 0, 0.04);
+}
+.hk-day-card.active {
+  border-color: #ff9500;
+  background: rgba(255, 149, 0, 0.08);
+}
+.hk-dc-left {
+  flex: 1;
+  min-width: 0;
+}
+.hk-dc-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--c-label);
+  margin-bottom: 2px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.hk-dc-sub {
+  font-size: 12px;
+  color: var(--c-sec);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.hk-dc-btn {
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: none;
+  background: #ff9500;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.hk-dc-status-done {
+  color: #34c759;
+  font-size: 12px;
+  font-weight: 700;
+}
+
 </style>
 </head>
 <body>
@@ -2642,7 +2840,8 @@ details.gr-fold[open]>summary .s2-chev{transform:rotate(90deg);}
           <button class="gear glass-c" id="btnSettingsP" aria-label="설정"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
         </div>
         <div class="hs-tiles" id="hTilesP"></div>
-        <div id="hHero"></div>
+        <div id="routineHub" class="routine-hub"></div>
+        <div id="hHero" style="display:none"></div>
         <div id="planWarn" class="plan-warn"></div>
         <div class="h-sec2"><h2>세션</h2><button id="btnNewSess" aria-label="새 세션" title="새 세션"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button></div>
         <div id="sessList"></div>
@@ -3249,6 +3448,18 @@ details.gr-fold[open]>summary .s2-chev{transform:rotate(90deg);}
   <input id="pkSearch" type="search" placeholder="과목·대주제·중주제 검색" style="width:100%;margin-bottom:8px">
   <div id="pkList" style="max-height:46vh;overflow-y:auto"></div>
   <div class="btn-row"><button class="btn-ghost" id="pkCancel">취소</button><button class="btn-primary" id="pkOk">확인</button></div>
+</div></div>
+
+<!-- 해커스톡 Day 선택 모달 -->
+<div class="ovl" id="ovlHkDays"><div class="sheet wide">
+  <div class="hk-modal-head">
+    <div>
+      <h2 style="margin:0 0 4px">⚡ 해커스톡 10분의 기적 — Day 선택</h2>
+      <p class="desc" style="margin:0">학습할 Day 팩(3일치 9문장)을 선택하세요.</p>
+    </div>
+    <button type="button" class="tb-btn" id="hkDaysClose" aria-label="닫기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+  </div>
+  <div class="hk-day-grid" id="hkDayGrid"></div>
 </div></div>
 
 <!-- 설정 -->
@@ -12011,8 +12222,186 @@ function scRenderSet(){ const b=$('scBox'); if(!b) return;
 /* 30초마다 올리고 받기(애드온과 같은 주기) · 앱을 내리면 「접속 중」으로 한 번 · 풀이 화면에서 손대면 「공부 중」 */
 setInterval(()=>{ if(SC.group && document.visibilityState==='visible'){ scSync(); scRtOpen(); scRtPresence(); scPokeFetch(); } else if(SC.group) scRenderHome(); if(!SC.group) scRtClose(); }, 30000);   // 실시간 연결·상태도 같은 박자(10-06)
 ['pointerdown','keydown'].forEach(ev=>document.addEventListener(ev, ()=>{ scInputAt=Date.now(); }, true));
-document.addEventListener('visibilitychange', ()=>{ if(!SC.group) return;
-  if(document.visibilityState==='hidden'){ scSync({keepalive:true, status:'stopped'}); try{ scRtPresence('stopped'); }catch(e){} scRtClose(); } else { scSync(); scRtOpen(); } });
+/* ═══════════════ Option A: 오늘의 루틴 카드 대시보드 (해커스톡 & 스피킹 매트릭스) ═══════════════ */
+function getHackerstalkPacks(){
+  const packs = [];
+  for(let i = 1; i <= 34; i++){
+    const start = (i - 1) * 3 + 1;
+    const end = Math.min(100, i * 3);
+    const sTag = start === end
+      ? `Session ${i < 10 ? '0' + i : i} (Day ${start})`
+      : `Session ${i < 10 ? '0' + i : i} (Day ${start < 10 ? '0' + start : start}-${end < 10 ? '0' + end : end})`;
+    const cards = DATA.filter(c => c && c.subj === '해커스톡 10분의 기적' && (c.tags || []).includes(sTag));
+    const doneCount = cards.filter(c => !isNew(c)).length;
+    const dueCount = cards.filter(c => isDue(c)).length;
+    const total = cards.length;
+    packs.push({
+      index: i,
+      start,
+      end,
+      tag: sTag,
+      title: start === end ? `Day ${start}` : `Day ${start < 10 ? '0' + start : start} ~ Day ${end < 10 ? '0' + end : end}`,
+      cards,
+      total,
+      doneCount,
+      dueCount,
+      isComplete: total > 0 && doneCount === total && dueCount === 0,
+      patterns: [...new Set(cards.map(c => {
+        const m = (c.src || '').match(/Day \d+ · ([^·]+) ·/);
+        return m ? m[1].trim() : '';
+      }).filter(Boolean))]
+    });
+  }
+  return packs;
+}
+
+function getHkCurrentPack(packs){
+  let lastIdx = 1;
+  try {
+    const saved = localStorage.getItem('hk_cur_pack');
+    if(saved) lastIdx = parseInt(saved, 10) || 1;
+  } catch(e){}
+  const candidate = packs.find(p => p.index === lastIdx);
+  if(candidate && !candidate.isComplete) return candidate;
+  const firstIncomplete = packs.find(p => !p.isComplete);
+  return firstIncomplete || candidate || packs[0];
+}
+
+function startHackerstalkPack(packIndex){
+  const packs = getHackerstalkPacks();
+  const p = packs.find(x => x.index === packIndex);
+  if(!p || !p.cards.length) return;
+  const sessName = `해커스톡 ${p.title}`;
+  let sx = sessions.find(s => s && s.name === sessName && !s.del);
+  if(!sx){
+    sx = newSessObj(sessName, {status:['all'], order:'doc', weights:{}, limit:9, bury:false, newAfter:false},
+      {subj:['해커스톡 10분의 기적'], tags:[p.tag], units:[], mids:[], typ:[]}, 'manual');
+    sessions.push(sx);
+    saveSessionsSoon();
+  }
+  sx.q = p.cards.map(c => c.id);
+  sx.day = todayKey();
+  curSess = sx; viewSess = sx; curPreset = asPreset(sx);
+  queue = p.cards.slice();
+  qPos = 0;
+  try { localStorage.setItem('hk_cur_pack', packIndex); } catch(e){}
+  saveSessionsSoon();
+  closeHkDayModal();
+  go('scrSolve');
+  showCard();
+}
+
+function openHkDayModal(){
+  const ovl = $('ovlHkDays');
+  const grid = $('hkDayGrid');
+  if(!ovl || !grid) return;
+  const packs = getHackerstalkPacks();
+  const curPack = getHkCurrentPack(packs);
+
+  grid.innerHTML = packs.map(p => {
+    const isAct = p.index === curPack.index;
+    let badgeHtml = '';
+    if(p.isComplete){
+      badgeHtml = '<span class="hk-dc-status-done">✔ 완료</span>';
+    } else if(p.doneCount > 0){
+      badgeHtml = `<span style="font-size:12px;font-weight:700;color:#ff9500;">${p.doneCount}/${p.total} 학습중</span>`;
+    } else {
+      badgeHtml = `<span style="font-size:12px;color:var(--c-ter);">미학습</span>`;
+    }
+    return `
+      <div class="hk-day-card${isAct ? ' active' : ''}" onclick="startHackerstalkPack(${p.index})">
+        <div class="hk-dc-left">
+          <div class="hk-dc-title">
+            <span>${esc(p.title)}</span>
+            <span style="font-size:11px;padding:1px 6px;border-radius:6px;background:var(--c-fill);color:var(--c-sec);font-weight:normal;">${p.total}문장</span>
+            ${badgeHtml}
+          </div>
+          <div class="hk-dc-sub">${esc(p.patterns.join(' · ') || '패턴 학습')}</div>
+        </div>
+        <button type="button" class="hk-dc-btn">시작</button>
+      </div>
+    `;
+  }).join('');
+
+  ovl.classList.add('show');
+}
+
+function closeHkDayModal(){
+  const ovl = $('ovlHkDays');
+  if(ovl) ovl.classList.remove('show');
+}
+
+function renderRoutineCards(){
+  const hub = $('routineHub');
+  if(!hub) return;
+  
+  // 1. 해커스톡 상태 산출
+  const packs = getHackerstalkPacks();
+  const completedPacks = packs.filter(p => p.isComplete).length;
+  const curPack = getHkCurrentPack(packs);
+  const hkPct = Math.round((completedPacks / 34) * 100);
+
+  // 2. Speaking Matrix 상태 산출
+  const smSess = sessions.find(s => s && !s.del && !s.name.includes('해커스톡')) || sessions[0];
+  const smRemain = smSess ? sessRemain(smSess) : 0;
+  const smName = smSess ? smSess.name : '스피킹 매트릭스';
+
+  hub.innerHTML = `
+    <!-- 해커스톡 10분의 기적 카드 -->
+    <div class="rc-card">
+      <div class="rc-badge-row">
+        <span class="rc-badge rc-badge-ht">⚡ 해커스톡 10분의 기적</span>
+        <span class="rc-subtag">하루 3일치 9문장 루틴</span>
+      </div>
+      <div class="rc-title">${esc(curPack.title)}</div>
+      <div class="rc-meta">${curPack.total}문장 · 핵심 패턴: ${esc(curPack.patterns.slice(0, 3).join(' · '))}</div>
+      <div class="rc-prog-bar">
+        <div class="rc-prog-fill ht" style="width:${Math.max(4, hkPct)}%;"></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--c-sec);margin:-8px 0 12px;">
+        <span>진도: ${completedPacks} / 34 팩 완료</span>
+        <b>${hkPct}%</b>
+      </div>
+      <div class="rc-actions">
+        <button type="button" class="rc-btn-primary ht" onclick="startHackerstalkPack(${curPack.index})">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="17" height="17" aria-hidden="true"><path d="M7 4.8v14.4a1 1 0 0 0 1.5.86l11.6-7.2a1 1 0 0 0 0-1.72L8.5 3.94A1 1 0 0 0 7 4.8z"/></svg>
+          오늘 9문장 바로 시작
+        </button>
+        <button type="button" class="rc-btn-sub" onclick="openHkDayModal()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+          Day 목록
+        </button>
+      </div>
+    </div>
+
+    <!-- Speaking Matrix 카드 -->
+    <div class="rc-card">
+      <div class="rc-badge-row">
+        <span class="rc-badge rc-badge-sm">📘 Speaking Matrix</span>
+        <span class="rc-subtag">900제 스피킹 훈련</span>
+      </div>
+      <div class="rc-title">${esc(smName)}</div>
+      <div class="rc-meta">${smRemain > 0 ? `오늘 남은 카드 ${smRemain.toLocaleString()}장` : '오늘 할 일 완료!'}</div>
+      <div class="rc-actions" style="margin-top:14px;">
+        <button type="button" class="rc-btn-primary" onclick="${smSess ? `viewSess=sessions.find(s=>s.id==='${smSess.id}');playSess(viewSess);` : `toast('세션이 없습니다');`}">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="17" height="17" aria-hidden="true"><path d="M7 4.8v14.4a1 1 0 0 0 1.5.86l11.6-7.2a1 1 0 0 0 0-1.72L8.5 3.94A1 1 0 0 0 7 4.8z"/></svg>
+          학습 시작
+        </button>
+        <button type="button" class="rc-btn-sub" onclick="const sl=$('sessList'); if(sl) sl.scrollIntoView({behavior:'smooth'});">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+          세션 목록
+        </button>
+      </div>
+    </div>
+  `;
+}
+
+// 오버레이 닫기 바인딩
+setTimeout(()=>{
+  if($('hkDaysClose')) $('hkDaysClose').onclick = closeHkDayModal;
+  if($('ovlHkDays')) $('ovlHkDays').onclick = e => { if(e.target === $('ovlHkDays')) closeHkDayModal(); };
+}, 100);
+
 function renderHome(){
   try{ if(DATA.length && !planIncomplete) basisCheck(); }catch(e){}
   try{ snapSoon(); }catch(e){}         // 앱 현황 스냅숏 — 부팅 뒤 첫 홈에서 그날 morning을 잡는다(10분 스로틀 · 실패 무시)
@@ -12021,6 +12410,7 @@ function renderHome(){
   const due=todayTileCount();   // 홈 「오늘」 = 세션에 남은 전부(복습+신규 · 09-26) — 세션 줄 합과 같다
   const restToday=isRestDay(todayKey());
   renderHomeHead(due, restToday);
+  renderRoutineCards();
   renderFoot();
   cleanupTempSessions();
   renderPlanWarn();
