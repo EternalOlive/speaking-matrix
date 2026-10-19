@@ -18834,8 +18834,8 @@ const COACH_PRESET_SITUATIONS = [
 function coachGetApiKey(){ return localStorage.getItem('cards_gemini_key_v1') || ''; }
 function coachGetModel(){
   let m = localStorage.getItem('cards_gemini_model_v1') || '';
-  if(!m || m.includes('1.5-flash') || m.includes('1.5-pro')){
-    m = m.includes('1.5-pro') ? 'gemini-2.5-pro' : 'gemini-2.5-flash';
+  if(!m || m.includes('1.5') || m.includes('2.0') || m.includes('2.5')){
+    m = m.includes('pro') ? 'gemini-3.1-pro-preview' : 'gemini-3.5-flash';
     localStorage.setItem('cards_gemini_model_v1', m);
   }
   return m;
@@ -18846,15 +18846,18 @@ async function coachCallGemini(prompt, systemPrompt){
   if(!key) throw new Error('Gemini API 키가 등록되지 않았습니다. 상단 설정 버튼을 눌러 키를 입력해 주세요.');
   
   let primaryModel = coachGetModel();
-  if(primaryModel.includes('1.5-flash')) primaryModel = 'gemini-2.5-flash';
-  else if(primaryModel.includes('1.5-pro')) primaryModel = 'gemini-2.5-pro';
+  if(primaryModel.includes('1.5') || primaryModel.includes('2.0') || primaryModel.includes('2.5')){
+    primaryModel = primaryModel.includes('pro') ? 'gemini-3.1-pro-preview' : 'gemini-3.5-flash';
+  }
 
-  // 우선순위 후보군 (현재 설정 모델 -> 2.5 Flash -> 2.0 Flash -> 2.5 Pro)
+  // 우선순위 후보군 (현재 설정 모델 -> 3.5 Flash -> 3.1 Pro -> 3.1 Flash-Lite -> 2.5 Flash -> 2.0 Flash)
   const candidateModels = [
     primaryModel,
+    'gemini-3.5-flash',
+    'gemini-3.1-pro-preview',
+    'gemini-3.1-flash-lite',
     'gemini-2.5-flash',
-    'gemini-2.0-flash',
-    'gemini-2.5-pro'
+    'gemini-2.0-flash'
   ].filter((v, i, a) => a.indexOf(v) === i);
 
   let lastError = null;
@@ -18875,7 +18878,7 @@ async function coachCallGemini(prompt, systemPrompt){
       if(!res.ok){
         const errData = await res.json().catch(()=>({}));
         const msg = errData.error?.message || ('HTTP ' + res.status);
-        if(res.status === 404 || /not found|not supported/i.test(msg)){
+        if(res.status === 404 || /not found|not supported|no longer available|is not available|deprecated/i.test(msg)){
           lastError = new Error(msg);
           console.warn('Gemini 모델 ' + curModel + ' 사용 불가 (' + msg + '), 다음 후보 모델 시도...');
           continue;
@@ -18890,7 +18893,7 @@ async function coachCallGemini(prompt, systemPrompt){
       return text;
     } catch(err){
       lastError = err;
-      if(/not found|not supported/i.test(err.message)){
+      if(/not found|not supported|no longer available|is not available|deprecated/i.test(err.message)){
         continue;
       }
       throw err;
@@ -18943,14 +18946,14 @@ function coachOpenKeyModal(){
   box.innerHTML = '<div class="coach-card" style="margin-bottom:16px;border:1.5px solid var(--c-acc);">'
     + '<div class="coach-card-head"><span class="coach-card-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Google Gemini API 설정</span>'
     + '<button class="coach-btn sm outline" id="btnCoachKeyClose">닫기</button></div>'
-    + '<p style="font-size:13px;color:var(--c-sec);line-height:1.45;margin:0;">구글 AI Studio(aistudio.google.com)에서 발급받은 API 키를 입력하세요. 프로 티어 및 무료 티어 모두 사용 가능합니다. 키는 브라우저 로컬 저장소에만 보관됩니다.</p>'
+    + '<p style="font-size:13px;color:var(--c-sec);line-height:1.45;margin:0;">구글 AI Studio(aistudio.google.com)에서 발급받은 무료 API 키를 입력하세요. 키는 브라우저 로컬 저장소에만 안전하게 보관됩니다.</p>'
     + '<div style="display:flex;flex-direction:column;gap:8px;">'
     + '<input id="coachKeyInput" type="password" value="' + esc(curKey) + '" placeholder="AIzaSy..." style="padding:10px 12px;border-radius:10px;border:1px solid var(--c-sep);background:var(--c-fill);color:var(--c-label);font-family:monospace;font-size:13px;">'
     + '<div style="display:flex;gap:8px;align-items:center;">'
     + '<select id="coachModelSelect" style="flex:1;padding:8px 10px;border-radius:8px;border:1px solid var(--c-sep);background:var(--c-fill);color:var(--c-label);font-size:13px;">'
-    + '<option value="gemini-2.5-flash"' + (curModel==='gemini-2.5-flash'?' selected':'') + '>Gemini 2.5 Flash (권장 · 초고속/최신)</option>'
-    + '<option value="gemini-2.0-flash"' + (curModel==='gemini-2.0-flash'?' selected':'') + '>Gemini 2.0 Flash (안정적 최신 모델)</option>'
-    + '<option value="gemini-2.5-pro"' + (curModel==='gemini-2.5-pro'?' selected':'') + '>Gemini 2.5 Pro (최고 정밀도 · 심층 피드백)</option>'
+    + '<option value="gemini-3.5-flash"' + (curModel==='gemini-3.5-flash'?' selected':'') + '>Gemini 3.5 Flash (권장 · 초고속/최신)</option>'
+    + '<option value="gemini-3.1-pro-preview"' + (curModel==='gemini-3.1-pro-preview'?' selected':'') + '>Gemini 3.1 Pro (최고 정밀도 · 심층 피드백)</option>'
+    + '<option value="gemini-3.1-flash-lite"' + (curModel==='gemini-3.1-flash-lite'?' selected':'') + '>Gemini 3.1 Flash-Lite (경량 초고속)</option>'
     + '</select>'
     + '<button class="coach-btn primary" id="btnCoachKeySave">저장</button>'
     + '</div></div></div>';
@@ -18968,7 +18971,7 @@ function coachSaveKey(){
   const sel = document.getElementById('coachModelSelect');
   if(!inp) return;
   const key = inp.value.trim();
-  const model = sel ? sel.value : 'gemini-2.5-flash';
+  const model = sel ? sel.value : 'gemini-3.5-flash';
   localStorage.setItem('cards_gemini_key_v1', key);
   localStorage.setItem('cards_gemini_model_v1', model);
   toast(key ? 'Gemini API 키가 저장되었습니다.' : 'API 키가 삭제되었습니다.');
