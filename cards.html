@@ -2321,6 +2321,45 @@ details.gr-fold[open]>summary .s2-chev{transform:rotate(90deg);}
 .coach-archive-item { background: var(--c-card); border-radius: 14px; padding: 14px 16px; border: 0.5px solid var(--c-sep); box-shadow: var(--sh-card); display: flex; flex-direction: column; gap: 10px; }
 .coach-archive-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
 
+/* ── AL Mastery: 앵커 & HUD & 스캐폴딩 & 취약점 통계 ── */
+.coach-anchor-row { display: flex; align-items: center; gap: 8px; background: var(--c-fill); padding: 8px 12px; border-radius: 10px; }
+.coach-anchor-num { width: 22px; height: 22px; border-radius: 11px; background: var(--c-acc); color: #fff; font-size: 12px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.coach-anchor-inp { flex: 1; background: none; border: 0; font-size: 14px; color: var(--c-label); outline: none; font-family: inherit; font-weight: 500; }
+.coach-anchor-inp::placeholder { color: var(--c-sec); font-weight: 400; }
+
+.coach-tag-chip { display: inline-flex; align-items: center; gap: 4px; padding: 3px 8px; border-radius: 6px; font-size: 12px; font-weight: 600; background: var(--c-fill); color: var(--c-label); border: 0.5px solid var(--c-sep); }
+.coach-tag-chip.warn { background: rgba(255,149,0,.12); color: var(--c-orange); border-color: rgba(255,149,0,.25); }
+.coach-tag-chip.error { background: rgba(255,59,48,.12); color: var(--c-red); border-color: rgba(255,59,48,.25); }
+.coach-tag-chip.success { background: rgba(52,199,89,.12); color: var(--c-green); border-color: rgba(52,199,89,.25); }
+.coach-tag-chip.purple { background: rgba(175,82,222,.12); color: var(--c-purple); border-color: rgba(175,82,222,.25); }
+
+/* Eva Live HUD overlay */
+.coach-hud-bar { background: linear-gradient(135deg, rgba(88,86,214,.08), rgba(175,82,222,.08)); border: 1px solid rgba(175,82,222,.25); border-radius: 12px; padding: 12px 14px; display: flex; flex-direction: column; gap: 8px; text-align: left; }
+.coach-hud-title { font-size: 12px; font-weight: 700; color: var(--c-purple); display: flex; align-items: center; justify-content: space-between; text-transform: uppercase; letter-spacing: 0.5px; }
+.coach-hud-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.coach-hud-chip { background: var(--c-card); border: 0.5px solid var(--c-sep); border-radius: 8px; padding: 5px 10px; font-size: 13px; font-weight: 600; color: var(--c-label); display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 1px 3px rgba(0,0,0,.04); }
+.coach-hud-chip .chip-num { width: 18px; height: 18px; border-radius: 9px; background: var(--c-purple); color: #fff; font-size: 11px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; }
+
+/* 3-Step Scaffolding */
+.coach-scaffold-step { background: var(--c-fill); border-radius: 12px; padding: 12px 14px; display: flex; flex-direction: column; gap: 8px; border-left: 3px solid var(--c-acc); }
+.coach-scaffold-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: 13px; font-weight: 600; color: var(--c-label); }
+.coach-before-after { display: flex; flex-direction: column; gap: 6px; margin-top: 4px; }
+.coach-draft-box { background: var(--c-card); border-radius: 8px; padding: 8px 10px; font-size: 13px; color: var(--c-sec); line-height: 1.45; border: 0.5px solid var(--c-sep); }
+.coach-al-box { background: rgba(52,199,89,.08); border-left: 3px solid var(--c-green); border-radius: 8px; padding: 10px 12px; font-size: 14px; font-weight: 500; color: var(--c-label); line-height: 1.5; }
+.coach-al-points { font-size: 12px; font-weight: 600; color: var(--c-green); margin-top: 4px; }
+
+/* Stitched Full Story */
+.coach-stitch-box { background: linear-gradient(135deg, rgba(0,122,255,.06), rgba(52,199,89,.06)); border: 1.5px solid rgba(0,122,255,.2); border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+
+/* Weakness Dashboard & Filter */
+.coach-weak-stat-box { background: var(--c-card); border-radius: 14px; padding: 14px 16px; border: 0.5px solid var(--c-sep); box-shadow: var(--sh-card); display: flex; flex-direction: column; gap: 10px; }
+.coach-weak-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: 13px; }
+.coach-weak-bar-wrap { flex: 1; height: 8px; border-radius: 4px; background: var(--c-fill); overflow: hidden; }
+.coach-weak-bar { height: 100%; border-radius: 4px; background: var(--c-orange); transition: width .3s ease; }
+.coach-filter-pills { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.coach-filter-pill { border: 0.5px solid var(--c-sep); background: var(--c-fill); color: var(--c-sec); padding: 4px 10px; border-radius: 8px; font-size: 12px; font-weight: 600; cursor: pointer; transition: all .15s; user-select: none; }
+.coach-filter-pill.active { background: var(--c-acc); color: #fff; border-color: var(--c-acc); }
+
 
 /* 라이브러리 빠른 목록 (09-24 · 캔버스 「라이브러리」 판) */
 .lh-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:10px;}
@@ -18784,12 +18823,12 @@ function syncTtsSettingsUI(){
 }
 
 
-/* ═══════════ 스피킹 코치 & Eva OPIc 인터뷰 (2026-10-20) ═══════════ */
-let coachTab = localStorage.getItem('cards_coach_tab_v1') || 'sit';
-let coachSitIndex = parseInt(localStorage.getItem('cards_coach_sit_idx_v1') || '0', 10);
-let coachCustomSits = null;
+/* ═══════════ ACTFL OPIc AL 마스터리 시스템 (2026-10-20) ═══════════ */
+let coachTab = localStorage.getItem('cards_coach_tab_v1') || 'anchor';
+if(coachTab === 'sit') coachTab = 'anchor';
 let coachEvaQIndex = parseInt(localStorage.getItem('cards_coach_eva_idx_v1') || '0', 10);
 let coachActiveSpeechRec = null;
+let coachScaffoldSpeechRec = null;
 let coachActiveRecorder = null;
 let coachAudioChunks = [];
 let coachRecordTimer = null;
@@ -18797,39 +18836,172 @@ let coachRecordSecs = 0;
 let coachLastEvaBlob = null;
 let coachLastEvaTranscript = '';
 let coachLastEvaFeedback = null;
-let coachSitAnswers = {};
-let coachSitFeedbacks = {};
+let coachArchiveFilterTag = null;
 
 const COACH_PRESET_QUESTIONS = [
-  { id: 'q1', topic: '묘사 · 거주지', eng: "I'd like to know about where you live. Could you describe your home to me? What does it look like, and which room is your favorite?", kor: "현재 살고 계신 집에 대해 묘사해 주세요. 집의 구조와 가장 좋아하는 방은 어디인가요?" },
-  { id: 'q2', topic: '루틴 · 평일 일과', eng: "Tell me about your daily routine on weekdays. What do you usually do from the moment you wake up until you go to bed?", kor: "평일의 하루 일과(루틴)를 아침에 일어나서 밤에 잠들 때까지 순서대로 말씀해 주세요." },
-  { id: 'q3', topic: '묘사 · 자주 가는 카페', eng: "You indicated that you like going to cafes. Describe your favorite cafe. Where is it located, and what do you like about the atmosphere?", kor: "자주 가시는 단골 카페에 대해 묘사해 주세요. 위치와 분위기의 어떤 점을 좋아하시나요?" },
-  { id: 'q4', topic: '과거경험 · 기억에 남는 여행', eng: "Tell me about a memorable trip you took in the past. Where did you go, who did you go with, and what made it so special?", kor: "과거에 다녀온 여행 중 가장 기억에 남는 여행에 대해 이야기해 주세요." },
-  { id: 'q5', topic: '돌발 · 약속 취소/변경', eng: "Have you ever had an unexpected issue where you had to cancel an appointment at the last minute? What happened, and how did you resolve it?", kor: "약속을 갑작스럽게 취소하거나 변경해야 했던 돌발 상황이 있었나요? 어떻게 해결하셨나요?" },
-  { id: 'q6', topic: '롤플레이 · 매장 문의 (11번)', eng: "You are planning to buy a new smartphone. Call the store and ask three or four questions about the latest models, prices, and available discounts.", kor: "새 스마트폰을 구매하려고 합니다. 매장에 전화를 걸어 최신 기종, 가격, 할인 혜택에 대해 3~4가지 질문을 해보세요." },
-  { id: 'q7', topic: '롤플레이 · 문제 해결 대안 제시 (12번)', eng: "You borrowed an electronic device from a friend, but it accidentally broke. Call your friend, explain the situation, and suggest two or three alternatives to solve the problem.", kor: "친구에게 빌린 전자기기가 실수로 고장 났습니다. 친구에게 전화하여 상황을 설명하고 2~3가지 해결 대안을 제시해 보세요." },
-  { id: 'q8', topic: '루틴 · 운동/조깅', eng: "You mentioned that you enjoy working out or jogging. Tell me about your exercise routine. Where do you go, and how often do you exercise?", kor: "운동이나 조깅 루틴에 대해 말씀해 주세요. 어디서 얼마나 자주 운동하시나요?" },
-  { id: 'q9', topic: '묘사 · 음악 취향', eng: "What kind of music do you like to listen to? Who is your favorite singer or composer, and what makes their music special?", kor: "어떤 종류의 음악을 즐겨 들으시나요? 가장 좋아하는 가수나 작곡가는 누구인가요?" },
-  { id: 'q10', topic: '과거경험 · 최근 외식', eng: "Tell me about the last time you went out to eat at a restaurant. Who did you go with, what did you order, and how was the food?", kor: "가장 최근에 식당에서 외식했던 경험을 말씀해 주세요. 누구와 가서 무엇을 드셨나요?" }
+  {
+    id: 'q1',
+    topic: '묘사 · 거주지',
+    eng: "I'd like to know about where you live. Could you describe your home to me? What does it look like, and which room is your favorite?",
+    kor: "현재 살고 계신 집에 대해 묘사해 주세요. 집의 구조와 가장 좋아하는 방은 어디인가요?",
+    defaultAnchors: [
+      "가족과 함께 아파트 거주 (거실 통창/시티뷰)",
+      "가장 좋아하는 방: 듀얼 모니터 서재 & 힐링 공간",
+      "주말마다 방 정리 & 미니멀 라이프 유지"
+    ]
+  },
+  {
+    id: 'q2',
+    topic: '루틴 · 평일 일과',
+    eng: "Tell me about your daily routine on weekdays. What do you usually do from the moment you wake up until you go to bed?",
+    kor: "평일의 하루 일과(루틴)를 아침에 일어나서 밤에 잠들 때까지 순서대로 말씀해 주세요.",
+    defaultAnchors: [
+      "오전 7시 기상 ➔ 가벼운 스트레칭 & 모닝 드립커피",
+      "지하철 출퇴근길 팟캐스트 청취 & 집중 업무",
+      "퇴근 후 헬스장 러닝 & 샤워 후 독서/휴식"
+    ]
+  },
+  {
+    id: 'q3',
+    topic: '묘사 · 자주 가는 카페',
+    eng: "You indicated that you like going to cafes. Describe your favorite cafe. Where is it located, and what do you like about the atmosphere?",
+    kor: "자주 가시는 단골 카페에 대해 묘사해 주세요. 위치와 분위기의 어떤 점을 좋아하시나요?",
+    defaultAnchors: [
+      "집 근처 골목길 아늑한 통유리 로스터리 카페",
+      "시그니처 플랫화이트와 은은한 재즈/인디 음악",
+      "주말 오후 노트북 작업이나 독서하기 최적의 아지트"
+    ]
+  },
+  {
+    id: 'q4',
+    topic: '과거경험 · 기억에 남는 여행',
+    eng: "Tell me about a memorable trip you took in the past. Where did you go, who did you go with, and what made it so special?",
+    kor: "과거에 다녀온 여행 중 가장 기억에 남는 여행에 대해 이야기해 주세요.",
+    defaultAnchors: [
+      "작년 여름 친구들과 떠난 제주도 즉흥 로드트립",
+      "해안도로 드라이브 중 만난 환상적인 일몰과 해산물",
+      "갑작스러운 폭우로 카페에 고립되었지만 나눈 깊은 대화"
+    ]
+  },
+  {
+    id: 'q5',
+    topic: '돌발 · 약속 취소/변경',
+    eng: "Have you ever had an unexpected issue where you had to cancel an appointment at the last minute? What happened, and how did you resolve it?",
+    kor: "약속을 갑작스럽게 취소하거나 변경해야 했던 돌발 상황이 있었나요? 어떻게 해결하셨나요?",
+    defaultAnchors: [
+      "친구 생일파티 당일 갑작스러운 야근/긴급 업무 발생",
+      "친구에게 즉시 전화로 사과하고 다음 주 고급 디너 예약 약속",
+      "다행히 친구가 쿨하게 이해해줘서 주말에 더 즐겁게 식사"
+    ]
+  },
+  {
+    id: 'q6',
+    topic: '롤플레이 · 매장 문의 (11번)',
+    eng: "You are planning to buy a new smartphone. Call the store and ask three or four questions about the latest models, prices, and available discounts.",
+    kor: "새 스마트폰을 구매하려고 합니다. 매장에 전화를 걸어 최신 기종, 가격, 할인 혜택에 대해 3~4가지 질문을 해보세요.",
+    defaultAnchors: [
+      "인사 및 최신 플래그십 스마트폰 재고/색상 확인",
+      "용량별 가격 차이 및 통신사 약정/카드 할인 프로모션 문의",
+      "오늘 퇴근길에 방문 수령 가능한지 매장 영업시간 확인"
+    ]
+  },
+  {
+    id: 'q7',
+    topic: '롤플레이 · 문제 해결 대안 제시 (12번)',
+    eng: "You borrowed an electronic device from a friend, but it accidentally broke. Call your friend, explain the situation, and suggest two or three alternatives to solve the problem.",
+    kor: "친구에게 빌린 전자기기가 실수로 고장 났습니다. 친구에게 전화하여 상황을 설명하고 2~3가지 해결 대안을 제시해 보세요.",
+    defaultAnchors: [
+      "빌린 전자기기 실수로 떨어뜨려 파손된 점 솔직한 사과",
+      "대안 1: 공식 AS 센터 당일 접수 후 수리비 전액 부담",
+      "대안 2: 원한다면 새 최신 제품으로 즉시 교환 구매 보상"
+    ]
+  },
+  {
+    id: 'q8',
+    topic: '루틴 · 운동/조깅',
+    eng: "You mentioned that you enjoy working out or jogging. Tell me about your exercise routine. Where do you go, and how often do you exercise?",
+    kor: "운동이나 조깅 루틴에 대해 말씀해 주세요. 어디서 얼마나 자주 운동하시나요?",
+    defaultAnchors: [
+      "주 3~4회 퇴근 후 집 근처 한강/하천 러닝 크루 코스",
+      "좋아하는 비트 빠른 음악 들으며 5km 페이스 유지",
+      "땀 흘린 뒤 시원한 물 한잔과 스트레칭으로 스트레스 해소"
+    ]
+  },
+  {
+    id: 'q9',
+    topic: '묘사 · 음악 취향',
+    eng: "What kind of music do you like to listen to? Who is your favorite singer or composer, and what makes their music special?",
+    kor: "어떤 종류의 음악을 즐겨 들으시나요? 가장 좋아하는 가수나 작곡가는 누구인가요?",
+    defaultAnchors: [
+      "계절과 기분에 따라 다른 장르 (주로 어쿠스틱/로파이)",
+      "가장 좋아하는 아티스트와 감성을 자극하는 시적인 가사",
+      "하루 일과 마무리할 때 이어폰 꽂고 멍때리며 힐링"
+    ]
+  },
+  {
+    id: 'q10',
+    topic: '과거경험 · 최근 외식',
+    eng: "Tell me about the last time you went out to eat at a restaurant. Who did you go with, what did you order, and how was the food?",
+    kor: "가장 최근에 식당에서 외식했던 경험을 말씀해 주세요. 누구와 가서 무엇을 드셨나요?",
+    defaultAnchors: [
+      "지난 주말 가족들과 축하 자리를 위해 찾은 이탈리안 레스토랑",
+      "화덕 피자와 꾸덕한 트러플 파스타, 하우스 와인 페어링",
+      "직원들의 친절한 응대와 따뜻한 조명 덕분에 완벽했던 저녁"
+    ]
+  }
 ];
 
-const COACH_PRESET_SITUATIONS = [
-  [
-    { id: 's1-1', sit: "나 방금 점심 먹고 들어왔는데, 커피 사러 잠깐 나갔다 올게.", hint: "come back / head out / grab a coffee", sample: "I just got back from lunch, but I'm heading out to grab a coffee." },
-    { id: 's1-2', sit: "오늘 아침에 일어나기 진짜 힘들었는데, 포기 안 하고 결국 운동 갔어.", hint: "hard to get up / give up / ended up going", sample: "It was really hard to get up this morning, but I didn't give up and ended up going to the gym." },
-    { id: 's1-3', sit: "아침엔 쌀쌀해서 자켓을 입고 나갔는데, 낮에는 더워서 벗었어.", hint: "chilly / put on / take off / got hot", sample: "I put on a jacket because it was chilly this morning, but I took it off in the afternoon because it got hot." }
-  ],
-  [
-    { id: 's2-1', sit: "비가 너무 많이 와서 원래 있던 친구와의 저녁 약속을 취소했어.", hint: "call off / cancel / rain heavily", sample: "It was raining so hard today that I called off my dinner plans with my friend." },
-    { id: 's2-2', sit: "퇴근길에 마트에 잠깐 들러서 내일 아침 먹을 것 좀 사려고.", hint: "drop by / pick up / on my way home", sample: "I'm going to drop by the grocery store on my way home to pick up some breakfast for tomorrow." },
-    { id: 's2-3', sit: "핸드폰 배터리가 다 닳아서 지하철에서 음악을 못 들었어.", hint: "run out of / battery died / couldn't listen", sample: "My phone battery completely died, so I couldn't listen to any music on the subway." }
-  ],
-  [
-    { id: 's3-1', sit: "회의가 예상보다 길어져서 오늘 야근해야 할 것 같아.", hint: "drag on / longer than expected / work late", sample: "The meeting dragged on longer than expected, so I think I'll have to work late today." },
-    { id: 's3-2', sit: "엘리베이터가 고장 나서 7층까지 계단으로 걸어 올라갔어.", hint: "out of order / broken down / take the stairs", sample: "The elevator was out of order, so I had to take the stairs all the way up to the 7th floor." },
-    { id: 's3-3', sit: "잠깐 바람 좀 쐬고 올게. 머리가 너무 복잡해.", hint: "get some fresh air / clear my head / head out", sample: "I'm heading out to get some fresh air and clear my head." }
-  ]
-];
+function coachGetActiveQuestion(){
+  return COACH_PRESET_QUESTIONS[coachEvaQIndex % COACH_PRESET_QUESTIONS.length];
+}
+
+function coachGetQuestionAnchors(qid){
+  const saved = localStorage.getItem('cards_q_anchors_v1_' + qid);
+  if(saved){
+    try {
+      const arr = JSON.parse(saved);
+      if(Array.isArray(arr) && arr.length === 3) return arr;
+    } catch(e){}
+  }
+  const q = COACH_PRESET_QUESTIONS.find(x => x.id === qid) || COACH_PRESET_QUESTIONS[0];
+  return q.defaultAnchors ? [...q.defaultAnchors] : ['배경 설명', '핵심 디테일 및 감정', '마무리 및 느낀 점'];
+}
+
+function coachSaveQuestionAnchors(qid, anchors){
+  localStorage.setItem('cards_q_anchors_v1_' + qid, JSON.stringify(anchors));
+}
+
+function coachResetQuestionAnchors(qid){
+  localStorage.removeItem('cards_q_anchors_v1_' + qid);
+}
+
+function coachGetScaffoldDraft(qid, stepIdx){
+  return localStorage.getItem('cards_draft_' + qid + '_' + stepIdx) || '';
+}
+
+function coachSaveScaffoldDraft(qid, stepIdx, text){
+  localStorage.setItem('cards_draft_' + qid + '_' + stepIdx, text);
+}
+
+function coachGetScaffoldPolished(qid, stepIdx){
+  const saved = localStorage.getItem('cards_polished_' + qid + '_' + stepIdx);
+  if(!saved) return null;
+  try { return JSON.parse(saved); } catch(e){ return null; }
+}
+
+function coachSaveScaffoldPolished(qid, stepIdx, data){
+  localStorage.setItem('cards_polished_' + qid + '_' + stepIdx, JSON.stringify(data));
+}
+
+function coachGetScaffoldStitched(qid){
+  const saved = localStorage.getItem('cards_stitched_' + qid);
+  if(!saved) return null;
+  try { return JSON.parse(saved); } catch(e){ return null; }
+}
+
+function coachSaveScaffoldStitched(qid, data){
+  localStorage.setItem('cards_stitched_' + qid, JSON.stringify(data));
+}
 
 function coachGetApiKey(){ return localStorage.getItem('cards_gemini_key_v1') || ''; }
 function coachGetModel(){
@@ -18850,7 +19022,6 @@ async function coachCallGemini(prompt, systemPrompt){
     primaryModel = primaryModel.includes('pro') ? 'gemini-3.1-pro-preview' : 'gemini-3.5-flash';
   }
 
-  // 우선순위 후보군 (현재 설정 모델 -> 3.1 Flash-Lite -> 3.5 Flash -> 3.1 Pro -> 2.5 Flash -> 2.0 Flash)
   const candidateModels = [
     primaryModel,
     'gemini-3.1-flash-lite',
@@ -18860,7 +19031,6 @@ async function coachCallGemini(prompt, systemPrompt){
     'gemini-2.0-flash'
   ].filter((v, i, a) => a.indexOf(v) === i);
 
-  // 모든 Gemini 모델에서 500 스키마 오류를 방지하기 위해 단일 contents로 통합
   const fullText = systemPrompt ? (systemPrompt + '\n\n' + prompt) : prompt;
   const payload = {
     contents: [{ parts: [{ text: fullText }] }]
@@ -19007,11 +19177,12 @@ function renderSpeakingCoach(){
   // 키 설정 박스 컨테이너
   h += '<div id="coachKeyBox" style="display:none;"></div>';
 
-  // 2. 상단 세그먼트 탭
-  h += '<nav class="coach-nav">'
-    + '<button class="coach-tab' + (coachTab==='sit'?' active':'') + '" data-coach-tab="sit">3문장 입영작</button>'
-    + '<button class="coach-tab' + (coachTab==='eva'?' active':'') + '" data-coach-tab="eva">Eva OPIc 인터뷰</button>'
-    + '<button id="coachRecTabBtn" class="coach-tab' + (coachTab==='rec'?' active':'') + '" data-coach-tab="rec">보관함</button>'
+  // 2. 4단계 AL 마스터리 탭 네비게이션
+  h += '<nav class="coach-nav" style="overflow-x:auto;">'
+    + '<button class="coach-tab' + (coachTab==='anchor'?' active':'') + '" data-coach-tab="anchor">1. 스토리 앵커</button>'
+    + '<button class="coach-tab' + (coachTab==='scaffold'?' active':'') + '" data-coach-tab="scaffold">2. AL 단락 확장</button>'
+    + '<button class="coach-tab' + (coachTab==='eva'?' active':'') + '" data-coach-tab="eva">3. Eva 실전 인터뷰</button>'
+    + '<button id="coachRecTabBtn" class="coach-tab' + (coachTab==='rec'?' active':'') + '" data-coach-tab="rec">4. 취약점 보관함</button>'
     + '</nav>';
 
   // 3. 서브 탭 본문
@@ -19028,7 +19199,8 @@ function renderSpeakingCoach(){
     btn.onclick = () => setCoachTab(btn.dataset.coachTab);
   });
 
-  if(coachTab === 'sit') renderCoachSituations();
+  if(coachTab === 'anchor') renderCoachAnchors();
+  else if(coachTab === 'scaffold') renderCoachScaffold();
   else if(coachTab === 'eva') renderCoachEva();
   else if(coachTab === 'rec') renderCoachRecordings();
 
@@ -19037,109 +19209,275 @@ function renderSpeakingCoach(){
     idbGet('cards_eva_index_v1').then(list => {
       if(list && Array.isArray(list) && list.length > 0){
         const b = document.getElementById('coachRecTabBtn');
-        if(b) b.textContent = '보관함 (' + list.length + ')';
+        if(b) b.textContent = '4. 취약점 보관함 (' + list.length + ')';
       }
     }).catch(()=>{});
   } catch(e){}
 }
 
-/* ═══════════ 탭 1: 상황별 3문장 입영작 ═══════════ */
-function getActiveSituations(){
-  if(coachCustomSits && coachCustomSits.length === 3) return coachCustomSits;
-  const sets = COACH_PRESET_SITUATIONS;
-  return sets[coachSitIndex % sets.length];
-}
-
-function renderCoachSituations(){
+/* ═══════════ 탭 1: 스토리 앵커 (3개 키워드 메모) ═══════════ */
+function renderCoachAnchors(){
   const el = document.getElementById('coachTabBody');
   if(!el) return;
-  const sits = getActiveSituations();
-  let completedCount = 0;
-  for(let i=0; i<3; i++){
-    if(coachSitFeedbacks[i]) completedCount++;
-  }
+  const q = coachGetActiveQuestion();
+  const anchors = coachGetQuestionAnchors(q.id);
 
   let h = '';
-  // 상단 진행도 & 새 문제 버튼
-  h += '<div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">'
-    + '<div style="display:flex;align-items:center;gap:6px;">'
-    + '<span class="coach-badge ' + (completedCount===3?'green':'blue') + '">' + completedCount + ' / 3 완료</span>'
-    + '<span style="font-size:13px;color:var(--c-sec);">상황을 보고 3초 안에 입으로 발화해 보세요</span>'
-    + '</div>'
-    + '<div style="display:flex;gap:6px;">'
-    + '<button class="coach-btn sm secondary" id="btnCoachNewSits"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>새 3문장</button>'
-    + (completedCount > 0 ? '<button class="coach-btn sm outline" id="btnCoachCopyObsidian"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>마크다운 복사</button>' : '')
-    + '</div></div>';
 
-  // 3개 문항 카드 렌더링
-  sits.forEach((item, idx) => {
-    const ans = coachSitAnswers[idx] || '';
-    const fb = coachSitFeedbacks[idx] || null;
-
-    h += '<div class="coach-card">'
-      + '<div class="coach-card-head">'
-      + '<span class="coach-card-title"><span class="coach-badge purple">문항 ' + (idx + 1) + '</span></span>'
-      + (fb ? '<span class="coach-badge green">완료</span>' : '<span class="coach-badge orange">진행 중</span>')
-      + '</div>'
-      + '<div class="coach-q-box">' + esc(item.sit) + '</div>'
-      + '<div class="coach-hints"><span>핵심 표현 힌트:</span>'
-      + item.hint.split('/').map(x => '<span class="coach-hint-chip">' + esc(x.trim()) + '</span>').join('')
-      + '</div>'
-      + '<div class="coach-input-wrap">'
-      + '<textarea id="coachSitInp_' + idx + '" class="coach-input" placeholder="보자마자 입으로 말한 영문장을 입력하거나 아래 마이크를 누르고 말씀하세요...">' + esc(ans) + '</textarea>'
-      + '<div class="coach-input-acts">'
-      + '<button id="coachMicBtn_' + idx + '" class="coach-btn sm mic" data-coach-mic="' + idx + '"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg><span id="coachMicTxt_' + idx + '">음성 입력</span></button>'
-      + '<button class="coach-btn sm primary" data-coach-sub="' + idx + '">AI 피드백 받기</button>'
-      + '</div></div>';
-
-    if(fb){
-      h += '<div class="coach-feedback">'
-        + '<div class="coach-fb-native">'
-        + '<span>원어민 추천: ' + esc(fb.corrected) + '</span>'
-        + '<button class="coach-btn sm outline" style="padding:3px 8px;font-size:11px;" data-coach-tts-text="' + esc(fb.corrected) + '"><svg viewBox="0 0 24 24" fill="currentColor" width="11" height="11"><polygon points="6 4 20 12 6 20 6 4"/></svg>소리 듣기</button>'
-        + '</div>'
-        + '<div class="coach-fb-tip">' + esc(fb.feedback) + '</div>'
-        + '</div>';
-    }
-
-    h += '</div>';
+  // 문항 선택 & 안내 카드
+  h += '<div class="coach-card">'
+    + '<div class="coach-card-head">'
+    + '<span class="coach-card-title"><span class="coach-badge purple">' + esc(q.topic) + '</span>질문 선택</span>'
+    + '<select id="coachAnchorQSelect" style="padding:6px 10px;border-radius:8px;border:1px solid var(--c-sep);background:var(--c-fill);color:var(--c-label);font-size:13px;font-weight:600;">';
+  COACH_PRESET_QUESTIONS.forEach((item, idx) => {
+    h += '<option value="' + item.id + '"' + (idx === coachEvaQIndex ? ' selected' : '') + '>' + (idx + 1) + '. ' + esc(item.topic) + '</option>';
   });
+  h += '</select></div>'
+    + '<div class="coach-q-box" style="font-size:16px;font-weight:600;line-height:1.6;">' + esc(q.eng) + '</div>'
+    + '<div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">'
+    + '<button class="coach-btn sm outline" id="btnCoachSpeakAnchorQ"><svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><polygon points="6 4 20 12 6 20 6 4"/></svg>Eva 질문 음성 듣기</button>'
+    + '<details style="font-size:13px;color:var(--c-sec);cursor:pointer;"><summary>한국어 번역 가이드</summary><div style="margin-top:4px;padding:6px 10px;background:var(--c-fill);border-radius:8px;">' + esc(q.kor) + '</div></details>'
+    + '</div>'
+    + '</div>';
+
+  // 3개 앵커 편집 카드
+  h += '<div class="coach-card">'
+    + '<div class="coach-card-head">'
+    + '<span class="coach-card-title">'
+    + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><circle cx="12" cy="12" r="10"/><path d="M12 8v8"/><path d="M8 12h8"/></svg>'
+    + '내 스토리 앵커 3개 (말할 내용 한국어 메모)'
+    + '</span>'
+    + '<button class="coach-btn sm outline" id="btnCoachResetAnchors"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>기본 추천 불러오기</button>'
+    + '</div>'
+    + '<p style="font-size:13px;color:var(--c-sec);line-height:1.5;margin:0;">시험장에서 매번 무슨 말을 할지 머뭇거리지 않도록, 내 실제 경험과 사실을 3개 앵커로 메모해 두세요. 이 메모는 2단계 단락 확장과 3단계 인터뷰 화면 상단 HUD에 상시 고정 표시됩니다.</p>'
+    + '<div style="display:flex;flex-direction:column;gap:10px;margin-top:6px;">'
+    + '<div class="coach-anchor-row">'
+    + '<span class="coach-anchor-num">1</span>'
+    + '<input type="text" id="coachAnchorInp_0" class="coach-anchor-inp" placeholder="앵커 1: 배경/도입 키워드 (예: 가족과 함께 아파트 거주)" value="' + esc(anchors[0] || '') + '">'
+    + '</div>'
+    + '<div class="coach-anchor-row">'
+    + '<span class="coach-anchor-num">2</span>'
+    + '<input type="text" id="coachAnchorInp_1" class="coach-anchor-inp" placeholder="앵커 2: 핵심 사건/디테일 (예: 가장 좋아하는 방: 서재 & 힐링 공간)" value="' + esc(anchors[1] || '') + '">'
+    + '</div>'
+    + '<div class="coach-anchor-row">'
+    + '<span class="coach-anchor-num">3</span>'
+    + '<input type="text" id="coachAnchorInp_2" class="coach-anchor-inp" placeholder="앵커 3: 느낀 점/마무리 (예: 주말마다 미니멀 라이프 유지)" value="' + esc(anchors[2] || '') + '">'
+    + '</div>'
+    + '</div>'
+    + '<div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px;gap:8px;">'
+    + '<button class="coach-btn outline" id="btnCoachSaveAnchors">앵커 저장</button>'
+    + '<button class="coach-btn primary" id="btnCoachGoScaffold">2단계 단락 확장으로 넘어가기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>'
+    + '</div>'
+    + '</div>';
 
   el.innerHTML = h;
 
   // 이벤트 바인딩
-  const newBtn = document.getElementById('btnCoachNewSits');
-  if(newBtn) newBtn.onclick = coachNewSituations;
-  const cpBtn = document.getElementById('btnCoachCopyObsidian');
-  if(cpBtn) cpBtn.onclick = coachCopyObsidian;
+  const qSel = document.getElementById('coachAnchorQSelect');
+  if(qSel){
+    qSel.onchange = () => {
+      const idx = COACH_PRESET_QUESTIONS.findIndex(x => x.id === qSel.value);
+      if(idx >= 0){
+        coachEvaQIndex = idx;
+        localStorage.setItem('cards_coach_eva_idx_v1', coachEvaQIndex);
+        renderCoachAnchors();
+      }
+    };
+  }
 
-  el.querySelectorAll('[data-coach-mic]').forEach(b => {
-    const idx = parseInt(b.dataset.coachMic, 10);
-    b.onclick = () => coachToggleSitMic(idx);
-  });
-  el.querySelectorAll('[data-coach-sub]').forEach(b => {
-    const idx = parseInt(b.dataset.coachSub, 10);
-    b.onclick = () => coachSubmitSituation(idx);
-  });
-  el.querySelectorAll('[data-coach-tts-text]').forEach(b => {
-    b.onclick = () => coachSpeak(b.dataset.coachTtsText);
-  });
+  const speakQBtn = document.getElementById('btnCoachSpeakAnchorQ');
+  if(speakQBtn) speakQBtn.onclick = () => coachSpeak(q.eng);
+
+  const resetBtn = document.getElementById('btnCoachResetAnchors');
+  if(resetBtn){
+    resetBtn.onclick = () => {
+      coachResetQuestionAnchors(q.id);
+      toast('기본 추천 앵커로 초기화되었습니다.');
+      renderCoachAnchors();
+    };
+  }
+
+  const saveBtn = document.getElementById('btnCoachSaveAnchors');
+  if(saveBtn){
+    saveBtn.onclick = () => {
+      const a0 = (document.getElementById('coachAnchorInp_0')?.value || '').trim();
+      const a1 = (document.getElementById('coachAnchorInp_1')?.value || '').trim();
+      const a2 = (document.getElementById('coachAnchorInp_2')?.value || '').trim();
+      coachSaveQuestionAnchors(q.id, [a0 || '배경 설명', a1 || '핵심 디테일', a2 || '마무리']);
+      toast('스토리 앵커가 저장되었습니다.');
+    };
+  }
+
+  const goScaffoldBtn = document.getElementById('btnCoachGoScaffold');
+  if(goScaffoldBtn){
+    goScaffoldBtn.onclick = () => {
+      const a0 = (document.getElementById('coachAnchorInp_0')?.value || '').trim();
+      const a1 = (document.getElementById('coachAnchorInp_1')?.value || '').trim();
+      const a2 = (document.getElementById('coachAnchorInp_2')?.value || '').trim();
+      coachSaveQuestionAnchors(q.id, [a0 || '배경 설명', a1 || '핵심 디테일', a2 || '마무리']);
+      setCoachTab('scaffold');
+    };
+  }
 }
 
-function coachToggleSitMic(idx){
-  const btn = document.getElementById('coachMicBtn_' + idx);
-  const txt = document.getElementById('coachMicTxt_' + idx);
-  const inp = document.getElementById('coachSitInp_' + idx);
+/* ═══════════ 탭 2: AL 단락 확장 (초안 ➔ AL 다듬기 ➔ 1분 스토리) ═══════════ */
+function renderCoachScaffold(){
+  const el = document.getElementById('coachTabBody');
+  if(!el) return;
+  const q = coachGetActiveQuestion();
+  const anchors = coachGetQuestionAnchors(q.id);
+  const stitched = coachGetScaffoldStitched(q.id);
+
+  let h = '';
+
+  // 질문 & 앵커 상단 브리핑 카드
+  h += '<div class="coach-card">'
+    + '<div class="coach-card-head">'
+    + '<span class="coach-card-title"><span class="coach-badge purple">' + esc(q.topic) + '</span>단락 확장 질문</span>'
+    + '<select id="coachScaffoldQSelect" style="padding:6px 10px;border-radius:8px;border:1px solid var(--c-sep);background:var(--c-fill);color:var(--c-label);font-size:13px;font-weight:600;">';
+  COACH_PRESET_QUESTIONS.forEach((item, idx) => {
+    h += '<option value="' + item.id + '"' + (idx === coachEvaQIndex ? ' selected' : '') + '>' + (idx + 1) + '. ' + esc(item.topic) + '</option>';
+  });
+  h += '</select></div>'
+    + '<div class="coach-q-box" style="font-size:15px;line-height:1.55;">' + esc(q.eng) + '</div>'
+    + '<div class="coach-hud-chips">'
+    + '<span class="coach-hud-chip"><span class="chip-num">1</span>' + esc(anchors[0] || '배경') + '</span>'
+    + '<span class="coach-hud-chip"><span class="chip-num">2</span>' + esc(anchors[1] || '사건') + '</span>'
+    + '<span class="coach-hud-chip"><span class="chip-num">3</span>' + esc(anchors[2] || '마무리') + '</span>'
+    + '</div>'
+    + '</div>';
+
+  // 3개 앵커 단계별 확장 카드
+  for(let i = 0; i < 3; i++){
+    const anchorText = anchors[i] || ('앵커 ' + (i + 1));
+    const draft = coachGetScaffoldDraft(q.id, i);
+    const polished = coachGetScaffoldPolished(q.id, i);
+
+    h += '<div class="coach-card">'
+      + '<div class="coach-scaffold-head">'
+      + '<span><span class="coach-badge purple">앵커 ' + (i + 1) + '</span> <b style="font-size:14px;color:var(--c-label);">' + esc(anchorText) + '</b></span>'
+      + (polished ? '<span class="coach-badge green">AL 변환 완료</span>' : '<span class="coach-badge orange">초안 대기</span>')
+      + '</div>'
+      + '<div class="coach-input-wrap">'
+      + '<textarea id="coachScaffoldInp_' + i + '" class="coach-input" placeholder="이 앵커에 대해 생각나는 대로 짧은 영문장이나 키워드를 편하게 말씀해 보세요 (문법 오류 신경쓰지 마세요)...">' + esc(draft) + '</textarea>'
+      + '<div class="coach-input-acts">'
+      + '<button id="coachScaffoldMicBtn_' + i + '" class="coach-btn sm mic" data-scaffold-mic="' + i + '"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg><span id="coachScaffoldMicTxt_' + i + '">음성 입력</span></button>'
+      + '<button class="coach-btn sm primary" data-scaffold-polish="' + i + '"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3z"/></svg>AL 다듬기 (Gemini)</button>'
+      + '</div></div>';
+
+    if(polished){
+      h += '<div class="coach-before-after">'
+        + '<div class="coach-draft-box"><span style="font-weight:600;color:var(--c-sec);">내 초안:</span> ' + esc(draft || '(음성 입력)') + '</div>'
+        + '<div class="coach-al-box">'
+        + '<div style="display:flex;align-items:center;justify-content:space-between;gap:6px;">'
+        + '<span style="font-weight:700;color:var(--c-green);font-size:13px;">AL급 업그레이드 문장:</span>'
+        + '<button class="coach-btn sm outline" style="padding:2px 8px;font-size:11px;" data-scaffold-tts="' + esc(polished.polished) + '"><svg viewBox="0 0 24 24" fill="currentColor" width="11" height="11"><polygon points="6 4 20 12 6 20 6 4"/></svg>소리 듣기</button>'
+        + '</div>'
+        + '<div style="font-size:14px;color:var(--c-label);margin-top:4px;font-weight:500;">' + esc(polished.polished) + '</div>'
+        + (polished.koreanMeaning ? '<div style="font-size:12px;color:var(--c-sec);margin-top:2px;">' + esc(polished.koreanMeaning) + '</div>' : '')
+        + (polished.points ? '<div class="coach-al-points"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12" style="display:inline-block;vertical-align:-1px;margin-right:3px;"><polyline points="20 6 9 17 4 12"/></svg>' + esc(polished.points) + '</div>' : '')
+        + '</div></div>';
+    }
+
+    h += '</div>';
+  }
+
+  // 1분 30초 풀 스토리 통합 섹션
+  h += '<div class="coach-card" style="text-align:center;">'
+    + '<button class="coach-btn primary" id="btnCoachStitchStory" style="width:100%;padding:12px 16px;font-size:15px;">'
+    + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3z"/></svg>'
+    + '3개 앵커 문장 연결하여 AL 풀 스토리 완성 (Gemini)'
+    + '</button>';
+
+  if(stitched && stitched.stitchedStory){
+    h += '<div class="coach-stitch-box" style="margin-top:14px;text-align:left;">'
+      + '<div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">'
+      + '<span style="font-size:15px;font-weight:700;color:var(--c-acc);display:flex;align-items:center;gap:6px;">'
+      + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>'
+      + '1분 30초 완성 AL 풀 스토리'
+      + '</span>'
+      + '<div style="display:flex;gap:6px;">'
+      + '<button class="coach-btn sm outline" id="btnCoachSpeakStitched"><svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><polygon points="6 4 20 12 6 20 6 4"/></svg>전체 듣기</button>'
+      + '<button class="coach-btn sm outline" id="btnCoachCopyStitched"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>복사</button>'
+      + '</div></div>'
+      + '<div style="font-size:15px;line-height:1.65;color:var(--c-label);background:var(--c-card);border-radius:10px;padding:12px 14px;border:0.5px solid var(--c-sep);">'
+      + esc(stitched.stitchedStory)
+      + '</div>'
+      + (stitched.tips ? '<div style="font-size:13px;color:var(--c-sec);line-height:1.5;"><b style="color:var(--c-acc);">실전 팁:</b> ' + esc(stitched.tips) + '</div>' : '')
+      + '<button class="coach-btn primary" id="btnCoachGoEvaFromScaffold" style="margin-top:8px;">3단계 Eva 실전 모의고사 도전하기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>'
+      + '</div>';
+  }
+
+  h += '</div>';
+
+  el.innerHTML = h;
+
+  // 이벤트 바인딩
+  const qSel = document.getElementById('coachScaffoldQSelect');
+  if(qSel){
+    qSel.onchange = () => {
+      const idx = COACH_PRESET_QUESTIONS.findIndex(x => x.id === qSel.value);
+      if(idx >= 0){
+        coachEvaQIndex = idx;
+        localStorage.setItem('cards_coach_eva_idx_v1', coachEvaQIndex);
+        renderCoachScaffold();
+      }
+    };
+  }
+
+  el.querySelectorAll('[data-scaffold-mic]').forEach(btn => {
+    const idx = parseInt(btn.dataset.scaffoldMic, 10);
+    btn.onclick = () => coachToggleScaffoldMic(idx);
+  });
+
+  el.querySelectorAll('[data-scaffold-polish]').forEach(btn => {
+    const idx = parseInt(btn.dataset.scaffoldPolish, 10);
+    btn.onclick = () => coachPolishScaffoldStep(idx);
+  });
+
+  el.querySelectorAll('[data-scaffold-tts]').forEach(btn => {
+    btn.onclick = () => coachSpeak(btn.dataset.scaffoldTts);
+  });
+
+  const stitchBtn = document.getElementById('btnCoachStitchStory');
+  if(stitchBtn) stitchBtn.onclick = coachStitchFullStory;
+
+  const speakStitchedBtn = document.getElementById('btnCoachSpeakStitched');
+  if(speakStitchedBtn && stitched) speakStitchedBtn.onclick = () => coachSpeak(stitched.stitchedStory);
+
+  const copyStitchedBtn = document.getElementById('btnCoachCopyStitched');
+  if(copyStitchedBtn && stitched){
+    copyStitchedBtn.onclick = () => {
+      const d = new Date().toISOString().slice(0, 10);
+      let md = '## OPIc AL 답변 스토리 (' + d + ')\n';
+      md += '**질문**: ' + q.eng + '\n\n';
+      md += '**스토리 앵커**:\n';
+      anchors.forEach((a, i) => { md += (i + 1) + '. ' + a + '\n'; });
+      md += '\n**AL 완성 답변**:\n' + stitched.stitchedStory + '\n';
+      if(stitched.tips) md += '\n**팁**: ' + stitched.tips + '\n';
+      navigator.clipboard.writeText(md).then(() => toast('옵시디언 마크다운이 복사되었습니다.')).catch(()=>prompt('복사하세요:', md));
+    };
+  }
+
+  const goEvaBtn = document.getElementById('btnCoachGoEvaFromScaffold');
+  if(goEvaBtn) goEvaBtn.onclick = () => setCoachTab('eva');
+}
+
+function coachToggleScaffoldMic(idx){
+  const btn = document.getElementById('coachScaffoldMicBtn_' + idx);
+  const txt = document.getElementById('coachScaffoldMicTxt_' + idx);
+  const inp = document.getElementById('coachScaffoldInp_' + idx);
+  const q = coachGetActiveQuestion();
   
-  if(coachActiveSpeechRec){
-    coachActiveSpeechRec._manualStop = true;
-    coachActiveSpeechRec.stop();
-    coachActiveSpeechRec = null;
+  if(coachScaffoldSpeechRec){
+    coachScaffoldSpeechRec._manualStop = true;
+    coachScaffoldSpeechRec.stop();
+    coachScaffoldSpeechRec = null;
     if(btn) btn.classList.remove('recording');
     if(txt) txt.textContent = '음성 입력';
     if(inp){
       inp.value = inp.value.trim();
-      coachSitAnswers[idx] = inp.value;
+      coachSaveScaffoldDraft(q.id, idx, inp.value);
     }
     return;
   }
@@ -19172,7 +19510,7 @@ function coachToggleSitMic(idx){
       const full = ((accumulatedFinal ? accumulatedFinal + ' ' : '') + sessionFinal).trim() + (sessionInterim ? ' ' + sessionInterim.trim() : '');
       if(inp){
         inp.value = full.trim();
-        coachSitAnswers[idx] = inp.value;
+        coachSaveScaffoldDraft(q.id, idx, inp.value);
       }
     };
     rec.onerror = (err) => {
@@ -19182,19 +19520,19 @@ function coachToggleSitMic(idx){
       accumulatedFinal = ((accumulatedFinal ? accumulatedFinal + ' ' : '') + sessionFinal).trim();
       sessionFinal = '';
       sessionInterim = '';
-      if(!rec._manualStop && coachActiveSpeechRec === rec){
+      if(!rec._manualStop && coachScaffoldSpeechRec === rec){
         try { rec.start(); return; } catch(err){}
       }
-      coachActiveSpeechRec = null;
+      coachScaffoldSpeechRec = null;
       if(btn) btn.classList.remove('recording');
       if(txt) txt.textContent = '음성 입력';
       if(inp){
         inp.value = accumulatedFinal;
-        coachSitAnswers[idx] = inp.value;
+        coachSaveScaffoldDraft(q.id, idx, inp.value);
       }
     };
 
-    coachActiveSpeechRec = rec;
+    coachScaffoldSpeechRec = rec;
     rec.start();
     if(btn) btn.classList.add('recording');
     if(txt) txt.textContent = '듣는 중… (누르면 완료)';
@@ -19203,114 +19541,109 @@ function coachToggleSitMic(idx){
   }
 }
 
-async function coachSubmitSituation(idx){
-  const inp = document.getElementById('coachSitInp_' + idx);
-  if(!inp) return;
-  const ans = inp.value.trim();
-  if(!ans){
-    alert('영문장을 입력하거나 음성으로 말해주세요.');
+async function coachPolishScaffoldStep(idx){
+  const q = coachGetActiveQuestion();
+  const anchors = coachGetQuestionAnchors(q.id);
+  const anchorText = anchors[idx] || '';
+  const inp = document.getElementById('coachScaffoldInp_' + idx);
+  const draft = (inp ? inp.value : coachGetScaffoldDraft(q.id, idx)).trim();
+  
+  if(!draft){
+    alert('먼저 앵커 ' + (idx + 1) + '에 대해 생각나는 영문장이나 키워드를 입력해 주세요.');
     return;
   }
-  coachSitAnswers[idx] = ans;
-  const sits = getActiveSituations();
-  const item = sits[idx];
+  coachSaveScaffoldDraft(q.id, idx, draft);
 
   const key = coachGetApiKey();
   if(!key){
-    coachSitFeedbacks[idx] = {
-      corrected: item.sample,
-      feedback: 'API 키 미등록 상태입니다. 기본 모범 답안과 비교해 보세요. (우측 상단 API 키 등록 시 정밀 첨삭 제공)'
-    };
-    renderCoachSituations();
+    alert('Gemini API 키가 필요합니다. 상단에서 API 키를 등록해 주세요.');
     return;
   }
 
-  toast('AI 첨삭 분석 중…');
+  toast('앵커 ' + (idx + 1) + ' 문장을 AL 수준으로 다듬는 중…');
   try {
-    const sysPrompt = 'You are an elite bilingual English speaking coach for a Korean learner preparing for OPIc IH/AL. '
-      + 'Evaluate the student response for this situation: "' + item.sit + '". '
-      + 'Output valid JSON only with keys "corrected" (natural casual spoken English with phrasal verbs) and "feedback" (1 concise bullet point in Korean about word order, phrasal verbs, or spoken rhythm). Format: {"corrected":"...","feedback":"..."}';
-    
-    const userPrompt = 'Student answer: "' + ans + '"';
+    const sysPrompt = 'You are an elite ACTFL OPIc examiner and AL speaking coach.\n'
+      + 'The student is answering the question: "' + q.eng + '"\n'
+      + 'Target story anchor point: "' + anchorText + '"\n'
+      + 'Student rough draft: "' + draft + '"\n\n'
+      + 'Task: Upgrade this draft into a natural, spoken ACTFL AL-level expression (1-2 sentences).\n'
+      + 'Requirements for AL:\n'
+      + '1. Use conversational fillers (e.g. Well, Honestly, To tell you the truth, As a matter of fact)\n'
+      + '2. Use idiomatic phrasal verbs or collocations\n'
+      + '3. Form compound/complex sentences with smooth connectors\n'
+      + '4. Express authentic emotion and natural rhythm\n\n'
+      + 'Output valid JSON only with this structure:\n'
+      + '{\n'
+      + '  "polished": "Natural spoken AL sentence(s)",\n'
+      + '  "points": "Key AL upgrade highlights in Korean (e.g., 필러 Honestly + 구동사 chill out + 복합문 연결)",\n'
+      + '  "koreanMeaning": "자연스러운 한국어 해석"\n'
+      + '}';
+
+    const userPrompt = 'Draft: "' + draft + '"';
     const resp = await coachCallGemini(userPrompt, sysPrompt);
     const parsed = coachCleanJson(resp);
-    coachSitFeedbacks[idx] = {
-      corrected: parsed.corrected || item.sample,
-      feedback: parsed.feedback || '훌륭한 시도입니다.'
-    };
-    renderCoachSituations();
+    coachSaveScaffoldPolished(q.id, idx, parsed);
+    toast('앵커 ' + (idx + 1) + ' AL 문장 완성이 완료되었습니다!');
+    renderCoachScaffold();
   } catch(e){
-    alert('AI 피드백 오류: ' + e.message);
+    alert('AL 다듬기 오류: ' + e.message);
   }
 }
 
-async function coachNewSituations(){
-  const key = coachGetApiKey();
-  if(!key){
-    coachSitIndex = (coachSitIndex + 1) % COACH_PRESET_SITUATIONS.length;
-    localStorage.setItem('cards_coach_sit_idx_v1', coachSitIndex);
-    coachCustomSits = null;
-    coachSitAnswers = {};
-    coachSitFeedbacks = {};
-    renderCoachSituations();
-    toast('새로운 상황 세트로 교체되었습니다.');
+async function coachStitchFullStory(){
+  const q = coachGetActiveQuestion();
+  const anchors = coachGetQuestionAnchors(q.id);
+  const p0 = coachGetScaffoldPolished(q.id, 0);
+  const p1 = coachGetScaffoldPolished(q.id, 1);
+  const p2 = coachGetScaffoldPolished(q.id, 2);
+
+  const s0 = p0?.polished || coachGetScaffoldDraft(q.id, 0);
+  const s1 = p1?.polished || coachGetScaffoldDraft(q.id, 1);
+  const s2 = p2?.polished || coachGetScaffoldDraft(q.id, 2);
+
+  if(!s0 && !s1 && !s2){
+    alert('최소 1개 이상의 앵커 문장을 작성하거나 AL로 다듬어 주세요.');
     return;
   }
 
-  toast('새로운 3문장 생성 중…');
+  const key = coachGetApiKey();
+  if(!key){
+    alert('Gemini API 키가 필요합니다. 상단에서 API 키를 등록해 주세요.');
+    return;
+  }
+
+  toast('3개 앵커를 연결하여 1분 30초 AL 풀 스토리를 합성 중…');
   try {
-    const sysPrompt = 'Generate 3 practical everyday Korean speaking situations for an English learner preparing for OPIc IH/AL using phrasal verbs. '
-      + 'Output JSON array only: [{"sit":"한국어 상황 1","hint":"구동사 힌트 2~3개","sample":"원어민 문장"}, {"sit":"...","hint":"...","sample":"..."}, {"sit":"...","hint":"...","sample":"..."}]';
-    const resp = await coachCallGemini('Generate 3 everyday situations.', sysPrompt);
-    const list = coachCleanJsonArray(resp);
-    if(Array.isArray(list) && list.length === 3){
-      coachCustomSits = list;
-      coachSitAnswers = {};
-      coachSitFeedbacks = {};
-      renderCoachSituations();
-      toast('새로운 맞춤형 3문장이 출제되었습니다.');
-    } else {
-      throw new Error('응답 형식 불일치');
-    }
+    const sysPrompt = 'You are an ACTFL OPIc AL master coach.\n'
+      + 'Question: "' + q.eng + '"\n'
+      + 'Story Anchor 1: "' + (anchors[0]||'') + '" -> Sentence: "' + (s0||'') + '"\n'
+      + 'Story Anchor 2: "' + (anchors[1]||'') + '" -> Sentence: "' + (s1||'') + '"\n'
+      + 'Story Anchor 3: "' + (anchors[2]||'') + '" -> Sentence: "' + (s2||'') + '"\n\n'
+      + 'Task: Stitch and combine these 3 anchor points into a seamless, high-scoring 1m to 1m30s ACTFL AL spoken narrative (about 6-8 sentences).\n'
+      + 'Add natural conversational bridge phrases (e.g., "To give you an idea...", "On top of that...", "Looking back...", "All in all...").\n'
+      + 'Keep the tone personal, expressive, and conversational.\n\n'
+      + 'Output valid JSON only:\n'
+      + '{\n'
+      + '  "stitchedStory": "Full connected spoken story text",\n'
+      + '  "tips": "실전 발화 팁 (시제 유지, 끊어 읽기, 감정 억양 등 한국어 1~2줄)"\n'
+      + '}';
+
+    const resp = await coachCallGemini('Stitch these 3 anchors into a cohesive story.', sysPrompt);
+    const parsed = coachCleanJson(resp);
+    coachSaveScaffoldStitched(q.id, parsed);
+    toast('1분 30초 AL 완성 스토리가 생성되었습니다!');
+    renderCoachScaffold();
   } catch(e){
-    coachSitIndex = (coachSitIndex + 1) % COACH_PRESET_SITUATIONS.length;
-    localStorage.setItem('cards_coach_sit_idx_v1', coachSitIndex);
-    coachCustomSits = null;
-    coachSitAnswers = {};
-    coachSitFeedbacks = {};
-    renderCoachSituations();
-    toast('기본 프리셋 세트로 교체되었습니다.');
+    alert('스토리 합성 오류: ' + e.message);
   }
 }
 
-function coachCopyObsidian(){
-  const sits = getActiveSituations();
-  const d = new Date().toISOString().slice(0, 10);
-  let md = '## ' + d + ' (3분 입영작 트레이닝)\n\n';
-  sits.forEach((item, idx) => {
-    const ans = coachSitAnswers[idx] || '(미작성)';
-    const fb = coachSitFeedbacks[idx] || {};
-    md += '### ' + (idx + 1) + '. ' + item.sit + '\n'
-      + '- **내가 한 말**: `' + ans + '`\n'
-      + '- **원어민 교정**: **' + (fb.corrected || item.sample) + '**\n'
-      + '- **포인트**: ' + (fb.feedback || item.hint) + '\n\n';
-  });
-  navigator.clipboard.writeText(md).then(() => {
-    toast('옵시디언 마크다운이 클립보드에 복사되었습니다.');
-  }).catch(() => {
-    prompt('마크다운을 복사하세요:', md);
-  });
-}
-
-/* ═══════════ 탭 2: Eva OPIc 매일 인터뷰 ═══════════ */
-function getActiveEvaQuestion(){
-  return COACH_PRESET_QUESTIONS[coachEvaQIndex % COACH_PRESET_QUESTIONS.length];
-}
-
+/* ═══════════ 탭 3: Eva OPIc 실전 인터뷰 (HUD 앵커 가이드 & 90초 타이머) ═══════════ */
 function renderCoachEva(){
   const el = document.getElementById('coachTabBody');
   if(!el) return;
-  const q = getActiveEvaQuestion();
+  const q = coachGetActiveQuestion();
+  const anchors = coachGetQuestionAnchors(q.id);
   
   let h = '';
   // Eva 프로필 카드 & 질문
@@ -19332,6 +19665,22 @@ function renderCoachEva(){
     + '<div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">'
     + '<button class="coach-btn sm outline" id="btnCoachSpeakEvaQ"><svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><polygon points="6 4 20 12 6 20 6 4"/></svg>Eva 질문 음성 듣기</button>'
     + '<details style="font-size:13px;color:var(--c-sec);cursor:pointer;"><summary>한국어 번역 가이드</summary><div style="margin-top:4px;padding:6px 10px;background:var(--c-fill);border-radius:8px;">' + esc(q.kor) + '</div></details>'
+    + '</div>'
+    + '</div>';
+
+  // HUD 앵커 가이드 바 (발화 중 실시간 시각적 가이드)
+  h += '<div class="coach-hud-bar">'
+    + '<div class="coach-hud-title">'
+    + '<span style="display:flex;align-items:center;gap:6px;">'
+    + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><circle cx="12" cy="12" r="10"/><path d="M12 8v8"/><path d="M8 12h8"/></svg>'
+    + '내 실전 발화 앵커 (HUD)'
+    + '</span>'
+    + '<button class="coach-btn sm outline" id="btnCoachEditAnchorsEva" style="padding:2px 8px;font-size:11px;">앵커 수정</button>'
+    + '</div>'
+    + '<div class="coach-hud-chips">'
+    + '<span class="coach-hud-chip"><span class="chip-num">1</span> ' + esc(anchors[0] || '배경') + '</span>'
+    + '<span class="coach-hud-chip"><span class="chip-num">2</span> ' + esc(anchors[1] || '사건') + '</span>'
+    + '<span class="coach-hud-chip"><span class="chip-num">3</span> ' + esc(anchors[2] || '마무리') + '</span>'
     + '</div>'
     + '</div>';
 
@@ -19377,6 +19726,8 @@ function renderCoachEva(){
   if(nextBtn) nextBtn.onclick = coachNextEvaQuestion;
   const speakQBtn = document.getElementById('btnCoachSpeakEvaQ');
   if(speakQBtn) speakQBtn.onclick = () => coachSpeak(q.eng);
+  const editAnchorsBtn = document.getElementById('btnCoachEditAnchorsEva');
+  if(editAnchorsBtn) editAnchorsBtn.onclick = () => setCoachTab('anchor');
   const bigMic = document.getElementById('evaBigMicBtn');
   if(bigMic) bigMic.onclick = coachToggleEvaRec;
   const evalBtn = document.getElementById('btnCoachEvalEva');
@@ -19524,24 +19875,27 @@ async function coachEvaluateEva(){
     return;
   }
   coachLastEvaTranscript = txt;
-  const q = getActiveEvaQuestion();
+  const q = coachGetActiveQuestion();
   const key = coachGetApiKey();
   if(!key){
     alert('정밀 채점을 위해 상단에서 Gemini API 키를 등록해 주세요.');
     return;
   }
 
-  toast('Eva가 답변을 ACTFL OPIc 기준으로 채점 중입니다…');
+  toast('Eva가 답변을 ACTFL OPIc 기준으로 정밀 채점 중입니다…');
   try {
-    const sysPrompt = 'You are "Eva", an official ACTFL OPIc examiner. '
+    const sysPrompt = 'You are "Eva", an official ACTFL OPIc examiner.\n'
       + 'Question: "' + q.eng + '"\n'
-      + 'Evaluate this user oral transcript according to OPIc criteria (AL, IH, IM3, IM2, IM1).\n'
+      + 'Evaluate this user oral transcript according to strict OPIc criteria (AL, IH, IM3, IM2, IM1).\n'
+      + 'Identify 1 to 3 primary weakness or improvement tags strictly from this predefined list:\n'
+      + '["시제누수", "필러부족", "단문나열", "어휘반복", "전개부족", "발음모호", "AL완성도우수"]\n\n'
       + 'Output valid JSON only with this structure:\n'
       + '{\n'
       + '  "level": "AL" (or "IH" or "IM3"),\n'
-      + '  "strengths": "잘한 점 (자연스러운 어휘, 발화 흐름 등 한국어로 1~2줄)",\n'
-      + '  "improvements": "보완할 점 (시제 일치, 어휘 다양성, 필러 활용 등 한국어로 1~2줄)",\n'
-      + '  "modelAnswer": "A full, authentic, native-level AL spoken response (about 5-7 sentences) that the student can shadow and learn from."\n'
+      + '  "tags": ["시제누수", "필러부족"],\n'
+      + '  "strengths": "잘한 점 (자연스러운 억양, 어휘 등 한국어로 1~2줄)",\n'
+      + '  "improvements": "보완할 점 (시제 일치, 구동사, 접속사 등 한국어로 1~2줄)",\n'
+      + '  "modelAnswer": "A full, authentic, native-level AL spoken response (about 5-7 sentences) that the student can shadow."\n'
       + '}';
     
     const userPrompt = 'Transcript: "' + txt + '" (Duration: ' + coachRecordSecs + ' seconds)';
@@ -19549,7 +19903,7 @@ async function coachEvaluateEva(){
     const parsed = coachCleanJson(resp);
     coachLastEvaFeedback = parsed;
     renderEvaReport(parsed);
-    toast('채점이 완료되었습니다. [기록 저장하기]를 눌러 보관할 수 있습니다.');
+    toast('채점이 완료되었습니다. [이 기록 저장하기]를 눌러 보관할 수 있습니다.');
   } catch(e){
     alert('채점 오류: ' + e.message);
   }
@@ -19559,13 +19913,22 @@ function renderEvaReport(fb){
   const el = document.getElementById('evaReportSection');
   if(!el) return;
   const lvlClass = String(fb.level||'IH').toLowerCase().includes('al') ? 'al' : String(fb.level||'').toLowerCase().includes('ih') ? 'ih' : 'im';
+  const tags = Array.isArray(fb.tags) ? fb.tags : [];
+
+  let tagH = '';
+  if(tags.length > 0){
+    tagH = '<div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:4px;">'
+      + tags.map(t => '<span class="coach-tag-chip ' + (t.includes('우수') ? 'success' : 'warn') + '">#' + esc(t) + '</span>').join('')
+      + '</div>';
+  }
 
   el.innerHTML = '<div class="coach-card eva-report">'
     + '<div class="coach-card-head">'
     + '<span class="coach-card-title">Eva의 공식 채점 리포트</span>'
     + '<span class="eva-score-badge ' + lvlClass + '">예상 등급: ' + esc(fb.level || 'IH') + '</span>'
     + '</div>'
-    + '<div style="font-size:14px;line-height:1.55;display:flex;flex-direction:column;gap:8px;">'
+    + tagH
+    + '<div style="font-size:14px;line-height:1.55;display:flex;flex-direction:column;gap:8px;margin-top:6px;">'
     + '<div><b style="color:var(--c-green);">강점 (Strengths):</b> ' + esc(fb.strengths || '-') + '</div>'
     + '<div><b style="color:var(--c-orange);">보완점 (Improvements):</b> ' + esc(fb.improvements || '-') + '</div>'
     + '</div>'
@@ -19589,16 +19952,20 @@ async function coachSaveEvaArchive(){
     alert('녹음된 오디오가 없습니다.');
     return;
   }
-  const q = getActiveEvaQuestion();
+  const q = coachGetActiveQuestion();
   const id = 'eva_' + Date.now();
   const dateStr = new Date().toISOString().slice(0, 10);
+  const fb = coachLastEvaFeedback || { level: '대기', tags: [], strengths: '채점 전 저장됨', improvements: '', modelAnswer: '' };
+  const tags = Array.isArray(fb.tags) ? fb.tags : [];
+
   const item = {
     id: id,
     date: dateStr,
     topic: q.topic,
     engQuestion: q.eng,
     transcript: coachLastEvaTranscript,
-    feedback: coachLastEvaFeedback || { level: '대기', strengths: '채점 전 저장됨', improvements: '', modelAnswer: '' },
+    feedback: fb,
+    tags: tags,
     blob: coachLastEvaBlob
   };
 
@@ -19608,7 +19975,8 @@ async function coachSaveEvaArchive(){
       id: id,
       date: dateStr,
       topic: q.topic,
-      level: item.feedback.level || 'IH',
+      level: fb.level || 'IH',
+      tags: tags,
       question: q.eng.slice(0, 50) + '...'
     });
     await idbSet('cards_eva_index_v1', index);
@@ -19620,7 +19988,7 @@ async function coachSaveEvaArchive(){
   }
 }
 
-/* ═══════════ 탭 3: 인터뷰 기록 보관함 (다시 듣기) ═══════════ */
+/* ═══════════ 탭 4: 취약점 분석 통계 & 보관함 ═══════════ */
 async function renderCoachRecordings(){
   const el = document.getElementById('coachTabBody');
   if(!el) return;
@@ -19635,7 +20003,7 @@ async function renderCoachRecordings(){
     el.innerHTML = '<div class="coach-card" style="text-align:center;padding:40px 20px;">'
       + '<div style="color:var(--c-ter);margin-bottom:12px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="48" height="48"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/></svg></div>'
       + '<div style="font-size:16px;font-weight:600;color:var(--c-label);margin-bottom:4px;">저장된 인터뷰 기록이 없습니다</div>'
-      + '<div style="font-size:13px;color:var(--c-sec);margin-bottom:16px;">Eva OPIc 인터뷰 탭에서 1분 30초 답변을 녹음하고 저장해 보세요. 언제든 내 목소리를 다시 들을 수 있습니다.</div>'
+      + '<div style="font-size:13px;color:var(--c-sec);margin-bottom:16px;">Eva OPIc 인터뷰 탭에서 1분 30초 답변을 녹음하고 평가를 저장해 보세요. 자주 지적받은 약점 분석과 내 녹음 음원을 다시 들을 수 있습니다.</div>'
       + '<button class="coach-btn primary" id="btnCoachGoEva">Eva 인터뷰 시작하기</button>'
       + '</div>';
     const goBtn = document.getElementById('btnCoachGoEva');
@@ -19643,11 +20011,69 @@ async function renderCoachRecordings(){
     return;
   }
 
-  let h = '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">'
-    + '<span style="font-size:14px;font-weight:600;color:var(--c-label);">총 ' + list.length + '개의 인터뷰 녹음 보관됨</span>'
+  // 1. 태그 통계 집계
+  const tagCounts = {};
+  list.forEach(item => {
+    if(Array.isArray(item.tags)){
+      item.tags.forEach(t => {
+        tagCounts[t] = (tagCounts[t] || 0) + 1;
+      });
+    }
+  });
+  const sortedTags = Object.entries(tagCounts).sort((a,b) => b[1] - a[1]);
+
+  let h = '';
+
+  // 2. 취약점 분석 통계 대시보드
+  h += '<div class="coach-weak-stat-box">'
+    + '<div class="coach-card-head">'
+    + '<span class="coach-card-title" style="font-size:15px;">'
+    + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>'
+    + '자주 지적받은 약점 TOP 분석 (AL 달성 장애요인)'
+    + '</span>'
+    + '<span style="font-size:12px;color:var(--c-sec);">총 ' + list.length + '회 평가 집계</span>'
     + '</div>';
 
-  for(const entry of list){
+  if(sortedTags.length > 0){
+    h += '<div style="display:flex;flex-direction:column;gap:8px;">';
+    sortedTags.slice(0, 4).forEach(([tag, cnt]) => {
+      const pct = Math.round(cnt / list.length * 100);
+      const isGood = tag.includes('우수');
+      h += '<div class="coach-weak-row">'
+        + '<span style="width:90px;font-weight:600;color:var(--c-label);">#' + esc(tag) + '</span>'
+        + '<div class="coach-weak-bar-wrap"><div class="coach-weak-bar" style="width:' + pct + '%;' + (isGood ? 'background:var(--c-green);' : '') + '"></div></div>'
+        + '<span style="width:65px;text-align:right;color:var(--c-sec);font-weight:500;">' + cnt + '회 (' + pct + '%)</span>'
+        + '</div>';
+    });
+    h += '</div>';
+  } else {
+    h += '<div style="font-size:13px;color:var(--c-sec);">아직 태그가 기록된 채점 결과가 없습니다. Eva AI 채점을 실행해 보세요.</div>';
+  }
+
+  // 필터 필즈
+  h += '<div class="coach-filter-pills" style="margin-top:6px;padding-top:10px;border-top:0.5px solid var(--c-sep);">'
+    + '<span style="font-size:12px;color:var(--c-sec);font-weight:600;">태그 필터:</span>'
+    + '<button class="coach-filter-pill' + (!coachArchiveFilterTag ? ' active' : '') + '" data-coach-filter="">전체 (' + list.length + ')</button>';
+  sortedTags.forEach(([tag, cnt]) => {
+    h += '<button class="coach-filter-pill' + (coachArchiveFilterTag === tag ? ' active' : '') + '" data-coach-filter="' + esc(tag) + '">#' + esc(tag) + ' (' + cnt + ')</button>';
+  });
+  h += '</div></div>';
+
+  // 3. 필터링된 녹음 목록
+  const displayList = coachArchiveFilterTag
+    ? list.filter(x => Array.isArray(x.tags) && x.tags.includes(coachArchiveFilterTag))
+    : list;
+
+  h += '<div style="display:flex;align-items:center;justify-content:space-between;margin:4px 0 2px;">'
+    + '<span style="font-size:13px;font-weight:600;color:var(--c-sec);">' + (coachArchiveFilterTag ? ('[#' + esc(coachArchiveFilterTag) + '] 필터 적용: ') : '전체 녹음: ') + displayList.length + '개</span>'
+    + '</div>';
+
+  if(!displayList.length){
+    h += '<div class="coach-card" style="text-align:center;padding:24px;color:var(--c-sec);font-size:13px;">해당 태그가 포함된 인터뷰 기록이 없습니다.</div>';
+  }
+
+  for(const entry of displayList){
+    const entryTags = Array.isArray(entry.tags) ? entry.tags : [];
     h += '<div class="coach-archive-item" id="recCard_' + entry.id + '">'
       + '<div class="coach-archive-head">'
       + '<div style="display:flex;align-items:center;gap:8px;">'
@@ -19655,8 +20081,15 @@ async function renderCoachRecordings(){
       + '<span style="font-size:14px;font-weight:600;color:var(--c-label);">' + esc(entry.topic) + '</span>'
       + '</div>'
       + '<span class="coach-badge ' + (String(entry.level).includes('AL')?'green':'blue') + '">' + esc(entry.level) + '</span>'
-      + '</div>'
-      + '<div style="font-size:13px;color:var(--c-sec);">' + esc(entry.question) + '</div>'
+      + '</div>';
+
+    if(entryTags.length > 0){
+      h += '<div style="display:flex;flex-wrap:wrap;gap:4px;">'
+        + entryTags.map(t => '<span class="coach-tag-chip ' + (t.includes('우수') ? 'success' : 'warn') + '">#' + esc(t) + '</span>').join('')
+        + '</div>';
+    }
+
+    h += '<div style="font-size:13px;color:var(--c-sec);">' + esc(entry.question) + '</div>'
       + '<div id="recPlayerWrap_' + entry.id + '">'
       + '<button class="coach-btn sm secondary" data-coach-load-rec="' + entry.id + '"><svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><polygon points="6 4 20 12 6 20 6 4"/></svg>녹음 듣기 & 리포트 펼치기</button>'
       + '</div>'
@@ -19664,6 +20097,14 @@ async function renderCoachRecordings(){
   }
 
   el.innerHTML = h;
+
+  // 이벤트 바인딩
+  el.querySelectorAll('[data-coach-filter]').forEach(btn => {
+    btn.onclick = () => {
+      coachArchiveFilterTag = btn.dataset.coachFilter || null;
+      renderCoachRecordings();
+    };
+  });
 
   el.querySelectorAll('[data-coach-load-rec]').forEach(btn => {
     btn.onclick = () => coachLoadArchiveItem(btn.dataset.coachLoadRec);
@@ -19684,17 +20125,31 @@ async function coachLoadArchiveItem(id){
     const audioUrl = URL.createObjectURL(item.blob);
     const fb = item.feedback || {};
 
-    wrap.innerHTML = '<div style="display:flex;flex-direction:column;gap:10px;margin-top:6px;">'
+    let detailsH = '<div style="display:flex;flex-direction:column;gap:10px;margin-top:6px;">'
       + '<audio controls style="width:100%;border-radius:8px;" src="' + audioUrl + '"></audio>'
       + '<div style="background:var(--c-fill);border-radius:10px;padding:10px 12px;font-size:13px;line-height:1.5;">'
-      + '<div><b>내 답변:</b> ' + esc(item.transcript || '(녹음만 저장됨)') + '</div>'
-      + (fb.modelAnswer ? '<div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--c-sep);"><b>Eva AL 모범 답변:</b> ' + esc(fb.modelAnswer) + '</div>' : '')
-      + '</div>'
+      + '<div><b>내 답변:</b> ' + esc(item.transcript || '(녹음만 저장됨)') + '</div>';
+
+    if(fb.strengths) detailsH += '<div style="margin-top:6px;color:var(--c-green);"><b>강점:</b> ' + esc(fb.strengths) + '</div>';
+    if(fb.improvements) detailsH += '<div style="margin-top:4px;color:var(--c-orange);"><b>보완점:</b> ' + esc(fb.improvements) + '</div>';
+    if(fb.modelAnswer){
+      detailsH += '<div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--c-sep);">'
+        + '<div style="display:flex;align-items:center;justify-content:space-between;"><b>Eva AL 모범 답변:</b><button class="coach-btn sm outline" style="padding:2px 8px;font-size:11px;" id="btnCoachPlayModelArchive_' + id + '"><svg viewBox="0 0 24 24" fill="currentColor" width="10" height="10"><polygon points="6 4 20 12 6 20 6 4"/></svg>소리 듣기</button></div>'
+        + '<div style="margin-top:4px;font-style:italic;">' + esc(fb.modelAnswer) + '</div>'
+        + '</div>';
+    }
+
+    detailsH += '</div>'
       + '<div style="display:flex;justify-content:flex-end;gap:6px;">'
       + '<button class="coach-btn sm outline" style="color:var(--c-red);border-color:rgba(255,59,48,.3);" id="btnCoachDelRec_' + id + '"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>삭제</button>'
       + '</div>'
       + '</div>';
+
+    wrap.innerHTML = detailsH;
     
+    const playModelBtn = document.getElementById('btnCoachPlayModelArchive_' + id);
+    if(playModelBtn && fb.modelAnswer) playModelBtn.onclick = () => coachSpeak(fb.modelAnswer);
+
     const delBtn = document.getElementById('btnCoachDelRec_' + id);
     if(delBtn) delBtn.onclick = () => coachDeleteArchiveItem(id);
   } catch(e){
@@ -19715,6 +20170,7 @@ async function coachDeleteArchiveItem(id){
     alert('삭제 실패: ' + e.message);
   }
 }
+
 
 
 </script>
