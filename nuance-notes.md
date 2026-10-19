@@ -258,18 +258,6 @@ Speaking Matrix 900제 문장의 뉘앙스, 원어민 어감 차이, 실전 활�
   - I trust the process now. : 이제 그 과정을 신뢰한다.
   - **핵심:** `believe`는 참이라고 생각하는 데, `trust`는 신뢰하는 데 초점을 둔다. 문맥에 따라 의미가 겹칠 수 있다.
 
-- **I will stay consistent because I trust the process.** <!-- id: sm_1790710448686 -->
-  - **stay consistent**: 꾸준한 상태를 유지하다.
-  - I will stay consistent. : 꾸준함을 유지할 것이다.
-  - **keep being consistent**: 계속 꾸준하게 행동하다.
-  - I will keep being consistent. : 계속 꾸준히 해 나갈 것이다.
-  - **keep going**: 계속해 나가다.
-  - I will keep going because I trust the process. : 과정을 믿기 때문에 계속해 나갈 것이다.
-  - **핵심**
-  - **stay + 형용사**: 특정 상태를 유지하다.
-  - **keep + 동사-ing**: 행동을 계속하다.
-  - `keep consistent`도 가능하지만, 일반적인 표현으로는 `stay consistent`가 더 자연스럽다.
-
 ## Unit 07 (Day 31-35)
 
 <div id="day-31"></div>
