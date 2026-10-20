@@ -59,7 +59,10 @@ Speaking Matrix 900제 문장의 뉘앙스, 원어민 어감 차이, 실전 활�
 
 <div id="day-06"></div>
 ### Day 06
-*등록된 뉘앙스 노트가 없습니다.*
+- **It's a bit messy, but it feels very cozy.** <!-- id: sm_1790710444602 -->
+  - **It's cozy.**: 아늑하다. 공간의 특성을 직접 설명한다.
+  - **It feels cozy.**: 아늑하게 느껴진다. 주관적인 인상을 강조한다.
+  - 두 표현 모두 자연스럽다. 공간의 분위기나 느낌을 설명할 때는 `It feels cozy`를 사용할 수 있다.
 
 <div id="day-07"></div>
 ### Day 07
