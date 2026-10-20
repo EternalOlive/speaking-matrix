@@ -163,6 +163,15 @@ Speaking Matrix 900제 문장의 뉘앙스, 원어민 어감 차이, 실전 활�
   - I hardly ever go hiking. : 저는 등산을 거의 하지 않아요.
   - **주의:** `hardly go hiking`도 문법적으로 가능하지만, 빈도를 말할 때는 `hardly ever go hiking`이 더 자연스럽다.
 
+- **I usually write a blog, and I end my day with that.** <!-- id: sm_1790710445785 -->
+  - **end + 목적어**: ~을 끝내다, 마무리하다
+  - I end my day with writing. : 글쓰기로 하루를 마무리한다.
+  - **end up + -ing**: 결국 ~하게 되다
+  - I ended up writing a blog. : 결국 블로그를 쓰게 되었다.
+  - **end the day with + 명사 / -ing**: ~을 하며 하루를 마무리하다
+  - I end the day with a blog post. : 블로그 글을 쓰며 하루를 마무리한다.
+  - **핵심:** `end`는 마무리하는 행동을, `end up`은 예상과 관계없이 최종적으로 도달한 결과를 강조한다.
+
 <div id="day-15"></div>
 ### Day 15
 *등록된 뉘앙스 노트가 없습니다.*
