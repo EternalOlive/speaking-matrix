@@ -6,15 +6,7 @@ Speaking Matrix 900제 문장의 뉘앙스, 원어민 어감 차이, 실전 활�
 
 <div id="day-01"></div>
 ### Day 01
-- **I'm picking out what to wear today.** <!-- id: sm_1790710443834 -->
-  - **what to wear**: 무엇을 입을지
-  - **what I wear**: 내가 입는 것
-  - **what I'm wearing**: 내가 입고 있는 것
-  - **예문**
-  - I'm picking out what to wear today. : 오늘 입을 옷을 고르고 있어.
-  - I don't know what to wear. : 무엇을 입어야 할지 모르겠어.
-  - I like what you wear. : 네가 입는 옷이 마음에 들어.
-  - **핵심:** 아직 선택 중인 옷을 말할 때는 `what to wear`를 사용한다. `what I wear`는 선택 행위보다 실제로 입는 옷을 가리킨다.
+*등록된 뉘앙스 노트가 없습니다.*
 
 <div id="day-02"></div>
 ### Day 02
@@ -67,18 +59,11 @@ Speaking Matrix 900제 문장의 뉘앙스, 원어민 어감 차이, 실전 활�
 
 <div id="day-06"></div>
 ### Day 06
-- **It's a bit messy, but it feels very cozy.** <!-- id: sm_1790710444602 -->
-  - **It's cozy.**: 아늑하다. 공간의 특성을 직접 설명한다.
-  - **It feels cozy.**: 아늑하게 느껴진다. 주관적인 인상을 강조한다.
-  - 두 표현 모두 자연스럽다. 공간의 분위기나 느낌을 설명할 때는 `It feels cozy`를 사용할 수 있다.
+*등록된 뉘앙스 노트가 없습니다.*
 
 <div id="day-07"></div>
 ### Day 07
-- **I carry my laptop in the bag, so it feels heavy.** <!-- id: sm_1790710444744 -->
-  - **I feel heavy.**: 내 몸이 무겁게 느껴진다.
-  - **It feels heavy.**: 그것이 무겁게 느껴진다. (가방 등 사물)
-  - **My bag feels heavy.**: 내 가방이 무겁게 느껴진다.
-  - **핵심:** 사람의 신체 상태는 `I feel ~`, 사물의 무게나 촉감은 `It feels ~` 또는 사물 이름 + `feels ~`로 표현한다.
+*등록된 뉘앙스 노트가 없습니다.*
 
 <div id="day-08"></div>
 ### Day 08
@@ -163,15 +148,6 @@ Speaking Matrix 900제 문장의 뉘앙스, 원어민 어감 차이, 실전 활�
   - I hardly ever go hiking. : 저는 등산을 거의 하지 않아요.
   - **주의:** `hardly go hiking`도 문법적으로 가능하지만, 빈도를 말할 때는 `hardly ever go hiking`이 더 자연스럽다.
 
-- **I usually write a blog, and I end my day with that.** <!-- id: sm_1790710445785 -->
-  - **end + 목적어**: ~을 끝내다, 마무리하다
-  - I end my day with writing. : 글쓰기로 하루를 마무리한다.
-  - **end up + -ing**: 결국 ~하게 되다
-  - I ended up writing a blog. : 결국 블로그를 쓰게 되었다.
-  - **end the day with + 명사 / -ing**: ~을 하며 하루를 마무리하다
-  - I end the day with a blog post. : 블로그 글을 쓰며 하루를 마무리한다.
-  - **핵심:** `end`는 마무리하는 행동을, `end up`은 예상과 관계없이 최종적으로 도달한 결과를 강조한다.
-
 <div id="day-15"></div>
 ### Day 15
 *등록된 뉘앙스 노트가 없습니다.*
@@ -182,11 +158,6 @@ Speaking Matrix 900제 문장의 뉘앙스, 원어민 어감 차이, 실전 활�
 ### Day 16
 - **I'm feeling exhausted at work.** <!-- id: sm_1790710445988 -->
   - Feel 빼도 가느
-
-- **I'm feeling burned out these days, so I'm a little down.** <!-- id: sm_1790710446073 -->
-  - **I'm burned out.**: 완전히 지쳤다. (소진된 상태)
-  - **I'm feeling burned out.**: 소진된 느낌이 든다. (현재 느끼는 감정 강조)
-  - **핵심:** 두 표현의 의미 차이는 크지 않다. `burned out` 자체에 심한 피로나 소진의 의미가 포함되어 있다.
 
 <div id="day-17"></div>
 ### Day 17
@@ -199,26 +170,9 @@ Speaking Matrix 900제 문장의 뉘앙스, 원어민 어감 차이, 실전 활�
 <div id="day-19"></div>
 ### Day 19
 - **`Thanks for understanding.`**: 이해해 주셔서 감사합니다. (이해해 주는 행위)
-
 - **`Thanks for your understanding.`**: 이해해 주셔서 감사합니다. (상대방의 이해와 배려)
+
 **차이:** 두 표현은 의미가 거의 같으며, `your understanding`은 상대방의 이해를 명사로 표현한다.
-
-- **Sorry for keeping you waiting so long for the meeting.** <!-- id: sm_1790710446535 -->
-  - **Sorry for + 명사 / 동명사**: ~에 대해 사과하다. 행동이나 원인을 강조한다.
-  - Sorry for keeping you waiting. : 기다리게 해서 미안해.
-  - Sorry for being late. : 늦어서 미안해.
-  - **Sorry about + 명사**: ~에 대해 미안하다. 문제나 상황을 강조한다.
-  - Sorry about the delay. : 지연되어 미안해.
-  - Sorry about the meeting. : 회의 건은 미안해.
-  - **핵심:** `Sorry for keeping you waiting`과 `Sorry about keeping you waiting` 모두 가능하지만, 특정 행동에 대해 사과할 때는 `Sorry for ~ing`가 더 일반적이다.
-
-- **Oh, sorry about the confusion.** <!-- id: sm_1790710446500 -->
-  - **Sorry about the confusion.**: 혼란스러운 상황에 대해 죄송합니다.
-  - **Sorry for the confusion.**: 혼선을 드려 죄송합니다.
-  - **핵심**
-  - `sorry about`: 문제나 상황에 대한 사과
-  - `sorry for`: 문제의 원인이나 잘못에 대한 사과
-  - 두 표현 모두 자연스럽고, 실제 회화에서는 의미 차이가 크지 않다.
 
 <div id="day-20"></div>
 ### Day 20
@@ -228,24 +182,11 @@ Speaking Matrix 900제 문장의 뉘앙스, 원어민 어감 차이, 실전 활�
 
 <div id="day-21"></div>
 ### Day 21
-- **There's a small park near my place, and I often take a walk there.** <!-- id: sm_1790710446911 -->
-  - **take a walk**: 산책하다
-  - **go for a walk**: 산책하러 가다
-  - **예문**
-  - I often take a walk there. : 나는 그곳에서 자주 산책한다.
-  - I often go for a walk there. : 나는 그곳에 자주 산책하러 간다.
-  - Let's go for a walk. : 산책하러 가자.
-  - **핵심:** 두 표현 모두 자연스럽다. `go for a walk`는 산책하러 나가는 느낌을 조금 더 강조한다.
+*등록된 뉘앙스 노트가 없습니다.*
 
 <div id="day-22"></div>
 ### Day 22
-- **Safety is probably the most important.** <!-- id: sm_1790710446971 -->
-  - **probably**: 아마, 십중팔구. 어떤 일이 일어날 가능성이 높다고 판단할 때
-  - **might be**: ~일 수도 있다. 가능성을 열어 두고 말할 때
-  - **비교**
-  - Safety is probably the most important. : 안전이 아마 가장 중요할 것이다.
-  - Safety might be the most important. : 안전이 가장 중요할 수도 있다.
-  - **핵심:** `probably`는 높은 가능성에 무게를 두고, `might be`는 가능성 자체를 강조한다. 다만 두 표현의 확신 정도는 문맥과 말하는 사람의 판단에 따라 달라진다.
+*등록된 뉘앙스 노트가 없습니다.*
 
 <div id="day-23"></div>
 ### Day 23
@@ -258,16 +199,21 @@ Speaking Matrix 900제 문장의 뉘앙스, 원어민 어감 차이, 실전 활�
   - More 형용사
   - 동사 more than
 
+- **The subway is more comfortable for reading than the bus.** <!-- id: sm_1790710447669 -->
+  - **comfortable for reading**: 독서하기에 편안한
+  - → 독서라는 활동에 적합하다는 의미.
+  - **comfortable to read**: 읽기에 편안한
+  - → 무엇을 읽는 행위가 편안한지 또는 읽기 편한 대상인지에 따라 의미가 달라질 수 있다.
+  - **비교**
+  - The subway is more comfortable for reading than the bus.
+  - : 독서할 때는 버스보다 지하철이 더 편하다.
+  - This book is comfortable to read.
+  - : 이 책은 읽기 편하다.
+  - **핵심:** 교통수단이 독서 활동에 적합하다는 뜻이라면 `comfortable for reading`이 자연스럽다. `comfortable to read`는 보통 책이나 글처럼 읽는 대상에 사용한다.
+
 <div id="day-25"></div>
 ### Day 25
-- **I usually make a plan beforehand so that I can use my time more efficiently.** <!-- id: sm_1790710447848 -->
-  - **make a plan**: 계획을 세우다. 특정되지 않은 계획을 새로 세우는 경우
-  - **make my plan**: 내 계획을 세우다. 자신의 특정 계획을 강조하는 경우
-  - **plan ahead / plan beforehand**: 미리 계획하다
-  - **예문**
-  - I make a plan beforehand. : 나는 미리 계획을 세운다.
-  - I make my plan for the week on Sunday. : 나는 일요일에 한 주의 계획을 세운다.
-  - **핵심:** 일반적인 계획 수립 습관에는 `make a plan`, 자신의 구체적인 계획을 가리킬 때는 `make my plan`을 사용한다.
+*등록된 뉘앙스 노트가 없습니다.*
 
 ## Unit 06 (Day 26-30)
 
@@ -294,17 +240,6 @@ Speaking Matrix 900제 문장의 뉘앙스, 원어민 어감 차이, 실전 활�
   - **`on the bed`**: 침대 표면 위에 있는 위치를 강조
   - **차이:** 취침·휴식 상태나 침대에서 하는 습관을 말할 때는 `in bed`, 물건이나 사람의 물리적 위치를 강조할 때는 `on the bed`를 주로 사용한다.
 
-- **I feel less rushed.** <!-- id: sm_1790710448073 -->
-  - **less rushed**: 덜 서두르는, 시간에 덜 쫓기는
-  - **less hurried**: 덜 서두르는
-  - **in less of a hurry**: 덜 급한 상태로
-  - **less hurry**: 일반적으로 자연스럽지 않은 표현
-  - **비교**
-  - I feel less rushed. : 시간에 덜 쫓기는 기분이다.
-  - I'm in less of a hurry. : 전보다 덜 급하다.
-  - I feel less pressure. : 부담감이 덜하다.
-  - **핵심:** `rushed`는 서둘러야 하는 상태를, `hurry`는 서두르는 행동이나 급한 상태를 나타내므로 이 문장에는 `less rushed`가 적절하다.
-
 <div id="day-28"></div>
 ### Day 28
 - **The file wouldn't open.**: 파일을 열려고 했지만 열리지 않았다. `wouldn't + 동사원형`은 과거에 어떤 일이 뜻대로 되지 않았음을 나타낼 수 있다.
@@ -313,6 +248,9 @@ Speaking Matrix 900제 문장의 뉘앙스, 원어민 어감 차이, 실전 활�
 
 - **The file wasn't opening.**: 파일이 열리는 중이 아니었다 또는 열리지 않고 있었다. 진행 상황을 묘사한다.
 **차이:** `wouldn't open`은 파일을 열려는 시도가 실패했다는 의미에 적합하다.
+
+- **I restarted my computer to check the settings.** <!-- id: sm_1790710448324 -->
+  - **핵심:** 컴퓨터나 앱의 설정 메뉴 전반을 말할 때는 `settings`가 일반적이다.
 
 <div id="day-29"></div>
 ### Day 29
@@ -354,6 +292,22 @@ Speaking Matrix 900제 문장의 뉘앙스, 원어민 어감 차이, 실전 활�
   - **stay + 형용사**: 특정 상태를 유지하다.
   - **keep + 동사-ing**: 행동을 계속하다.
   - `keep consistent`도 가능하지만, 일반적인 표현으로는 `stay consistent`가 더 자연스럽다.
+
+- **I will keep this up because I want to continue practicing.** <!-- id: sm_1790710448672 -->
+  - **keep + -ing**: 계속 ~하다
+  - I keep practicing. : 계속 연습한다.
+  - 반복해서 지속하는 느낌
+  - **continue + -ing / to부정사**: ~을 계속하다
+  - I continue practicing. : 연습을 계속한다.
+  - 진행 중인 행동을 이어가는 느낌
+  - **keep + 목적어**: ~을 유지하다
+  - I'll keep this habit. : 이 습관을 유지할 것이다.
+  - **keep this up**: 지금까지 해 온 일을 계속 이어가다
+  - I'll keep this up. : 지금처럼 계속할 것이다.
+  - **핵심**
+  - `keep practicing`과 `continue practicing`은 모두 자연스럽다.
+  - `keep this up`은 현재 하고 있는 좋은 행동이나 성과를 계속 이어간다는 의미다.
+  - `continue`는 `keep`보다 격식 있는 문맥에서도 자주 사용된다.
 
 ## Unit 07 (Day 31-35)
 
