@@ -66,7 +66,11 @@ Speaking Matrix 900제 문장의 뉘앙스, 원어민 어감 차이, 실전 활�
 
 <div id="day-07"></div>
 ### Day 07
-*등록된 뉘앙스 노트가 없습니다.*
+- **I carry my laptop in the bag, so it feels heavy.** <!-- id: sm_1790710444744 -->
+  - **I feel heavy.**: 내 몸이 무겁게 느껴진다.
+  - **It feels heavy.**: 그것이 무겁게 느껴진다. (가방 등 사물)
+  - **My bag feels heavy.**: 내 가방이 무겁게 느껴진다.
+  - **핵심:** 사람의 신체 상태는 `I feel ~`, 사물의 무게나 촉감은 `It feels ~` 또는 사물 이름 + `feels ~`로 표현한다.
 
 <div id="day-08"></div>
 ### Day 08
