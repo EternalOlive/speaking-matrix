@@ -63,7 +63,11 @@ Speaking Matrix 900제 문장의 뉘앙스, 원어민 어감 차이, 실전 활�
 
 <div id="day-07"></div>
 ### Day 07
-*등록된 뉘앙스 노트가 없습니다.*
+- **There is also an AirPods case on my bag.** <!-- id: sm_1790710444757 -->
+  - **There is ~ on my bag.**: 가방에 ~이 있다.
+  - **I have ~ on my bag.**: 가방에 ~을 달고 있다 / 가지고 있다.
+  - **There is an AirPods case attached to my bag.**: 가방에 에어팟 케이스가 달려 있다.
+  - **핵심:** 존재나 위치를 설명할 때는 `There is`, 소유나 휴대 사실을 강조할 때는 `I have`를 사용한다. 다만 `I have ~ on my bag`도 가방에 달린 물건을 설명하는 문맥에서 가능하다.
 
 <div id="day-08"></div>
 ### Day 08
@@ -93,6 +97,9 @@ Speaking Matrix 900제 문장의 뉘앙스, 원어민 어감 차이, 실전 활�
   - I'm focusing on the music. : 그 음악에 집중하고 있다.
   - I'm focusing on music. : 음악에 집중하고 있다. (일반적인 의미)
   - **핵심:** `my`는 음악의 소유권보다 현재 나와 관련된 음악이라는 점을 나타낸다.
+
+- **I use them often, especially when I go for a run.** <!-- id: sm_1790710445074 -->
+  - Go running ㄱㄴ
 
 ## Unit 03 (Day 11-15)
 
@@ -199,18 +206,6 @@ Speaking Matrix 900제 문장의 뉘앙스, 원어민 어감 차이, 실전 활�
   - More 형용사
   - 동사 more than
 
-- **The subway is more comfortable for reading than the bus.** <!-- id: sm_1790710447669 -->
-  - **comfortable for reading**: 독서하기에 편안한
-  - → 독서라는 활동에 적합하다는 의미.
-  - **comfortable to read**: 읽기에 편안한
-  - → 무엇을 읽는 행위가 편안한지 또는 읽기 편한 대상인지에 따라 의미가 달라질 수 있다.
-  - **비교**
-  - The subway is more comfortable for reading than the bus.
-  - : 독서할 때는 버스보다 지하철이 더 편하다.
-  - This book is comfortable to read.
-  - : 이 책은 읽기 편하다.
-  - **핵심:** 교통수단이 독서 활동에 적합하다는 뜻이라면 `comfortable for reading`이 자연스럽다. `comfortable to read`는 보통 책이나 글처럼 읽는 대상에 사용한다.
-
 <div id="day-25"></div>
 ### Day 25
 *등록된 뉘앙스 노트가 없습니다.*
@@ -249,28 +244,17 @@ Speaking Matrix 900제 문장의 뉘앙스, 원어민 어감 차이, 실전 활�
 - **The file wasn't opening.**: 파일이 열리는 중이 아니었다 또는 열리지 않고 있었다. 진행 상황을 묘사한다.
 **차이:** `wouldn't open`은 파일을 열려는 시도가 실패했다는 의미에 적합하다.
 
-- **I restarted my computer to check the settings.** <!-- id: sm_1790710448324 -->
-  - **핵심:** 컴퓨터나 앱의 설정 메뉴 전반을 말할 때는 `settings`가 일반적이다.
-
 <div id="day-29"></div>
 ### Day 29
 - **I feel proud.**: 자랑스러운 기분이 든다. 감정에 초점을 둔다.
-
 - **I'm proud of it.**: 그것이 자랑스럽다. 자랑스럽게 여기는 대상을 나타낸다.
-
 - **I'm proud of myself.**: 내 자신이 자랑스럽다.
+
 **비교**
 - I think I did my best, and I feel proud.
 - I think I did my best, and I'm proud of it.
 
 두 문장 모두 자연스럽다. 자신의 노력이나 결과를 자랑스럽게 여긴다는 의미를 명확히 하려면 `I'm proud of it`을 사용할 수 있다.
-
-- **Now I feel tired but okay.** <!-- id: sm_1790710448411 -->
-  - **핵심:** 두 표현은 대부분의 상황에서 의미가 같다. 일상 회화에서는 `I'm tired, but okay.`가 더 간결하고 일반적이다.
-  - **I'm tired.**: 피곤하다. 현재 상태를 직접 표현한다.
-  - **I feel tired.**: 피곤하다고 느낀다. 주관적인 감각을 강조한다.
-  - **I'm tired but okay.**: 피곤하지만 괜찮다.
-  - **I feel tired but okay.**: 피곤하게 느껴지지만 괜찮다.
 
 <div id="day-30"></div>
 ### Day 30
@@ -300,22 +284,6 @@ Speaking Matrix 900제 문장의 뉘앙스, 원어민 어감 차이, 실전 활�
   - **stay + 형용사**: 특정 상태를 유지하다.
   - **keep + 동사-ing**: 행동을 계속하다.
   - `keep consistent`도 가능하지만, 일반적인 표현으로는 `stay consistent`가 더 자연스럽다.
-
-- **I will keep this up because I want to continue practicing.** <!-- id: sm_1790710448672 -->
-  - **keep + -ing**: 계속 ~하다
-  - I keep practicing. : 계속 연습한다.
-  - 반복해서 지속하는 느낌
-  - **continue + -ing / to부정사**: ~을 계속하다
-  - I continue practicing. : 연습을 계속한다.
-  - 진행 중인 행동을 이어가는 느낌
-  - **keep + 목적어**: ~을 유지하다
-  - I'll keep this habit. : 이 습관을 유지할 것이다.
-  - **keep this up**: 지금까지 해 온 일을 계속 이어가다
-  - I'll keep this up. : 지금처럼 계속할 것이다.
-  - **핵심**
-  - `keep practicing`과 `continue practicing`은 모두 자연스럽다.
-  - `keep this up`은 현재 하고 있는 좋은 행동이나 성과를 계속 이어간다는 의미다.
-  - `continue`는 `keep`보다 격식 있는 문맥에서도 자주 사용된다.
 
 ## Unit 07 (Day 31-35)
 
