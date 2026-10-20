@@ -182,9 +182,18 @@ Speaking Matrix 900제 문장의 뉘앙스, 원어민 어감 차이, 실전 활�
 <div id="day-19"></div>
 ### Day 19
 - **`Thanks for understanding.`**: 이해해 주셔서 감사합니다. (이해해 주는 행위)
-- **`Thanks for your understanding.`**: 이해해 주셔서 감사합니다. (상대방의 이해와 배려)
 
+- **`Thanks for your understanding.`**: 이해해 주셔서 감사합니다. (상대방의 이해와 배려)
 **차이:** 두 표현은 의미가 거의 같으며, `your understanding`은 상대방의 이해를 명사로 표현한다.
+
+- **Sorry for keeping you waiting so long for the meeting.** <!-- id: sm_1790710446535 -->
+  - **Sorry for + 명사 / 동명사**: ~에 대해 사과하다. 행동이나 원인을 강조한다.
+  - Sorry for keeping you waiting. : 기다리게 해서 미안해.
+  - Sorry for being late. : 늦어서 미안해.
+  - **Sorry about + 명사**: ~에 대해 미안하다. 문제나 상황을 강조한다.
+  - Sorry about the delay. : 지연되어 미안해.
+  - Sorry about the meeting. : 회의 건은 미안해.
+  - **핵심:** `Sorry for keeping you waiting`과 `Sorry about keeping you waiting` 모두 가능하지만, 특정 행동에 대해 사과할 때는 `Sorry for ~ing`가 더 일반적이다.
 
 <div id="day-20"></div>
 ### Day 20
