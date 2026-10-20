@@ -159,6 +159,11 @@ Speaking Matrix 900제 문장의 뉘앙스, 원어민 어감 차이, 실전 활�
 - **I'm feeling exhausted at work.** <!-- id: sm_1790710445988 -->
   - Feel 빼도 가느
 
+- **I'm feeling burned out these days, so I'm a little down.** <!-- id: sm_1790710446073 -->
+  - **I'm burned out.**: 완전히 지쳤다. (소진된 상태)
+  - **I'm feeling burned out.**: 소진된 느낌이 든다. (현재 느끼는 감정 강조)
+  - **핵심:** 두 표현의 의미 차이는 크지 않다. `burned out` 자체에 심한 피로나 소진의 의미가 포함되어 있다.
+
 <div id="day-17"></div>
 ### Day 17
 *등록된 뉘앙스 노트가 없습니다.*
@@ -227,6 +232,17 @@ Speaking Matrix 900제 문장의 뉘앙스, 원어민 어감 차이, 실전 활�
   - **`in bed`**: 침대에 누워 있거나 침대에서 쉬는 상태
   - **`on the bed`**: 침대 표면 위에 있는 위치를 강조
   - **차이:** 취침·휴식 상태나 침대에서 하는 습관을 말할 때는 `in bed`, 물건이나 사람의 물리적 위치를 강조할 때는 `on the bed`를 주로 사용한다.
+
+- **I feel less rushed.** <!-- id: sm_1790710448073 -->
+  - **less rushed**: 덜 서두르는, 시간에 덜 쫓기는
+  - **less hurried**: 덜 서두르는
+  - **in less of a hurry**: 덜 급한 상태로
+  - **less hurry**: 일반적으로 자연스럽지 않은 표현
+  - **비교**
+  - I feel less rushed. : 시간에 덜 쫓기는 기분이다.
+  - I'm in less of a hurry. : 전보다 덜 급하다.
+  - I feel less pressure. : 부담감이 덜하다.
+  - **핵심:** `rushed`는 서둘러야 하는 상태를, `hurry`는 서두르는 행동이나 급한 상태를 나타내므로 이 문장에는 `less rushed`가 적절하다.
 
 <div id="day-28"></div>
 ### Day 28
