@@ -211,7 +211,14 @@ Speaking Matrix 900제 문장의 뉘앙스, 원어민 어감 차이, 실전 활�
 
 <div id="day-21"></div>
 ### Day 21
-*등록된 뉘앙스 노트가 없습니다.*
+- **There's a small park near my place, and I often take a walk there.** <!-- id: sm_1790710446911 -->
+  - **take a walk**: 산책하다
+  - **go for a walk**: 산책하러 가다
+  - **예문**
+  - I often take a walk there. : 나는 그곳에서 자주 산책한다.
+  - I often go for a walk there. : 나는 그곳에 자주 산책하러 간다.
+  - Let's go for a walk. : 산책하러 가자.
+  - **핵심:** 두 표현 모두 자연스럽다. `go for a walk`는 산책하러 나가는 느낌을 조금 더 강조한다.
 
 <div id="day-22"></div>
 ### Day 22
