@@ -195,6 +195,14 @@ Speaking Matrix 900제 문장의 뉘앙스, 원어민 어감 차이, 실전 활�
   - Sorry about the meeting. : 회의 건은 미안해.
   - **핵심:** `Sorry for keeping you waiting`과 `Sorry about keeping you waiting` 모두 가능하지만, 특정 행동에 대해 사과할 때는 `Sorry for ~ing`가 더 일반적이다.
 
+- **Oh, sorry about the confusion.** <!-- id: sm_1790710446500 -->
+  - **Sorry about the confusion.**: 혼란스러운 상황에 대해 죄송합니다.
+  - **Sorry for the confusion.**: 혼선을 드려 죄송합니다.
+  - **핵심**
+  - `sorry about`: 문제나 상황에 대한 사과
+  - `sorry for`: 문제의 원인이나 잘못에 대한 사과
+  - 두 표현 모두 자연스럽고, 실제 회화에서는 의미 차이가 크지 않다.
+
 <div id="day-20"></div>
 ### Day 20
 *등록된 뉘앙스 노트가 없습니다.*
