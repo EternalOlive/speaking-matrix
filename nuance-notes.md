@@ -6,7 +6,15 @@ Speaking Matrix 900제 문장의 뉘앙스, 원어민 어감 차이, 실전 활�
 
 <div id="day-01"></div>
 ### Day 01
-*등록된 뉘앙스 노트가 없습니다.*
+- **I'm picking out what to wear today.** <!-- id: sm_1790710443834 -->
+  - **what to wear**: 무엇을 입을지
+  - **what I wear**: 내가 입는 것
+  - **what I'm wearing**: 내가 입고 있는 것
+  - **예문**
+  - I'm picking out what to wear today. : 오늘 입을 옷을 고르고 있어.
+  - I don't know what to wear. : 무엇을 입어야 할지 모르겠어.
+  - I like what you wear. : 네가 입는 옷이 마음에 들어.
+  - **핵심:** 아직 선택 중인 옷을 말할 때는 `what to wear`를 사용한다. `what I wear`는 선택 행위보다 실제로 입는 옷을 가리킨다.
 
 <div id="day-02"></div>
 ### Day 02
