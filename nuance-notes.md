@@ -237,7 +237,14 @@ Speaking Matrix 900제 문장의 뉘앙스, 원어민 어감 차이, 실전 활�
 
 <div id="day-25"></div>
 ### Day 25
-*등록된 뉘앙스 노트가 없습니다.*
+- **I usually make a plan beforehand so that I can use my time more efficiently.** <!-- id: sm_1790710447848 -->
+  - **make a plan**: 계획을 세우다. 특정되지 않은 계획을 새로 세우는 경우
+  - **make my plan**: 내 계획을 세우다. 자신의 특정 계획을 강조하는 경우
+  - **plan ahead / plan beforehand**: 미리 계획하다
+  - **예문**
+  - I make a plan beforehand. : 나는 미리 계획을 세운다.
+  - I make my plan for the week on Sunday. : 나는 일요일에 한 주의 계획을 세운다.
+  - **핵심:** 일반적인 계획 수립 습관에는 `make a plan`, 자신의 구체적인 계획을 가리킬 때는 `make my plan`을 사용한다.
 
 ## Unit 06 (Day 26-30)
 
