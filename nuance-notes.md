@@ -255,14 +255,22 @@ Speaking Matrix 900제 문장의 뉘앙스, 원어민 어감 차이, 실전 활�
 <div id="day-29"></div>
 ### Day 29
 - **I feel proud.**: 자랑스러운 기분이 든다. 감정에 초점을 둔다.
-- **I'm proud of it.**: 그것이 자랑스럽다. 자랑스럽게 여기는 대상을 나타낸다.
-- **I'm proud of myself.**: 내 자신이 자랑스럽다.
 
+- **I'm proud of it.**: 그것이 자랑스럽다. 자랑스럽게 여기는 대상을 나타낸다.
+
+- **I'm proud of myself.**: 내 자신이 자랑스럽다.
 **비교**
 - I think I did my best, and I feel proud.
 - I think I did my best, and I'm proud of it.
 
 두 문장 모두 자연스럽다. 자신의 노력이나 결과를 자랑스럽게 여긴다는 의미를 명확히 하려면 `I'm proud of it`을 사용할 수 있다.
+
+- **Now I feel tired but okay.** <!-- id: sm_1790710448411 -->
+  - **핵심:** 두 표현은 대부분의 상황에서 의미가 같다. 일상 회화에서는 `I'm tired, but okay.`가 더 간결하고 일반적이다.
+  - **I'm tired.**: 피곤하다. 현재 상태를 직접 표현한다.
+  - **I feel tired.**: 피곤하다고 느낀다. 주관적인 감각을 강조한다.
+  - **I'm tired but okay.**: 피곤하지만 괜찮다.
+  - **I feel tired but okay.**: 피곤하게 느껴지지만 괜찮다.
 
 <div id="day-30"></div>
 ### Day 30
