@@ -239,7 +239,13 @@ Speaking Matrix 900제 문장의 뉘앙스, 원어민 어감 차이, 실전 활�
 
 <div id="day-22"></div>
 ### Day 22
-*등록된 뉘앙스 노트가 없습니다.*
+- **Safety is probably the most important.** <!-- id: sm_1790710446971 -->
+  - **probably**: 아마, 십중팔구. 어떤 일이 일어날 가능성이 높다고 판단할 때
+  - **might be**: ~일 수도 있다. 가능성을 열어 두고 말할 때
+  - **비교**
+  - Safety is probably the most important. : 안전이 아마 가장 중요할 것이다.
+  - Safety might be the most important. : 안전이 가장 중요할 수도 있다.
+  - **핵심:** `probably`는 높은 가능성에 무게를 두고, `might be`는 가능성 자체를 강조한다. 다만 두 표현의 확신 정도는 문맥과 말하는 사람의 판단에 따라 달라진다.
 
 <div id="day-23"></div>
 ### Day 23
