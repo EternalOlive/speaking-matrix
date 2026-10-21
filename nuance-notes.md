@@ -63,11 +63,7 @@ Speaking Matrix 900제 문장의 뉘앙스, 원어민 어감 차이, 실전 활�
 
 <div id="day-07"></div>
 ### Day 07
-- **There is also an AirPods case on my bag.** <!-- id: sm_1790710444757 -->
-  - **There is ~ on my bag.**: 가방에 ~이 있다.
-  - **I have ~ on my bag.**: 가방에 ~을 달고 있다 / 가지고 있다.
-  - **There is an AirPods case attached to my bag.**: 가방에 에어팟 케이스가 달려 있다.
-  - **핵심:** 존재나 위치를 설명할 때는 `There is`, 소유나 휴대 사실을 강조할 때는 `I have`를 사용한다. 다만 `I have ~ on my bag`도 가방에 달린 물건을 설명하는 문맥에서 가능하다.
+*등록된 뉘앙스 노트가 없습니다.*
 
 <div id="day-08"></div>
 ### Day 08
@@ -97,9 +93,6 @@ Speaking Matrix 900제 문장의 뉘앙스, 원어민 어감 차이, 실전 활�
   - I'm focusing on the music. : 그 음악에 집중하고 있다.
   - I'm focusing on music. : 음악에 집중하고 있다. (일반적인 의미)
   - **핵심:** `my`는 음악의 소유권보다 현재 나와 관련된 음악이라는 점을 나타낸다.
-
-- **I use them often, especially when I go for a run.** <!-- id: sm_1790710445074 -->
-  - Go running ㄱㄴ
 
 ## Unit 03 (Day 11-15)
 
@@ -165,6 +158,11 @@ Speaking Matrix 900제 문장의 뉘앙스, 원어민 어감 차이, 실전 활�
 ### Day 16
 - **I'm feeling exhausted at work.** <!-- id: sm_1790710445988 -->
   - Feel 빼도 가느
+
+- **I'm a bit off.**: 평소와 달리 컨디션이 좋지 않다.
+- **I'm not feeling well.**: 몸 상태가 좋지 않다
+
+- **I'm not feeling well.**: 몸 상태가 좋지 않다, 신체적으로
 
 <div id="day-17"></div>
 ### Day 17
