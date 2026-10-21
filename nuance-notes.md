@@ -162,7 +162,7 @@ Speaking Matrix 900제 문장의 뉘앙스, 원어민 어감 차이, 실전 활�
 - **I'm a bit off.**: 평소와 달리 컨디션이 좋지 않다.
 - **I'm not feeling well.**: 몸 상태가 좋지 않다
 
-- **I'm not feeling well.**: 몸 상태가 좋지 않다, 신체적으로
+- **I'm not feeling well.**: 몸 상태가 좋지 않다
 
 <div id="day-17"></div>
 ### Day 17
